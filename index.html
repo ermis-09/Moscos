@@ -18,17 +18,16 @@
             <!-- Ana Menü -->
             <section id="menu" class="view">
                 <div class="welcome-card">
-                    <p>Bugün ne çalışmak istersin?</p>
-                    <label for="file-input" class="file-label">📄 Yeni XML Yükle</label>
-                    <input type="file" id="file-input" accept=".xml">
-                </div>
-                
-                <div class="action-grid">
-                    <button class="action-btn" onclick="startQuiz()">📝 Teste Başla</button>
-                    <button class="action-btn" onclick="startFlashcards()">🎴 Flashcards</button>
-                    <button class="action-btn error-btn" onclick="startErrorQuiz()">🔥 Hata Tekrarı</button>
-                    <button class="action-btn history-btn" onclick="loadHistory()">📊 Geçmiş</button>
-                </div>
+    <p>Bugün ne çalışmak istersin?</p>
+    <div class="upload-container">
+        <label for="file-input" class="custom-upload-btn">
+            <span id="upload-icon">📄</span>
+            <span id="file-name-display">Yeni XML Yükle</span>
+        </label>
+        <input type="file" id="file-input" accept=".xml">
+    </div>
+</div>
+
             </section>
 
             <!-- Quiz Ekranı -->
