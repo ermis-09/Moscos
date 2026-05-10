@@ -72,6 +72,48 @@ body {
 
 .action-btn:active { transform: scale(0.95); background: var(--primary); color: white; }
 
+/* Standart butonu tamamen gizle */
+#file-input {
+    display: none;
+}
+
+.upload-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.custom-upload-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px;
+    border: 2px dashed var(--primary);
+    border-radius: 20px;
+    background: #fffafa;
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.custom-upload-btn:active {
+    background: var(--primary);
+    color: white;
+    transform: scale(0.98);
+}
+
+#upload-icon {
+    font-size: 2rem;
+}
+
+#file-name-display {
+    font-weight: 600;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+
 /* Soru & Seçenekler */
 .option {
     width: 100%;
