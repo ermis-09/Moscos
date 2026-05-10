@@ -7,19 +7,27 @@ function showView(id) {
 
 // Dosya Yükleme
 document.getElementById('file-input').addEventListener('change', function(e) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        const xmlDoc = new DOMParser().parseFromString(event.target.result, "text/xml");
-        questions = Array.from(xmlDoc.getElementsByTagName("question")).map(node => ({
-            q: node.getElementsByTagName("q")[0].textContent,
-            a: Array.from(node.getElementsByTagName("a")).map(a => a.textContent),
-            c: parseInt(node.getElementsByTagName("c")[0].textContent)
-        }));
-        localStorage.setItem('last_questions', JSON.stringify(questions));
-        alert("Başarıyla yüklendi!");
-    };
-    reader.readAsText(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+        // Dosya ismini ekranda göster
+        document.getElementById('file-name-display').innerText = file.name;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const xmlDoc = new DOMParser().parseFromString(event.target.result, "text/xml");
+            questions = Array.from(xmlDoc.getElementsByTagName("question")).map(node => ({
+                q: node.getElementsByTagName("q")[0].textContent,
+                a: Array.from(node.getElementsByTagName("a")).map(a => a.textContent),
+                c: parseInt(node.getElementsByTagName("c")[0].textContent)
+            }));
+            localStorage.setItem('last_questions', JSON.stringify(questions));
+            // Başarı görseli veya geri bildirimi
+            document.getElementById('upload-icon').innerText = "✅";
+        };
+        reader.readAsText(file);
+    }
 });
+
 
 // Quiz Mantığı
 function startQuiz() {
