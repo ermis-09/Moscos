@@ -1,0 +1,107 @@
+:root {
+    --primary: #e6a8a8;
+    --primary-dark: #d48b8b;
+    --bg: #fdf6f6;
+    --text: #5a4a4a;
+    --white: #ffffff;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden; /* Kaydırmayı uygulama içinde halledeceğiz */
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.app-header {
+    padding: 20px;
+    text-align: center;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.app-header h1 { margin: 0; font-size: 1.5rem; color: var(--primary-dark); font-weight: 300; }
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.view { height: 100%; display: flex; flex-direction: column; }
+.hidden { display: none !important; }
+
+/* Menü Tasarımı */
+.welcome-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(230,168,168,0.1);
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.action-btn {
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 20px;
+    background: var(--white);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.action-btn:active { transform: scale(0.95); background: var(--primary); color: white; }
+
+/* Soru & Seçenekler */
+.option {
+    width: 100%;
+    padding: 18px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    background: var(--white);
+    text-align: left;
+}
+
+.main-btn {
+    margin-top: auto;
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Flashcard */
+.flashcard-container { height: 60%; margin-bottom: 20px; perspective: 1000px; }
+.flashcard { width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d; }
+.flashcard.flipped { transform: rotateY(180deg); }
+.face {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    display: flex; align-items: center; justify-content: center; padding: 25px;
+    border-radius: 25px; background: white; text-align: center; font-size: 1.4rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid var(--primary);
+}
+.back { transform: rotateY(180deg); background: var(--bg); color: var(--primary-dark); }
