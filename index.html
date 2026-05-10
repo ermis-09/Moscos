@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soru Çözüm Platformu</title>
+    <style>
+        :root { --p: #2563eb; --s: #f3f4f6; }
+        body { font-family: sans-serif; margin: 0; background: var(--s); display: flex; justify-content: center; }
+        #app { width: 100%; max-width: 500px; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 15px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .q-text { font-size: 1.2rem; margin-bottom: 20px; font-weight: bold; }
+        .option { 
+            display: block; width: 100%; padding: 15px; margin: 10px 0; 
+            border: 2px solid #ddd; border-radius: 10px; background: white;
+            text-align: left; font-size: 1rem; cursor: pointer; transition: 0.2s;
+        }
+        .option:active { transform: scale(0.98); }
+        .correct { background: #dcfce7; border-color: #22c55e; }
+        .wrong { background: #fee2e2; border-color: #ef4444; }
+        #next-btn { 
+            width: 100%; padding: 15px; background: var(--p); color: white; 
+            border: none; border-radius: 10px; margin-top: 20px; font-weight: bold; display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="card">
+            <div id="question" class="q-text">Soru yükleniyor...</div>
+            <div id="options"></div>
+            <button id="next-btn" onclick="nextQuestion()">Sonraki Soru</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Örnek Soru 1: Sinir sisteminin temel hücresi nedir?", a: ["Astrosit", "Nöron", "Mikroglia", "Oligodendrosit", "Ependim"], c: 1 },
+            { q: "Örnek Soru 2: Hangisi bir Japon alfabesidir?", a: ["Kiril", "Latin", "Katakana", "Arapça", "Yunan"], c: 2 }
+        ];
+
+        let currentQ = 0;
+
+        function loadQuestion() {
+            const q = questions[currentQ];
+            document.getElementById("question").innerText = q.q;
+            const optDiv = document.getElementById("options");
+            optDiv.innerHTML = "";
+            q.a.forEach((opt, i) => {
+                const btn = document.createElement("button");
+                btn.className = "option";
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i, q.c, btn);
+                optDiv.appendChild(btn);
+            });
+            document.getElementById("next-btn").style.display = "none";
+        }
+
+        function checkAnswer(selected, correct, btn) {
+            const btns = document.querySelectorAll(".option");
+            btns.forEach(b => b.disabled = true);
+            if(selected === correct) btn.classList.add("correct");
+            else {
+                btn.classList.add("wrong");
+                btns[correct].classList.add("correct");
+            }
+            document.getElementById("next-btn").style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if(currentQ < questions.length) loadQuestion();
+            else document.getElementById("app").innerHTML = "<h1>Test Bitti!</h1>";
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
