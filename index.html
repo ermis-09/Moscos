@@ -3,144 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelişmiş Test Sistemi</title>
+    <title>RoseStudy | Med & Language</title>
     <style>
-        :root { --p: #2563eb; --s: #f3f4f6; --success: #22c55e; --danger: #ef4444; }
-        body { font-family: sans-serif; margin: 0; background: var(--s); display: flex; justify-content: center; }
-        #app { width: 100%; max-width: 600px; padding: 15px; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 15px; }
-        .hidden { display: none; }
-        
+        :root {
+            --bg: #fdf6f6;
+            --primary: #e6a8a8; /* Toz Pembe */
+            --primary-dark: #d48b8b;
+            --accent: #b4cfb0; /* Soft Yeşil */
+            --text: #5a4a4a;
+            --white: rgba(255, 255, 255, 0.9);
+            --shadow: 0 8px 32px 0 rgba(230, 168, 168, 0.2);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 20% 20%, #fff1f1 0%, transparent 40%),
+                              radial-gradient(circle at 80% 80%, #f7e2e2 0%, transparent 40%);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        #app { width: 100%; max-width: 550px; padding: 20px; box-sizing: border-box; }
+
+        .card {
+            background: var(--white);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 { color: var(--primary-dark); font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; }
+
         /* Butonlar */
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.2s; margin-top: 10px; }
-        .btn-p { background: var(--p); color: white; }
-        .option { display: block; width: 100%; padding: 12px; margin: 8px 0; border: 2px solid #ddd; border-radius: 8px; background: white; text-align: left; }
-        
-        /* Optik Görünüm */
-        .optik-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 20px; }
-        .optik-item { padding: 10px; border-radius: 5px; text-align: center; color: white; font-weight: bold; cursor: pointer; }
-        .correct { background: var(--success); border-color: var(--success); }
-        .wrong { background: var(--danger); border-color: var(--danger); }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-p { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(230, 168, 168, 0.4); }
+        .btn-p:active { transform: scale(0.96); }
+
+        .option {
+            display: block; width: 100%; padding: 16px; margin: 12px 0;
+            border: 1.5px solid #eee; border-radius: 14px; background: white;
+            text-align: left; transition: 0.2s; font-size: 1rem; color: var(--text);
+        }
+        .option:active { background: #fffafa; border-color: var(--primary); }
+
+        /* Flashcard Tasarımı */
+        .flashcard-container { perspective: 1000px; height: 350px; margin: 25px 0; }
+        .flashcard { width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; position: relative; }
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            display: flex; align-items: center; justify-content: center;
+            padding: 25px; box-sizing: border-box; border-radius: 24px;
+            font-size: 1.3rem; text-align: center; 
+            box-shadow: var(--shadow); background: white; border: 1px solid var(--primary);
+        }
+        .back { transform: rotateY(180deg); background: var(--bg); color: var(--primary-dark); }
+
+        /* Optik Grid */
+        .optik-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 25px; }
+        .optik-item { 
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+            border-radius: 12px; color: white; font-weight: bold; cursor: pointer; font-size: 0.9rem;
+        }
+        .correct { background: #b4cfb0; }
+        .wrong { background: #e6a8a8; }
+        .hidden { display: none; }
+
+        input[type="file"] { display: none; }
+        .file-label {
+            display: block; padding: 20px; border: 2px dashed var(--primary);
+            border-radius: 16px; color: var(--primary-dark); cursor: pointer; margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div id="app">
-    <div id="upload-screen" class="card">
-        <h2>Test Yükle</h2>
-        <input type="file" id="file-input" accept=".xml" class="btn">
-        <p>Lütfen hazırladığın XML dosyasını seç.</p>
+    <!-- Ana Menü -->
+    <div id="menu" class="card">
+        <h1>RoseStudy</h1>
+        <label for="file-input" class="file-label">📄 Yeni XML Dosyası Yükle</label>
+        <input type="file" id="file-input" accept=".xml">
+        <button class="btn btn-p" onclick="startQuiz()">📝 Teste Başla</button>
+        <button class="btn" style="background:#f0f0f0;" onclick="startErrorQuiz()">🔥 Yanlışları Tekrarla</button>
+        <button class="btn" style="background:#f0f0f0;" onclick="startFlashcards()">🎴 Flashcard Modu</button>
     </div>
 
+    <!-- Soru Ekranı -->
     <div id="quiz-screen" class="card hidden">
-        <div id="q-progress" style="font-size: 0.8rem; color: #666;"></div>
-        <div id="question" style="font-size: 1.2rem; margin: 15px 0; font-weight: bold;"></div>
+        <div id="q-progress" style="color: var(--primary-dark); font-size: 0.9rem;"></div>
+        <div id="question" style="font-size: 1.25rem; margin: 25px 0; font-weight: 500; line-height: 1.4;"></div>
         <div id="options"></div>
         <button id="next-btn" class="btn btn-p hidden" onclick="nextQuestion()">Sonraki Soru</button>
     </div>
 
+    <!-- Flashcard Ekranı -->
+    <div id="flashcard-screen" class="card hidden">
+        <div id="f-progress"></div>
+        <div class="flashcard-container" onclick="this.querySelector('.flashcard').classList.toggle('flipped')">
+            <div class="flashcard">
+                <div class="face front" id="f-front"></div>
+                <div class="face back" id="f-back"></div>
+            </div>
+        </div>
+        <button class="btn btn-p" onclick="nextFlashcard()">Sıradaki Kart →</button>
+        <button class="btn" onclick="showScreen('menu')">Menüye Dön</button>
+    </div>
+
+    <!-- Sonuç Ekranı -->
     <div id="result-screen" class="card hidden">
-        <h2>Sınav Sonucu</h2>
-        <div id="score-summary"></div>
+        <h2>Sonuç Analizi</h2>
+        <div id="score-summary" style="font-size: 1.5rem; margin: 20px 0;"></div>
         <div class="optik-grid" id="optik-view"></div>
-        <button class="btn btn-p" onclick="location.reload()">Yeni Test Yükle</button>
+        <div id="review-box" class="hidden" style="margin-top:25px; padding:20px; background:#fffafa; border-radius:16px; border-left: 4px solid var(--primary);">
+            <p id="rev-q" style="font-weight:600; margin-top:0;"></p>
+            <p id="rev-a" style="color: var(--primary-dark); font-style: italic;"></p>
+        </div>
+        <button class="btn btn-p" onclick="showScreen('menu')">Ana Menü</button>
     </div>
 </div>
 
 <script>
-    let questions = [];
-    let userAnswers = [];
-    let currentQ = 0;
+    // Mantık (Logic) kısmı önceki ile aynı, ID'lere göre güncellendi.
+    let questions = [], userAnswers = [], currentIdx = 0;
 
-    // XML Deşifre Etme
+    function showScreen(id) {
+        document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+        document.getElementById(id).classList.remove('hidden');
+    }
+
     document.getElementById('file-input').addEventListener('change', function(e) {
-        const file = e.target.files[0];
         const reader = new FileReader();
-        reader.onload = function(e) {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
-            const qNodes = xmlDoc.getElementsByTagName("question");
-            
-            questions = Array.from(qNodes).map(node => ({
+        reader.onload = (e) => {
+            const xmlDoc = new DOMParser().parseFromString(e.target.result, "text/xml");
+            questions = Array.from(xmlDoc.getElementsByTagName("question")).map(node => ({
                 q: node.getElementsByTagName("q")[0].textContent,
                 a: Array.from(node.getElementsByTagName("a")).map(a => a.textContent),
                 c: parseInt(node.getElementsByTagName("c")[0].textContent)
             }));
-
-            startQuiz();
+            localStorage.setItem('last_loaded_questions', JSON.stringify(questions));
+            alert("Dosya başarıyla yüklendi!");
         };
-        reader.readAsText(file);
+        reader.readAsText(e.target.files[0]);
     });
 
     function startQuiz() {
-        document.getElementById('upload-screen').classList.add('hidden');
-        document.getElementById('quiz-screen').classList.remove('hidden');
+        if (!questions.length) return alert("Önce XML yüklemelisin!");
+        userAnswers = []; currentIdx = 0;
+        showScreen('quiz-screen');
         loadQuestion();
     }
 
     function loadQuestion() {
-        const q = questions[currentQ];
-        document.getElementById("q-progress").innerText = `Soru: ${currentQ + 1} / ${questions.length}`;
+        const q = questions[currentIdx];
+        document.getElementById("q-progress").innerText = `Soru ${currentIdx + 1} / ${questions.length}`;
         document.getElementById("question").innerText = q.q;
         const optDiv = document.getElementById("options");
         optDiv.innerHTML = "";
-        
         q.a.forEach((opt, i) => {
             const btn = document.createElement("button");
             btn.className = "option";
             btn.innerText = opt;
-            btn.onclick = () => selectAnswer(i, btn);
+            btn.onclick = () => {
+                userAnswers[currentIdx] = i;
+                document.querySelectorAll(".option").forEach(b => b.style.borderColor = "#eee");
+                btn.style.borderColor = "var(--primary)";
+                document.getElementById("next-btn").classList.remove('hidden');
+            };
             optDiv.appendChild(btn);
         });
-        document.getElementById("next-btn").classList.add("hidden");
-    }
-
-    function selectAnswer(index, btn) {
-        userAnswers[currentQ] = index;
-        document.querySelectorAll(".option").forEach(b => b.style.borderColor = "#ddd");
-        btn.style.borderColor = "var(--p)";
-        document.getElementById("next-btn").classList.remove("hidden");
+        document.getElementById("next-btn").classList.add('hidden');
     }
 
     function nextQuestion() {
-        currentQ++;
-        if (currentQ < questions.length) loadQuestion();
-        else showResults();
+        currentIdx++;
+        if (currentIdx < questions.length) loadQuestion();
+        else finishQuiz();
     }
 
-    function showResults() {
-        document.getElementById('quiz-screen').classList.add('hidden');
-        document.getElementById('result-screen').classList.remove('hidden');
-        
-        let correctCount = 0;
-        const optikDiv = document.getElementById('optik-view');
-        optikDiv.innerHTML = "";
+    function finishQuiz() {
+        const res = { date: new Date().toLocaleString(), questions, answers: userAnswers };
+        let history = JSON.parse(localStorage.getItem('quiz_history') || '[]');
+        history.push(res);
+        localStorage.setItem('quiz_history', JSON.stringify(history));
+        displayResults(res);
+    }
 
-        questions.forEach((q, i) => {
-            const isCorrect = userAnswers[i] === q.c;
-            if (isCorrect) correctCount++;
-            
-            // Optik öğesi oluşturma
+    function displayResults(res) {
+        showScreen('result-screen');
+        const correctCount = res.answers.filter((a, i) => a === res.questions[i].c).length;
+        document.getElementById('score-summary').innerText = `%${Math.round((correctCount/res.questions.length)*100)} Başarı`;
+        const optik = document.getElementById('optik-view');
+        optik.innerHTML = "";
+        res.questions.forEach((q, i) => {
             const item = document.createElement("div");
-            item.className = `optik-item ${isCorrect ? 'correct' : 'wrong'}`;
+            item.className = `optik-item ${res.answers[i] === q.c ? 'correct' : 'wrong'}`;
             item.innerText = i + 1;
-            item.title = `Senin Cevabın: ${q.a[userAnswers[i]] || 'Boş'}, Doğru: ${q.a[q.c]}`;
-            optikDiv.appendChild(item);
+            item.onclick = () => {
+                document.getElementById('review-box').classList.remove('hidden');
+                document.getElementById('rev-q').innerText = q.q;
+                document.getElementById('rev-a').innerText = `Doğru: ${q.a[q.c]}`;
+            };
+            optik.appendChild(item);
         });
-
-        document.getElementById('score-summary').innerHTML = `
-            <p>Toplam Soru: ${questions.length}</p>
-            <p>Doğru: ${correctCount}</p>
-            <p>Yanlış: ${questions.length - correctCount}</p>
-        `;
-        
-        // Lokal belleğe kaydet (Opsiyonel: İstatistik için)
-        localStorage.setItem('last_result', JSON.stringify({
-            score: correctCount,
-            total: questions.length,
-            date: new Date().toLocaleDateString()
-        }));
     }
+
+    function startFlashcards() {
+        if (!questions.length) return alert("Soru yok!");
+        currentIdx = 0;
+        showScreen('flashcard-screen');
+        loadFlashcard();
+    }
+
+    function loadFlashcard() {
+        const q = questions[currentIdx];
+        document.querySelector('.flashcard').classList.remove('flipped');
+        document.getElementById('f-progress').innerText = `${currentIdx + 1} / ${questions.length}`;
+        document.getElementById('f-front').innerText = q.q;
+        document.getElementById('f-back').innerText = q.a[q.c];
+    }
+
+    function nextFlashcard() {
+        currentIdx = (currentIdx + 1) % questions.length;
+        loadFlashcard();
+    }
+
+    function startErrorQuiz() {
+        const history = JSON.parse(localStorage.getItem('quiz_history') || '[]');
+        let mistakes = [];
+        history.forEach(h => {
+            h.questions.forEach((q, i) => { if (h.answers[i] !== q.c) mistakes.push(q); });
+        });
+        if (!mistakes.length) return alert("Hatalı sorun yok!");
+        questions = [...new Set(mistakes)];
+        startQuiz();
+    }
+
+    window.onload = () => {
+        const saved = localStorage.getItem('last_loaded_questions');
+        if (saved) questions = JSON.parse(saved);
+    };
 </script>
 </body>
 </html>
