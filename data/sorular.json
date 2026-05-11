@@ -20,7 +20,7 @@
     {
       "id": 2,
       "donem": 2,
-      "kurulId": "D2K6",
+      "kurulId": "D2K5",
       "ders": "Farmakoloji",
       "ogrenimHedefi": "Otonom sinir sistemi ilaçları",
       "soru": "Atropin hangi reseptörü bloke eder?",
@@ -36,7 +36,7 @@
     {
       "id": 3,
       "donem": 2,
-      "kurulId": "D2K6",
+      "kurulId": "D2K5",
       "ders": "Patoloji",
       "ogrenimHedefi": "İnflamasyon",
       "soru": "Akut inflamasyonda ilk gelen hücre tipi hangisidir?",
