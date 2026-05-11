@@ -6,7 +6,7 @@ const exam = {
   secim: null,
   sorular: [],         // karıştırılmış, seçilen sorular
   aktifIndex: 0,
-  cevaplar: {}         // { soruId: 'A' } - kullanıcının seçimi
+  cevaplar: {}         // { 0: 'A', 1: 'C' } - aktifIndex => harf
 };
 
 // DOM
@@ -45,7 +45,6 @@ async function basla() {
       return;
     }
 
-    // Karıştır + istenen sayıda al
     const karisik = karistir(uygun);
     exam.sorular = karisik.slice(0, Math.min(exam.secim.sayi, karisik.length));
 
@@ -65,7 +64,6 @@ function filtreleSorular(sorular, secim) {
   });
 }
 
-// Fisher-Yates shuffle
 function karistir(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -83,11 +81,9 @@ function soruyuGoster(index) {
   exam.aktifIndex = index;
   const soru = exam.sorular[index];
 
-  // Üst bilgi
   counter.textContent = `${index + 1} / ${exam.sorular.length}`;
   progressFill.style.width = `${((index + 1) / exam.sorular.length) * 100}%`;
 
-  // Meta
   metaDers.textContent = soru.ders;
   if (soru.ogrenimHedefi) {
     metaHedef.textContent = soru.ogrenimHedefi;
@@ -96,13 +92,11 @@ function soruyuGoster(index) {
     metaHedef.hidden = true;
   }
 
-  // Soru metni
   questionText.textContent = soru.soru;
 
-  // Şıklar
   optionsBox.innerHTML = '';
   const harfler = ['A', 'B', 'C', 'D', 'E'];
-  const kullaniciCevap = exam.cevaplar[soru.id];
+  const kullaniciCevap = exam.cevaplar[index];
 
   harfler.forEach(harf => {
     const metin = soru.secenekler[harf];
@@ -116,7 +110,6 @@ function soruyuGoster(index) {
     `;
     btn.dataset.harf = harf;
 
-    // Önceden cevaplanmışsa görsel durumu uygula
     if (kullaniciCevap) {
       btn.disabled = true;
       if (harf === soru.dogruCevap) {
@@ -133,7 +126,6 @@ function soruyuGoster(index) {
     optionsBox.appendChild(btn);
   });
 
-  // Açıklama
   if (kullaniciCevap && soru.aciklama) {
     rationaleText.textContent = soru.aciklama;
     rationale.hidden = false;
@@ -141,7 +133,6 @@ function soruyuGoster(index) {
     rationale.hidden = true;
   }
 
-  // Navigasyon butonları
   prevBtn.disabled = index === 0;
   const sonSoru = index === exam.sorular.length - 1;
   nextBtn.hidden = sonSoru;
@@ -153,10 +144,7 @@ function soruyuGoster(index) {
 // ============================================
 
 function cevapVer(harf) {
-  const soru = exam.sorular[exam.aktifIndex];
-  exam.cevaplar[soru.id] = harf;
-
-  // Şıkları güncelle (yeniden çiz)
+  exam.cevaplar[exam.aktifIndex] = harf;
   soruyuGoster(exam.aktifIndex);
 }
 
@@ -175,7 +163,6 @@ nextBtn.addEventListener('click', () => {
 });
 
 finishBtn.addEventListener('click', () => {
-  // Sonuçları sessionStorage'a kaydet
   const sonuc = {
     sorular: exam.sorular,
     cevaplar: exam.cevaplar,
@@ -198,5 +185,4 @@ function geriDon() {
   window.location.href = 'index.html';
 }
 
-// Başlat
 basla();
