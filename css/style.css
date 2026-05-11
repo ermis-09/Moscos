@@ -382,3 +382,291 @@ body {
 .filter-block:nth-child(2) { animation-delay: 0.15s; }
 .filter-block:nth-child(3) { animation-delay: 0.20s; }
 .filter-block:nth-child(4) { animation-delay: 0.25s; }
+
+
+/* ============================================
+   SINAV SAYFASI
+   ============================================ */
+
+.exam-frame .app-main {
+  padding: 0;
+}
+
+/* Üst başlık */
+.exam-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px 14px;
+  flex-shrink: 0;
+}
+
+.exam-exit {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.12);
+  transition: all 0.2s ease;
+}
+
+.exam-exit:hover {
+  transform: translateX(-2px);
+  background: var(--surface-elevated);
+}
+
+.exam-progress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exam-counter {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(139, 38, 53, 0.12);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+  width: 0%;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px rgba(139, 38, 53, 0.3);
+}
+
+/* Soru gövdesi */
+.exam-main {
+  flex: 1;
+  padding: 16px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.question-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-pill {
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.meta-hedef {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  padding: 4px 0;
+}
+
+/* Şıklar */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 4px 12px rgba(139, 38, 53, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.option:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--accent-soft);
+  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.15);
+}
+
+.option-letter {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.option-text {
+  flex: 1;
+  line-height: 1.4;
+  padding-top: 3px;
+}
+
+/* Doğru cevap */
+.option.correct {
+  background: #D4E8D4;
+  border-color: #6B9E6B;
+  color: #2D4A2D;
+}
+
+.option.correct .option-letter {
+  background: #6B9E6B;
+  color: white;
+}
+
+/* Yanlış cevap (kullanıcının yanlış seçimi) */
+.option.wrong {
+  background: #F0CFCF;
+  border-color: #B85454;
+  color: #5C2424;
+}
+
+.option.wrong .option-letter {
+  background: #B85454;
+  color: white;
+}
+
+/* Cevap verildikten sonra, doğru/yanlış olmayan diğer şıklar */
+.option.faded {
+  opacity: 0.5;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+/* Açıklama */
+.rationale {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  animation: fadeUp 0.4s ease;
+}
+
+.rationale-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.rationale-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+/* Alt navigasyon */
+.exam-footer {
+  padding: 14px 22px 24px;
+  background: linear-gradient(to top, var(--bg-deep) 70%, transparent);
+  flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  flex: 1;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nav-prev {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.12);
+}
+
+.nav-prev:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.18);
+}
+
+.nav-prev:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.nav-next, .nav-finish {
+  background: var(--accent);
+  color: var(--surface);
+  box-shadow:
+    0 8px 22px rgba(139, 38, 53, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.nav-next:hover, .nav-finish:hover {
+  background: var(--accent-warm);
+  transform: translateY(-1px);
+}
+
+.nav-finish {
+  flex: 2;
+}
+
+
