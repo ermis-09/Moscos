@@ -1,7 +1,6 @@
 /* ============================================
    KURUL SORU BANKASI
-   Tasarım: Sıcak, kontrastlı, butik - ortalı
-   Palet: Doygun toz pembe / şarap kırmızısı / krem
+   Tasarım: Ortalı, buton-tabanlı, dokunulabilir
    ============================================ */
 
 :root {
@@ -17,15 +16,15 @@
   --text-muted: #8B5F62;
   --border-soft: #D89B92;
   --border-strong: #B07A75;
-  --gold: #C9956B;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
 
   --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
   --radius-xl: 32px;
+  --radius-pill: 999px;
 }
 
 * {
@@ -74,7 +73,7 @@ body {
   overflow-x: hidden;
 
   background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(255, 244, 237, 0.4), transparent 60%),
+    radial-gradient(ellipse at 20% 0%, rgba(255, 244, 237, 0.5), transparent 60%),
     radial-gradient(ellipse at 80% 100%, rgba(139, 38, 53, 0.15), transparent 60%),
     linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-deep) 100%);
 }
@@ -111,24 +110,13 @@ body {
 }
 
 /* ============================================
-   HEADER - ortalı
+   HEADER
    ============================================ */
 
 .app-header {
-  padding: 32px 28px 20px;
-  position: relative;
+  padding: 28px 24px 16px;
   text-align: center;
-}
-
-.app-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 28px;
-  right: 28px;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--border-strong), transparent);
-  opacity: 0.4;
+  flex-shrink: 0;
 }
 
 .brand {
@@ -139,81 +127,47 @@ body {
 }
 
 .brand-mark {
-  font-size: 24px;
+  font-size: 22px;
   color: var(--accent);
   line-height: 1;
-  filter: drop-shadow(0 1px 2px rgba(139, 38, 53, 0.2));
 }
 
 .brand-name {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 32px;
+  font-size: 30px;
   letter-spacing: -0.03em;
   color: var(--text-primary);
   line-height: 1;
 }
 
 .brand-sub {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--accent);
   margin-top: 8px;
-  margin-left: 0;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   font-weight: 700;
 }
 
 /* ============================================
-   MAIN CONTENT
+   MAIN - dikeyde ortalı
    ============================================ */
 
 .app-main {
   flex: 1;
-  padding: 24px 24px 24px;
+  padding: 16px 22px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  gap: 28px;
   overflow-y: auto;
 }
 
-/* Hero kart - ortalı */
-.hero-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 32px 24px 28px;
-  position: relative;
-  overflow: hidden;
+/* Hero - başlık alanı */
+.hero {
   text-align: center;
-  box-shadow:
-    0 12px 30px rgba(139, 38, 53, 0.15),
-    0 4px 10px rgba(139, 38, 53, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 240px;
-  height: 200px;
-  background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 65%);
-  opacity: 0.4;
-  border-radius: 50%;
-}
-
-/* Üst süs - küçük diamond */
-.hero-card::after {
-  content: '◆';
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--accent);
-  font-size: 10px;
-  opacity: 0.6;
+  padding: 8px 0;
 }
 
 .hero-eyebrow {
@@ -222,18 +176,16 @@ body {
   color: var(--accent);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  margin-bottom: 14px;
-  position: relative;
+  margin-bottom: 10px;
 }
 
 .hero-title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1.2;
   color: var(--text-primary);
   letter-spacing: -0.025em;
-  position: relative;
 }
 
 .hero-title em {
@@ -242,127 +194,119 @@ body {
   color: var(--accent);
 }
 
-.hero-text {
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  position: relative;
-  line-height: 1.55;
-  max-width: 280px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* ============================================
-   FILTERS - artık kart içinde
+   FILTERS - chip / buton tabanlı
    ============================================ */
 
 .filters {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 26px 22px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  box-shadow:
-    0 12px 30px rgba(139, 38, 53, 0.12),
-    0 4px 10px rgba(139, 38, 53, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
-.filter-group {
+.filter-block {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
-  text-align: center;
 }
 
 .filter-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--text-secondary);
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
-.filter-select {
-  appearance: none;
-  -webkit-appearance: none;
-  background: var(--surface-elevated);
-  border: 1.5px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: 14px 44px 14px 18px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
-  text-align-last: center;
-
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4 L6 8 L10 4' stroke='%238B2635' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 18px center;
-  background-size: 12px;
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
 }
 
-.filter-select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(139, 38, 53, 0.12);
-}
-
-.filter-select:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  background-color: var(--bg-primary);
-  color: var(--text-muted);
-}
-
-.filter-select option {
-  text-align: left;
-}
-
-/* Soru sayısı butonları */
-.count-row {
+/* Soru sayısı için 4'lü eşit grid */
+.chip-row-equal {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
 }
 
-.count-btn {
-  background: var(--surface-elevated);
-  border: 1.5px solid var(--border-soft);
-  border-radius: var(--radius-md);
-  padding: 14px 0;
-  font-family: var(--font-display);
-  font-size: 17px;
+.chip {
+  background: var(--surface);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-pill);
+  padding: 12px 20px;
+  font-family: var(--font-body);
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
+
+  box-shadow:
+    0 4px 12px rgba(139, 38, 53, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
-.count-btn:hover {
-  border-color: var(--accent-warm);
-  color: var(--text-primary);
+.chip-row-equal .chip {
+  padding: 14px 0;
+  font-family: var(--font-display);
+  font-size: 17px;
 }
 
-.count-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--surface);
-  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.35);
+.chip:hover:not(:disabled) {
+  background: var(--surface-elevated);
   transform: translateY(-1px);
+  color: var(--text-primary);
+  box-shadow:
+    0 6px 16px rgba(139, 38, 53, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.chip:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.chip.active {
+  background: var(--accent);
+  color: var(--surface);
+  border-color: var(--accent);
+  box-shadow:
+    0 6px 18px rgba(139, 38, 53, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: transparent;
+  border-color: var(--border-soft);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.app-footer {
+  padding: 16px 22px 24px;
+  background: linear-gradient(to top, var(--bg-deep) 70%, transparent);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .available-info {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
   text-align: center;
-  padding: 4px;
   font-style: italic;
+  min-height: 18px;
 }
 
 .available-info.ready {
@@ -371,24 +315,13 @@ body {
   font-style: normal;
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
-
-.app-footer {
-  padding: 20px 24px 28px;
-  background: linear-gradient(to top, var(--bg-deep) 60%, transparent);
-  position: sticky;
-  bottom: 0;
-}
-
 .start-btn {
   width: 100%;
   background: var(--accent);
   color: var(--surface);
   border: none;
   border-radius: var(--radius-md);
-  padding: 20px 24px;
+  padding: 18px 24px;
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
@@ -414,10 +347,6 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.start-btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
 .start-btn:disabled {
   background: var(--border-strong);
   cursor: not-allowed;
@@ -435,24 +364,21 @@ body {
 }
 
 /* ============================================
-   ANIMASYONLAR
+   ANIMASYON
    ============================================ */
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hero-card,
-.filters {
-  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+.hero,
+.filter-block {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.hero-card { animation-delay: 0.05s; }
-.filters { animation-delay: 0.15s; }
+.hero { animation-delay: 0.05s; }
+.filter-block:nth-child(1) { animation-delay: 0.10s; }
+.filter-block:nth-child(2) { animation-delay: 0.15s; }
+.filter-block:nth-child(3) { animation-delay: 0.20s; }
+.filter-block:nth-child(4) { animation-delay: 0.25s; }
