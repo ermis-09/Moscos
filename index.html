@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#F4D6D6" />
+  <meta name="theme-color" content="#E8B8B0" />
   <title>Kurul Soru Bankası</title>
-
-  <!-- Fonts -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,75 +15,70 @@
 <body>
   <div class="app-frame">
 
-<!-- Üst başlık -->
-<header class="app-header">
-  <div class="brand">
-    <span class="brand-mark">✦</span>
-    <h1 class="brand-name">Kurul</h1>
-  </div>
-  <p class="brand-sub">Soru Bankası</p>
-</header>
-
-<!-- İçerik -->
-<main class="app-main">
-
-  <section class="hero-card">
-    <p class="hero-eyebrow">Hoş geldin</p>
-    <h2 class="hero-title">Bugün hangi kurula <em>çalışıyorsun?</em></h2>
-    <p class="hero-text">Aşağıdan filtreleri seç, kendine bir mini sınav hazırla.</p>
-  </section>
-
-  <!-- Filtre alanı -->
-  <section class="filters">
-
-    <div class="filter-group">
-      <label class="filter-label" for="donem">Dönem</label>
-      <select class="filter-select" id="donem">
-        <option value="">Tüm dönemler</option>
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label class="filter-label" for="kurul">Kurul</label>
-      <select class="filter-select" id="kurul" disabled>
-        <option value="">Önce dönem seç</option>
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label class="filter-label" for="ders">Ders</label>
-      <select class="filter-select" id="ders" disabled>
-        <option value="">Tüm dersler</option>
-      </select>
-    </div>
-
-    <div class="filter-group">
-      <label class="filter-label" for="soru-sayisi">Soru sayısı</label>
-      <div class="count-row">
-        <button class="count-btn" data-count="10">10</button>
-        <button class="count-btn" data-count="20">20</button>
-        <button class="count-btn active" data-count="30">30</button>
-        <button class="count-btn" data-count="50">50</button>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">✦</span>
+        <h1 class="brand-name">Kurul</h1>
       </div>
-    </div>
+      <p class="brand-sub">Soru Bankası</p>
+    </header>
 
-    <p class="available-info" id="availableInfo">Filtre seçimine göre uygun soru bulunamadı.</p>
+    <main class="app-main">
 
-  </section>
+      <section class="hero">
+        <p class="hero-eyebrow">Hoş geldin</p>
+        <h2 class="hero-title">Bugün hangi kurula <em>çalışıyorsun?</em></h2>
+      </section>
 
-</main>
+      <section class="filters">
 
-<!-- Alt eylem çubuğu -->
-<footer class="app-footer">
-  <button class="start-btn" id="startBtn" disabled>
-    Sınava Başla
-    <span class="start-btn-icon">→</span>
-  </button>
-</footer>
+        <div class="filter-block">
+          <span class="filter-label">Dönem</span>
+          <div class="chip-row" id="donemChips">
+            <button class="chip" data-value="1">1. Dönem</button>
+            <button class="chip" data-value="2">2. Dönem</button>
+            <button class="chip" data-value="3">3. Dönem</button>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <span class="filter-label">Kurul</span>
+          <div class="chip-row" id="kurulChips">
+            <button class="chip" disabled>Önce dönem</button>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <span class="filter-label">Ders</span>
+          <div class="chip-row" id="dersChips">
+            <button class="chip active" data-value="">Tüm dersler</button>
+          </div>
+        </div>
+
+        <div class="filter-block">
+          <span class="filter-label">Soru Sayısı</span>
+          <div class="chip-row chip-row-equal">
+            <button class="chip" data-count="10">10</button>
+            <button class="chip" data-count="20">20</button>
+            <button class="chip active" data-count="30">30</button>
+            <button class="chip" data-count="50">50</button>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <p class="available-info" id="availableInfo">Filtreleri seç</p>
+      <button class="start-btn" id="startBtn" disabled>
+        Sınava Başla
+        <span class="start-btn-icon">→</span>
+      </button>
+    </footer>
 
   </div>
 
   <script src="js/app.js"></script>
-
 </body>
 </html>
