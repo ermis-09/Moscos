@@ -1,0 +1,54 @@
+{
+  "sorular": [
+    {
+      "id": 1,
+      "donem": 2,
+      "kurulId": "D2K5",
+      "ders": "Fizyoloji",
+      "ogrenimHedefi": "Hücre zedelenmesi",
+      "soru": "Aşağıdakilerden hangisi geri dönüşümsüz hücre hasarının göstergesidir?",
+      "secenekler": {
+        "A": "Hücre şişmesi",
+        "B": "Yağlı değişiklik",
+        "C": "Çekirdek piknozu ve karyoreksisi",
+        "D": "Ribozom kaybı",
+        "E": "ATP azalması"
+      },
+      "dogruCevap": "C",
+      "aciklama": "Çekirdekte piknoz, karyoreksis ve karyolizis geri dönüşümsüz hasar bulgularıdır."
+    },
+    {
+      "id": 2,
+      "donem": 2,
+      "kurulId": "D2K6",
+      "ders": "Farmakoloji",
+      "ogrenimHedefi": "Otonom sinir sistemi ilaçları",
+      "soru": "Atropin hangi reseptörü bloke eder?",
+      "secenekler": {
+        "A": "Nikotinik",
+        "B": "Muskarinik",
+        "C": "Alfa-1 adrenerjik",
+        "D": "Beta-2 adrenerjik",
+        "E": "Dopamin"
+      },
+      "dogruCevap": "B"
+    },
+    {
+      "id": 3,
+      "donem": 2,
+      "kurulId": "D2K6",
+      "ders": "Patoloji",
+      "ogrenimHedefi": "İnflamasyon",
+      "soru": "Akut inflamasyonda ilk gelen hücre tipi hangisidir?",
+      "secenekler": {
+        "A": "Lenfosit",
+        "B": "Makrofaj",
+        "C": "Eozinofil",
+        "D": "Nötrofil",
+        "E": "Plazma hücresi"
+      },
+      "dogruCevap": "D",
+      "aciklama": "Akut inflamasyonun ilk 24 saatinde baskın hücre nötrofildir."
+    }
+  ]
+}
