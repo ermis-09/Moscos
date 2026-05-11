@@ -10,11 +10,7 @@
           "ad": "Kurul 5",
           "dersler": ["Fizyoloji", "Anatomi", "Histoloji", "Biyokimya"]
         },
-        {
-          "id": "D2K6",
-          "ad": "Kurul 6",
-          "dersler": ["Patoloji", "Farmakoloji", "İç Hastalıkları"]
-        }
+        
       ]
     }
   ]
