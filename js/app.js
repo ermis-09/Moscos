@@ -10,7 +10,7 @@ const state = {
     donem: null,
     kurulId: null,
     ders: '',
-    sayi: 30
+    sayi: 5
   }
 };
 
