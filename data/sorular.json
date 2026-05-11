@@ -320,327 +320,330 @@
     },
     "dogruCevap": "C",
     "aciklama": "COX enziminin iki ana antagonistik ürünü vardır. Trombositlerde bulunan COX-1'den üretilen 'Tromboksan A2 (TXA2)' damarı sıkar ve pıhtıyı çağırır. Damar endotel hücrelerinde üretilen 'Prostasiklin (PGI2)' ise damarı genişletir ve pıhtılaşmayı önler. Düşük doz aspirin verildiğinde, çekirdeği olmayan trombositlerdeki COX-1 geri dönüşümsüz bozulduğundan TXA2 sentezlenemez. Ancak çekirdekli endotel hücreleri hızla yeni enzim sentezleyerek PGI2 üretimine devam eder. Bu durum terazinin PGI2 (koruyucu ve kan sulandırıcı) lehine kaymasını sağlar."
-  }
+  },
+
+
 {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Adrenal Korteks Hastalıkları ve Ayırıcı Tanı",
-    "soru": "Primer Cushing sendromu ile hipofiz adenomuna bağlı Sekonder Cushing sendromunun (Cushing Hastalığı) laboratuvar bulgularında en belirgin ayırt edici fark aşağıdakilerden hangisidir?",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Katekolamin Sentezi ve Yıkımı",
+    "soru": "Ergenlikten beri ayakta duramama ve senkop şikayetleri olan bir hastanın plazma panelinde norepinefrin ve epinefrin saptanamazken, dopamin düzeyi normalin 8 katı yüksek bulunmuştur. Bu hastada hangi enzimin eksikliği düşünülmelidir?",
     "secenekler": {
-      "A": "Plazma kortizol düzeyinin sekonder tipte daha yüksek olması",
-      "B": "Plazma ACTH düzeyinin primer tipte düşük, sekonder tipte yüksek olması",
-      "C": "Hipopotasemi varlığının sadece primer tipte görülmesi",
-      "D": "Metabolik alkalozun sekonder tipte izlenmemesi",
-      "E": "Hipertansiyonun sadece primer tipte ortaya çıkması"
-    },
-    "dogruCevap": "B",
-    "aciklama": "Primer Cushing sendromu direkt adrenal korteks kaynaklı olduğu için kortizol artışı negatif feedback ile ACTH'ı baskılar (düşük ACTH). Sekonder Cushing (Cushing Hastalığı) ise hipofizdeki bir tümörden aşırı ACTH salgılanmasına bağlıdır (yüksek ACTH)."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hormon Reseptör Etkileşimi",
-    "soru": "Aşağıdaki hormonlardan hangisinin reseptörü yapısal olarak 'çinko parmaklar' (zinc fingers) adı verilen özel aminoasit dizisi içerir?",
-    "secenekler": {
-      "A": "Epinefrin",
-      "B": "İnsülin",
-      "C": "Tiroksin salgılatıcı hormon (TRH)",
-      "D": "Aldosteron",
-      "E": "Glukagon"
-    },
-    "dogruCevap": "D",
-    "aciklama": "Çinko parmaklar (zinc fingers), DNA'ya bağlanan nükleer/intrasellüler reseptörlerin DNA bağlayıcı bölgelerinde bulunur. Steroid yapıdaki hormonların (aldosteron, kortizol, testosteron vb.) reseptörleri bu yapıyı içerir. Diğer seçenekler peptit/protein ya da katekolamin yapılıdır ve hücre yüzey reseptörlerini kullanırlar."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hipofiz Embriyolojisi",
-    "soru": "Hipofiz bezinin embriyolojik gelişimi göz önüne alındığında, aşağıdakilerden hangisi nöroektoderm kökenli diensefalon uzantısından (infundibulum) gelişir?",
-    "secenekler": {
-      "A": "Pars distalis",
-      "B": "Pars intermedia",
-      "C": "Pars tuberalis",
-      "D": "Rathke kesesi",
-      "E": "Pars nervosa"
-    },
-    "dogruCevap": "E",
-    "aciklama": "Hipofizin ön lobu (adenohipofiz) olan pars distalis, pars intermedia ve pars tuberalis stomodeum'un ektodermal tavanından (Rathke kesesi) gelişirken; arka lob (nörohipofiz) olan pars nervosa diensefalonun nöroektoderminden (infundibulum) gelişir."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Ön Hipofiz Hormonları",
-    "soru": "Ön hipofizde sentezlenen Pro-opiomelanokortin (POMC) molekülü enzimatik olarak parçalandığında aşağıdaki hormonlardan hangisi oluşmaz?",
-    "secenekler": {
-      "A": "Adrenokortikotropik hormon (ACTH)",
-      "B": "Alfa-Melanosit uyarıcı hormon (α-MSH)",
-      "C": "Beta-endorfin",
-      "D": "Beta-lipotropin (β-LPH)",
-      "E": "Büyüme hormonu salgılatıcı hormon (GHRH)"
-    },
-    "dogruCevap": "E",
-    "aciklama": "POMC bir prekürsör (öncül) proteindir. Parçalanmasıyla ACTH, β-lipotropin, MSH türevleri ve endorfinler oluşur. GHRH ise hipotalamusta sentezlenen bağımsız bir hormondur."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hormonların Yapısı ve Sınıflandırılması",
-    "soru": "Steroid yapılı hormonların genel biyokimyasal özellikleri ile ilgili aşağıda verilen ifadelerden hangisi yanlıştır?",
-    "secenekler": {
-      "A": "Sentezlendikleri temel prekürsör molekül kolesteroldür.",
-      "B": "Hücre içinde veziküllerde depolanmazlar, sentezlendikten hemen sonra salgılanırlar.",
-      "C": "Hidrofobik (lipofilik) oldukları için kanda taşıyıcı proteinlere bağlı olarak taşınırlar.",
-      "D": "Hücre zarına yerleşmiş G proteinine bağlı reseptörler (serpentin) üzerinden etki gösterirler.",
-      "E": "Düz endoplazmik retikulum ve mitokondride enzimatik olarak üretilirler."
-    },
-    "dogruCevap": "D",
-    "aciklama": "Steroid hormonlar lipofilik olduklarından hücre zarını kolayca geçerler ve etki göstermek için hücre içi (sitoplazmik veya nükleer) reseptörlere bağlanırlar. G proteinine bağlı yüzey reseptörleri genellikle hidrofilik (peptit/protein) hormonlar tarafından kullanılır."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "İkincil Haberci Sistemleri",
-    "soru": "Tirotropin Salgılatıcı Hormon'un (TRH) ön hipofizdeki tiyrotroplara etki mekanizmasında kullandığı ikincil haberci sistemi aşağıdakilerden hangisidir?",
-    "secenekler": {
-      "A": "Siklik adenozin monofosfat (cAMP)",
-      "B": "Siklik guanozin monofosfat (cGMP)",
-      "C": "İnositol trifosfat (IP3) ve Diaçilgliserol (DAG)",
-      "D": "Tirozin kinaz aktivitesi",
-      "E": "Hücre içi nükleer reseptör kompleksi"
+      "A": "Tirozin hidroksilaz",
+      "B": "Dopa dekarboksilaz",
+      "C": "Dopamin beta-hidroksilaz (DBH)",
+      "D": "Feniletanolamin N-metiltransferaz (PNMT)",
+      "E": "Katekol-O-metil transferaz (COMT)"
     },
     "dogruCevap": "C",
-    "aciklama": "TRH, GnRH, Anjiyotensin II, ADH (V1 reseptörü) ve Oksitosin gibi hormonlar hücre içinde Fosfolipaz C'yi aktive ederek IP3 ve DAG ikincil habercilerini oluştururlar. TSH ve ACTH ise cAMP kullanır."
+    "aciklama": "Dopamin'den norepinefrin sentezini katalizleyen enzim Dopamin beta-hidroksilaz'dır. Bu enzimin eksikliğinde dopamin birikir ancak norepinefrin üretilemez, bu da şiddetli nörojenik ortostatik hipotansiyona yol açar."
   },
   {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "İkincil Haberci Sistemleri",
-    "soru": "Aşağıdaki hormon ve hücresel etkisinde kullandığı ağırlıklı reseptör / ikincil haberci eşleştirmelerinden hangisi yanlıştır?",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Hormonların Etki Mekanizmaları ve İkincil Haberciler",
+    "soru": "Aşağıdaki hormonlardan hangisi hedef hücredeki etkisini gösterirken ikincil haberci olarak İnositol 1,4,5-trifosfat (IP3) ve Diaçilgliserol (DAG) yolağını kullanmaz?",
     "secenekler": {
-      "A": "İnsülin - Tirozin Kinaz",
-      "B": "Adrenokortikotropik Hormon (ACTH) - cAMP",
-      "C": "Glukokortikoidler - Hücre içi reseptörler",
-      "D": "Atriyal Natriüretik Faktör (ANF) - cAMP",
-      "E": "Gonadotropin Serbest Bırakıcı Hormon (GnRH) - IP3/Ca++"
+      "A": "Tirotropin salgılatıcı hormon (TRH)",
+      "B": "Gonadotropin salgılatıcı hormon (GnRH)",
+      "C": "Oksitosin",
+      "D": "Glukagon",
+      "E": "Anjiyotensin II"
     },
     "dogruCevap": "D",
-    "aciklama": "Atriyal Natriüretik Faktör (ANF) ve Endotelyum Kaynaklı Gevşetici Faktör (EDRF/NO) ikincil haberci olarak cAMP değil, cGMP (guanilat siklaz aktivasyonu) kullanır."
+    "aciklama": "Glukagon, ACTH ve TSH gibi hormonlar hücre içinde adenilat siklazı aktive ederek cAMP yolağını kullanırlar. TRH, GnRH, Oksitosin ve Anjiyotensin II ise fosfolipaz C üzerinden IP3 ve DAG ikincil habercilerini oluşturur."
   },
   {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Steroid Hormon Sentezi",
+    "soru": "Adrenal kortekste kolesterolden steroid hormonların sentezi sırasında gerçekleşen ilk ve hız kısıtlayıcı basamak olan kolesterolün pregnenolona dönüşümünü sağlayan enzim (kolesterol desmolaz) hücrenin hangi bölümünde lokalizedir?",
+    "secenekler": {
+      "A": "Düz Endoplazmik Retikulum",
+      "B": "Mitokondri iç zarı",
+      "C": "Sitoplazma",
+      "D": "Golgi cisimciği",
+      "E": "Çekirdek zarı"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Steroid sentezinde hız kısıtlayıcı adım olan kolesterolün pregnenolona dönüşümü, P450scc (kolesterol desmolaz) enzimi tarafından mitokondri iç zarında gerçekleştirilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Tiroid Hormon Sentezi",
+    "soru": "Tiroid hormon sentezinde, tiroglobulin yapısındaki tirozin kalıntılarının iyotlanması (organizasyon) ve iyodotirozinlerin kenetlenmesi (coupling) reaksiyonlarının her ikisini birden katalizleyen enzim aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "5'-Deiyodinaz",
+      "B": "Tirozin kinaz",
+      "C": "Sodyum-İyot Simportu (NIS)",
+      "D": "Tiroid peroksidaz (TPO)",
+      "E": "Pendrin"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Tiroid peroksidaz (TPO) enzimi; iyodürün oksidasyonu, tiroglobulindeki tirozinlerin iyotlanması ve mono/di-iyodotirozinlerin T3/T4 oluşturmak üzere kenetlenmesi aşamalarının tümünü katalizler."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Hormon Yapısı",
+    "soru": "Aşağıdaki hormonlardan hangisi glikoprotein yapıda olup, alfa (α) alt birimi LH, FSH ve hCG ile yapısal olarak tamamen aynıdır?",
+    "secenekler": {
+      "A": "Büyüme Hormonu (GH)",
+      "B": "Tiroid Stimüle Edici Hormon (TSH)",
+      "C": "Prolaktin",
+      "D": "Adrenokortikotropik Hormon (ACTH)",
+      "E": "Kortikotropin Salgılatıcı Hormon (CRH)"
+    },
+    "dogruCevap": "B",
+    "aciklama": "TSH, LH, FSH ve hCG glikoprotein yapıda hormonlardır. Hepsinde ortak bir alfa (α) alt birimi bulunur. Hormonların kendilerine özgü biyolojik aktivitelerini ve reseptör spesifitelerini belirleyen ise beta (β) alt birimleridir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Fizyoloji",
+    "ogrenimHedefi": "Tiroid Hormonlarının Etkileri",
+    "soru": "Tiroid hormonlarının mitokondriyal düzeydeki temel 'kalorijenik' (ısı oluşturucu) etkisi esas olarak hangi mekanizma üzerinden gerçekleşir?",
+    "secenekler": {
+      "A": "Böbrekte aquaporin kanallarını açarak",
+      "B": "Hücre zarlarındaki Na+/K+-ATPaz pompası aktivitesini ve sentezini artırarak",
+      "C": "Kalsiyumun kemiklerden kana geçişini hızlandırarak",
+      "D": "Hücre içi cAMP düzeyini kalıcı olarak düşürerek",
+      "E": "Glikojen sentezini uyararak"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Tiroid hormonları hedef dokularda Na+/K+-ATPaz enzim miktarını artırır. Bu işlem çok fazla ATP tüketimine neden olur, artan oksidatif fosforilasyon sonucunda vücut ısısı açığa çıkar (kalorijenik etki)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Fizyoloji",
+    "ogrenimHedefi": "Adrenal Korteks Hormonları",
+    "soru": "Primer hiperaldosteronizmi (Conn sendromu) olan bir hastada aşağıdaki laboratuvar ve klinik bulgulardan hangisinin görülmesi beklenmez?",
+    "secenekler": {
+      "A": "Hipertansiyon",
+      "B": "Hipokalemi",
+      "C": "Metabolik asidoz",
+      "D": "Plazma renin aktivitesinde düşüklük",
+      "E": "Hipernatremi eğilimi"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Aldosteron böbreklerde Na+ geri emilimini artırırken, K+ ve H+ atılımını uyarır. H+ kaybı nedeniyle metabolik asidoz değil, metabolik alkaloz görülür. Artan Na+ hipertansiyona neden olur ve negatif feedback ile renini baskılar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Fizyoloji",
+    "ogrenimHedefi": "Arka Hipofiz Hormonları",
+    "soru": "Antidiüretik hormon (ADH) etkisini gösterirken toplayıcı kanallarda hangi reseptöre bağlanır ve hücre içi su kanallarından hangisinin apikal membrana yerleşmesini sağlar?",
+    "secenekler": {
+      "A": "V1 reseptörü - Aquaporin-1",
+      "B": "V2 reseptörü - Aquaporin-2",
+      "C": "V1 reseptörü - Aquaporin-3",
+      "D": "V2 reseptörü - Aquaporin-4",
+      "E": "V3 reseptörü - Aquaporin-2"
+    },
+    "dogruCevap": "B",
+    "aciklama": "ADH, böbrek toplayıcı kanallarındaki V2 reseptörlerine (cAMP aracılı) bağlanarak sitoplazmadaki Aquaporin-2 kanallarının lümene bakan (apikal) membrana insersiyonunu sağlar ve serbest suyu geri emer."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Fizyoloji",
+    "ogrenimHedefi": "Hipofiz Ön Lob Hormonları Regülasyonu",
+    "soru": "Kaza sonucu hipofiz sapı kesisi (travmatik transeksiyon) gelişen bir hastada, aşağıdaki hormonlardan hangisinin plazma seviyesinde belirgin bir artış olması beklenir?",
+    "secenekler": {
+      "A": "Adrenokortikotropik Hormon (ACTH)",
+      "B": "Tiroid Stimüle Edici Hormon (TSH)",
+      "C": "Prolaktin (PRL)",
+      "D": "Lüteinleştirici Hormon (LH)",
+      "E": "Büyüme Hormonu (GH)"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Hipotalamus, ön hipofiz hormonlarının salınımını genellikle uyarıcı (releasing) faktörlerle kontrol eder. Ancak Prolaktin salınımı hipotalamustan gelen dopamin (PIF) ile sürekli inhibisyon altındadır. Sap kesildiğinde inhibisyon kalkacağı için sadece prolaktin seviyesi artar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Fizyoloji",
+    "ogrenimHedefi": "Pankreas Hormonları",
+    "soru": "İnsülinin hedef hücrelerdeki metabolik etkileri düşünüldüğünde, aşağıdaki enzimlerden hangisinin aktivitesini artırması beklenmez?",
+    "secenekler": {
+      "A": "Hormona duyarlı lipaz",
+      "B": "Glikojen sentaz",
+      "C": "Lipoprotein lipaz",
+      "D": "Glukokinaz",
+      "E": "Fosfofruktokinaz"
+    },
+    "dogruCevap": "A",
+    "aciklama": "İnsülin anabolik bir hormondur. Glikojen, lipid ve protein sentezini (depolanmayı) uyarır. Hormona duyarlı lipaz ise yağ dokusunda trigliseritleri yıkan enzimdir ve insülin tarafından inhibe edilir (glukagon ve epinefrin tarafından uyarılır)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Anatomi",
+    "ogrenimHedefi": "Hipofiz Bezinin Embriyolojik Gelişimi",
+    "soru": "Adenohipofiz (hipofiz ön lobu) embriyolojik olarak aşağıdaki yapılardan hangisinden gelişir?",
+    "secenekler": {
+      "A": "Diensefalon tabanı",
+      "B": "Stomodeum tavanından (Rathke kesesi)",
+      "C": "Nöral krest hücreleri",
+      "D": "Mezoderm",
+      "E": "Üçüncü brankial arkus"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Adenohipofiz, ilkel ağız boşluğu (stomodeum) tavanından yukarı doğru ektodermal bir çıkıntı olarak gelişen Rathke kesesinden köken alır. Nörohipofiz ise diensefalon tabanından aşağı inen nöroektoderm kökenlidir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Anatomi",
+    "ogrenimHedefi": "Tiroid ve Paratiroid Kanlanması",
+    "soru": "Tiroid bezinin kanlanması ve komşulukları dikkate alındığında, total tiroidektomi ameliyatı sırasında arteria thyroidea inferior bağlanırken aşağıdaki sinirlerden hangisinin zedelenme riski en yüksektir?",
+    "secenekler": {
+      "A": "Nervus laryngeus superior (ramus externus)",
+      "B": "Nervus vagus",
+      "C": "Nervus laryngeus recurrens",
+      "D": "Nervus hypoglossus",
+      "E": "Nervus phrenicus"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Arteria thyroidea inferior, tiroid bezine alt polünden girerken nervus laryngeus recurrens ile çok yakın anatomik çaprazlaşma yapar. Bu nedenle alt pol arterleri bağlanırken rekürren sinir yaralanma riski çok yüksektir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Anatomi",
+    "ogrenimHedefi": "Böbrek Üstü Bezi Venöz Drenajı",
+    "soru": "Sağ ve sol böbrek üstü bezlerinin (glandula suprarenalis) venöz drenajı anatomi açısından farklılık gösterir. Buna göre, vena suprarenalis sinistra (sol böbrek üstü veni) doğrudan hangi damara dökülür?",
+    "secenekler": {
+      "A": "Vena cava inferior",
+      "B": "Vena renalis sinistra",
+      "C": "Vena lumbalis ascendens",
+      "D": "Vena mesenterica inferior",
+      "E": "Vena splenica"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Sağ suprarenal ven (v. suprarenalis dextra) kısa bir seyirle doğrudan Vena Cava Inferior'a dökülürken, sol suprarenal ven (v. suprarenalis sinistra) Vena Renalis Sinistra'ya (sol böbrek veni) açılır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Anatomi",
+    "ogrenimHedefi": "Hipotalamik Nükleuslar",
+    "soru": "Arka hipofizden salgılanan oksitosin ve antidiüretik hormon (vazopressin), hipotalamusta bulunan hangi iki çekirdekte (nükleus) sentezlenir?",
+    "secenekler": {
+      "A": "Nucleus ventromedialis - Nucleus arcuatus",
+      "B": "Nucleus preopticus - Nucleus suprachiasmaticus",
+      "C": "Nucleus supraopticus - Nucleus paraventricularis",
+      "D": "Nucleus dorsomedialis - Nucleus posterior",
+      "E": "Corpus mamillare - Nucleus anterior"
+    },
+    "dogruCevap": "C",
+    "aciklama": "ADH (vazopressin) esas olarak nucleus supraopticus'ta, Oksitosin ise esas olarak nucleus paraventricularis'te sentezlenerek aksonlar aracılığıyla arka hipofize (nörohipofiz) taşınır ve depolanır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Anatomi",
+    "ogrenimHedefi": "Paratiroid Bezlerinin Gelişimi",
+    "soru": "Üst ve alt paratiroid bezlerinin embriyolojik kökenleri birbirinden farklı faringeal ceplere (pouch) dayanır. Glandula parathyroidea inferior (alt paratiroid bezi) aşağıdakilerden hangisinden gelişir?",
+    "secenekler": {
+      "A": "Birinci faringeal cep",
+      "B": "İkinci faringeal cep",
+      "C": "Üçüncü faringeal cep",
+      "D": "Dördüncü faringeal cep",
+      "E": "Beşinci faringeal cep"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Glandula parathyroidea inferior (alt paratiroid bezi) ve timus 3. faringeal cepten (pouch) gelişir. Timusun aşağı doğru göçü nedeniyle alt paratiroidler de sürüklenir. Glandula parathyroidea superior ise 4. faringeal cepten gelişir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Histoloji",
     "ogrenimHedefi": "Adrenal Bez Histolojisi",
-    "soru": "Adrenal korteksin en kalın tabakası olan; büyük, poligonal şekilli, stoplazmasında bol lipit damlacığı içerdiği için 'spongiyosit' olarak adlandırılan hücrelerden oluşan ve esas olarak glukokortikoidlerin sentezlendiği bölge aşağıdakilerden hangisidir?",
+    "soru": "Adrenal korteksin en kalın tabakası olan; hücreleri bol lipid damlacığı içerdiği için preparatlarda açık renkli ve süngerimsi görünerek 'spongiyosit' adını alan ve esas olarak glukokortikoid üreten bölge aşağıdakilerden hangisidir?",
     "secenekler": {
       "A": "Zona glomerulosa",
       "B": "Zona fasciculata",
       "C": "Zona reticularis",
       "D": "Adrenal medulla",
-      "E": "Adrenal kapsül"
+      "E": "Kromafin hücre adacıkları"
     },
     "dogruCevap": "B",
-    "aciklama": "Adrenal korteksin %80'ini oluşturan en kalın tabakası Zona Fasciculata'dır. Bu tabakadaki hücreler lipid yönünden zengin oldukları için histolojik preperatlarda süngerimsi görünür ve spongiyosit adını alırlar."
+    "aciklama": "Zona fasciculata, adrenal korteksin %80'ini kaplayan en geniş tabakasıdır. Lipid içeriği zengin olduğu için hücrelerine spongiyosit denir ve esas olarak kortizol sentezinden sorumludur."
   },
   {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hipotalamo-Hipofizer Eksen",
-    "soru": "Hipotalamo-hipofizer portal damar sisteminin ciddi travma veya cerrahi bir nedenle kesilmesi durumunda (hipofiz sapı kesisi), aşağıdaki ön hipofiz hormonlarından hangisinin kan düzeyinde kalıcı bir artış gözlenmesi beklenir?",
+    "ders": "Histoloji",
+    "ogrenimHedefi": "Tiroid Bezi Histolojisi",
+    "soru": "Tiroid folikülleri arasında tek tek ya da küçük gruplar halinde yerleşmiş, nöral krista kökenli olan ve kalsitonin sentezleyen C-hücrelerinin (parafoliküler hücreler) temel histolojik ayırıcı özelliği nedir?",
     "secenekler": {
-      "A": "Büyüme Hormonu (GH)",
-      "B": "Tirotropin (TSH)",
-      "C": "Folikül Stimüle Edici Hormon (FSH)",
-      "D": "Prolaktin (PRL)",
-      "E": "Adrenokortikotropik Hormon (ACTH)"
-    },
-    "dogruCevap": "D",
-    "aciklama": "Ön hipofiz hormonlarının biri (Prolaktin) hariç hepsi hipotalamusun stimüle edici kontrolü altındadır. Prolaktin ise hipotalamustan salgılanan Dopamin (PIF) tarafından sürekli olarak inhibe edilir. Sap kesildiğinde bu inhibisyon kalkacağı için Prolaktin seviyesi artar."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Adrenal Korteks Hastalıkları",
-    "soru": "Adrenogenital sendromlu (konjenital adrenal hiperplazi) bir hastada, enzimatik yetmezliğe (en sık 21-hidroksilaz eksikliği) bağlı olarak aşağıdakilerden hangisinin sentezinde patolojik bir artış gözlenir?",
-    "secenekler": {
-      "A": "Aldosteron",
-      "B": "Kortizol",
-      "C": "DHEA (Dehidroepiandrosteron) ve Androstenedion",
-      "D": "Epinefrin",
-      "E": "Antidiüretik hormon (ADH)"
+      "A": "Folikül lümeni ile doğrudan temas halinde olmaları",
+      "B": "Foliküler hücrelere göre daha koyu boyanmaları ve bol kolloid içermeleri",
+      "C": "Folikül epitelinin bazal laminası içerisinde ancak lümene ulaşmayacak şekilde yerleşim göstermeleri",
+      "D": "Sadece tiroidin en dış kapsül tabakasında bulunmaları",
+      "E": "Zengin bir düz endoplazmik retikuluma sahip olmaları"
     },
     "dogruCevap": "C",
-    "aciklama": "21-hidroksilaz enzimi eksikliğinde aldosteron ve kortizol sentezlenemez. Kortizol düşüklüğü hipofizden ACTH salınımını aşırı artırır. Artan ACTH adrenal bezi uyarır, fakat enzim bloğu nedeniyle biriken öncül maddeler zorunlu olarak adrenal androjen (DHEA ve androstenedion) sentez yolağına kayar."
+    "aciklama": "Parafoliküler hücreler (C-hücreleri) foliküler epitel hücrelerinin arasında veya foliküller arasındaki bağ dokusunda bulunur. Folikülün bazal laminası ile çevrilidirler ancak apikal yüzeyleri folikül lümenindeki kolloid ile temas etmez."
   },
   {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Adrenal Yetmezlik Acilleri",
-    "soru": "Primer adrenal yetmezliği (Addison hastalığı) olan bir hastada; ameliyat, enfeksiyon veya ciddi travma gibi şiddetli stres durumlarında artan glukokortikoid ihtiyacının karşılanamaması nedeniyle gelişen akut, hipotansif ve hayatı tehdit edici tabloya ne ad verilir?",
+    "ders": "Histoloji",
+    "ogrenimHedefi": "Ön Hipofiz Hücreleri",
+    "soru": "Adenohipofizdeki (pars distalis) kromofil hücreler boyanma özelliklerine göre asidofilik ve bazofilik olarak ayrılırlar. Aşağıdaki hormonlardan hangisini salgılayan hücreler 'bazofilik' hücre grubunda yer alır?",
     "secenekler": {
-      "A": "Feokromositoma krizi",
-      "B": "Cushing sendromu alevlenmesi",
-      "C": "Conn sendromu",
-      "D": "Addison Krizi",
-      "E": "Tiroid fırtınası"
-    },
-    "dogruCevap": "D",
-    "aciklama": "Addison krizi, vücudun akut strese yanıt vermek için yüksek doz kortizole ihtiyaç duyduğu ancak adrenal korteksin harabiyeti nedeniyle bunu üretemediği durumlarda ortaya çıkan akut adrenal yetmezlik tablosudur."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Adrenal Bez Histolojisi ve Fonksiyonu",
-    "soru": "Adrenal korteksin Zona Reticularis tabakası ile ilgili olarak aşağıda verilen ifadelerden hangisi yanlıştır?",
-    "secenekler": {
-      "A": "Pencereli tip kapillerler ile birbirinden ayrılan anastomozlaşmış hücre kordonlarından meydana gelir.",
-      "B": "Hücreleri zona fasciculata'ya göre daha küçüktür ve nükleusları daha koyu boyanır.",
-      "C": "Esas sekresyonu zayıf androjenlerdir (dehidroepiandrosteron).",
-      "D": "Hücrelerinde yaşlanma ile birlikte lipofuskin pigment granülleri birikir.",
-      "E": "Tuz ve su dengesini düzenleyen mineralokortikoidlerin temel sentez yeridir."
-    },
-    "dogruCevap": "E",
-    "aciklama": "Mineralokortikoidler (aldosteron) adrenal korteksin en dış tabakası olan Zona Glomeruloza'da sentezlenir. Zona Reticularis ise korteksin en iç tabakasıdır ve zayıf androjenleri (DHEA, androstenedion) sentezler."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hormonların Dolaşımda Taşınması",
-    "soru": "Hormonların kanda taşınması prensipleri göz önüne alındığında, aşağıdaki hormonlardan hangisinin dolaşımdaki fraksiyonunun tamamına yakını serbest formda (taşıyıcı proteine bağlı olmadan) bulunur?",
-    "secenekler": {
-      "A": "Tiroksin (T4)",
-      "B": "Kortizol",
-      "C": "Epinefrin (Katekolaminler)",
-      "D": "Aldosteron",
-      "E": "Östrojen"
+      "A": "Somatotropin (GH)",
+      "B": "Prolaktin (PRL)",
+      "C": "Lüteinleştirici Hormon (LH)",
+      "D": "Oksitosin",
+      "E": "Antidiüretik Hormon (ADH)"
     },
     "dogruCevap": "C",
-    "aciklama": "Hidrofilik özellikteki katekolaminler (epinefrin, norepinefrin) ve peptit/protein yapılı hormonların büyük çoğunluğu kanda serbest olarak çözünmüş halde bulunurlar. Tiroksin ve steroid hormonlar (kortizol, aldosteron, östrojen) ise lipofilik olduklarından TBG, transkortin, SHBG gibi spesifik taşıyıcı proteinlere bağlanarak taşınırlar."
+    "aciklama": "Ön hipofizde asidofil hücreler Büyüme hormonu (GH) ve Prolaktin salgılar. Bazofil hücreler ise TSH, ACTH, FSH ve LH salgılar (B-FLAT kısaltması ile hatırlanabilir). ADH ve oksitosin ise arka hipofizden salınır."
   },
   {
     "donem": 2,
     "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Adrenal Medulla Hastalıkları",
-    "soru": "Adrenal medulla kaynaklı bir tümör olan Feokromositoma'nın tanısında, hormon salınımının epizodik olabilmesi nedeniyle yalnızca katekolamin ölçümü yanıltıcı olabilir. Bu nedenle tümör dokusunda COMT enzimi aracılığıyla sürekli üretilen ve ilk basamak tarama testi olarak kullanılması gereken daha duyarlı biyobelirteç aşağıdakilerden hangisidir?",
+    "ders": "Histoloji",
+    "ogrenimHedefi": "Pineal Bez (Epifiz) Histolojisi",
+    "soru": "Histolojik incelemede, kalsiyum ve magnezyum fosfat çökelmeleri sonucu oluşan ve yaşla birlikte miktarı artan 'beyin kumu' (corpora arenacea / acervuli cerebri) adlı yapıların karakteristik olarak görüldüğü endokrin bez aşağıdakilerden hangisidir?",
     "secenekler": {
-      "A": "Plazma ACTH düzeyi",
-      "B": "Plazma veya 24 saatlik idrar fraksiyone metanefrinleri",
-      "C": "Serum 17-hidroksiprogesteron düzeyi",
-      "D": "Yüksek doz deksametazon baskılama testi",
-      "E": "Tiroglobulin seviyesi"
+      "A": "Hipofiz bezi (Pars intermedia)",
+      "B": "Paratiroid bezi",
+      "C": "Pineal bez (Epifiz)",
+      "D": "Adrenal medulla",
+      "E": "Pankreas adacıkları"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Beyin kumu (corpora arenacea), pineal bezin (glandula pinealis/epifiz) en karakteristik histolojik bulgularından biridir. Radyolojik görüntülemelerde orta hat belirteci olarak da işe yararlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Histoloji",
+    "ogrenimHedefi": "Pankreas Adacık Hücreleri",
+    "soru": "Langerhans adacıklarının histolojik yapısında en fazla oranda bulunan, adacığın genellikle merkezine lokalize olmuş ve hücre içi veziküllerinde çinko ile kompleks yapmış hormon barındıran hücre tipi aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Alfa hücreleri (Glukagon)",
+      "B": "Beta hücreleri (İnsülin)",
+      "C": "Delta hücreleri (Somatostatin)",
+      "D": "F (PP) hücreleri (Pankreatik polipeptit)",
+      "E": "Epsilon hücreleri (Grelin)"
     },
     "dogruCevap": "B",
-    "aciklama": "Katekolaminler tümörden atipik krizler halinde salınırken, katekolaminlerin yıkım ürünleri olan metanefrinler (tümör dokusunda katekol-o-metil transferaz ile sürekli üretildikleri için) her zaman yüksek bulunur. Bu yüzden en duyarlı tarama testi metanefrin ölçümüdür."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Katekolamin Sentezi",
-    "soru": "Ergenlikten beri ayakta duramama ve tekrarlayan senkop şikayetleri olan bir hastada plazma katekolamin panelinde Norepinefrin (NE) ve Epinefrin (EPI) seviyeleri yok denecek kadar azken, Dopamin (DA) seviyesinin normalin 8 katı olduğu saptanmıştır. Bu hastadaki nörojenik ortostatik hipotansiyonun temelinde aşağıdaki enzimlerden hangisinin eksikliği yatmaktadır?",
-    "secenekler": {
-      "A": "Feniletanolamin N-metiltransferaz (PNMT)",
-      "B": "Tirozin hidroksilaz",
-      "C": "Dopamin beta-hidroksilaz (DBH)",
-      "D": "Monoamin oksidaz (MAO)",
-      "E": "Katekol-O-metil transferaz (COMT)"
-    },
-    "dogruCevap": "C",
-    "aciklama": "Katekolamin sentez yolağında Dopamin'den Norepinefrin oluşumunu katalizleyen enzim Dopamin beta-hidroksilaz'dır (DBH). Bu enzimin eksikliğinde dopamin birikir ancak norepinefrin (ve dolayısıyla epinefrin) üretilemez, bu da şiddetli sempatik yetmezliğe (ortostatik hipotansiyon) neden olur."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Tiroid Hormonlarının Metabolizması",
-    "soru": "Tiroid hormonlarının hücresel düzeydeki etkileri ve metabolizması ile ilgili aşağıda verilen ifadelerden hangisi doğrudur?",
-    "secenekler": {
-      "A": "T4'ün hedef hücredeki tiroid nükleer reseptörüne afinitesi T3'e kıyasla 10 kat daha fazladır.",
-      "B": "Hücre düzeyinde gen transkripsiyonunu artıran asıl aktif hormon T4'tür, T3 inaktif depo formdur.",
-      "C": "Dolaşımdaki tiroid hormonlarının %90'ından fazlasını T3 oluşturur.",
-      "D": "Lipofilik özelliklerine rağmen hücre zarındaki enzime bağlı reseptörleri kullanırlar.",
-      "E": "T4, hedef hücre içerisine difüzyonla girdikten sonra deiyodinaz enzimi aracılığıyla daha aktif olan T3'e dönüştürülür."
-    },
-    "dogruCevap": "E",
-    "aciklama": "Tiroid bezi esas olarak T4 (%93) salgılar. Ancak T4 bir prohormon gibi davranır ve hedef dokulara (karaciğer, böbrek vb.) girdiğinde 5'-deiyodinaz enzimi ile aktif formu olan T3'e dönüştürülür. Nükleer reseptörlere asıl bağlanan ve afinitesi çok daha yüksek olan hormon T3'tür."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Ayırıcı Tanı ve Dinamik Testler",
-    "soru": "Klinik olarak Cushing sendromu ile uyumlu bulguları olan bir hastaya Yüksek Doz Deksametazon Baskılama Testi uygulanmıştır. Test sonucunda plazma kortizol ve ACTH seviyelerinin baskılanmadığı (yüksek kalmaya devam ettiği) görülmüştür. Bu hastada patolojinin kökeni yüksek ihtimalle aşağıdakilerden hangisidir?",
-    "secenekler": {
-      "A": "Hipofiz adenomu (Cushing Hastalığı)",
-      "B": "Primer Adrenal Karsinom",
-      "C": "Ektopik ACTH üreten bir tümör (örn. küçük hücreli akciğer kanseri)",
-      "D": "İyatrojenik (dışarıdan) glukokortikoid kullanımı",
-      "E": "Primer adrenal hiperplazi"
-    },
-    "dogruCevap": "C",
-    "aciklama": "Yüksek doz deksametazon, hipofiz kaynaklı ACTH salgılayan adenomları baskılayabilir (negatif feedback direnci kısmen kırılır). Ancak Ektopik ACTH salgılayan tümörler otonom çalıştıkları için yüksek doza da yanıt vermez ve ACTH baskılanmaz."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Arka Hipofiz Hormonları",
-    "soru": "Antidiüretik hormon (ADH) ve etkileri ile ilgili aşağıdaki ifadelerden hangisi doğrudur?",
-    "secenekler": {
-      "A": "Su yoksunluğu, plazma ozmolaritesini düşürerek ADH salgılanmasını azaltır.",
-      "B": "Sentezi esas olarak böbrek üstü bezi medullasında gerçekleşir.",
-      "C": "Vücut su dengesini sağlamak için etkisini böbrekte esas olarak proksimal tübüllerde gösterir.",
-      "D": "Böbrek toplayıcı kanallarında V2 reseptörlerine bağlanarak aquaporin-2 (su kanalları) proteinlerinin apikal membrana yerleşmesini sağlar.",
-      "E": "Yüksek dozlarda güçlü bir vazodilatör (damar genişletici) etki gösterir."
-    },
-    "dogruCevap": "D",
-    "aciklama": "ADH, hipotalamusta sentezlenip arka hipofizden salgılanır. Böbreklerin distal tübül son kısımları ve toplayıcı kanallarındaki V2 reseptörlerine (cAMP üzerinden) etki ederek Aquaporin-2 kanallarını lümene yönlendirir ve suyu geri emer. Yüksek dozlarda ise V1 reseptörleriyle güçlü vazokonstriktör (damar büzücü) etki gösterir."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Hipotalamik Hormonların Yapısı",
-    "soru": "Hipotalamusun ön hipofizi kontrol eden salgılatıcı (releasing) ve inhibe edici (inhibiting) hormonları kimyasal yapı bakımından değerlendirildiğinde, peptit yapıda 'olmayan' tek hipotalamik regülatör hormon aşağıdakilerden hangisidir?",
-    "secenekler": {
-      "A": "TRH (Tirotropin salgılatıcı hormon)",
-      "B": "GnRH (Gonadotropin salgılatıcı hormon)",
-      "C": "CRH (Kortikotropin salgılatıcı hormon)",
-      "D": "Somatostatin (Büyüme hormonu inhibe edici hormon)",
-      "E": "Dopamin (Prolaktin inhibe edici faktör)"
-    },
-    "dogruCevap": "E",
-    "aciklama": "Hipotalamus hormonlarının tamamı peptit/protein yapılıdır; bunun tek istisnası bir amin (katekolamin türevi) yapısında olan ve ön hipofizden prolaktin salınımını sürekli olarak baskılayan Dopamin'dir (PIF)."
-  },
-  {
-    "donem": 2,
-    "kurulId": "D2K5",
-    "ders": "Endokrinoloji",
-    "ogrenimHedefi": "Tiroid Hormon Metabolizması",
-    "soru": "Tiroid hormonlarının mitokondriyal seviyedeki temel 'kalorijenik' (ısı oluşturucu) ve ATP tüketici etkisi esas olarak hangi mekanizma üzerinden gerçekleşir?",
-    "secenekler": {
-      "A": "Hücre zarlarındaki Na+/K+-ATPaz pompası aktivitesini ve miktarını artırarak",
-      "B": "Böbrekte aquaporin kanallarını sürekli açık tutarak",
-      "C": "Kalsiyumun kemiklerden rezorpsiyonunu hızlandırarak",
-      "D": "Adenilat siklazı kalıcı olarak inaktif duruma geçirerek",
-      "E": "Lizozomal enzimlerin yıkıcı etkisini bloke ederek"
-    },
-    "dogruCevap": "A",
-    "aciklama": "Tiroid hormonlarının en önemli hücresel etkilerinden biri, hedef dokulardaki Na+/K+-ATPaz enzim miktarını ve aktivitesini artırmaktır. Bu işlem çok fazla ATP tüketimine neden olur; oksidatif fosforilasyon artar ve yan ürün olarak vücut ısısı (kalorijenik etki) açığa çıkar."
+    "aciklama": "Pankreas Langerhans adacıklarındaki hücrelerin %70'ini Beta hücreleri oluşturur. Bu hücreler genellikle adacıkların merkezinde yer alır ve içlerindeki granüllerde insülin hormonu çinko kristalleri halinde depolanır."
   }
+
 ]
 
 }
