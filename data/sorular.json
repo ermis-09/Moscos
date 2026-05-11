@@ -1,5 +1,326 @@
 {
-  "sorular": [
-    
-  ]
+  "sorular":
+  [
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Hücreler arası iletişim tiplerinin ayırt edici özelliklerinin kavranması",
+    "soru": "Bir dokuda sentezlenen ve genel kan dolaşımına tam olarak girmeden, sadece yakın komşuluğunda bulunan ancak farklı histolojik yapıdaki hedef hücrelerin fonksiyonlarını düzenleyen kimyasal habercilerin (örneğin yangı bölgesindeki eikozanoidlerin) sergilediği biyokimyasal haberleşme mekanizması aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Hormonun üretildiği hücrede tekrar kendi yüzey reseptörlerine bağlanarak geri bildirim yaptığı otokrin etki",
+      "B": "Malign tümörlerden kaynaklanan ve genetik kod dışı sentezlenerek kana salınan ektopik endokrin etki",
+      "C": "Hormonun komşu ancak farklı histolojik hücre tipleri üzerinde sadece lokal difüzyonla gösterdiği parakrin etki",
+      "D": "Nöron gövdelerinden sentezlenip akson terminalleri vasıtasıyla doğrudan sistemik dolaşıma verilen nöroendokrin etki",
+      "E": "Bir bireyden dış ortama salgılanıp başka bir bireyin davranış veya reseptörlerini uzaktan uyaran feromonal etki"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Parakrin etkide sentezlenen haberci molekül sistemik kan dolaşımına geçmeden sadece hemen yakınında yer alan, ancak kendi sentezlendiği hücreden farklı tipteki komşu hücreleri etkiler. Eikozanoidler lokal olarak üretilip hızla yıkıldıkları için bu duruma en klasik biyokimyasal örneği oluştururlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Hidrofilik yapıdaki polipeptid hormonların hücresel biyosentez aşamalarının analiz edilmesi",
+    "soru": "Protein ve büyük peptid yapılı hormonların sentez aşamaları incelendiğinde; ilk olarak serbest ribozomlarda sentezi başlayan polipeptid zincirinin lümene yönlendirilmesini sağlayan 'sinyal dizisinin' enzimatik olarak koparıldığı hücresel kompartman ve bu klevaj sonucunda oluşan ürün aşağıdakilerin hangisinde doğru verilmiştir?",
+    "secenekler": {
+      "A": "Granüllü endoplazmik retikulum lümeni / Prohormon molekülünün oluşumu",
+      "B": "Golgi aygıtı sisternaları / İkincil habercilerin ve aktif hormonun oluşumu",
+      "C": "Hücre zarına yakın salgı vezikülleri / Tam boyutlu preprohormon oluşumu",
+      "D": "Hücrenin sitozolik kompartmanı / Doğrudan nükleer reseptöre giden hormon oluşumu",
+      "E": "Mitokondri iç zarı ve matriksi / Enzimatik olarak kesilmiş aktif peptid fragman oluşumu"
+    },
+    "dogruCevap": "A",
+    "aciklama": "Peptid hormonlar hücresel düzeyde ilk olarak preprohormon halinde translasyona uğrar. Bu yapıdaki hidrofobik sinyal dizisi, ribozomu granüllü endoplazmik retikuluma (GER) yönlendirir. Sinyal dizisi GER lümeni içinde peptidazlarla kesildiğinde geriye 'prohormon' kalır. Prohormonlar daha sonra Golgi'de ve sekretuvar veziküllerde enzimatik olgunlaşmayla son aktif haline dönüşür."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Kanda taşıyıcı proteinlere bağlanan lipofilik hormonların biyolojik dinamiklerinin değerlendirilmesi",
+    "soru": "Gebelikte veya östrojen içeren oral kontraseptif kullanımında, karaciğer kaynaklı Tiroksin Bağlayıcı Globulin (TBG) protein sentezinde belirgin bir artış meydana gelir. Hormon homeostazisi normal (ötiroid) olan bu kişilerin laboratuvar tiroid hormon profilleri değerlendirildiğinde kanda hangi biyokimyasal tablonun gözlenmesi en olasıdır?",
+    "secenekler": {
+      "A": "Biyolojik olarak aktif olan serbest T3 ve serbest T4 fraksiyonlarında kalıcı, orantısız ve belirgin bir artış saptanması",
+      "B": "Total tiroid hormon miktarında (TT3, TT4) artış gözlenirken, biyolojik aktiviteyi belirleyen serbest hormon fraksiyonunun referans aralıkta kalması",
+      "C": "Sentezlenen tüm tiroid hormonlarının proteine fazlaca bağlanarak böbrekten hızla atılması ve total hormon seviyesinin dibe inmesi",
+      "D": "Tiroksinin periferik dokularda inaktif bir molekül olan rT3 formuna dönüşümünün TBG bağlanması sebebiyle tamamen durması",
+      "E": "Sadece tiroksin (T4) miktarının taşıyıcıya bağlı olarak kanda artması ve hücresel T3 seviyesinin mutlak olarak yetersiz kalması"
+    },
+    "dogruCevap": "B",
+    "aciklama": "TBG gibi özgül taşıyıcı proteinlerin artması (östrojen dominansında olduğu gibi), kanda tiroid hormonlarının bağlanma kapasitesini artırır. Bunun sonucunda laboratuvarda ölçülen 'total' hormon seviyesi yüksek bulunur. Ancak çalışan bir hipotalamo-hipofizer sistem, biyolojik olarak hedef dokuya giren 'serbest' fraksiyonu sıkı bir geri bildirimle koruyacağı için serbest hormon seviyesi değişmez."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "G-protein kenetli reseptör (GPCR) alt tiplerinin dokuya özgü moleküler etkilerinin ayrımı",
+    "soru": "Aynı yapıdaki bir hormon, hedef dokusundaki reseptör profiline göre tamamen farklı hücre içi kaskadları tetikleyebilir. Antidiüretik hormonun (Vazopressin) böbrek toplayıcı kanallarındaki V2 reseptörlerine bağlandığında kullandığı ikincil haberci mekanizması ile damar düz kasındaki V1 reseptörlerine bağlandığında kullandığı ikincil haberci yolağı sırasıyla aşağıdakilerin hangisinde verilmiştir?",
+    "secenekler": {
+      "A": "cGMP artışı ile protein kinaz G aktivasyonu / Tirozin kinaz ile çapraz fosforilasyon",
+      "B": "JAK-STAT ile doğrudan çekirdek uyarımı / İnozitol trifosfat (IP3) ile kalsiyum salınımı",
+      "C": "Adenilat siklaz üzerinden cAMP artışı (Gs) / Fosfolipaz C üzerinden IP3 ve DAG oluşumu (Gq)",
+      "D": "Fosfolipaz C üzerinden IP3 ve DAG oluşumu (Gq) / Adenilat siklaz üzerinden cAMP artışı (Gs)",
+      "E": "Tirozin kinaz ile MAPK aktivasyonu / Kalsiyum-Kalmodulin kompleksi üzerinden kasılma"
+    },
+    "dogruCevap": "C",
+    "aciklama": "ADH, böbrek toplayıcı kanallarında suyu tutmak için V2 reseptörünü uyarır. V2 reseptörü Gs proteini üzerinden adenilat siklazı aktifler, cAMP artar ve akuaporin kanalları zara yerleşir. Ancak damar düz kasını kasmak (vazokonstriksiyon) için V1 reseptörüne bağlanır. V1 reseptörü Gq proteinine kenetlidir; fosfolipaz C'yi uyararak IP3, DAG ve intraselüler kalsiyum artışına yol açarak şiddetli kasılma sağlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Hipotalamo-hipofizer eksende prolaktin salınımındaki 'tonik inhibisyon' mekanizmasının klinik analizinin yapılması",
+    "soru": "Ağır bir trafik kazası sonucu kafatası tabanında kırık gelişen ve infundibulum (hipofiz sapı) yapısı tamamen kopan bir hastada, hipotalamustan ön hipofize giden tüm portal vasküler sistem kesintiye uğramıştır. Bu akut gelişen olaydan sonraki saatler içerisinde hastanın hormon profili incelendiğinde, aşağıdaki ön hipofiz hormonlarından hangisinin kandaki miktarında düşüş yerine paradoksal olarak şiddetli bir artış (Stalk Effect) görülmesi beklenir?",
+    "secenekler": {
+      "A": "Somatotrop hücrelerden Büyüme Hormonu (GH)",
+      "B": "Gonadotrop hücrelerden Lüteinleştirici Hormon (LH)",
+      "C": "Kortikotrop hücrelerden Adrenokortikotropik Hormon (ACTH)",
+      "D": "Laktotrop hücrelerden Prolaktin (PRL)",
+      "E": "Tirotrop hücrelerden Tiroid Stimüle Edici Hormon (TSH)"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Ön hipofiz hormonlarının büyük bölümü, hipotalamustan salgılanan 'releasing (salıverici)' hormonlara bağımlıdır (örn: TRH, CRH, GnRH). Sap kesildiğinde bu hormonlar inemez ve TSH, ACTH, FSH/LH seviyeleri düşer. Ancak Prolaktin, hipotalamus kaynaklı dopaminin (PIH) sürekli 'tonik inhibisyonu' (baskısı) altındadır. Hipofiz sapı kesildiğinde dopamin laktotroplara ulaşamaz, fren boşalır ve prolaktin seviyesi kontrolsüzce artar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Pro-opiomelanokortin (POMC) molekülü ve altın standart dinamik testlerle ACTH-Kortizol rezervinin değerlendirilmesi",
+    "soru": "Hipofizer kökenli bir adenom kuşkusu ile değerlendirilen ve adrenokortikal yetmezlik dışlanmak istenen bir hastada; hekim, ACTH ve Kortizol hormonlarının maksimum üretim rezervini ve vücudun ağır strese karşı tepkisini ölçmek istemektedir. Nöroendokrin ekseni harekete geçirerek bu iki molekülün plazma düzeylerinde sağlam bir zirve yapıp yapmadığını ölçen altın standart dinamik test aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Oral Glukoz Tolerans Testi (OGTT) ile GH baskılanmasının ölçülmesi",
+      "B": "Düşük Doz Deksametazon Baskılama Testi ile sabah kortizolünün analizi",
+      "C": "İnsülin Tolerans Testi (ITT) kullanılarak kontrollü hipoglisemi oluşturulması",
+      "D": "Kanda sabah ve akşam Bazal Plazma Adrenalin ve Noradrenalin Ölçümü yapılması",
+      "E": "Tiyosiyanat verilerek tiroid iyot alım testinin baskılanması"
+    },
+    "dogruCevap": "C",
+    "aciklama": "İnsülin Tolerans Testi (ITT), hastaya intravenöz insülin verilerek kan glukozunun klinik olarak 40 mg/dL'nin altına düşürüldüğü bir strestir. Akut hipoglisemi, insan fizyolojisinde hipotalamo-hipofizer-adrenal aksı harekete geçiren en şiddetli streslerden biridir. Bu uyarana rağmen ACTH ve kortizol düzeyi yeterli oranda (>18-20 µg/dL) artmıyorsa sekonder (merkezi) adrenal yetmezlik tanısı doğrulanmış olur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Glikoprotein yapılı hormonların moleküler alt birim mimarisinin ve biyolojik özgüllük kavramının kavranması",
+    "soru": "52 yaşında primer ovaryan yetmezliği olan menopozal bir kadında FSH ve LH seviyelerinin tavan yaptığı bilinmektedir. Rutin bir biyokimya taramasında kadının kanında gebelik hormonu olan hCG'nin de çok zayıf ancak pozitif bir sinyal verdiği gözlenmiştir. Hastada bir malignite saptanmadığına göre, test kitindeki bu yalancı pozitifliğin (çapraz reaksiyonun) altında yatan temel biyokimyasal gerçeklik aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Menopozda artan östrojenin, albumin yapısını bozarak ticari kitlerin ayırt etme kapasitesini bozması",
+      "B": "TSH, FSH, LH ve hCG gibi glikoproteinlerin tümünün yapısında 92 aminoasitlik aynı ortak alfa alt birimine sahip olması",
+      "C": "Gonadotropların yüksek stres altında ektopik olarak serbest beta zinciri yerine plasental hCG üretmeye başlaması",
+      "D": "FSH ve LH hormonlarının reseptör düzeyinde parçalanarak yapısal olarak hCG'nin spesifik beta zincirine benzemesi",
+      "E": "Progesteron yokluğunda tiroid hormonlarının kanda birikerek immünolojik testlerde koryonik gonadotropini taklit etmesi"
+    },
+    "dogruCevap": "B",
+    "aciklama": "TSH, FSH, LH ve hCG hormonları birer heterodimerik glikoproteindir ve tümünün alfa (α) zinciri tam olarak aynıdır. Onları eşsiz kılan ve reseptöre spesifik şekilde bağlayan parça beta (β) zinciridir. Menopozda FSH ve LH üretimi o kadar yüksek seviyelere çıkar ki, kanda artan ortak alfa zincirleri gebelik testlerinde (genellikle spesifik beta-hCG'ye bakılsa da zayıf spesifite durumlarında) çapraz reaksiyon gösterip yalancı, silik bir hCG pozitifliğine yol açabilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Nörohipofizer hormonların sentezi ve copeptin molekülünün biyobelirteç olarak kullanılımının değerlendirilmesi",
+    "soru": "Santral Diyabetes İnsipidus (şekersiz diyabet) kuşkusu olan bir hastada ADH (Vazopressin) salınım kapasitesinin saptanması kritik önem taşır. Ancak ADH molekülünün kanda çok kısa sürede parçalanması ve pulsatil doğası, direkt kan ölçümünü güvenilmez kılar. Laboratuvarda ADH yerine, onunla aynı preprohormon zincirinden 1:1 eş molar oranda koparılan ve kanda çok daha stabil kalarak 'biyokimyasal ayna' görevi gören polipeptid aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Sadece oksitosinin taşınmasında rol alan Nörofizin-1",
+      "B": "Prepro-vazopressinin C-terminal bölgesinden koparılan Kopeptin (Copeptin)",
+      "C": "Büyüme hormonu kompleksine dahil olan Asit-Labil Altbirim (ALS)",
+      "D": "Serbest proinsülinden hücre içinde koparılan stabil yapıdaki C-peptid",
+      "E": "Tiroksini ve A vitaminini beyin omurilik sıvısına taşıyan Transtiretin"
+    },
+    "dogruCevap": "B",
+    "aciklama": "ADH, hipotalamik nöronlarda sentezlenirken Nörofizin-2 ve Kopeptin molekülü ile birlikte dev bir polipeptid olarak yapılır. Akson boyunca taşınırken enzimatik olarak kesilir ve arka hipofizden dolaşıma kana ADH ile birlikte aynı molar oranda Kopeptin (Copeptin) salınır. Kopeptin kanda daha dirençli olduğundan günümüzde gerçek ADH sekresyon gücünün ölçülmesinde altın standart bir biyobelirteçtir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Adrenal korteks steroidogenez basamaklarındaki hız kısıtlayıcı yapıların ve mitokondrial transport proteinlerinin tespiti",
+    "soru": "Kolesterolden köken alan tüm steroid hormonların (kortizol, aldosteron, seks steroidleri) biyosentezi böbrek üstü bezlerinde başlar. Bu devasa üretim bandının en sıkı kontrol edilen ve süreci başlatan 'hız kısıtlayıcı' (rate-limiting) basamağı, serbest kolesterolün hücre sitozolünden mitokondrinin iç zarına taşınmasıdır. Bu kritik transferi gerçekleştiren ve konjenital eksikliğinde 'lipoid adrenal hiperplazi'ye neden olan taşıyıcı protein molekülü aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Mitokondriyal sitokrom P450 yan zincir kesici enzim (CYP11A1 / SCC)",
+      "B": "Aromatizasyonu başlatarak steroid yapısını kıran aromataz enzim kompleksi",
+      "C": "Kolesterolü sülfatlarına ayırarak zara hazırlayan 3-beta-hidroksisteroid dehidrogenaz",
+      "D": "Akut düzenleyici olarak görev yapan Steroidogenic Acute Regulatory (StAR) Proteini",
+      "E": "Steroide reseptöre kadar eşlik eden Seks Hormonu Bağlayıcı Globulin (SHBG)"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Kortizol ve diğer steroidlerin sentezinde hormon uyarısı (örn. ACTH veya LH), cAMP ve PKA üzerinden 'StAR' proteininin (Steroidogenic Acute Regulatory Protein) sentezini veya fosforilasyonunu hızla artırır. Kolesterolün su ortamından hidrofobik mitokondri iç zarına aktarılması StAR tarafından yapılır ve bu işlem steroidogenezin kesin olarak hız kısıtlayıcı aşamasıdır. CYP11A1, StAR'ın taşıdığı kolesterolü bekleyen ve pregnenolona çeviren ilk enzimdir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Konjenital adrenal hiperplazi alt tiplerinde (CAH) spesifik enzim defektlerinin biyokimyasal ve klinik sonuçlarının haritalanması",
+    "soru": "Kliniğe getirilen ve dış cinsel organlarında virilizasyon (erkeksileşme/ambigüöz) bulguları olan XX kromozomlu yenidoğanda; belirgin tuz tutulumu, hipokalemi (düşük potasyum) ve kontrol altına alınamayan şiddetli hipertansiyon saptanmıştır. Yapılan plazma analizinde, '11-Deoksikortikosteron (DOC)' isimli ara ürünün referans aralığın onlarca katına çıktığı gözlenmiştir. Adrenal yolaklardaki trafik şeması (metro haritası) dikkate alındığında bu hastada eksikliği olan mutasyona uğramış enzim hangisidir?",
+    "secenekler": {
+      "A": "Mineralokortikoid yolağı sadece spesifik bir noktadan bozan Aldosteron Sentaz",
+      "B": "Pregnenolonu progesterona çeviren 3-beta-hidroksisteroid dehidrogenaz (3β-HSD)",
+      "C": "Klasik CAH tablosuna (hipertansiyon değil tuz kaybına) yol açan 21-alfa-Hidroksilaz",
+      "D": "Tüm mineralokortikoid ürünlerini tavan yaptıran ancak androjenleri sıfırlayan 17-alfa-Hidroksilaz",
+      "E": "Kortizol sentezinin son basamağını koparıp DOC molekülünü biriktiren 11-beta-Hidroksilaz"
+    },
+    "dogruCevap": "E",
+    "aciklama": "11-beta-hidroksilaz eksikliğinde kortizol yapılamadığı için ACTH çok artar. Adrenal bez çok çalışır, ancak enzim blokajı olduğu için 11-beta öncesindeki '11-Deoksikortikosteron (DOC)' aşırı birikir. DOC, aldosteron kadar olmasa da oldukça etkili bir mineralokortikoiddir. Bu durum böbreklerde tuz/su tutulumuna ve hipertansiyona neden olur. Ayrıca androjen yolağı açık olduğu için buralara kayan hammadde kız fetüste erkeksileşmeye (virilizasyona) yol açar. Klasik 21-hidroksilazda ise DOC da üretilemediğinden tam tersine tansiyon düşer, tuz kaybedilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Pankreas beta hücresinden glukoza yanıt olarak gerçekleşen elektriksel ve metabolik insülin salınım adımlarının incelenmesi",
+    "soru": "Yemek sonrası kana karışan glukoz, pankreas beta hücrelerine GLUT-2 taşıyıcılarıyla girerek enerji metabolizmasına katılır ve neticede hücre içi ATP yoğunluğunu artırır. Glikoliz ve TCA döngüsü sonucu artan bu ATP'nin, beta hücresindeki voltaj kapılı kalsiyum kanallarının açılmasını sağlayan 'ilk hücresel/elektriksel adım'ı aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Sitozolde biriken glukoz-6-fosfatın doğrudan kalsiyum kanallarına kimyasal bağlanması",
+      "B": "Hücre zarında bulunan ATP-duyarlı potasyum (K+) kanallarını kapatarak potasyum çıkışını engellemesi ve zarı depolarize etmesi",
+      "C": "Hücre zarında bulunan Na+/K+ pompalarını durdurup hücreyi aşırı derecede sodyum ile şişirerek membranı hiperpolarize etmesi",
+      "D": "Endoplazmik retikulum üzerindeki ryanodin reseptörlerini kırarak içeriden dışarıya devasa bir kalsiyum patlaması yaratması",
+      "E": "Sülfonilüre türevi reseptörleri ATP hidrolizi ile fiziksel olarak yıkarak membran potansiyelini sıfırlaması"
+    },
+    "dogruCevap": "B",
+    "aciklama": "İnsülinin kana atılması temelde bir elektriksel olaylar dizisidir. Glukoz yıkılıp ATP üretildiğinde, bu ATP molekülleri beta hücresi zarındaki 'ATP-duyarlı Potasyum kanallarına' bağlanarak onları kapatır. Normalde dışarı akan artı yüklü K+ iyonları içeride kalır ve hücrenin zarı pozitife kayarak 'depolarize' olur. Bu depolarizasyon dalgası, ortamdaki 'voltaj-kapılı kalsiyum kanallarını' açar. İçeri giren kalsiyum insülin veziküllerinin zardan salınmasını (ekzositoz) başlatır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "İnsülin hormonunun lipid, protein ve karbonhidrat metabolizmasındaki enzimlere periferik etkilerinin analizi",
+    "soru": "Bir bireyin yemekten (tokluk fazından) sonra kanında yükselen insülin, karaciğer, iskelet kası ve adipoz dokulardaki metabolik yolları yeniden düzenler. Ancak insülin, her mekanizmayı aktive etmez, enerji tasarrufunu (anabolizmayı) desteklemeyen yıkım mekanizmalarını durdurur. Aşağıdakilerden hangisi insülinin vücutta oluşturduğu bilinen temel biyokimyasal/metabolik etkilerden biri değildir?",
+    "secenekler": {
+      "A": "Karaciğerde glikojen sentaz enzimini aktive edip, glukozdan glikojen depolarının oluşturulmasını hızlandırmak",
+      "B": "Yağ dokusunda yer alan hormona duyarlı lipaz (HSL) enzimini inaktif hale getirerek lipolizi ve serbest yağ asidi çıkışını baskılamak",
+      "C": "İskelet kası ve yağ dokusunda sitoplazmik veziküllerde bekleyen GLUT4 taşıyıcı moleküllerinin hücre zarına çıkışını uyarmak",
+      "D": "Glukoneogenezin ana enzimlerinden biri olan glukoz-6-fosfatazı baskılayarak karaciğerin kana serbest glukoz atmasını durdurmak",
+      "E": "Kan kapillerlerinde dolaşan Lipoprotein Lipaz (LPL) enzimini inhibe ederek, şilomikronların içindeki trigliseritlerin adipoz dokuya aktarımını engellemek"
+    },
+    "dogruCevap": "E",
+    "aciklama": "İnsülin bir 'depolama' hormonudur. Kanda gezen ve yemeklerle alınan yağları (şilomikron ve VLDL) parçalayıp yağ dokusuna (adiposite) sokabilmek için endotel üzerindeki 'Lipoprotein Lipaz (LPL)' enzimini inhibe ETMEZ, tam tersine GÜÇLÜ ŞEKİLDE AKTİVE EDER. Böylece yağ asitleri hücreye girerek trigliserit olarak depolanır. Yağ hücrelerinin içindeki kendi deposunu yıkan 'Hormona Duyarlı Lipaz (HSL)' enzimini ise durdurur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Klinikte endojen beta hücre fonksiyonunun ve yapay hipoglisemilerin ayırıcı tanısında C-peptidin değerinin sorgulanması",
+    "soru": "Acil servise şiddetli nöroglikopeni (beyne yetersiz şeker gitmesi) bulgularıyla koma halinde getirilen genç bir hastanın tetkiklerinde plazma insülin düzeyi çok yüksek bulunmuştur. Bu durumun, hastanın gizlice kendine dışarıdan insülin enjekte etmesinden mi (factitious/iyatrojenik) yoksa pankreasında insülin salgılayan bir tümör (insülinoma) bulunmasından mı kaynaklandığını kesin olarak ayırt etmek için hangi biyokimyasal molekülün kanda ölçülmesi en doğru yaklaşımdır?",
+    "secenekler": {
+      "A": "Glikolizin ilk enzimi olan Glukokinaz seviyesi",
+      "B": "Veziküllerden insülinle birlikte 1:1 eş molar oranda koparılan C-Peptid seviyesi",
+      "C": "Hücreye şeker girmesini sağlayan pankreatik GLUT2 membran molekülü",
+      "D": "Glikozile olmuş hemoglobin zincirlerini ölçen HbA1c değeri",
+      "E": "Pankreas adacık hücrelerinden sentezlenen ve alfa reseptörleri uyaran Somatostatin"
+    },
+    "dogruCevap": "B",
+    "aciklama": "İnsülin, pankreasta 'proinsülin' olarak sentezlenir. Aktif insülin oluşurken proinsülinin ortasındaki bağlayıcı 'C-Peptid' (bağlayıcı peptid) parçası enzimatik olarak koparılır ve kana insülinle eşit molekül sayısında verilir. Ticari farmakolojik insülin iğnelerinde C-peptid yoktur. Eğer kişi dışarıdan iğne vurulmuşsa kanında insülin çok yüksektir ama C-peptid sıfırdır. Eğer pankreasında otonom tümör varsa (insülinoma) kanında hem insülin hem de C-peptid çok yüksektir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Aromataz enzim yolağının adipoz dokudaki periferik dönüşümler ve Polikistik Over Sendromu'ndaki patofizyolojik etkisinin kavranması",
+    "soru": "Polikistik Over Sendromu'nda (PKOS) kadınlardaki infertilite, hirsutizm (kıllanma) ve obezitenin oluşturduğu karmaşık bir hormonal kısırdöngü söz konusudur. Özellikle obezite zemininde, genişlemiş adipoz (yağ) dokusu tarafından aşırı miktarda zayıf androjen aromataz edilerek bir östrojen türevine dönüştürülür. Kana sürekli karışarak hipofizdeki FSH salınımını baskılayan ve böylece folikül gelişimini durdurup overi kistleşmeye iten bu 'adipoz kaynaklı' majör östrojen türevi hangisidir?",
+    "secenekler": {
+      "A": "En güçlü östrojen formlarından biri olan 17-beta Östradiol (E2)",
+      "B": "Sadece gebelikte yüksek miktarlarda tespit edilebilen Östriol (E3)",
+      "C": "Over dışı yağ dokusunda androstenediondan sentezlenen Östron (E1)",
+      "D": "LH reseptörlerini körelten Progesteron yıkım türevi pregnanediol",
+      "E": "5-alfa redüktaz aktivitesini inhibe eden zayıf androjen DHEAS"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Östron (E1), adipoz dokuda aromataz enziminin zayıf androjenleri (özellikle androstenedion) işlemesiyle oluşur. Obez PKOS hastalarında yağ kütlesi arttıkça, buradan kana sızan E1 sürekli yüksek kalır. E1, hipofize giderek negatif feedback ile FSH'ı baskılar. FSH (Folikül Stimüle Edici Hormon) düşünce, overdeki yumurta olgunlaşıp çatlar hale gelemez (anovulasyon) ve over korteksinde kist olarak birikir. Bu sırada LH yüksek kalmaya devam ederek teka hücrelerinden sürekli androjen fışkırtır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Ovaryan folliküllerin olgunlaşmasında rol oynayan İki Hücre - İki Gonadotropin (Teka/Granüloza) teorisinin moleküler analizinin yapılması",
+    "soru": "Kadınlarda folliküler büyüme evresinde, kana verilen aktif 17-beta östradiolün sentezlenebilmesi için teka hücreleri ile komşusu granüloza hücrelerinin mutlak işbirliği yapması gerekir (İki Hücre Teorisi). LH tarafından uyarılan teka hücreleri kolesterolden androjen üretir ancak bu androjenleri östrojene dönüştüremeyerek granüloza hücrelerine aktarır. Teka hücrelerinde bu dönüşümün gerçekleşememesinin ve sistemin iki hücreye bölünmesinin temel enzimatik nedeni aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Teka hücrelerinde testosteronu östradiole dönüştüren Aromataz (CYP19) enziminin hiç bulunmaması",
+      "B": "Granüloza hücrelerinin kolesterolü mitokondriye alacak StAR proteini ekspresyonundan yoksun olması",
+      "C": "LH hormonunun bağlandığı reseptörlerin teka hücresinde sitoplazma yerine sadece çekirdekte olması",
+      "D": "Androjen molekülünün teka hücresi içinde sentezlendiği an hızla yıkılarak 17-ketosteroid idrar formuna dönmesi",
+      "E": "Teka hücrelerinin sadece progesteron reseptörüne sahip olup steroid halkanın kırılmasını sağlayan redüktazlardan yoksun olması"
+    },
+    "dogruCevap": "A",
+    "aciklama": "Teka hücrelerinde LH reseptörü ve kolesterolü androjene kadar (androstenedion/testosteron) getirecek olan tüm genetik/enzimatik donanım vardır, ancak bu aromatik halkayı işleyip östrojene çevirecek olan 'Aromataz (CYP19)' enzimi teka hücresinde YOKTUR. Bu yüzden hammaddeler (androjenler) zar difüzyonu ile granüloza hücresine sızar. Granüloza hücresinde ise FSH uyarısıyla Aromataz bolca çalıştırılır ve androjenler aktif 17-beta östradiole (E2) çevrilerek kana verilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Erkek üreme fizyolojisinde Sertoli hücrelerinin salgı ürünlerinin ve testis içi homeostazın kavranması",
+    "soru": "Erkeklerde Sertoli hücreleri, seminifer tübüllerde gelişmekte olan spermatozoaları 'hemşire hücre' olarak besleyen, kan-testis bariyerini kuran ve spermatogenez için gerekli mikroçevreyi sağlayan kritik elemanlardır. FSH'ın doğrudan uyardığı Sertoli hücrelerinden sentezlenen ve spermatogenez ortamında lokal testosteron seviyesinin dolaşımdan çok daha yüksek konsantrasyonlarda tutulmasını sağlayan spesifik protein aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Hipofizden doğrudan LH salınımını geri bildirimle azaltan İnhibin B peptidi",
+      "B": "Testosteronu kana karıştırmadan tubül içinde bağlayıp hapseden Androjen Bağlayıcı Protein (ABP)",
+      "C": "Fetal hayatta Mülleriyen kanalların gerilemesini sağlayan Müllerian İnhibitör Faktör (MIF)",
+      "D": "Erkek tipi kelliğe yol açan DHT sentezinde görev alan yüksek reaktif 5-alfa redüktaz izoenzimi",
+      "E": "Dış cinsel gelişim farklılıklarını tetikleyen sülfatlı Dehidroepiandrosteron (DHEAS)"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Sertoli hücrelerinin temel işlevlerinden biri, FSH uyarısıyla 'Androjen Bağlayıcı Protein (ABP)' üretmektir. Normalde testosteron lipofilik olduğu için kandan veya testisten hızla uzaklaşabilir. Ancak başarılı bir spermatogenez için testis tubüllerindeki testosteron miktarının kandan yaklaşık 100 kat fazla olması gerekir. ABP, Leydig hücrelerinden sızan testosteronu bir mıknatıs gibi yakalar ve seminifer tubül lümeninde hapsederek sperm olgunlaşması için ideal ocağı (mikroçevreyi) yaratır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Erkek fizyolojisinde 5-alfa redüktaz enziminin substrat dönüşümünün ve klinik varyasyonlarının analizi",
+    "soru": "Testosteron güçlü bir hormondur ancak dokularda embriyolojik süreçleri başlatması veya spesifik reseptör yanıtı oluşturması için 5-alfa redüktaz enzimiyle çok daha yüksek afiniteli olan Dihidrotestosteron (DHT) molekülüne çevrilmesi gerekir. 5-alfa redüktaz enzim eksikliği ile doğan veya farmakolojik olarak bu enzimi inhibe edilmiş (finasterid kullanan) bir bireyin fiziksel veya embriyolojik gelişiminde aşağıdaki durumlardan hangisinin bozulması BEKLENMEZ?",
+    "secenekler": {
+      "A": "Embriyolojik hayatta skrotal torbaların birleşmesi ve inmesi",
+      "B": "Ürogenital sinüsten prostat bezinin hücresel gelişimi",
+      "C": "Dış genital yapıda glans penis ve üretranın maskülinizasyonu",
+      "D": "Embriyolojik iç erkek kanalları olan Wolffian sisteminin (epididimis, vas deferens) oluşumu",
+      "E": "Erişkinlikte saç foliküllerinin atrezisi (erkek tipi andojenik alopesi) ve yağ bezi aktivitesi"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Bu klinik fizyolojinin altın bir kuralıdır: Erkek iç üreme sisteminin (epididimis, vas deferens, seminal vezikül - Wolffian Kanalı) embriyolojik gelişimi, dönüşüme uğramamış pür TESTOSTERON tarafından yönetilir. Ancak 'dış genital sistem' (penis, skrotum) ve prostat gelişimi, ayrıca ilerideki saç dökülmesi testosteronun 5-alfa redüktaz enzimiyle zorunlu olarak Dihidrotestosteron (DHT) molekülüne dönüştürülmesine bağımlıdır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Tiroid biyosentezinde iyodür pompasının (Na/I simport) elektrokimyasal dinamiklerinin ve kompetitif inhibisyonlarının değerlendirilmesi",
+    "soru": "Tiroid bezi, fonksiyonel tiroksin sentezini başarabilmek için dışarıdan gelen iyodu dolaşımdan hücre içine yüksek bir konsantrasyon gradyanına karşı almak zorundadır (iyodun tuzağa düşürülmesi). Bu enerji bağımlı pompayı kandırarak iyot taşıyıcısı ile doğrudan yarışan, ancak tiroid hücreleri tarafından konsantre edilmeyip (içeri hapsedilmeyip) salt moleküler blokaj yapan inorganik inhibitör iyon hangisidir?",
+    "secenekler": {
+      "A": "Tiroid içinde birikmeden transportu bloke eden Tiyosiyanat (SCN-)",
+      "B": "Perteknetat benzeri etkiyle hücre içinde yüksek oranda konsantre olan Perklorat (ClO4-)",
+      "C": "Aromatik iyodun takılmasını önleyen sentetik Methimazol",
+      "D": "Halka deiyodinasyonunu durduran Propiltiourasil (PTU)",
+      "E": "Tiroksin bağlayıcı globulin sentezini engelleyen Salisilat bileşikleri"
+    },
+    "dogruCevap": "A",
+    "aciklama": "İyot pompasının (NIS taşıyıcısı) iki sınıf blokeri vardır. Perklorat (ClO4-) gibi yapılar spesifik parsiyel hacimleri iyoda benzediği için hem yarışırlar hem de hücrenin içine çekilip orada hapis kalırlar (konsantre edilirler). Ancak 'Tiyosiyanat (SCN-)' (örneğin lahana, brokoli gibi guatrojenik gıdalardan da gelen) pompayı bloke etmek için iyotla yarışan rekabetçi (kompetitif) bir iyon olmasına rağmen tiroid tarafından hücre içine hapsedilmez (konsantre edilemez)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Tiroid hormonu tiroglobulin üzerinde gerçekleşen organifikasyon ve eşleşme reaksiyonlarının enzimlerinin bilinmesi",
+    "soru": "Kolloid lümenine sızan inorganik iyodür moleküllerinin pozitif yüklü iyodinyum radikallerine yükseltgenmesi (oksidasyon), ardından tiroglobulin üzerindeki tirozin kalıntılarına bağlanarak MIT ve DIT oluşturması (organifikasyon) gerekir. Daha sonrasında bu MIT ve DIT yapıları eşleştirilerek asıl biyolojik ürünler olan T3 ve T4 sentezlenir. Hem iyodun yükseltgenmesi, hem tirozine bağlanması, hem de bu komplekslerin eşleşmesi adımlarının tümünü birden katalizleyen o çok amaçlı ve hayati mikrovillüs enzimi aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "İç halkanın kırılmasından sorumlu Tip 3 Seleno-Deiyodinaz",
+      "B": "NADPH bağımlı Sitokrom C Redüktaz",
+      "C": "Glikoprotein iskeletini keserek hormonu serbestleştiren Asit Proteaz",
+      "D": "Hem grubunu aktif merkeze taşıyan hücre zarı Tiroperoksidaz (TPO)",
+      "E": "Hücre zarındaki konsantrasyonu dengeleyen ATP-bağımlı Na/K Pompası"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Tiroperoksidaz (TPO), hidrojen peroksit varlığında üç mucizevi görevi arka arkaya yapar: 1) İyodu elektronundan koparıp aktif moleküler formuna (I2 veya I+) oksitler. 2) Bu aktif iyodu tiroglobulindeki tirozin parçalarına yapıştırır (Organifikasyon). 3) Oluşan mono- ve diiyodotirozinleri (MIT ve DIT) kendi aralarında eşleştirerek T3 (MIT+DIT) ve T4 (DIT+DIT) bileşiklerini üretir. Antitiroid ilaçlar (PTU, metimazol) doğrudan bu 'TPO' enzimini bloke ederler."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Biyokimya",
+    "ogrenimHedefi": "Eikozanoid kaskadındaki siklooksijenaz ürünlerinin pıhtılaşma fizyolojisi açısından denge mekanizmalarının tespiti",
+    "soru": "Kardiyovasküler hastalık riski olan bireylere düşük dozda aspirin verilmesinin biyokimyasal temeli, araşidonik asitten köken alan ve etkileri birbirine tamamen zıt olan iki güçlü eikozanoid arasındaki dengeye dayanır. Damar düz kasını genişleterek (vazodilatör) ve trombositlerin agregasyonunu engelleyerek pıhtı riskini azaltan ve sağkalımı koruyan ana eikozanoid molekülü aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Prostaglandin F2-alfa (PGF2a)",
+      "B": "Tromboksan A2 (TXA2)",
+      "C": "Prostasiklin (PGI2)",
+      "D": "Lökotrien C4 (LTC4)",
+      "E": "Hidroperoksieikozatetraenoik asit (HPETE)"
+    },
+    "dogruCevap": "C",
+    "aciklama": "COX enziminin iki ana antagonistik ürünü vardır. Trombositlerde bulunan COX-1'den üretilen 'Tromboksan A2 (TXA2)' damarı sıkar ve pıhtıyı çağırır. Damar endotel hücrelerinde üretilen 'Prostasiklin (PGI2)' ise damarı genişletir ve pıhtılaşmayı önler. Düşük doz aspirin verildiğinde, çekirdeği olmayan trombositlerdeki COX-1 geri dönüşümsüz bozulduğundan TXA2 sentezlenemez. Ancak çekirdekli endotel hücreleri hızla yeni enzim sentezleyerek PGI2 üretimine devam eder. Bu durum terazinin PGI2 (koruyucu ve kan sulandırıcı) lehine kaymasını sağlar."
+  }
+]
+
 }
