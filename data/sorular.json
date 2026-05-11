@@ -1,10 +1,9 @@
 {
   "sorular": [
     {
-      "id": 1,
       "donem": 2,
       "kurulId": "D2K5",
-      "ders": "Fizyoloji",
+      "ders": "Patoloji",
       "ogrenimHedefi": "Hücre zedelenmesi",
       "soru": "Aşağıdakilerden hangisi geri dönüşümsüz hücre hasarının göstergesidir?",
       "secenekler": {
@@ -18,7 +17,6 @@
       "aciklama": "Çekirdekte piknoz, karyoreksis ve karyolizis geri dönüşümsüz hasar bulgularıdır."
     },
     {
-      "id": 2,
       "donem": 2,
       "kurulId": "D2K5",
       "ders": "Farmakoloji",
@@ -34,9 +32,8 @@
       "dogruCevap": "B"
     },
     {
-      "id": 3,
       "donem": 2,
-      "kurulId": "D2K5",
+      "kurulId": "D2K6",
       "ders": "Patoloji",
       "ogrenimHedefi": "İnflamasyon",
       "soru": "Akut inflamasyonda ilk gelen hücre tipi hangisidir?",
