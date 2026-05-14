@@ -72,6 +72,48 @@
 
   </div>
 
+  
+ <!-- OPTİK SONUÇ EKRANI -->
+<div class="app-frame optik-frame" id="optikEkrani" hidden>
+
+  <header class="result-header" id="optikHeader">
+    <p class="result-eyebrow">Sınav Sonucu</p>
+    <p class="optik-sinav-adi" id="optikSinavAdi">—</p>
+
+    <div class="score-stats" style="margin-top: 20px;">
+      <div class="stat-pill stat-correct">
+        <span class="stat-num" id="optikDogru">0</span>
+        <span class="stat-label">Doğru</span>
+      </div>
+      <div class="stat-pill stat-wrong">
+        <span class="stat-num" id="optikYanlis">0</span>
+        <span class="stat-label">Yanlış</span>
+      </div>
+      <div class="stat-pill stat-blank">
+        <span class="stat-num" id="optikBos">0</span>
+        <span class="stat-label">Boş</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num" id="optikNet">0</span>
+        <span class="stat-label">Net</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="result-main">
+    <div class="optik-tablo" id="optikTablo"></div>
+  </main>
+
+  <footer class="result-footer">
+    <button class="nav-btn nav-next" id="optikYeniBtn" style="flex:1;">
+      Yeni Sınav →
+    </button>
+  </footer>
+
+</div>
+ 
+  
+
   <script type="module" src="js/sonuc.js"></script>
 </body>
 </html>
