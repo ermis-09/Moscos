@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Admin · Kurul Soru Bankası</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <div class="app-frame admin-frame">
+
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark">✦</span>
+        <h1 class="brand-name">Admin</h1>
+      </div>
+      <p class="brand-sub">Soru Yönetimi</p>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- Sekme seçici -->
+      <div class="tab-row">
+        <button class="tab active" data-tab="ekle">Soru Ekle</button>
+        <button class="tab" data-tab="listele">Sorular</button>
+      </div>
+
+      <!-- SORU EKLE -->
+      <section class="tab-content" id="tab-ekle">
+
+        <div class="form-group">
+          <label class="form-label">Dönem</label>
+          <div class="chip-row chip-row-equal" id="adminDonem">
+            <button class="chip" data-value="2">D2</button>
+            <button class="chip" data-value="3">D3</button>
+            <button class="chip" data-value="4">D4</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Kurul</label>
+          <input class="form-input" type="text" id="adminKurul" placeholder="örn. D2K5" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Ders</label>
+          <input class="form-input" type="text" id="adminDers" placeholder="örn. Patoloji" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Öğrenim Hedefi <span class="optional">(opsiyonel)</span></label>
+          <input class="form-input" type="text" id="adminHedef" placeholder="örn. Hücre zedelenmesi" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Soru</label>
+          <textarea class="form-input form-textarea" id="adminSoru" placeholder="Soru metnini yaz..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Seçenekler</label>
+          <div class="options-form">
+            <div class="option-row" data-harf="A">
+              <span class="option-harf">A</span>
+              <input class="form-input" type="text" placeholder="A şıkkı" />
+            </div>
+            <div class="option-row" data-harf="B">
+              <span class="option-harf">B</span>
+              <input class="form-input" type="text" placeholder="B şıkkı" />
+            </div>
+            <div class="option-row" data-harf="C">
+              <span class="option-harf">C</span>
+              <input class="form-input" type="text" placeholder="C şıkkı" />
+            </div>
+            <div class="option-row" data-harf="D">
+              <span class="option-harf">D</span>
+              <input class="form-input" type="text" placeholder="D şıkkı" />
+            </div>
+            <div class="option-row" data-harf="E">
+              <span class="option-harf">E</span>
+              <input class="form-input" type="text" placeholder="E şıkkı" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Doğru Cevap</label>
+          <div class="chip-row" id="adminCevap">
+            <button class="chip" data-value="A">A</button>
+            <button class="chip" data-value="B">B</button>
+            <button class="chip" data-value="C">C</button>
+            <button class="chip" data-value="D">D</button>
+            <button class="chip" data-value="E">E</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Açıklama <span class="optional">(opsiyonel)</span></label>
+          <textarea class="form-input form-textarea" id="adminAciklama" placeholder="Açıklama veya rationale..." rows="2"></textarea>
+        </div>
+
+        <p class="form-msg" id="formMsg"></p>
+
+        <button class="start-btn" id="kaydetBtn">
+          Soruyu Kaydet
+          <span class="start-btn-icon">✓</span>
+        </button>
+
+      </section>
+
+      <!-- SORU LİSTESİ -->
+      <section class="tab-content" id="tab-listele" hidden>
+
+        <div class="list-filters">
+          <input class="form-input" type="text" id="listKurul" placeholder="Kurul filtrele (örn. D2K5)" />
+        </div>
+
+        <div class="soru-listesi" id="soruListesi">
+          <p class="liste-bos">Yükleniyor...</p>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
