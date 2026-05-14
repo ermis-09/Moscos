@@ -5,10 +5,9 @@
 import { db } from '../firebase.js';
 import {
   collection, addDoc, getDocs,
-  deleteDoc, doc, query, where, orderBy
+  deleteDoc, doc, query, where
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Durum
 const form = {
   donem: null,
   cevap: null
@@ -24,7 +23,6 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.querySelectorAll('.tab-content').forEach(c => c.hidden = true);
     tab.classList.add('active');
     document.getElementById(`tab-${tab.dataset.tab}`).hidden = false;
-
     if (tab.dataset.tab === 'listele') soruListele();
   });
 });
@@ -62,7 +60,6 @@ document.getElementById('adminCevap').querySelectorAll('.chip').forEach(btn => {
 document.getElementById('kaydetBtn').addEventListener('click', async () => {
   const msg = document.getElementById('formMsg');
 
-  // Validasyon
   const kurul = document.getElementById('adminKurul').value.trim();
   const ders = document.getElementById('adminDers').value.trim();
   const soru = document.getElementById('adminSoru').value.trim();
@@ -123,10 +120,7 @@ async function soruListele() {
   try {
     let q;
     if (kurulFiltre) {
-      q = query(
-        collection(db, 'sorular'),
-        where('kurulId', '==', kurulFiltre)
-      );
+      q = query(collection(db, 'sorular'), where('kurulId', '==', kurulFiltre));
     } else {
       q = query(collection(db, 'sorular'));
     }
@@ -169,7 +163,6 @@ async function soruListele() {
   }
 }
 
-// Kurul filtresi için
 document.getElementById('listKurul').addEventListener('input', soruListele);
 
 // ============================================
