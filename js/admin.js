@@ -22,12 +22,10 @@ const loginError = document.getElementById('loginError');
 
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    // Giriş yapılmamış — giriş ekranını göster
     loginScreen.classList.remove('hidden');
     return;
   }
 
-  // Giriş yapılmış — admin listesinde mi kontrol et
   const adminDoc = await getDoc(doc(db, 'adminler', user.email));
   if (!adminDoc.exists() || adminDoc.data().aktif !== true) {
     loginError.textContent = `${user.email} adresi yetkili değil.`;
@@ -35,11 +33,9 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
 
-  // Yetkili — giriş ekranını kapat
   loginScreen.classList.add('hidden');
 });
 
-// Google ile giriş
 loginBtn.addEventListener('click', async () => {
   const provider = new GoogleAuthProvider();
   try {
@@ -103,7 +99,7 @@ document.getElementById('kaydetBtn').addEventListener('click', async () => {
   const hedef = document.getElementById('adminHedef').value.trim();
 
   const secenekler = {};
-  document.querySelectorAll('.option-row').forEach(row => {
+  document.querySelectorAll('#tab-ekle .option-row').forEach(row => {
     const harf = row.dataset.harf;
     const deger = row.querySelector('input').value.trim();
     if (deger) secenekler[harf] = deger;
@@ -200,6 +196,96 @@ async function soruListele() {
 document.getElementById('listKurul').addEventListener('input', soruListele);
 
 // ============================================
+// ÇIKMIŞ SORU EKLE
+// ============================================
+
+const cikmisForm = { donem: null, cevap: null };
+
+document.getElementById('cikmisDonem').querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('cikmisDonem').querySelectorAll('.chip')
+      .forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cikmisForm.donem = parseInt(btn.dataset.value);
+  });
+});
+
+document.getElementById('cikmisCevap').querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('cikmisCevap').querySelectorAll('.chip')
+      .forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    cikmisForm.cevap = btn.dataset.value;
+  });
+});
+
+document.getElementById('cikmisKaydetBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('cikmisMsg');
+
+  const yil = parseInt(document.getElementById('cikmisYil').value);
+  const sinav = document.getElementById('cikmisSinav').value.trim();
+  const kurul = document.getElementById('cikmisKurul').value.trim().toUpperCase();
+  const ders = document.getElementById('cikmisDers').value.trim();
+  const sira = parseInt(document.getElementById('cikmisSira').value) || 0;
+  const soru = document.getElementById('cikmisSoru').value.trim();
+  const aciklama = document.getElementById('cikmisAciklama').value.trim();
+
+  const secenekler = {};
+  document.querySelectorAll('#tab-cikmis .option-row').forEach(row => {
+    const harf = row.dataset.harf;
+    const deger = row.querySelector('input').value.trim();
+    if (deger) secenekler[harf] = deger;
+  });
+
+  if (!cikmisForm.donem) { mesajGoster(msg, 'Dönem seç!', 'error'); return; }
+  if (!yil) { mesajGoster(msg, 'Yıl gir!', 'error'); return; }
+  if (!sinav) { mesajGoster(msg, 'Sınav adı gir!', 'error'); return; }
+  if (!kurul) { mesajGoster(msg, 'Kurul gir!', 'error'); return; }
+  if (!ders) { mesajGoster(msg, 'Ders gir!', 'error'); return; }
+  if (!soru) { mesajGoster(msg, 'Soru gir!', 'error'); return; }
+  if (Object.keys(secenekler).length < 2) { mesajGoster(msg, 'En az 2 şık gir!', 'error'); return; }
+  if (!cikmisForm.cevap) { mesajGoster(msg, 'Doğru cevabı seç!', 'error'); return; }
+
+  const yeniSoru = {
+    donem: cikmisForm.donem,
+    yil,
+    sinav,
+    kurulId: kurul,
+    ders,
+    sira,
+    soru,
+    secenekler,
+    dogruCevap: cikmisForm.cevap,
+    olusturulmaTarihi: new Date().toISOString()
+  };
+
+  if (aciklama) yeniSoru.aciklama = aciklama;
+
+  try {
+    document.getElementById('cikmisKaydetBtn').disabled = true;
+    await addDoc(collection(db, 'cikmis_sorular'), yeniSoru);
+    mesajGoster(msg, '✓ Çıkmış soru kaydedildi!', 'success');
+
+    ['cikmisYil','cikmisSinav','cikmisKurul','cikmisDers',
+     'cikmisSira','cikmisSoru','cikmisAciklama']
+      .forEach(id => document.getElementById(id).value = '');
+    document.querySelectorAll('#tab-cikmis .option-row input')
+      .forEach(i => i.value = '');
+    document.getElementById('cikmisDonem').querySelectorAll('.chip')
+      .forEach(b => b.classList.remove('active'));
+    document.getElementById('cikmisCevap').querySelectorAll('.chip')
+      .forEach(b => b.classList.remove('active'));
+    cikmisForm.donem = null;
+    cikmisForm.cevap = null;
+
+  } catch (err) {
+    mesajGoster(msg, 'Hata: ' + err.message, 'error');
+  } finally {
+    document.getElementById('cikmisKaydetBtn').disabled = false;
+  }
+});
+
+// ============================================
 // YARDIMCILAR
 // ============================================
 
@@ -214,41 +300,14 @@ function kisalt(metin, max) {
   return metin.substring(0, max).trim() + '…';
 }
 
-
-// Firebase'e toplu kaydet
-document.getElementById('aiKaydetBtn').addEventListener('click', async () => {
-  const msg = document.getElementById('aiMsg');
-  if (aiParsedSorular.length === 0) return;
-
-  mesajGoster(msg, 'Kaydediliyor...', 'success');
-  document.getElementById('aiKaydetBtn').disabled = true;
-
-  try {
-    const batch = aiParsedSorular.map(s =>
-      addDoc(collection(db, 'sorular'), s)
-    );
-    await Promise.all(batch);
-
-    mesajGoster(msg, `✓ ${aiParsedSorular.length} soru kaydedildi!`, 'success');
-    document.getElementById('aiOnizleme').hidden = true;
-    document.getElementById('aiMetin').value = '';
-    aiParsedSorular = [];
-
-  } catch (err) {
-    mesajGoster(msg, 'Kayıt hatası: ' + err.message, 'error');
-  } finally {
-    document.getElementById('aiKaydetBtn').disabled = false;
-  }
-});
-
-
 function formuSifirla() {
   document.getElementById('adminKurul').value = '';
   document.getElementById('adminDers').value = '';
   document.getElementById('adminHedef').value = '';
   document.getElementById('adminSoru').value = '';
   document.getElementById('adminAciklama').value = '';
-  document.querySelectorAll('.option-row input').forEach(i => i.value = '');
+  document.querySelectorAll('#tab-ekle .option-row input')
+    .forEach(i => i.value = '');
   document.getElementById('adminDonem').querySelectorAll('.chip')
     .forEach(b => b.classList.remove('active'));
   document.getElementById('adminCevap').querySelectorAll('.chip')
