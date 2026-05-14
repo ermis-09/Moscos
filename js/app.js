@@ -212,11 +212,16 @@ function durumGuncelle() {
 }
 
 startBtn.addEventListener('click', () => {
-  sessionStorage.setItem('sinavSecim', JSON.stringify({
-    ...state.secim,
+  const secimData = {
+    donem: state.secim.donem,
+    kurulId: state.secim.kurulId,
+    ders: state.secim.ders,
+    sayi: state.secim.sayi,
     sorular: state.sorular
-  }));
-  window.location.href = 'sinav.html';
+  };
+  const encoded = encodeURIComponent(JSON.stringify(secimData));
+  window.location.href = `sinav.html?data=${encoded}`;
 });
+
 
 veriYukle();
