@@ -9,7 +9,6 @@ const exam = {
   cevaplar: {}
 };
 
-// DOM
 const counter = document.getElementById('counter');
 const progressFill = document.getElementById('progressFill');
 const metaDers = document.getElementById('metaDers');
@@ -23,12 +22,7 @@ const nextBtn = document.getElementById('nextBtn');
 const finishBtn = document.getElementById('finishBtn');
 const exitBtn = document.getElementById('exitBtn');
 
-// ============================================
-// BAŞLATMA
-// ============================================
-
 function basla() {
-  // Önce URL parametresinden dene, sonra sessionStorage
   let secimJson = null;
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -62,15 +56,6 @@ function basla() {
   soruyuGoster(0);
 }
 
-
-
-  if (uygun.length === 0) { geriDon(); return; }
-
-  const karisik = karistir(uygun);
-  exam.sorular = karisik.slice(0, Math.min(secim.sayi, karisik.length));
-  soruyuGoster(0);
-}
-
 function karistir(arr) {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -79,10 +64,6 @@ function karistir(arr) {
   }
   return a;
 }
-
-// ============================================
-// SORU GÖSTERME
-// ============================================
 
 function soruyuGoster(index) {
   exam.aktifIndex = index;
@@ -146,18 +127,10 @@ function soruyuGoster(index) {
   finishBtn.hidden = !sonSoru;
 }
 
-// ============================================
-// CEVAP VERME
-// ============================================
-
 function cevapVer(harf) {
   exam.cevaplar[exam.aktifIndex] = harf;
   soruyuGoster(exam.aktifIndex);
 }
-
-// ============================================
-// NAVİGASYON
-// ============================================
 
 prevBtn.addEventListener('click', () => {
   if (exam.aktifIndex > 0) soruyuGoster(exam.aktifIndex - 1);
@@ -179,7 +152,6 @@ finishBtn.addEventListener('click', () => {
   sessionStorage.setItem('sinavSonuc', JSON.stringify(sonuc));
   window.location.href = `sonuc.html?data=${encoded}`;
 });
-
 
 exitBtn.addEventListener('click', () => {
   if (Object.keys(exam.cevaplar).length > 0) {
