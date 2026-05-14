@@ -335,3 +335,19 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+
+/* Admin chip aktif durumu */
+#adminDonem .chip.active,
+#cikmisDonem .chip.active,
+#adminCevap .chip.active,
+#cikmisCevap .chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--surface);
+  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.35);
+}
+
+
+
+
+
