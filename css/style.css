@@ -1108,3 +1108,15 @@ body {
   transform: rotate(30deg);
 }
 
+
+/* Simülasyon — seçili şık (geri bildirim yok) */
+.option.selected {
+  background: var(--surface-elevated);
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px rgba(139, 38, 53, 0.2);
+}
+
+.option.selected .option-letter {
+  background: var(--accent);
+  color: var(--surface);
+}
