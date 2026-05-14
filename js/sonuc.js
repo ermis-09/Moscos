@@ -27,7 +27,17 @@ const newExamBtn = document.getElementById('newExamBtn');
 // ============================================
 
 function basla() {
-  const sonucJson = sessionStorage.getItem('sinavSonuc');
+  let sonucJson = null;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlData = urlParams.get('data');
+
+  if (urlData) {
+    sonucJson = decodeURIComponent(urlData);
+  } else {
+    sonucJson = sessionStorage.getItem('sinavSonuc');
+  }
+
   if (!sonucJson) {
     window.location.href = 'index.html';
     return;
