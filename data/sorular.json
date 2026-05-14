@@ -643,6 +643,1535 @@
     "dogruCevap": "B",
     "aciklama": "Pankreas Langerhans adacıklarındaki hücrelerin %70'ini Beta hücreleri oluşturur. Bu hücreler genellikle adacıkların merkezinde yer alır ve içlerindeki granüllerde insülin hormonu çinko kristalleri halinde depolanır."
   }
+  
+   {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Kadında bulunan dış genital organların tümüne verilen doğru terim aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Mons pubis",
+      "B": "Vulva",
+      "C": "Glans clitoridis",
+      "D": "Labium majus",
+      "E": "Vestibulum vagina"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Columna renalis'te seyreden damar aşağıdakilerin hangisinde doğru verilmiştir?",
+    "secenekler": {
+      "A": "Arteria interlobaris",
+      "B": "Vena arcuata",
+      "C": "Arteria arcuata",
+      "D": "Arteria segmentalis",
+      "E": "Vena segmentalis"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Aşağıdakilerden hangisi ren ile ilgili doğru bir bilgi değildir?",
+    "secenekler": {
+      "A": "Extremitas superior sağ ve solda gl. suprarenalis ile komşudur",
+      "B": "Karın arka duvarında yerleşik retroperitoneal bir organdır.",
+      "C": "Sağ böbreğin ön yüzü duodenum'un pars horizontalis'i ile komşudur.",
+      "D": "Sağ Th12-L3 ve Sol Th 11-L2 hizasındadır.",
+      "E": "Fascia renalis, böbreği pozisyonunda tutan en önemli oluşumdur."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Glandula thyroidea yerleşim yeri olarak hangi omur seviyelerinde bulunur?",
+    "secenekler": {
+      "A": "C7-T3",
+      "B": "T1-T3",
+      "C": "C3-C5",
+      "D": "C4-T2",
+      "E": "C5-T1"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Labium minus pudendi ile ilgili olan tanımlamalardan hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Her iki labium majus pudendi arasında yer alır.",
+      "B": "Labium majus pudendi ile arasında sulcus nympholabialis bulunur",
+      "C": "Clitoris'in arkasında birleşen bölümü frenulum clitoridis adını alır.",
+      "D": "Tabanında yerleşmiş crus clitoridis'i m. ischiocavernosus sarar.",
+      "E": "Her iki taraf arasında kalan yarık şeklinde vestibulum vagina'yı oluşturur"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Ovarium ile ilgili aşağıdaki ifadelerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Fossa ovarica'dan farklı yerleşim gösteren ovarium'a ectopia ovarii denir.",
+      "B": "Mezoovarium, lig. latum uteri'nin uzantısıdr.",
+      "C": "Lig. ovarii proprium, uterus yan duvarından ovarium'a uzanır.",
+      "D": "Fossa ovarica'yı üstten vasa iliaca externa, arkada vasa iliaca interna ve ureter sınırlar.",
+      "E": "Lig. suspensorium ovarii, extremitas uterina'ya bağlanır."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Aşağıdaki ifadelerden hangisi hidrocele'i doğru tanımlamaktadır?",
+    "secenekler": {
+      "A": "Processus vaginalis'in kapanmaması sonucu oluşur.",
+      "B": "Epididymis'in arteryel kanlanmasının artmasıyla oluşur.",
+      "C": "Plexus pampiniformis'in venlerinin genişlemesi ile oluşur.",
+      "D": "Cavum scrotide travma sonrası kanamanın olmasıyla oluşur.",
+      "E": "Ductus deferens'in aşırı genişlemesiyle oluşur."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "I. Columna renalis\nII. Pelvis renalis\nIII. Corpus adiposum pararenale\nIV. Calyx renalis major\nV. Calyx renalis minor\nVI. Arteriae segmentales\nVII. Capsula fibrosa\nSinus renalis'te yukarıdaki yapıların hangisi veya hangileri yer alır?",
+    "secenekler": {
+      "A": "I, III, IV, VI",
+      "B": "II, IV, V, VI, VII",
+      "C": "IV, V",
+      "D": "I, IV, V, VI, VII",
+      "E": "II, III, IV, V, VI"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Urethra masculina ile ilgili bilgilerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Curvatura infrapubica, anatomik bir eğrilik olup elle düzeltilemez.",
+      "B": "Pars prostatica bölümü, en geniş bölümüdür.",
+      "C": "Pars membranacea, spatium profundum perine içerisinde yer alır.",
+      "D": "Genişlemiş son ksımı fossa navicularis denir",
+      "E": "Gl. bulbourethralis, pars membranacea kısmına boşalır."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Aşağıdakileden hangisi pars pelvica ductus deferens'in komşulukta bulunduğu yapılardan biri değildir?",
+    "secenekler": {
+      "A": "A. v. epigastrica inferior",
+      "B": "Vasa iliaca externa",
+      "C": "Plexus pampiniformis",
+      "D": "Ureter",
+      "E": "N. obturatorius"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Cervix uteri ile ilgili ifadelerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Ostium uteri, fornix vaginae posterior'a bakar.",
+      "B": "Portio supravaginalis, parametrium ile sarılıdır.",
+      "C": "A. uterina, ureter'i önden çaprazlayarak, organa girer.",
+      "D": "Plica palmatae, cavitas uteri de mukozal kallantılardır",
+      "E": "Corpus uteri ile cervix uteri uzun eksenlari arasında anteflexio açısı vardır."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Mesane ile ilgili aşağıdaki açıklamalardan hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Apex vesicae'dan ligamentum umbilicale mediale uzanır.",
+      "B": "Fundus vesica erkekte glandula vesiculosa ve ampulla ductus deferens ile komşudur.",
+      "C": "Facies superior peritoneum ile örtülüdür.",
+      "D": "Peritonla sarılı olan facies inferolateralis, diaphragma pelvis ile komşudur.",
+      "E": "Trigonum vesica'nın üst köşelerine ostium ureteris yapıları açılır."
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "I. Scrotum içinde, funiculus spermaticus'a asılıdır\nII. Genellikle sol testis sağa oranla daha aşağıdadır.\nIII. Kadındaki gl. vestibularis major'un analoğudur.\nIV. Fascia spermatica externa, peritonel bir uzantıdır\nV. Margo posterior'unda, medaistinum testis yer alır.\nVI. Dıştan içe doğru epiorchium, tunica albuginea ve tunica vasculosa ile sarılıdır.\nVII. Tubuli seminiferi contorti, rete testis oluşturarak epididymis'in yapısına katılır.\nTestis ile ilgili yukarıdaki bilgilerden hangisi veya hangileri doğrudur?",
+    "secenekler": {
+      "A": "I, IV, V, VI",
+      "B": "IV, V, VII",
+      "C": "II, I, IV, V, VII",
+      "D": "II, III, VI, VII",
+      "E": "I, II, V, VI"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Ligamentum latum uteri içinde aşağıdaki yapılardan hangisi bulunmaz?",
+    "secenekler": {
+      "A": "Ligamentum ovarii proprium",
+      "B": "Ovarium",
+      "C": "Arteria ovarica",
+      "D": "Tuba uterina",
+      "E": "Cervix uteri"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel Anatomi",
+    "soru": "Sperm'in depolandığını organ aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Testis",
+      "B": "Epididymis",
+      "C": "Ductus deferens",
+      "D": "Gl. prostatica",
+      "E": "Vesicula seminalis"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  }
+
+ {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. Prepitum penis, glans penis'i örter.\nII. Lig. suspensorium penis, fascia superficialis penis ile devamlıdır.\nIII. Corpus penis, pars libera kısmıdır.\nIV. Facies urethralis, dorsum penis'te bulunur.\nV. Bulbus penis, pars spongiosa'nın radix penis'teki bölümüdür.\nVI. Ostium urethra externum, corpus cavernosum'un devamıdır.\nPenis ile ilgili yukarıdaki açıklamalardan hangisi doğrudur?",
+    "secenekler": {
+      "A": "I, II, III, V",
+      "B": "II, III, VI",
+      "C": "II, III, IV, V",
+      "D": "I, III, V",
+      "E": "III, V, VI"
+    },
+    "dogruCevap": "D",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi sağ ureter'in ön yüz komşuluğunda görülmez?",
+    "secenekler": {
+      "A": "Radix mesenterii",
+      "B": "A.v. mesenterica inferior",
+      "C": "Pars descendens duodeni",
+      "D": "A.v. colica dextra",
+      "E": "A.v. testicularis (a.v. ovarica)"
+    },
+    "dogruCevap": "B",
+    "aciklama": "A.v. mesenterica inferior, sol üreterin komşuluğunda bulunur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Menstrüel döngüde Luteal fazın en önemli hormonu hangisidir?",
+    "secenekler": {
+      "A": "Progesteron",
+      "B": "Östriol",
+      "C": "FSH",
+      "D": "LH",
+      "E": "Testesteron"
+    },
+    "dogruCevap": "A",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki hormonlardan hangisi andrenstenediona aromataz enziminin direkt etkisi ile oluşur?",
+    "secenekler": {
+      "A": "DHEA",
+      "B": "Progesteron",
+      "C": "Östron",
+      "D": "Testesteron",
+      "E": "17-OH Pregnenelon"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki hormonların hangisi tripeptid olup yapısında da piroglutamat bulunur?",
+    "secenekler": {
+      "A": "CRH",
+      "B": "TRH",
+      "C": "TSH",
+      "D": "GH",
+      "E": "MSH"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Büyüme hormonunun metabolik faaliyetleri arasında aşağıdakilerden hangisi YANLIŞTIR?",
+    "secenekler": {
+      "A": "Dokulara aminoasit girişini arttırır",
+      "B": "Ketogenezi arttırır",
+      "C": "Dokulara glikoz girişini azaltır",
+      "D": "Lipolizi azaltır",
+      "E": "Insüline doku hassasiyetini azaltır"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Büyüme hormonu (GH) lipolizi azaltmaz, aksine yağ dokusunda lipolizi artırır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Antidiüretik hormonunun (ADH) isimlendirilmesinde de belirtilen 8. Aminoasitte oksitosin hormonundan farklı olan amino asit hangisidir?",
+    "secenekler": {
+      "A": "Arginin",
+      "B": "Histidin",
+      "C": "Prolin",
+      "D": "Lösin",
+      "E": "Aspartik asit"
+    },
+    "dogruCevap": "A",
+    "aciklama": "İnsanda bulunan form Arginin Vazopressin'dir (AVP)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Prostaglandinlerin sentezini irreversbl inhibe eden aspirin hangi enzime etki eder?",
+    "secenekler": {
+      "A": "5- lipogenaz",
+      "B": "Fosfolipaz A2",
+      "C": "Lökotrien A4 esteraz",
+      "D": "Trombaksan A2 hidrolaz",
+      "E": "COX 1 ve COX 2"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki Prostaglandinlerin hangisi Trombaksan A2 ye metabolik etki gösterir?",
+    "secenekler": {
+      "A": "PG12",
+      "B": "PGF20",
+      "C": "PGE2",
+      "D": "LTC4",
+      "E": "LBT2"
+    },
+    "dogruCevap": "A",
+    "aciklama": "Prostasiklin (PGI2), Tromboksan A2'nin tam zıttı yönde etki göstererek vazodilatasyon ve anti-agregan etki sağlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Tiroid hormonları sentezinde gerekli olan amino asit hangisidir?",
+    "secenekler": {
+      "A": "Glutamat",
+      "B": "Aspartat",
+      "C": "Triptofan",
+      "D": "Tiamin",
+      "E": "Tirozin"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Tiroid hormonlarının metabolik etkileri içinde yanlışı belirtiniz?",
+    "secenekler": {
+      "A": "Glikoneogenezi arttırır",
+      "B": "Katabolik bir hormondur",
+      "C": "Özellikle çocukluk çağında SSS ve beyin gelişimini arttırır",
+      "D": "Glikojenolizi arttırır",
+      "E": "Kalorijenik etki yapar"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Fizyolojik düzeylerde tiroid hormonları protein sentezini uyararak anabolik etki gösterir. Yalnızca patolojik olarak çok yüksek dozlarda katabolik etki yaratır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi minerolokortikoiddir?",
+    "secenekler": {
+      "A": "Kortizol",
+      "B": "Östriol",
+      "C": "Aldesteron",
+      "D": "1-25 kolekalsiferol",
+      "E": "Testesteron"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Steroid hormonların öncü molekülü hangisidir?",
+    "secenekler": {
+      "A": "Testesteron",
+      "B": "Progesteron",
+      "C": "1-25 kolekalsiferol",
+      "D": "Pregnenolon",
+      "E": "Andresitenedion"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Kolesterolden sentezlenen ilk ortak yapı pregnenolondur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi Katekolaminlerin atılım ürünüdür?",
+    "secenekler": {
+      "A": "Anneksin",
+      "B": "17-OH kortizol",
+      "C": "Homovanilik asit",
+      "D": "Östrodiol",
+      "E": "Asetik asit"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki hormonlardan hangisinin reseptörü hücre içinde yer alır?",
+    "secenekler": {
+      "A": "Oksitosin",
+      "B": "fT4 (serbest)",
+      "C": "Antidiüretik hormon",
+      "D": "Glukagon",
+      "E": "Prolaktin"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Tiroid hormonları (T3, T4) lipofilik olduklarından membran yerine hücre içi (nükleer) reseptörlere bağlanırlar."
+  }
+
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki hormonlardan hangisinin reseptörü diğerlerinden farklı olup otokalitik etkiye sahiptir?",
+    "secenekler": {
+      "A": "İnsülin",
+      "B": "Glukagon",
+      "C": "ADH",
+      "D": "TSH",
+      "E": "Kortizol"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki özelliklerden hangisi steroid yapılı hormonların genel özelliklerinden değildir?",
+    "secenekler": {
+      "A": "Hidrofobik karakterdedirler",
+      "B": "Dolaşımda taşıyıcıya ihtiyaç duyarlar",
+      "C": "Hücre içi reseptörlerine etki gösterirler",
+      "D": "İkincil haberciye ihtiyaç duymazlar",
+      "E": "Etkileri hızlı başlar kısa sürelidir"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi hücre içi sinyal iletiminde ikinci haberci olarak kabul edilir?",
+    "secenekler": {
+      "A": "Siklik AMP (CAMP)",
+      "B": "G proteini alfa alt ünitesi",
+      "C": "Adenilaz siklaz",
+      "D": "Adenilat kinaz",
+      "E": "Protein kinaz"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Hipofiz bezinde adenoma bağlı gelişen hipertiroidi vakasında hasta serumunda aşağıdaki hormon değişimlerinden hangisi beklenir?",
+    "secenekler": {
+      "A": "TSH artmış, T3-T4 artmıştır.",
+      "B": "TSH artmış, T3-T4 azalmıştır.",
+      "C": "TSH azalmış, T3-T4 azalmıştır.",
+      "D": "TSH artmış, T3-T4 değişmemiştir.",
+      "E": "TSH azalmış, T3-T4 artmıştır"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Pankreas Beta adacık hücrelerinde membran depolarizasyonundan hangisi sorumludur?",
+    "secenekler": {
+      "A": "Glikozun adacık hücresine girişi",
+      "B": "Glikoliz sonucunda ATP üretilmesi",
+      "C": "ATP duyarlı potasyum kanallarının kapanması",
+      "D": "Voltaj duyarlı kalsiyum kanallarının açılması",
+      "E": "M-ATP duyarlı sodyum kanallarının açılması"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Böbreküstü bezi korteks tabakalarından hangisi/hangileri ağırlıklı olarak anjiyotensin II etkisiyle hormon salgılar?",
+    "secenekler": {
+      "A": "Zona glomeruloza",
+      "B": "Zona glomeruloza ve Zona fasikülata",
+      "C": "Zona glomeruloza ve Zona retikülaris",
+      "D": "Zona fasikülata",
+      "E": "Zona retikülaris"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki endokrin organlardan hangisi nöral krista kökenlidir?",
+    "secenekler": {
+      "A": "Adrenal korteks",
+      "B": "Adrenal medulla",
+      "C": "Nörohipofiz",
+      "D": "Adenohipofiz",
+      "E": "Paratiroid bezi"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Biyolojik ritimlerin düzenlenmesinde görevli bez ve salgıladığı hormon hangi şıkta doğru belirtilmiştir?",
+    "secenekler": {
+      "A": "Adenohipofiz--Troid sitümülan hormon",
+      "B": "Adenohipofiz----Troid releasing hormon",
+      "C": "Tiroid-Kalsitonin",
+      "D": "Pankreas--İnsülin",
+      "E": "Epifiz Melanosit slimülan hormon"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen yapılardan hangisi nörohipofiz ile ilgili değildir?",
+    "secenekler": {
+      "A": "Hipotalamohipofizyal traktus",
+      "B": "Pituisit",
+      "C": "Fenestralı kapillerler",
+      "D": "Hipotalamohipofizyal portal sistem",
+      "E": "Herring cisimcikleri"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen hücrelerden hangisi pars distalisteki glandüler hücre kümelerinin düzenlenmesine yardımcı olur?",
+    "secenekler": {
+      "A": "Fibröz astrositeler",
+      "B": "Folikülostellat hücreleri",
+      "C": "Pituisitler",
+      "D": "Pinealositler",
+      "E": "Satellit hücreleri"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Pankreasın langerhans adacıklarında bulunan alfa, beta ve delta hücreleri arasındaki ayrımı yapabilmek için aşağıdaki özelliklerden hangisi kullanışlıdır?",
+    "secenekler": {
+      "A": "Hücre boyutu ve şekli",
+      "B": "Eozin ile reaktivite",
+      "C": "DNA içeriği (ploidi)",
+      "D": "Immün boyanma özelliği",
+      "E": "Salgı granüllerinin boyutu"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Böbreğe ait aşağıdaki yapılardan hangisi üreter tomurcuğundan gelişir?",
+    "secenekler": {
+      "A": "Glomerül",
+      "B": "Henle kulpu",
+      "C": "Renal pelvis",
+      "D": "Distal tübül",
+      "E": "Proksimal tübül"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Renin salgılayan modifiye düz kas hücresi aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Makula densa hücreleri",
+      "B": "Ekstraglomerüler mezengial hücreler",
+      "C": "Podositler",
+      "D": "Jukstaglomerüler hücreler",
+      "E": "Endotel hücreleri"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. Bazal lamina II. Pedisel III. Fenestralı diyaframsız endotel IV. Glikokaliks Yukarıda glomerüler filtrasyon bariyeri katmanları verilmiştir. Aşağıdakilerden hangisi idrarın süzülme yönüne göre sırası ile doğru olarak verilmiştir?",
+    "secenekler": {
+      "A": "I-II-III-IV",
+      "B": "II-IV-III-I",
+      "C": "IV-III-I-II",
+      "D": "IV-I-II-III",
+      "E": "I-II-IV-III"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi filtrasyon yarık diyaframında bulunan majör yapısal proteindir?",
+    "secenekler": {
+      "A": "Nefrin",
+      "B": "Fibrilin",
+      "C": "Fibronektin",
+      "D": "Laminin",
+      "E": "Perlekan"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  }
+
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki yapılardan hangisi glomerüler ultrafiltrattan su, elektrolit, amino asitler, şekerler ve polipeptitlerin geri emilimi için primer olarak işlev görür?",
+    "secenekler": {
+      "A": "Kortikal toplayıcı kanal",
+      "B": "Proksimal kıvrıntılı tübül",
+      "C": "Distal kıvrıntılı tübül",
+      "D": "Henle kulpunun çıkan kolu",
+      "E": "Henle kulpunun inen kolu"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. Somatotroplar II. Laktotroplar III. Gonadotroplar IV. Tirotroplar V. Kortikotroplar. Hipofiz bezinin pars distalis bölümündeki hücre gruplarından hangisi/hangileri asidofilik boyanma özelliğine sahiptir?",
+    "secenekler": {
+      "A": "I-II-III",
+      "B": "II-IV",
+      "C": "I-II",
+      "D": "III-IV-V",
+      "E": "IV-V"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen sertoli hücre fonksiyonlarından hangisi lümen içi testesteron miktarını arttırır?",
+    "secenekler": {
+      "A": "Anti müllerian hormon sentezi",
+      "B": "Fruktoz sentezi",
+      "C": "Aktivin sentezi",
+      "D": "Inhibin sentezi",
+      "E": "Androjen binding protein sentezi"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen hücrelerden hangisi 46 kromozom sayısına ve 2C kromatin miktarına sahiptir?",
+    "secenekler": {
+      "A": "Spermatogonyum B",
+      "B": "Spermatid",
+      "C": "Primer spermatosit",
+      "D": "Spermiyum",
+      "E": "Sekonder oosit"
+    },
+    "dogruCevap": "A",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Glandula veziküloza bezleri ile ilgili yanlış ifadeyi işaretleyiniz?",
+    "secenekler": {
+      "A": "Epiteli mezoderm kökenlidir",
+      "B": "Fruktozdan zengin salgı yaparlar",
+      "C": "Semenin likefaksiyonunu sağlarlar",
+      "D": "Prostaglandin sentez ederler",
+      "E": "Sekonder tersiyer mukozal katlantılara sahiptirler"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Lipit zenginliği, LH hormon reseptörü, Eozinofilik boyanma, Mitokondri zenginliği. Yukarıda belirtilen özellikler hangi hücreye aittir?",
+    "secenekler": {
+      "A": "Granüloza hücreleri",
+      "B": "Sertoli hücreleri",
+      "C": "Leyding hücreleri",
+      "D": "Foliküler hücre",
+      "E": "Spermatid"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Menstrial siklusun 10. günü ile ilgili aşağıda belirtilen bilgilerden hangisi doğrudur?",
+    "secenekler": {
+      "A": "Endometrium proliferasyonu başlamamıştır",
+      "B": "Ovaryumda foliküller gelişmektedir",
+      "C": "Endometrium proliferasyonunu tamamlamıştır",
+      "D": "Mens devam etmektedir",
+      "E": "Ovaryumda korpus luteum şekillenmiştir"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Ovulasyon esnasında atılan oogenezis hücresi hangi şıkta doğru belirtilmiştir?",
+    "secenekler": {
+      "A": "1. mayozun profazında duraksamış sekonder oosit",
+      "B": "1. mayozun profazında duraksamış primer oosit",
+      "C": "2. mayozun profazında duraksamış primer oosit",
+      "D": "2. mayozun profazında duraksamış sekonder oosit",
+      "E": "2. mayozun metafazında duraksamış sekonder cosit"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen yapılardan hangisi graft folikülünde bulunmaz?",
+    "secenekler": {
+      "A": "Zona pellusida",
+      "B": "Teka lutein hücreleri",
+      "C": "Kumulus ooforus",
+      "D": "Korona radiata hücreleri",
+      "E": "1. mayozun profaz aşamasında durmuş primer oosit"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen fonksiyonlardan hangisi tuba uterinalar ile ilgili değildir?",
+    "secenekler": {
+      "A": "Besleme",
+      "B": "Kapasitasyon",
+      "C": "Zigot hareketi",
+      "D": "Desquamasyon",
+      "E": "Fertilizasyon"
+    },
+    "dogruCevap": "D",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen yapılardan hangisi farklanmamış dış gonad yapısına ait değildir?",
+    "secenekler": {
+      "A": "Genital tüberkül",
+      "B": "Phallus",
+      "C": "Ürethral katlantı",
+      "D": "Labioskrotal katlantı",
+      "E": "Ürogenital membran"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen genital sistem ile ilgili embriyolojik köken ve yapı epiteli eşleştirmelerinden yanlış olanı işaretleyiniz?",
+    "secenekler": {
+      "A": "Wolff kanalı-duktili efferenles",
+      "B": "Müller kanalı----uterus",
+      "C": "Wolff kanalı----glandula veziküloza",
+      "D": "Meduller sex kordonu---seminifer tübül",
+      "E": "Meduller seks kordonu rete testis"
+    },
+    "dogruCevap": "A",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıda belirtilen yapılardan hangisi farklanmamış gonadın, ovaryum yönünde farklandığını belirler?",
+    "secenekler": {
+      "A": "Primer seks kordonlarının oluşumu",
+      "B": "Meduller kordonların gelişimi",
+      "C": "Gonad korteks yapısının gerilemesi",
+      "D": "Primordial hücre göçü",
+      "E": "Sekonder seks kordonlarının oluşumu"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Hipotalamo-hipofizer portal sistemin damar tıkanıklığına uğraması sonrası bir hastada, diğer hipofiz hormonları baskılanmış olmasına rağmen hiperprolaktinemi bulunmuştur. Bu durumda artışın nedeni aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Dopaminin salgısının artması",
+      "B": "TRH düzeyinin düşmesi",
+      "C": "Prolaktin salgılayan hücrelerin nekrozu",
+      "D": "Dopaminın ön hipofize ulaşamaması",
+      "E": "ADH salınımının artması"
+    },
+    "dogruCevap": "D",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Hormon 1. Kortizol 2. Tiroksin (T4) 3. Ostrojen 4. TRH 5. Adrenalin. Yapı tipi A. Peptid hormon B. Amin türevi hormon C. Steroid hormon. Yukarıda verilen hormonları yapılarına göre uygun kategoriyle eşleştirdiğinizde doğru seçenek hangisidir?",
+    "secenekler": {
+      "A": "1-A/2-8/3-C/4-C/5-A",
+      "B": "1-B/2-C/3-B/4-B/5-C",
+      "C": "1-C/2-B/3-C/4-A/5-B",
+      "D": "1-B/2-A/3-B/4-B/5-C",
+      "E": "1-C/2-C/3-C/4-A/5-C"
+    },
+    "dogruCevap": "C",
+    "aciklama": ""
+  }
+
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "35 yaşında erkek hasta, günlük idrar miktarında belirgin artış, ağız kuruluğu ve yoğun susama hissi ile başvurur. Serum sodyum düzeyi yüksek ve plazma osmolalitesi artmış olarak bulunmuştur. İdrar dansitesi düşüktür. Bu hastada en olası patofizyolojik mekanizma aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Artmış ADH salınımı",
+      "B": "ADH reseptörüne duyarlılık artışı",
+      "C": "Yetersiz ADH salınımı",
+      "D": "Primer polidipsi",
+      "E": "Artmış aldosteron salınımı"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Hastada Diabetes Insipidus tablosu (poliüri, polidipsi, hipernatremi, düşük idrar dansitesi) görülmektedir. Bu duruma yetersiz ADH salınımı (santral D.I.) neden olabilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Basamak: 1. Hücreye iyot alımı, 2. Lümen içine iyot taşınımı, 3. İyodun oksidasyonu ve bağlanması, 4. T3/T4 sentezi için substrat, 5. Kolloidin geri alımı. Molekül/Enzim: A. Tiroglobulin, B. NIS (Na+/I simporter), C. TPO (tiroid peroksidaz), D. Pendrin, E. Megalin. Yukarıdaki tiroid sentez aşamalarına karşılık gelen basamak ve uygun protein/enzimlerle eşleştirmeleri yapınca en doğru seçenek aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "1-B/2-D/3-C/4-A/5-E",
+      "B": "1-B/2-E/3-D/4-C/5-A",
+      "C": "1-D/2-B/3-C/4-A/5-E",
+      "D": "1-D/2-B/3-A/4-C/5-E",
+      "E": "1-C/2-B/3-A/4-D/5-E"
+    },
+    "dogruCevap": "A",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I- Sempatik uyarıyı artırarak: Nabız ve kalp debisi artışı gerçekleştirmektedir. II- Vazodilatasyon yaparak: Total periferik direnç azalmasına neden olur. III- Kalorijenik etki ile Isı üretimi artışı yapar bu da vazodilatasyona neden olarak diyastol basıncının düşmesine katkı sağlar. IV- LDL reseptör ekspresyonunu artırarak plazmada Kolesterol seviyesini düşürür. V- Plazmada kolesterol ve trigliserid seviyesinde azaltıcı etkiye sahiptir. Tiroid hormonlarının etkileri ile ilgili verilen bilgilerden hangisi/hangileri doğrudur?",
+    "secenekler": {
+      "A": "Yalnız I",
+      "B": "I-II-IV",
+      "C": "I-III",
+      "D": "II-III",
+      "E": "I-II-III-IV-V"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I-Hem GH hem de kortizol glukoneogenezi artırır. II-GH, kas proteinlerini parçalayarak enerji sağlar. III-Kortizol, uzun süreli açlıkta kas proteinlerini yıkarak glukoz üretimine katkı sağlar. IV-GH sadece çocuklukta etkilidir, erişkinde metabolik rolü yoktur. V-GH ve Kortizol lipolizi artırır. Yukarıda verilen büyüme hormonu (GH) ve kortizolün metabolik etkileri ile ilgili ifadelerden doğru(D) / yanlış (Y) olarak en doğru seçenek hangisidir?",
+    "secenekler": {
+      "A": "D-Y-D-Y-D",
+      "B": "Y-Y-Y-Y-D",
+      "C": "Y-Y-D-Y-Y",
+      "D": "D-D-Y-Y-D",
+      "E": "Y-Y-Y-Y-Y"
+    },
+    "dogruCevap": "A",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Paratiroid hormonunun fazla salgılandığı primer hiperparatiroidi durumunda; PTH düzeyi yüksekliği ile birlikte serumda ........... artar, ........... azalır. Yukarıdaki boşluklara gelebilecek en uygun seçenek aşaıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Fosfat-kalsiyum",
+      "B": "Kalsiyum-sodyum",
+      "C": "Sodyum-fosfat",
+      "D": "Kalsiyum - fosfat",
+      "E": "Fosfat-potasyum"
+    },
+    "dogruCevap": "D",
+    "aciklama": "PTH kalsiyumun geri emilimini artırıp, fosfatın atılımını sağladığı için serumda kalsiyum artar, fosfat azalır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Pankreatik beta hücrelerinde kan glukoz düzeyinin artmasına bağlı olarak aşağıdaki olaylar sırasıyla gerçekleşir: 1. Glukoz hücreye ...... taşıyıcısı aracılığıyla girer. 2. Hücre içinde ATP düzeyinin artması, ...... kanalını inhibe eder. 3. Bu durum hücre membranında depolarizasyona yol açar. 4. Ardından ...... iyonu hücre içine girer ve insülin sekresyonunu başlatır. 5. Salınan insülin, kas ve yağ hücrelerinde ...... taşıyıcısını uyararak glukozun hücre içine alımını artırır. Yukarıdaki boşluklara sırasıyla hangi seçenekteki yanıtlar gelmelidir?",
+    "secenekler": {
+      "A": "GLUT4 - CaATP - Na - GLUT2",
+      "B": "GLUT2 - KATP - Ca - GLUT4",
+      "C": "SGLT2 - KATP - Na - GLUT4",
+      "D": "GLUT2 - CaATP - Ca - GLUT2",
+      "E": "GLUT4 - KATP - Ca - GLUT2"
+    },
+    "dogruCevap": "B",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "İnsülinin yağ dokusundaki etkilerine ilişkin aşağıdaki ifadelerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Lipoprotein lipaz enzimini aktive ederek serbest yağ asidi alımını kolaylaştırır.",
+      "B": "Trigliserid sentezini artırarak depo yağ oluşumunu destekler.",
+      "C": "Hormon-duyarlı lipazı aktive ederek trigliseridlerin yıkımını başlatır.",
+      "D": "İnsülin eksikliği durumunda lipoliz artar ve plazmada serbest yağ asidi düzeyi yükselir.",
+      "E": "Glukagon, adrenalin, kortizol gibi katabolik hormonlar Hormon-duyarlı lipazı aktive ederken insülin Hormon-duyarlı lipazı inhibe eder."
+    },
+    "dogruCevap": "C",
+    "aciklama": "İnsülin anabolik bir hormondur, lipolizi başlatan 'Hormon-duyarlı lipaz'ı aktive etmez, aksine inhibe eder."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. Adrenalin, kalpte β1 reseptörlerini uyararak kalp hızını ve kontraktiliteyi artırır. II. Noradrenalin, α1 reseptörleri üzerinden damar düz kaslarında vazokonstriksiyon yaparak kan basıncını yükseltir. III. Adrenalin, β2 reseptörleri aracılığıyla iskelet kası damarlarında vazodilatasyon yapar ve diyastolik basınç artışını sınırlar. IV. Adrenal bezin çıkarılmasından sonra plazma adrenalin düzeyi belirgin şekilde azalırken noradrenalin düzeyleri sabit kalabilir veya hafif azalabilir ancak artmaz. Adrenal medulla hormonları olan adrenalin ve noradrenalin ile ilgili yukarıda verilen ifadelerden hangisi/hangileri doğrudur?",
+    "secenekler": {
+      "A": "Yalnız I",
+      "B": "I ve II",
+      "C": "I, II ve III",
+      "D": "II, III ve IV",
+      "E": "I, II, III ve IV"
+    },
+    "dogruCevap": "E",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I-Glukagon II-GH III-kortizol IV- epinefrin. Yukarıda verilen hormonlardan hangisi/hangileri kan glikoz düzeyini artırırken insülin sekresyon hızını da artırmaktadır?",
+    "secenekler": {
+      "A": "I ve II",
+      "B": "II ve III",
+      "C": "I, II ve III",
+      "D": "II, III ve IV",
+      "E": "I, II, III ve IV"
+    },
+    "dogruCevap": "X",
+    "aciklama": ""
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Hormonların metabolik etkileri ile ilgili verilen bilgilerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Glukagon açlıkta, adrenalin ise daha çok stres durumunda lipolizisi sağlar.",
+      "B": "Adrenalin yağ dokusundaki hormona duyarlı lipazı aktive ettiğinden yağ hücreleri üzerine doğrudan lipolitik etkiye sahiptir ve dolayısı ile kan yağ asitleri konsantrasyonunu da büyük ölçüde artırır.",
+      "C": "Glukagon, yağ dokuda hormona duyarlı Lipaz aktivitesini artırır",
+      "D": "Yüksek kan glikoz düzeyi hücrelerde dehidratasyona yol açmaktadır.",
+      "E": "Diabetes mellitusta insülin eksikliği ile yağların kullanımı azalır ve metabolik asidoza neden olur"
+    },
+    "dogruCevap": "E",
+    "aciklama": "Diyabette insülin eksikliği ile hücreler glikozu kullanamadığı için enerji kaynağı olarak 'yağların kullanımı' artar, azalmaz. Yağların yıkımı sonucu artan keton cisimleri metabolik asidoza yol açar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. ACTH, adrenokortikal hücrelerde LDL reseptör ekspresyonunu artırarak kolesterol teminini ve steroidogenez kapasitesini yükseltir. II. Mineralokortikoid fazlalığı; hiperkalemi, hipotansiyon ve metabolik asidozla karakterizedir. III. Aldosteron sekresyonu; ekstraselüler sıvı hacmindeki azalma, artmış anjiyotensin II ve hiperkalemi tarafından uyarılır. Yukarıdaki ifadelerden hangisi/hangileri doğrudur?",
+    "secenekler": {
+      "A": "Yalnız I",
+      "B": "I ve II",
+      "C": "I ve III",
+      "D": "II ve III",
+      "E": "I, II ve III"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Mineralokortikoid fazlalığı hipokalemi, hipertansiyon ve metabolik alkaloza neden olur (ifade II yanlıştır)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi Addison hastalığında (primer adrenal yetmezlik) gözlenen mineralokortikoid ve glukokortikoid eksikliğine bağlı etkilerden biri değildir?",
+    "secenekler": {
+      "A": "Hiponatremi ve hiperkalemi",
+      "B": "Glikoneogenez kapasitesinde azalma",
+      "C": "Plazma hacminde azalma ve kalp debisinde düşüş",
+      "D": "Eritrosit konsantrasyonunda belirgin azalma",
+      "E": "Hafif enfeksiyonlara karşı artmış ölüm riski"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Addison hastalığında sıvı kaybına bağlı olarak plazma hacmi azalır, bu da genellikle hemokonsantrasyona (eritrosit konsantrasyonunda artışa) neden olur, azalmaya değil."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I. Glukoz alımının azalması ve hiperglisemi II. Lipolizin artması ve serbest yağ asitlerinin yükselmesi III. Ketogenez ve metabolik asidoz gelişimi IV. Protein sentezinin artması ve plazma aminoasitlerinin azalması. İnsülin eksikliğinin metabolik etkileri arasında yukarıdakilerden hangileri yer alır?",
+    "secenekler": {
+      "A": "Yalnız I",
+      "B": "I ve II",
+      "C": "I, II ve III",
+      "D": "II, III ve IV",
+      "E": "I, III ve IV"
+    },
+    "dogruCevap": "C",
+    "aciklama": "İnsülin eksikliğinde protein sentezi artmaz, tam tersine protein yıkımı artar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Pankreasın endokrin kısmını oluşturan Langerhans adacıkları, farklı hücre tiplerinden oluşur ve bu hücreler spesifik hormonlar salgılar. Aşağıda bu hücreler ve özellikleriyle ilgili verilen ifadelerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Langerhans adacıklarında en fazla bulunan hücre tipi olan beta hücreleri, insülin ve amilin salgılar.",
+      "B": "Alfa hücreleri, glukagon salgılayarak kan şekeri düzeyinin korunmasında görev alır ve adacık hücrelerinin yaklaşık dörtte birini oluşturur.",
+      "C": "Delta hücreleri, parakrin etki gösteren somatostatin hormonunu salgılar ve toplam hücrelerin yaklaşık %10'unu oluşturur.",
+      "D": "F (PP) hücreleri, pankreatik polipeptid salgılar ve Langerhans adacıklarında sayıca alfa hücrelerinden fazladır.",
+      "E": "Langerhans adacıkları farklı hücre gruplarının hormonlarını aynı anda salgılayan yapılar içerir."
+    },
+    "dogruCevap": "D",
+    "aciklama": "F (PP) hücreleri sayıca alfa hücrelerinden fazla değildir; adacık hücrelerinin çok daha küçük bir bölümünü oluştururlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki hormonlardan hangisinin salınımı Hipotalamo-hipofizer portal sistemin yetmezliğinden etkilenmez?",
+    "secenekler": {
+      "A": "Prolaktin",
+      "B": "Oksitosin",
+      "C": "LH",
+      "D": "TSH",
+      "E": "Dopamin"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Oksitosin nörohipofizden (arka hipofiz) salgılanır ve hipotalamustan portal dolaşımla değil, aksonlar (hipotalamohipofizyal traktus) aracılığıyla direkt taşınır."
+  }
+
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "İnülin klirens testi aşağıdakilerden hangisinin değerlendirilmesinde kullanılır?",
+    "secenekler": {
+      "A": "Glomerüler filtrasyon hızı",
+      "B": "Tübüler sekresyon",
+      "C": "Tübüler reabsorpsiyon",
+      "D": "Renal plazma akımı",
+      "E": "Kan akışı ve basıncı"
+    },
+    "dogruCevap": "A",
+    "aciklama": "İnülin sadece glomerüllerden filtre edilir, tübüllerden salgılanmaz veya geri emilmez. Bu nedenle GFR ölçümünde altın standarttır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Henle kulbu çıkan kalın kolu boyunca seyreden vasa recta'nın inen kolunda aşağıdakilerden hangisi aracılığıyla ürenin vasa recta kanına taşınması sağlanır?",
+    "secenekler": {
+      "A": "UT-A1",
+      "B": "UT-A2",
+      "C": "UT-A3",
+      "D": "UT-B1",
+      "E": "UT-B2"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Vasa recta endotelinde üre taşınımı UT-B taşıyıcıları ile gerçekleşir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki nörotransmitterlerden hangisi postgangliyonik parasempatik sinir liflerinden serbestlenerek P2X1 resepötörü aracılığıyla işeme sırasında detrusor kasın eksitasyonuna neden olur?",
+    "secenekler": {
+      "A": "Noradrenalin",
+      "B": "Nitrik Oksit",
+      "C": "ATP",
+      "D": "Adrenalin",
+      "E": "Asetilkolin"
+    },
+    "dogruCevap": "C",
+    "aciklama": "ATP, P2X purinerjik reseptörlerine bağlanarak mesane düz kasının (detrusor) kasılmasını uyarır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Kontrol altına alınamamış hipertansiyonu olan bir hasta, proksimal tübül renal epitel hücrelerinin bazolateral yüzeyinden Na geri emilim bölgesini hedef alan yeni bir diüretik ile tedavi edilmeye başlanıyor. Yeni ilaç, aşağıdaki hangi taşıma sürecini etkilemektedir?",
+    "secenekler": {
+      "A": "Na+/H+antiport taşıma",
+      "B": "SGLT1",
+      "C": "SGLT2",
+      "D": "Na+/K+ATPaz",
+      "E": "Na+/aminoasit simport taşıma"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Bazolateral membranda sodyumun hücreden kana pompalanmasını sağlayan ana mekanizma Na+/K+ ATPaz pompasıdır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) ANP II) BNP III) CNP IV) DNP V) Ürodilatin. Yukarıdakilerden kaç tanesinin natriüretik etkisi bulunur?",
+    "secenekler": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "dogruCevap": "E",
+    "aciklama": "Belirtilen peptidlerin (ANP, BNP, CNP, DNP, Ürodilatin) tamamı natriüretik (sodyum atılımını artırıcı) etkiye sahiptir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) Glomerüler filtrasyon hızı azalır II) Renal kan akımı artar III) Glomerüler hidrostatik basıncı azalır. Preklinik deneysel bir çalışmada, deney hayvanına efferent arteriyollerin vazodilatasyonunu sağlayan bir ilaç verilmesi durumunda yukarıdakilerden hangisi/hangileri gerçekleşir?",
+    "secenekler": {
+      "A": "Yalnız I",
+      "B": "Yalnız II",
+      "C": "I-II",
+      "D": "II-III",
+      "E": "I-II-III"
+    },
+    "dogruCevap": "E",
+    "aciklama": "Efferent arteriyol genişlediğinde renal kan akımı artar, glomerüler kapiller hidrostatik basınç düşer, bu da GFR'nin azalmasına neden olur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) TRPV5 II) TRPV6 III) TRPM6 IV) Na+/K+ATPaz V) Ca+2-ATPaz. Kronik böbrek hastalığı olan 50 yaşındaki bir kadın son aylarda kötüleşen kas spazmları şikayetiyle doktoruna başvurmuştur. Yapılan idrar testi sonucunda idrar kalsiyum düzeyinin arttığı saptanmıştır. Buna göre distal nefron renal epitel hücrelerinin apikal membranında Ca+2'un transellüler geri emilimini hedef alan yukarıdaki yapılardan kaç tanesi hasar görmüş olabilir?",
+    "secenekler": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "dogruCevap": "A",
+    "aciklama": "Distal tübülde apikal membrandan kalsiyum girişi esas olarak TRPV5 kanalı aracılığıyla gerçekleşir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi kompanse olmamış metabolik alkaloz için doğrudur?",
+    "secenekler": {
+      "A": "Plazma pH'sı, plazma HCO3- konsantrasyonu ve arteriyel PCO2 düşüktür",
+      "B": "Plazma pH'sı yüksek, plazma HCO3- konsantrasyonu ve arteriyel PCO2 düşüktür",
+      "C": "Plazma pH'sı ve plazma HCO3- konsantrasyonu düşük, arteriyel PCO2 normaldir",
+      "D": "Plazma pH'sı düşük, plazma HCO3- konsantrasyonu yüksek ve arteriyel PCO2 normaldir",
+      "E": "Plazma pH'sı ve plazma HCO3- konsantrasyonu yüksek, arteriyel PCO2 normaldir"
+    },
+    "dogruCevap": "E",
+    "aciklama": "Metabolik alkalozda primer bozukluk HCO3- yüksekliği ve buna bağlı yüksek pH'tır. Kompanzasyon (solunumun yavaşlayıp pCO2'nin artması) henüz gelişmemişse pCO2 normal kalır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "I) Na+/NH4+ antiport taşıma II) H+-ATPaz III) Na+/HCO3- simport taşıma IV) Na+/K+ATPaz V) Na+/Glutamin simport taşıma. Kronik metabolik asidozlu bir hastada, proksimal tübül renal epitel hücrelerinin apikal yüzeyinde bulunan yukarıdakı taşıma sistemlerinden hangileri ile fizyolojik kontrol sağlanır?",
+    "secenekler": {
+      "A": "I-II",
+      "B": "II-III",
+      "C": "III-IV",
+      "D": "I-V",
+      "E": "I-III-IV"
+    },
+    "dogruCevap": "X",
+    "aciklama": "Metabolik asidozda proksimal tübülde apikal membranda H+ sekresyonu ve amonyagenez/amonyum atılımı hızlanır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Vücutta sıvı azalması durumunda medulla interstisyum ozmolaritesine katkısı en fazla olan aşağıdakilerden hangisidir?",
+    "secenekler": {
+      "A": "Na/K ATPaz pompası",
+      "B": "Ure",
+      "C": "Aldosteron",
+      "D": "Glikoz",
+      "E": "Atriyal natriüretik peptit (ANP)"
+    },
+    "dogruCevap": "B",
+    "aciklama": "Sıvı azlığında salgılanan ADH, iç medüller toplayıcı kanallarda üre geçirgenliğini (UT-A1 ve UT-A3) artırarak medüller interstisyum ozmolaritesinin yaklaşık %50'sini oluşturur ve konsantre idrar atılmasını sağlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) Aquaporin-1 2) Aquaporin-II 3) Aquaporin-III 4) Aquaporin-IV 5) Aquaporin-V. Distal tübül epitel hücresine giren suyun interstisyuma taşınmasına yukarıdakilerden hangileri aracılık eder?",
+    "secenekler": {
+      "A": "1-2",
+      "B": "2-5",
+      "C": "1-2-5",
+      "D": "3-4",
+      "E": "3-4-5"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Su apikal membrandan AQP-2 ile hücre içine girerken, bazolateral membrandan interstisyuma geçişini AQP-3 ve AQP-4 sağlar."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) Tip A interkale hücre II) Tip B interkale hücre III) Tip C interkale hücre IV) Esas hücre. Distal tübülde yukarıdaki hücrelerin hangisinde/hangilerinde CI-/HCO3- antiport taşıma sistemi ile HCO3- sekresyonu gerçekleşir?",
+    "secenekler": {
+      "A": "I-II",
+      "B": "II-III",
+      "C": "I-II-III",
+      "D": "I-III",
+      "E": "I-II-III-IV"
+    },
+    "dogruCevap": "X",
+    "aciklama": "Tip B interkale hücrelerde apikal yerleşimli pendrin (Cl-/HCO3- değiştirici) aracılığıyla lümene bikarbonat sekrete edilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1) Filtrasyon fraksiyonunun artması II) Arteryel kan basıncının artması III) Efferent arteriyollerin vazodilatasyonu IV) Sistemik kan kolloid ozmotik basıncın azalması V) Peritübüler kapiller hidrostatik basıncın azalması. Yukarıdaki durumların kaç tanesinde peritübüler kapiller geriemilim hızı azalır?",
+    "secenekler": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4",
+      "E": "5"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Arteryel basıncın artması, efferent vazodilatasyon ve kolloid ozmotik basıncın azalması (II, III ve IV) Starling kuvvetleri gereği peritübüler geri emilimi azaltır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Glukometre ile kan şekeri ölçümü ile ilgili aşağıdakilerden hangisi doğrudur?",
+    "secenekler": {
+      "A": "Ölçüm sadece hastanede yapılır.",
+      "B": "Ölçümü sağlık personeli yapar",
+      "C": "Laboratuvar ölçümlerine göre farklı ölçüm sonuçları çıkar.",
+      "D": "Çok yüksek değerleri doğrulukla ölçebilir.",
+      "E": "Kan şekeri ölçüm striplerinin son kullanım tarihleri yoktur."
+    },
+    "dogruCevap": "C",
+    "aciklama": "Glukometreler tam kan kullanırken laboratuvarlar genellikle plazma/serum kullandığı için ölçüm sonuçları arasında fizyolojik olarak %10-15 fark olabilir."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdaki ifadelerden hangisi yanlıştır?",
+    "secenekler": {
+      "A": "Tam idrar testi birinci basamakta sık yapılan laboratuvar testlerinden birisidir.",
+      "B": "Tam idrar testinde lökosit ve nitrit pozitif olması idrar yolu enfeksiyonu tanısı koydurur.",
+      "C": "Tam idrar testinde lökosit ve nitrit olmaması idrar yolu enfeksiyonunu ekarte ettirir.",
+      "D": "Diyabeti olan bir kişide tam idrar testinde glukoz ve keton varlığı diyabetik ketoasidozu akla getirmelidir.",
+      "E": "İdrar analiz öncesinde oda ısısında bekletilirse glukoz miktarı düşer."
+    },
+    "dogruCevap": "C",
+    "aciklama": "Lökosit esteraz ve nitrit testlerinin negatif olması her zaman İYE olmadığını kesin olarak göstermez (bazı bakteriler nitratı nitrite dönüştüremez)."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi sütür uygulaması için yanlıştır?",
+    "secenekler": {
+      "A": "Eller yıkanır.",
+      "B": "Kesi yeri steril delikli örtü ile örtülür",
+      "C": "Kesi antiseptik solüsyon ile temizlenir.",
+      "D": "Steril eldiven giymeye gerek yoktur.",
+      "E": "Lokal anestezi uygulanır"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Sütür atma işlemi invaziv bir girişimdir, enfeksiyon riskini önlemek için steril eldiven giyilmesi zorunludur."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi ideal bir pansumanın özelliklerinden değildir?",
+    "secenekler": {
+      "A": "Yara iyileşmesini hızlandırmalı",
+      "B": "Havadan yara yüzeyine mikroorganizma geçişine izin vermemeli",
+      "C": "Ağrıyı azaltmalı",
+      "D": "Tüm yaralara kuru bir ortam sağlamalı",
+      "E": "Yara yüzeyinin sıcaklığını korumalı"
+    },
+    "dogruCevap": "D",
+    "aciklama": "Günümüzde ideal yara iyileşmesi için nemli yara iyileşmesi prensibi geçerlidir, her yaraya 'tamamen kuru bir ortam' sağlamak önerilmez."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "1.pH II.PCO2 III. Anyon açığı IV.plazma HCO-3 konsantrasyonu. Hastada asit-baz bozukluğunun varlığı hangi parametreler ile belirlenir?",
+    "secenekler": {
+      "A": "Yalnız 1",
+      "B": "I ve III",
+      "C": "I, II, III ve IV",
+      "D": "III ve IV",
+      "E": "II ve III"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Tam asit-baz durumu değerlendirmesinde pH, pCO2, HCO3 ve metabolik asidozun ayırıcı tanısında anyon açığı kullanılır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi Üriner Kateter takılması amaçlarından biri değildir?",
+    "secenekler": {
+      "A": "İdrarın boşalmasının sağlanması",
+      "B": "Mesane distansiyonuna bağlı rahatsızlığın azaltılması",
+      "C": "Steril idrar örneğinin alınması",
+      "D": "Cerrahi işlemler sırasında idrar sızıntısının önlenmesi",
+      "E": "Mesane tümörünün cerrahi olarak çıkarılması"
+    },
+    "dogruCevap": "E",
+    "aciklama": "Üriner kateterizasyon tümör eksizyonu gibi cerrahi bir prosedürü gerçekleştirmez; sadece drenaj veya tanı amaçlı kullanılır."
+  },
+  {
+    "donem": 2,
+    "kurulId": "D2K5",
+    "ders": "Çıkmışlar",
+    "ogrenimHedefi": "Genel",
+    "soru": "Aşağıdakilerden hangisi geçici mesane kateterizasyonun bir endikasyonu değildir?",
+    "secenekler": {
+      "A": "Steril idrar örneği almak",
+      "B": "Mesane distansiyonu varsa",
+      "C": "Foley kateterle uzun süreli drenaj sağlamak",
+      "D": "Rezidüel idrar miktarını belirlemek",
+      "E": "Mesane boşaltımında yetersizlik durumunda"
+    },
+    "dogruCevap": "C",
+    "aciklama": "Foley kateterle 'uzun süreli drenaj' sağlamak kalıcı (indwelling) kateterizasyonun özelliğidir, geçici (intermitan) kateterizasyonun değil."
+  }
+
+
+
 
 ]
 
