@@ -1120,3 +1120,30 @@ body {
   background: var(--accent);
   color: var(--surface);
 }
+
+
+.sim-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--surface);
+  color: var(--accent);
+  border: 1.5px solid var(--accent-soft);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.10);
+}
+
+.sim-btn:hover {
+  background: var(--surface-elevated);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(139, 38, 53, 0.15);
+}
+
