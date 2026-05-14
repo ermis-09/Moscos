@@ -34,15 +34,25 @@ function basla() {
   const secim = JSON.parse(secimJson);
   exam.secim = secim;
 
-  // Sorular sessionStorage'dan geliyor (app.js oraya koydu)
   const tumSorular = secim.sorular || [];
 
-  const uygun = tumSorular.filter(s => {
+  // Boş objeleri temizle
+  const temizSorular = tumSorular.filter(s => s && s.soru && s.kurulId);
+
+  const uygun = temizSorular.filter(s => {
     if (s.donem !== secim.donem) return false;
     if (s.kurulId !== secim.kurulId) return false;
     if (secim.ders && s.ders !== secim.ders) return false;
     return true;
   });
+
+  if (uygun.length === 0) { geriDon(); return; }
+
+  const karisik = karistir(uygun);
+  exam.sorular = karisik.slice(0, Math.min(secim.sayi, karisik.length));
+  soruyuGoster(0);
+}
+
 
   if (uygun.length === 0) { geriDon(); return; }
 
