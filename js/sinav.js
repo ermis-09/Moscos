@@ -175,9 +175,11 @@ finishBtn.addEventListener('click', () => {
     cevaplar: exam.cevaplar,
     tarih: new Date().toISOString()
   };
+  const encoded = encodeURIComponent(JSON.stringify(sonuc));
   sessionStorage.setItem('sinavSonuc', JSON.stringify(sonuc));
-  window.location.href = 'sonuc.html';
+  window.location.href = `sonuc.html?data=${encoded}`;
 });
+
 
 exitBtn.addEventListener('click', () => {
   if (Object.keys(exam.cevaplar).length > 0) {
