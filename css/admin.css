@@ -1,0 +1,239 @@
+/* ============================================
+   ADMİN SAYFASI STİLLERİ
+   ============================================ */
+
+.admin-frame .app-header {
+  text-align: left;
+}
+
+.admin-frame .brand {
+  justify-content: flex-start;
+}
+
+.admin-frame .brand-sub {
+  margin-left: 36px;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 16px 22px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+/* Sekmeler */
+.tab-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.tab {
+  background: var(--surface);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  padding: 14px 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.08);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: var(--surface);
+  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.3);
+}
+
+/* Form elemanları */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.optional {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.form-input {
+  background: var(--surface);
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(139, 38, 53, 0.12);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* Şık satırları */
+.options-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.option-harf {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-row .form-input {
+  flex: 1;
+}
+
+/* Form mesajı */
+.form-msg {
+  font-size: 13px;
+  text-align: center;
+  min-height: 20px;
+  font-weight: 500;
+}
+
+.form-msg.success { color: #4A7A4A; }
+.form-msg.error { color: #8B3838; }
+
+/* Soru listesi */
+.list-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.soru-listesi {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.liste-bos {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 30px 0;
+}
+
+.soru-kart {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.soru-kart-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.soru-kart-pill {
+  background: var(--accent);
+  color: var(--surface);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.soru-kart-pill.ders {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+.soru-kart-metin {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.soru-kart-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.action-btn.sil {
+  color: #8B3838;
+  border-color: #D4A0A0;
+}
+
+.action-btn.sil:hover {
+  background: #F0CFCF;
+  border-color: #B85454;
+}
