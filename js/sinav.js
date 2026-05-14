@@ -28,15 +28,24 @@ const exitBtn = document.getElementById('exitBtn');
 // ============================================
 
 function basla() {
-  const secimJson = sessionStorage.getItem('sinavSecim');
+  // Önce URL parametresinden dene, sonra sessionStorage
+  let secimJson = null;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlData = urlParams.get('data');
+
+  if (urlData) {
+    secimJson = decodeURIComponent(urlData);
+  } else {
+    secimJson = sessionStorage.getItem('sinavSecim');
+  }
+
   if (!secimJson) { geriDon(); return; }
 
   const secim = JSON.parse(secimJson);
   exam.secim = secim;
 
   const tumSorular = secim.sorular || [];
-
-  // Boş objeleri temizle
   const temizSorular = tumSorular.filter(s => s && s.soru && s.kurulId);
 
   const uygun = temizSorular.filter(s => {
@@ -52,6 +61,7 @@ function basla() {
   exam.sorular = karisik.slice(0, Math.min(secim.sayi, karisik.length));
   soruyuGoster(0);
 }
+
 
 
   if (uygun.length === 0) { geriDon(); return; }
