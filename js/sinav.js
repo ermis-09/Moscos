@@ -4,9 +4,9 @@
 
 const exam = {
   secim: null,
-  sorular: [],         // karıştırılmış, seçilen sorular
+  sorular: [],
   aktifIndex: 0,
-  cevaplar: {}         // { 0: 'A', 1: 'C' } - aktifIndex => harf
+  cevaplar: {}
 };
 
 // DOM
@@ -27,41 +27,28 @@ const exitBtn = document.getElementById('exitBtn');
 // BAŞLATMA
 // ============================================
 
-async function basla() {
+function basla() {
   const secimJson = sessionStorage.getItem('sinavSecim');
-  if (!secimJson) {
-    geriDon();
-    return;
-  }
-  exam.secim = JSON.parse(secimJson);
+  if (!secimJson) { geriDon(); return; }
 
-  try {
-    const res = await fetch('data/sorular.json');
-    const data = await res.json();
-    const uygun = filtreleSorular(data.sorular, exam.secim);
+  const secim = JSON.parse(secimJson);
+  exam.secim = secim;
 
-    if (uygun.length === 0) {
-      geriDon();
-      return;
-    }
+  // Sorular sessionStorage'dan geliyor (app.js oraya koydu)
+  const tumSorular = secim.sorular || [];
 
-    const karisik = karistir(uygun);
-    exam.sorular = karisik.slice(0, Math.min(exam.secim.sayi, karisik.length));
-
-    soruyuGoster(0);
-  } catch (err) {
-    console.error(err);
-    questionText.textContent = 'Sorular yüklenemedi.';
-  }
-}
-
-function filtreleSorular(sorular, secim) {
-  return sorular.filter(s => {
+  const uygun = tumSorular.filter(s => {
     if (s.donem !== secim.donem) return false;
     if (s.kurulId !== secim.kurulId) return false;
     if (secim.ders && s.ders !== secim.ders) return false;
     return true;
   });
+
+  if (uygun.length === 0) { geriDon(); return; }
+
+  const karisik = karistir(uygun);
+  exam.sorular = karisik.slice(0, Math.min(secim.sayi, karisik.length));
+  soruyuGoster(0);
 }
 
 function karistir(arr) {
