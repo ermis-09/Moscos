@@ -1,17 +1,53 @@
 /* ============================================
-   ADMİN SAYFASI
+   ADMİN SAYFASI — Google Auth korumalı
    ============================================ */
 
-import { db } from '../firebase.js';
+import { db, auth } from '../firebase.js';
 import {
   collection, addDoc, getDocs,
-  deleteDoc, doc, query, where
+  deleteDoc, doc, query, where, getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import {
+  GoogleAuthProvider, signInWithPopup, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const form = {
-  donem: null,
-  cevap: null
-};
+const form = { donem: null, cevap: null };
+const loginScreen = document.getElementById('loginScreen');
+const loginBtn = document.getElementById('loginBtn');
+const loginError = document.getElementById('loginError');
+
+// ============================================
+// AUTH KONTROLÜ
+// ============================================
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    // Giriş yapılmamış — giriş ekranını göster
+    loginScreen.classList.remove('hidden');
+    return;
+  }
+
+  // Giriş yapılmış — admin listesinde mi kontrol et
+  const adminDoc = await getDoc(doc(db, 'adminler', user.email));
+  if (!adminDoc.exists() || adminDoc.data().aktif !== true) {
+    loginError.textContent = `${user.email} adresi yetkili değil.`;
+    loginScreen.classList.remove('hidden');
+    return;
+  }
+
+  // Yetkili — giriş ekranını kapat
+  loginScreen.classList.add('hidden');
+});
+
+// Google ile giriş
+loginBtn.addEventListener('click', async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (err) {
+    loginError.textContent = 'Giriş başarısız: ' + err.message;
+  }
+});
 
 // ============================================
 // SEKME YÖNETİMİ
@@ -101,7 +137,6 @@ document.getElementById('kaydetBtn').addEventListener('click', async () => {
     formuSifirla();
   } catch (err) {
     mesajGoster(msg, 'Hata: ' + err.message, 'error');
-    console.error(err);
   } finally {
     document.getElementById('kaydetBtn').disabled = false;
   }
@@ -159,7 +194,6 @@ async function soruListele() {
 
   } catch (err) {
     listesi.innerHTML = `<p class="liste-bos">Hata: ${err.message}</p>`;
-    console.error(err);
   }
 }
 
