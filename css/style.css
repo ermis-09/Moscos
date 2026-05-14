@@ -1147,3 +1147,7 @@ body {
   box-shadow: 0 8px 20px rgba(139, 38, 53, 0.15);
 }
 
+
+[hidden] {
+  display: none !important;
+}
