@@ -149,9 +149,83 @@
 
       </section>
 
+	<!-- ÇIKMIŞ SORU EKLE -->
+<section class="tab-content" id="tab-cikmis" hidden>
 
-	<section class="tab-content" id="tab-cikmis" hidden>
-      
+  <div class="form-group">
+    <label class="form-label">Dönem</label>
+    <div class="chip-row chip-row-equal" id="cikmisDonem">
+      <button class="chip" data-value="2">D2</button>
+      <button class="chip" data-value="3">D3</button>
+      <button class="chip" data-value="4">D4</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Yıl</label>
+    <input class="form-input" type="number" id="cikmisYil" placeholder="örn. 2024" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Sınav Adı</label>
+    <input class="form-input" type="text" id="cikmisSinav" placeholder="örn. Ara Sınav 1, Final, Bütünleme" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Kurul</label>
+    <input class="form-input" type="text" id="cikmisKurul" placeholder="örn. D2K5" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Ders</label>
+    <input class="form-input" type="text" id="cikmisDers" placeholder="örn. Patoloji" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Sıra No</label>
+    <input class="form-input" type="number" id="cikmisSira" placeholder="örn. 1" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Soru</label>
+    <textarea class="form-input form-textarea" id="cikmisSoru" rows="3" placeholder="Soru metnini yaz..."></textarea>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Seçenekler</label>
+    <div class="options-form">
+      <div class="option-row" data-harf="A"><span class="option-harf">A</span><input class="form-input" type="text" placeholder="A şıkkı" /></div>
+      <div class="option-row" data-harf="B"><span class="option-harf">B</span><input class="form-input" type="text" placeholder="B şıkkı" /></div>
+      <div class="option-row" data-harf="C"><span class="option-harf">C</span><input class="form-input" type="text" placeholder="C şıkkı" /></div>
+      <div class="option-row" data-harf="D"><span class="option-harf">D</span><input class="form-input" type="text" placeholder="D şıkkı" /></div>
+      <div class="option-row" data-harf="E"><span class="option-harf">E</span><input class="form-input" type="text" placeholder="E şıkkı" /></div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Doğru Cevap</label>
+    <div class="chip-row" id="cikmisCevap">
+      <button class="chip" data-value="A">A</button>
+      <button class="chip" data-value="B">B</button>
+      <button class="chip" data-value="C">C</button>
+      <button class="chip" data-value="D">D</button>
+      <button class="chip" data-value="E">E</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Açıklama <span class="optional">(opsiyonel)</span></label>
+    <textarea class="form-input form-textarea" id="cikmisAciklama" rows="2" placeholder="Açıklama veya rationale..."></textarea>
+  </div>
+
+  <p class="form-msg" id="cikmisMsg"></p>
+  <button class="start-btn" id="cikmisKaydetBtn">
+    Kaydet <span class="start-btn-icon">✓</span>
+  </button>
+
+</section>
+
+		
     </main>
 
   </div>
