@@ -48,8 +48,9 @@
       <div class="tab-row">
   <button class="tab active" data-tab="ekle">Soru Ekle</button>
   <button class="tab" data-tab="listele">Sorular</button>
-  <button class="tab" data-tab="ai">AI Parse</button>
+  <button class="tab" data-tab="cikmis">Çıkmış</button>
 </div>
+
 
 
       <!-- SORU EKLE -->
@@ -148,63 +149,7 @@
 
       </section>
       
-      <!-- AI PARSE -->
-<section class="tab-content" id="tab-ai" hidden>
-
-  <div class="form-group">
-    <label class="form-label">Gemini API Key</label>
-    <input class="form-input" type="password" id="geminiKey" placeholder="AIza..." />
-    <p class="key-hint">Tarayıcında saklanır, GitHub'a gitmez.</p>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Dönem</label>
-    <div class="chip-row chip-row-equal" id="aiDonem">
-      <button class="chip" data-value="2">D2</button>
-      <button class="chip" data-value="3">D3</button>
-      <button class="chip" data-value="4">D4</button>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Kurul</label>
-    <input class="form-input" type="text" id="aiKurul" placeholder="örn. D2K5" />
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Ders</label>
-    <input class="form-input" type="text" id="aiDers" placeholder="örn. Patoloji" />
-  </div>
-
-  <div class="form-group">
-    <label class="form-label">Gemini'den Gelen Metin</label>
-    <textarea class="form-input form-textarea" id="aiMetin" 
-      placeholder="Gemini'nin verdiği soruları buraya yapıştır..." 
-      rows="8"></textarea>
-  </div>
-
-  <button class="start-btn" id="aiParseBtn">
-    Parse Et
-    <span class="start-btn-icon">✦</span>
-  </button>
-
-  <p class="form-msg" id="aiMsg"></p>
-
-  <!-- Önizleme -->
-  <div id="aiOnizleme" hidden>
-    <div class="onizleme-header">
-      <h3 class="section-title" id="aiSoruSayisi">0 soru bulundu</h3>
-      <button class="start-btn" id="aiKaydetBtn">
-        Firebase'e Kaydet
-        <span class="start-btn-icon">→</span>
-      </button>
-    </div>
-    <div id="aiSoruListesi"></div>
-  </div>
-
-</section>
-
-
+      
     </main>
 
   </div>
