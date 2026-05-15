@@ -25,12 +25,67 @@ function sonucVeriAl() {
 const sonuc = sonucVeriAl();
 if (!sonuc) throw new Error('Sonuç yok');
 
+// Sonucu kaydet
+sonucuKaydet(sonuc, sonuc.mod);
+
 // Simülasyon modu mu?
 if (sonuc.mod === 'simulasyon') {
   optikEkraniGoster(sonuc);
 } else {
   normalEkraniGoster(sonuc);
 }
+
+
+// Sonucu Firebase'e kaydet (giriş yapmışsa)
+async function sonucuKaydet(sonuc, mod) {
+  const { auth, db } = await import('../firebase.js');
+  const { collection, addDoc } = await import(
+    "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"
+  );
+  const { onAuthStateChanged } = await import(
+    "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"
+  );
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
+
+    const { sorular, cevaplar } = sonuc;
+    let dogru = 0, yanlis = 0, bos = 0;
+    const dersDetay = {};
+
+    sorular.forEach((s, i) => {
+      const cevap = cevaplar[i];
+      if (!dersDetay[s.ders]) dersDetay[s.ders] = { dogru: 0, yanlis: 0, bos: 0, toplam: 0 };
+      dersDetay[s.ders].toplam++;
+      if (!cevap) { bos++; dersDetay[s.ders].bos++; }
+      else if (cevap === s.dogruCevap) { dogru++; dersDetay[s.ders].dogru++; }
+      else { yanlis++; dersDetay[s.ders].yanlis++; }
+    });
+
+    const kayit = {
+      tarih: new Date().toISOString(),
+      mod: mod || 'sinav',
+      donem: sorular[0]?.donem || null,
+      kurulId: sorular[0]?.kurulId || null,
+      sinav: sorular[0]?.sinav || null,
+      yil: sorular[0]?.yil || null,
+      toplam: sorular.length,
+      dogru, yanlis, bos,
+      yuzde: Math.round((dogru / sorular.length) * 100),
+      dersDetay
+    };
+
+    try {
+      await addDoc(
+        collection(db, 'kullanici_sonuclari', user.uid, 'sonuclar'),
+        kayit
+      );
+    } catch (err) {
+      console.error('Sonuç kaydedilemedi:', err);
+    }
+  });
+}
+
 
 // ============================================
 // OPTİK EKRANI

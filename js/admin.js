@@ -4,9 +4,10 @@
 
 import { db, auth } from '../firebase.js';
 import {
-  collection, addDoc, getDocs, deleteDoc,
-  doc, query, where, getDoc, updateDoc
+  collection, addDoc, getDocs,
+  deleteDoc, doc, query, where, getDoc, updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
 import {
   GoogleAuthProvider, signInWithPopup, onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
@@ -144,20 +145,22 @@ async function soruListele() {
       const kart = document.createElement('div');
       kart.className = 'soru-kart';
       kart.innerHTML = `
-        <div class="soru-kart-meta">
-          <span class="soru-kart-pill">D${s.donem} · ${s.kurulId}</span>
-          <span class="soru-kart-pill ders">${s.ders}</span>
-        </div>
-        <p class="soru-kart-metin">${kisalt(s.soru, 80)}</p>
-        <div class="soru-kart-actions">
-          <button class="action-btn duzenle" data-id="${docSnap.id}">Düzenle</button>
-          <button class="action-btn sil" data-id="${docSnap.id}">Sil</button>
-        </div>
-      `;
+  <div class="soru-kart-meta">
+    <span class="soru-kart-pill">D${s.donem} · ${s.kurulId}</span>
+    <span class="soru-kart-pill ders">${s.ders}</span>
+  </div>
+  <p class="soru-kart-metin">${kisalt(s.soru, 80)}</p>
+  <div class="soru-kart-actions">
+    <button class="action-btn duzenle" data-id="${docSnap.id}">Düzenle</button>
+    <button class="action-btn sil" data-id="${docSnap.id}">Sil</button>
+  </div>
+`;
+
 
       kart.querySelector('.action-btn.duzenle').addEventListener('click', () => {
-        soruModalAc(docSnap.id, s);
-      });
+  soruModalAc(docSnap.id, s);
+});
+
 
       kart.querySelector('.action-btn.sil').addEventListener('click', async () => {
         if (!confirm('Bu soruyu silmek istediğine emin misin?')) return;

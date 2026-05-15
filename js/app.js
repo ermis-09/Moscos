@@ -2,20 +2,20 @@
    ANA SAYFA — Firebase'den veri çeker
    ============================================ */
 
-import { db } from '../firebase.js';
+import { db, auth } from '../firebase.js';
 import {
   collection, getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import {
+  GoogleAuthProvider, signInWithPopup,
+  signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const state = {
   kurullarData: null,
   sorular: [],
-  secim: {
-    donem: null,
-    kurulId: null,
-    ders: '',
-    sayi: 30
-  }
+  secim: { donem: null, kurulId: null, ders: '', sayi: 30 },
+  kullanici: null
 };
 
 const donemChips = document.getElementById('donemChips');
@@ -24,6 +24,39 @@ const dersChips = document.getElementById('dersChips');
 const sayiChips = document.querySelector('.chip-row-equal');
 const availableInfo = document.getElementById('availableInfo');
 const startBtn = document.getElementById('startBtn');
+const girisBtn = document.getElementById('girisBtn');
+const profilBtn = document.getElementById('profilBtn');
+const profilFoto = document.getElementById('profilFoto');
+const profilAd = document.getElementById('profilAd');
+
+// ============================================
+// AUTH
+// ============================================
+
+onAuthStateChanged(auth, (user) => {
+  state.kullanici = user;
+  if (user) {
+    girisBtn.hidden = true;
+    profilBtn.hidden = false;
+    profilFoto.src = user.photoURL || '';
+    profilAd.textContent = user.displayName?.split(' ')[0] || 'Profil';
+  } else {
+    girisBtn.hidden = false;
+    profilBtn.hidden = true;
+  }
+});
+
+girisBtn.addEventListener('click', async () => {
+  try {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+profilBtn.addEventListener('click', () => {
+  window.location.href = 'profil.html';
+});
 
 // ============================================
 // VERİ YÜKLEME
@@ -31,14 +64,10 @@ const startBtn = document.getElementById('startBtn');
 
 async function veriYukle() {
   try {
-    // Kurullar JSON'dan
     const kurullarRes = await fetch('data/kurullar.json');
     state.kurullarData = await kurullarRes.json();
-
-    // Sorular Firebase'den
     const snapshot = await getDocs(collection(db, 'sorular'));
     state.sorular = snapshot.docs.map(d => d.data());
-
     donemleriCiz();
   } catch (err) {
     availableInfo.textContent = 'Veri yüklenemedi.';
@@ -126,7 +155,7 @@ function chipOlustur(metin, onClick) {
 }
 
 // ============================================
-// SEÇİM MANTIĞI
+// SEÇİM
 // ============================================
 
 function donemSec(donemId) {
@@ -212,16 +241,16 @@ function durumGuncelle() {
 }
 
 startBtn.addEventListener('click', () => {
-  const secimData = {
-    donem: state.secim.donem,
-    kurulId: state.secim.kurulId,
-    ders: state.secim.ders,
-    sayi: state.secim.sayi,
-    sorular: state.sorular
-  };
-  const encoded = encodeURIComponent(JSON.stringify(secimData));
-  window.location.href = `sinav.html?data=${encoded}`;
+  sessionStorage.setItem('sinavSecim', JSON.stringify({
+    ...state.secim,
+    sorular: state.sorular,
+    kullaniciId: state.kullanici?.uid || null
+  }));
+  window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify({
+    ...state.secim,
+    sorular: state.sorular,
+    kullaniciId: state.kullanici?.uid || null
+  }))}`;
 });
-
 
 veriYukle();

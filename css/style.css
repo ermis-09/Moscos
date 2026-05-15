@@ -1257,4 +1257,268 @@ body {
 }
 
 
+/* ============================================
+   KULLANICI GİRİŞİ
+   ============================================ */
+
+.giris-btn {
+  position: absolute;
+  top: 28px;
+  right: 64px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent-soft);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(139, 38, 53, 0.10);
+}
+
+.giris-btn:hover {
+  background: var(--surface-elevated);
+  transform: translateY(-1px);
+}
+
+.profil-btn {
+  position: absolute;
+  top: 24px;
+  right: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent-soft);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px 6px 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(139, 38, 53, 0.10);
+  text-decoration: none;
+}
+
+.profil-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.15);
+}
+
+.profil-foto {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profil-ad {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* ============================================
+   PROFİL SAYFASI
+   ============================================ */
+
+.profil-frame .app-header {
+  text-align: center;
+}
+
+.profil-giris {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.profil-giris-kart {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 12px 30px rgba(139, 38, 53, 0.12);
+}
+
+.profil-giris-baslik {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.profil-giris-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  max-width: 280px;
+}
+
+.profil-main {
+  flex: 1;
+  padding: 16px 22px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+/* Kullanıcı kartı */
+.kullanici-kart {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.10);
+}
+
+.kullanici-foto {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--accent-soft);
+}
+
+.kullanici-bilgi {
+  flex: 1;
+  min-width: 0;
+}
+
+.kullanici-ad {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kullanici-email {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cikis-btn {
+  background: transparent;
+  border: 1.5px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.cikis-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* İstatistik bölümü */
+.istat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.istat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.istat-kart {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 14px 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.istat-num {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.istat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Geçmiş sınav kartları */
+.gecmis-kart {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.08);
+}
+
+.gecmis-kart-ust {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.gecmis-baslik {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.gecmis-tarih {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.gecmis-skor {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.gecmis-detay {
+  display: flex;
+  gap: 12px;
+}
+
+.gecmis-stat {
+  font-size: 13px;
+  font-weight: 600;
+}
 
