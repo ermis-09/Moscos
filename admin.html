@@ -136,18 +136,79 @@
 
       </section>
 
-      <!-- SORU LİSTESİ -->
       <section class="tab-content" id="tab-listele" hidden>
+  <div class="list-filters">
+    <input class="form-input" type="text" id="listKurul" placeholder="Kurul filtrele (örn. D2K5)" />
+  </div>
+  <div class="soru-listesi" id="soruListesi">
+    <p class="liste-bos">Yükleniyor...</p>
+  </div>
 
-        <div class="list-filters">
-          <input class="form-input" type="text" id="listKurul" placeholder="Kurul filtrele (örn. D2K5)" />
+  <!-- Düzenleme modalı -->
+  <div class="modal" id="soruModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Soruyu Düzenle</h3>
+        <button class="modal-kapat" id="modalKapat">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Dönem</label>
+          <div class="chip-row chip-row-equal" id="editDonem">
+            <button class="chip" data-value="2">D2</button>
+            <button class="chip" data-value="3">D3</button>
+            <button class="chip" data-value="4">D4</button>
+          </div>
         </div>
-
-        <div class="soru-listesi" id="soruListesi">
-          <p class="liste-bos">Yükleniyor...</p>
+        <div class="form-group">
+          <label class="form-label">Kurul</label>
+          <input class="form-input" type="text" id="editKurul" />
         </div>
+        <div class="form-group">
+          <label class="form-label">Ders</label>
+          <input class="form-input" type="text" id="editDers" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Öğrenim Hedefi <span class="optional">(opsiyonel)</span></label>
+          <input class="form-input" type="text" id="editHedef" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Soru</label>
+          <textarea class="form-input form-textarea" id="editSoru" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Seçenekler</label>
+          <div class="options-form">
+            <div class="option-row" data-harf="A"><span class="option-harf">A</span><input class="form-input" type="text" id="editA" /></div>
+            <div class="option-row" data-harf="B"><span class="option-harf">B</span><input class="form-input" type="text" id="editB" /></div>
+            <div class="option-row" data-harf="C"><span class="option-harf">C</span><input class="form-input" type="text" id="editC" /></div>
+            <div class="option-row" data-harf="D"><span class="option-harf">D</span><input class="form-input" type="text" id="editD" /></div>
+            <div class="option-row" data-harf="E"><span class="option-harf">E</span><input class="form-input" type="text" id="editE" /></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Doğru Cevap</label>
+          <div class="chip-row" id="editCevap">
+            <button class="chip" data-value="A">A</button>
+            <button class="chip" data-value="B">B</button>
+            <button class="chip" data-value="C">C</button>
+            <button class="chip" data-value="D">D</button>
+            <button class="chip" data-value="E">E</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Açıklama <span class="optional">(opsiyonel)</span></label>
+          <textarea class="form-input form-textarea" id="editAciklama" rows="2"></textarea>
+        </div>
+        <p class="form-msg" id="editMsg"></p>
+        <button class="start-btn" id="editKaydetBtn">
+          Güncelle <span class="start-btn-icon">✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
-      </section>
 
 	<!-- ÇIKMIŞ SORU EKLE -->
 <section class="tab-content" id="tab-cikmis" hidden>
@@ -222,6 +283,89 @@
   <button class="start-btn" id="cikmisKaydetBtn">
     Kaydet <span class="start-btn-icon">✓</span>
   </button>
+
+    <hr style="border: none; border-top: 1px solid var(--border-soft); margin: 24px 0;" />
+  
+  <h3 class="section-title" style="margin-bottom: 12px;">Kayıtlı Çıkmış Sorular</h3>
+  <div class="list-filters">
+    <input class="form-input" type="text" id="cikmisListKurul" placeholder="Kurul filtrele (örn. D2K5)" />
+  </div>
+  <div class="soru-listesi" id="cikmisListesi">
+    <p class="liste-bos">Yüklemek için filtrele</p>
+  </div>
+
+  <!-- Çıkmış düzenleme modalı -->
+  <div class="modal" id="cikmisModal" hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Çıkmış Soruyu Düzenle</h3>
+        <button class="modal-kapat" id="cikmisModalKapat">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Dönem</label>
+          <div class="chip-row chip-row-equal" id="ceditDonem">
+            <button class="chip" data-value="2">D2</button>
+            <button class="chip" data-value="3">D3</button>
+            <button class="chip" data-value="4">D4</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Yıl</label>
+          <input class="form-input" type="number" id="ceditYil" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sınav Adı</label>
+          <input class="form-input" type="text" id="ceditSinav" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kurul</label>
+          <input class="form-input" type="text" id="ceditKurul" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ders</label>
+          <input class="form-input" type="text" id="ceditDers" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sıra No</label>
+          <input class="form-input" type="number" id="ceditSira" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Soru</label>
+          <textarea class="form-input form-textarea" id="ceditSoru" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Seçenekler</label>
+          <div class="options-form">
+            <div class="option-row"><span class="option-harf">A</span><input class="form-input" type="text" id="ceditA" /></div>
+            <div class="option-row"><span class="option-harf">B</span><input class="form-input" type="text" id="ceditB" /></div>
+            <div class="option-row"><span class="option-harf">C</span><input class="form-input" type="text" id="ceditC" /></div>
+            <div class="option-row"><span class="option-harf">D</span><input class="form-input" type="text" id="ceditD" /></div>
+            <div class="option-row"><span class="option-harf">E</span><input class="form-input" type="text" id="ceditE" /></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Doğru Cevap</label>
+          <div class="chip-row" id="ceditCevap">
+            <button class="chip" data-value="A">A</button>
+            <button class="chip" data-value="B">B</button>
+            <button class="chip" data-value="C">C</button>
+            <button class="chip" data-value="D">D</button>
+            <button class="chip" data-value="E">E</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Açıklama <span class="optional">(opsiyonel)</span></label>
+          <textarea class="form-input form-textarea" id="ceditAciklama" rows="2"></textarea>
+        </div>
+        <p class="form-msg" id="ceditMsg"></p>
+        <button class="start-btn" id="ceditKaydetBtn">
+          Güncelle <span class="start-btn-icon">✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
 
 </section>
 
