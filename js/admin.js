@@ -353,28 +353,40 @@ let ceditAktifId = null;
 const ceditDonem = { val: null };
 const ceditCevap = { val: null };
 
+
 async function cikmisListele() {
   const listesi = document.getElementById('cikmisListesi');
   listesi.innerHTML = '<p class="liste-bos">Yükleniyor...</p>';
-  const kurulFiltre = document.getElementById('cikmisListKurul').value.trim().toUpperCase();
+
+  const donemFiltre = parseInt(document.getElementById('cikmisListDonem').value);
+  const yilFiltre = parseInt(document.getElementById('cikmisListYil').value);
 
   try {
-    const q = kurulFiltre
-      ? query(collection(db, 'cikmis_sorular'), where('kurulId', '==', kurulFiltre))
-      : query(collection(db, 'cikmis_sorular'));
+    const snapshot = await getDocs(collection(db, 'cikmis_sorular'));
 
-    const snapshot = await getDocs(q);
-    if (snapshot.empty) { listesi.innerHTML = '<p class="liste-bos">Henüz soru yok.</p>'; return; }
+    if (snapshot.empty) {
+      listesi.innerHTML = '<p class="liste-bos">Henüz soru yok.</p>';
+      return;
+    }
 
     listesi.innerHTML = '';
+    let sayac = 0;
+
     snapshot.forEach(docSnap => {
       const s = docSnap.data();
+
+      // Filtrele
+      if (donemFiltre && s.donem !== donemFiltre) return;
+      if (yilFiltre && s.yil !== yilFiltre) return;
+
+      sayac++;
       const kart = document.createElement('div');
       kart.className = 'soru-kart';
       kart.innerHTML = `
         <div class="soru-kart-meta">
           <span class="soru-kart-pill">${s.yil} · ${s.sinav}</span>
           <span class="soru-kart-pill ders">${s.ders}</span>
+          <span class="soru-kart-pill ders">Sıra: ${s.sira || '?'}</span>
         </div>
         <p class="soru-kart-metin">${kisalt(s.soru, 80)}</p>
         <div class="soru-kart-actions">
@@ -395,12 +407,21 @@ async function cikmisListele() {
 
       listesi.appendChild(kart);
     });
+
+    if (sayac === 0) {
+      listesi.innerHTML = '<p class="liste-bos">Filtreye uygun soru bulunamadı.</p>';
+    }
+
   } catch (err) {
     listesi.innerHTML = `<p class="liste-bos">Hata: ${err.message}</p>`;
   }
 }
 
-document.getElementById('cikmisListKurul').addEventListener('input', cikmisListele);
+// Event listeners
+document.getElementById('cikmisListDonem').addEventListener('change', cikmisListele);
+document.getElementById('cikmisListYil').addEventListener('input', cikmisListele);
+
+
 
 function cikmisModalAc(id, s) {
   ceditAktifId = id;

@@ -228,6 +228,16 @@
   color: var(--accent);
 }
 
+.action-btn.duzenle {
+  color: var(--accent);
+  border-color: var(--accent-soft);
+}
+
+.action-btn.duzenle:hover {
+  background: var(--surface-warm);
+  border-color: var(--accent);
+}
+
 .action-btn.sil {
   color: #8B3838;
   border-color: #D4A0A0;
@@ -237,6 +247,7 @@
   background: #F0CFCF;
   border-color: #B85454;
 }
+
 
 
 /* ============================================
@@ -345,12 +356,13 @@
 #editCevap .chip.active,
 #ceditDonem .chip.active,
 #ceditCevap .chip.active {
-
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--surface);
-  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.35);
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--surface) !important;
+  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.35) !important;
+  transform: translateY(-1px);
 }
+
 
 
 /* ============================================

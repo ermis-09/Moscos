@@ -155,9 +155,9 @@
         <div class="form-group">
           <label class="form-label">Dönem</label>
           <div class="chip-row chip-row-equal" id="editDonem">
+            <button class="chip" data-value="1">D1</button>
             <button class="chip" data-value="2">D2</button>
             <button class="chip" data-value="3">D3</button>
-            <button class="chip" data-value="4">D4</button>
           </div>
         </div>
         <div class="form-group">
@@ -287,9 +287,16 @@
     <hr style="border: none; border-top: 1px solid var(--border-soft); margin: 24px 0;" />
   
   <h3 class="section-title" style="margin-bottom: 12px;">Kayıtlı Çıkmış Sorular</h3>
-  <div class="list-filters">
-    <input class="form-input" type="text" id="cikmisListKurul" placeholder="Kurul filtrele (örn. D2K5)" />
-  </div>
+  <div class="list-filters" style="display: flex; gap: 8px;">
+  <select class="form-input" id="cikmisListDonem" style="flex:1;">
+    <option value="">Tüm dönemler</option>
+    <option value="2">Dönem 2</option>
+    <option value="3">Dönem 3</option>
+    <option value="4">Dönem 4</option>
+  </select>
+  <input class="form-input" type="number" id="cikmisListYil" placeholder="Yıl (örn. 2025)" style="flex:1;" />
+</div>
+
   <div class="soru-listesi" id="cikmisListesi">
     <p class="liste-bos">Yüklemek için filtrele</p>
   </div>
