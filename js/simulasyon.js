@@ -283,10 +283,11 @@ simFinishBtn.addEventListener('click', () => {
     tarih: new Date().toISOString(),
     mod: 'simulasyon'
   };
-  const encoded = encodeURIComponent(JSON.stringify(sonuc));
+  // URL yerine sadece sessionStorage kullan
   sessionStorage.setItem('sinavSonuc', JSON.stringify(sonuc));
-  window.location.href = `sonuc.html?data=${encoded}`;
+  window.location.href = 'sonuc.html';
 });
+
 
 simExitBtn.addEventListener('click', () => {
   if (Object.keys(sim.cevaplar).length > 0) {
