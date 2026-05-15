@@ -8,17 +8,19 @@
 // ============================================
 
 function sonucVeriAl() {
-  let json = null;
+  // Önce sessionStorage'a bak
+  const json = sessionStorage.getItem('sinavSonuc');
+  if (json) return JSON.parse(json);
+  
+  // Sonra URL'e bak
   const urlParams = new URLSearchParams(window.location.search);
   const urlData = urlParams.get('data');
-  if (urlData) {
-    json = decodeURIComponent(urlData);
-  } else {
-    json = sessionStorage.getItem('sinavSonuc');
-  }
-  if (!json) { window.location.href = 'index.html'; return null; }
-  return JSON.parse(json);
+  if (urlData) return JSON.parse(decodeURIComponent(urlData));
+  
+  window.location.href = 'index.html';
+  return null;
 }
+
 
 const sonuc = sonucVeriAl();
 if (!sonuc) throw new Error('Sonuç yok');
