@@ -88,10 +88,15 @@ function genelIstatCiz(sonuclar) {
   }
 
   const toplamSoru = sonuclar.reduce((acc, s) => acc + (s.toplam || 0), 0);
-  const ortalama = Math.round(
-    sonuclar.reduce((acc, s) => acc + (s.yuzde || 0), 0) / sonuclar.length
-  );
-  const enYuksek = Math.max(...sonuclar.map(s => s.yuzde || 0));
+  const buAy = sonuclar.filter(s => {
+  const tarih = new Date(s.tarih);
+  const simdi = new Date();
+  return tarih.getMonth() === simdi.getMonth() &&
+         tarih.getFullYear() === simdi.getFullYear();
+}).length;
+
+document.getElementById('enYuksek').textContent = buAy;
+
 
   document.getElementById('toplamSinav').textContent = sonuclar.length;
   document.getElementById('toplamSoru').textContent = toplamSoru;
@@ -164,8 +169,9 @@ function gecmisSinavCiz(sonuclar) {
     });
 
     const baslik = s.mod === 'simulasyon'
-      ? `${s.yil} · ${s.sinav || 'Simülasyon'}`
-      : `D${s.donem} · ${s.kurulId || ''}`;
+  ? `${s.yil} · ${s.kurulId || ''}`
+  : `D${s.donem} · ${s.kurulId || ''}`;
+
 
     const renk = s.yuzde >= 75 ? '#4A7A4A' : s.yuzde >= 50 ? '#8B2635' : '#8B3838';
 

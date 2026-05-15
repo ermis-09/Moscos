@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kurul-v2';
+const CACHE_NAME = 'moscos-v1';
 
 const CACHE_FILES = [
   '/',
@@ -7,6 +7,7 @@ const CACHE_FILES = [
   '/sonuc.html',
   '/admin.html',
   '/simulasyon.html',
+  '/profil.html',
   '/firebase.js',
   '/css/style.css',
   '/css/admin.css',
@@ -15,6 +16,7 @@ const CACHE_FILES = [
   '/js/sonuc.js',
   '/js/admin.js',
   '/js/simulasyon.js',
+  '/js/profil.js',
   '/data/kurullar.json'
 ];
 

@@ -1,5 +1,5 @@
 /* ============================================
-   ADMİN SAYFASI STİLLERİ
+   MOSCOS — Admin Sayfası
    ============================================ */
 
 .admin-frame .app-header {
@@ -26,7 +26,7 @@
 /* Sekmeler */
 .tab-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
@@ -41,13 +41,13 @@
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.08);
+  box-shadow: 0 4px 12px rgba(193, 83, 58, 0.08);
 }
 
 .tab.active {
   background: var(--accent);
-  color: var(--surface);
-  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.3);
+  color: white;
+  box-shadow: 0 6px 16px rgba(193, 83, 58, 0.3);
 }
 
 /* Form elemanları */
@@ -89,7 +89,7 @@
 .form-input:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(139, 38, 53, 0.12);
+  box-shadow: 0 0 0 4px rgba(193, 83, 58, 0.12);
 }
 
 .form-input::placeholder {
@@ -122,7 +122,7 @@
   height: 32px;
   border-radius: 50%;
   background: var(--accent);
-  color: var(--surface);
+  color: white;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 14px;
@@ -145,6 +145,22 @@
 
 .form-msg.success { color: #4A7A4A; }
 .form-msg.error { color: #8B3838; }
+
+/* Chip aktif durumu — admin */
+#adminDonem .chip.active,
+#cikmisDonem .chip.active,
+#adminCevap .chip.active,
+#cikmisCevap .chip.active,
+#editDonem .chip.active,
+#editCevap .chip.active,
+#ceditDonem .chip.active,
+#ceditCevap .chip.active {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: white !important;
+  box-shadow: 0 6px 16px rgba(193, 83, 58, 0.35) !important;
+  transform: translateY(-1px);
+}
 
 /* Soru listesi */
 .list-filters {
@@ -169,7 +185,7 @@
   background: var(--surface);
   border-radius: var(--radius-md);
   padding: 14px;
-  box-shadow: 0 4px 10px rgba(139, 38, 53, 0.08);
+  box-shadow: 0 4px 10px rgba(193, 83, 58, 0.08);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -183,7 +199,7 @@
 
 .soru-kart-pill {
   background: var(--accent);
-  color: var(--surface);
+  color: white;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -193,8 +209,8 @@
 }
 
 .soru-kart-pill.ders {
-  background: var(--accent-soft);
-  color: var(--text-primary);
+  background: var(--accent-light);
+  color: var(--accent);
 }
 
 .soru-kart-metin {
@@ -234,7 +250,7 @@
 }
 
 .action-btn.duzenle:hover {
-  background: var(--surface-warm);
+  background: var(--accent-light);
   border-color: var(--accent);
 }
 
@@ -248,7 +264,72 @@
   border-color: #B85454;
 }
 
+/* ============================================
+   AI PARSE (basitleştirildi)
+   ============================================ */
 
+.key-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding-left: 4px;
+  font-style: italic;
+}
+
+.onizleme-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 12px;
+  gap: 12px;
+}
+
+.onizleme-header .start-btn {
+  flex: 0 0 auto;
+  padding: 12px 18px;
+  font-size: 14px;
+}
+
+.onizleme-header .section-title {
+  margin: 0;
+}
+
+.ai-soru-kart {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(193, 83, 58, 0.08);
+  border-left: 3px solid var(--accent);
+}
+
+.ai-soru-metin {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.ai-secenekler {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.ai-secenek {
+  font-size: 13px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-gradient-start);
+}
+
+.ai-secenek.dogru {
+  background: #D4E8D4;
+  color: #2D4A2D;
+  font-weight: 600;
+}
 
 /* ============================================
    GİRİŞ EKRANI
@@ -257,11 +338,10 @@
 .login-screen {
   position: fixed;
   inset: 0;
-  background: var(--bg-primary);
+  background: var(--bg-gradient-start);
   background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(255, 244, 237, 0.5), transparent 60%),
-    radial-gradient(ellipse at 80% 100%, rgba(139, 38, 53, 0.15), transparent 60%),
-    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-deep) 100%);
+    radial-gradient(ellipse at 20% 0%, rgba(255, 240, 235, 0.8), transparent 60%),
+    linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -281,9 +361,8 @@
   width: 100%;
   max-width: 360px;
   box-shadow:
-    0 20px 50px rgba(139, 38, 53, 0.2),
-    0 8px 20px rgba(139, 38, 53, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+    0 20px 50px rgba(193, 83, 58, 0.2),
+    0 8px 20px rgba(193, 83, 58, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -324,13 +403,13 @@
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(139, 38, 53, 0.1);
+  box-shadow: 0 4px 12px rgba(193, 83, 58, 0.1);
   margin-top: 8px;
 }
 
 .login-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(139, 38, 53, 0.18);
+  box-shadow: 0 8px 20px rgba(193, 83, 58, 0.18);
   border-color: var(--accent-soft);
 }
 
@@ -341,30 +420,6 @@
   font-weight: 500;
 }
 
-/* Tab row 3'lü */
-.tab-row {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-
-/* Admin chip aktif durumu */
-#adminDonem .chip.active,
-#cikmisDonem .chip.active,
-#adminCevap .chip.active,
-#cikmisCevap .chip.active,
-#editDonem .chip.active,
-#editCevap .chip.active,
-#ceditDonem .chip.active,
-#ceditCevap .chip.active {
-  background: var(--accent) !important;
-  border-color: var(--accent) !important;
-  color: var(--surface) !important;
-  box-shadow: 0 6px 16px rgba(139, 38, 53, 0.35) !important;
-  transform: translateY(-1px);
-}
-
-
-
 /* ============================================
    DÜZENLEME MODALI
    ============================================ */
@@ -372,7 +427,7 @@
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(45, 20, 22, 0.6);
+  background: rgba(42, 21, 16, 0.6);
   z-index: 200;
   display: flex;
   align-items: flex-end;
@@ -422,7 +477,7 @@
 .modal-kapat {
   width: 32px;
   height: 32px;
-  background: var(--bg-primary);
+  background: var(--bg-gradient-start);
   border: none;
   border-radius: 50%;
   font-size: 14px;
@@ -435,7 +490,7 @@
 }
 
 .modal-kapat:hover {
-  background: var(--accent-soft);
+  background: var(--accent-light);
   color: var(--accent);
 }
 
@@ -445,6 +500,3 @@
   flex-direction: column;
   gap: 18px;
 }
-
-
-
