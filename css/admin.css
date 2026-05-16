@@ -14,7 +14,9 @@
   flex-direction: column;
   gap: 20px;
   overflow-y: auto;
+  padding-top: 20px;
 }
+
 
 /* ============================================
    SEKMELER
