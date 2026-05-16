@@ -524,9 +524,9 @@ body {
 
 .hologram-beam {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -100%);
   width: 220px;
   display: flex;
   flex-direction: column;
@@ -536,6 +536,7 @@ body {
 }
 
 .hologram-symbol {
+  order: 1;
   width: 100px;
   height: 100px;
   display: flex;
@@ -591,14 +592,16 @@ body {
 .hologram-rays {
   width: 3px;
   height: 120px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(200,119,26,0.3) 30%,
-    rgba(200,119,26,0.7) 100%
+  background: linear-gradient(to top,
+    rgba(200,119,26,0.7) 0%,
+    rgba(200,119,26,0.3) 70%,
+    transparent 100%
   );
   animation: hologramFlicker 4s infinite;
   position: relative;
+  order: 2;
 }
+
 
 /* Huzme yayılımı */
 .hologram-rays::before {
