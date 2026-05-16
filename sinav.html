@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#E8B8B0" />
-  <title>Sınav · Kurul Soru Bankası</title>
+  <meta name="theme-color" content="#1C1A15" />
+  <title>Sınav · Moscos</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="app-frame exam-frame">
 
-    <!-- Üst bilgi: ilerleme + çıkış -->
     <header class="exam-header">
-      <button class="exam-exit" id="exitBtn" aria-label="Çıkış">←</button>
+      <button class="exam-exit" id="exitBtn">←</button>
       <div class="exam-progress">
         <span class="exam-counter" id="counter">0 / 0</span>
         <div class="progress-bar">
@@ -26,42 +24,27 @@
       </div>
     </header>
 
-    <!-- Soru gövdesi -->
     <main class="exam-main">
-
       <div class="question-meta">
         <span class="meta-pill" id="metaDers">—</span>
         <span class="meta-hedef" id="metaHedef"></span>
       </div>
-
       <h2 class="question-text" id="questionText">Yükleniyor...</h2>
-
-      <div class="options" id="options">
-        <!-- şıklar JS ile -->
-      </div>
-
+      <div class="options" id="options"></div>
       <div class="rationale" id="rationale" hidden>
         <p class="rationale-label">Açıklama</p>
         <p class="rationale-text" id="rationaleText"></p>
       </div>
-
     </main>
 
-    <!-- Alt navigasyon -->
     <footer class="exam-footer">
-      <button class="nav-btn nav-prev" id="prevBtn">
-        <span>←</span> Önceki
-      </button>
-      <button class="nav-btn nav-next" id="nextBtn">
-        Sonraki <span>→</span>
-      </button>
-      <button class="nav-btn nav-finish" id="finishBtn" hidden>
-        Sınavı Bitir
-      </button>
+      <button class="nav-btn nav-prev" id="prevBtn">← Önceki</button>
+      <button class="nav-btn nav-next" id="nextBtn">Sonraki →</button>
+      <button class="nav-btn nav-finish" id="finishBtn" hidden>Sınavı Bitir</button>
     </footer>
 
   </div>
 
-  <script src="js/sinav.js"></script>
+  <script type="module" src="js/sinav.js"></script>
 </body>
 </html>

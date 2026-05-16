@@ -131,7 +131,7 @@ function updatePositions() {
     btn.style.top = y + 'px';
     // Yazıyı oku olacak şekilde döndür
     const inner = btn.querySelector('.r-orbit-inner');
-    inner.style.transform = `rotate(${-totalAngle}deg)`;
+    inner.style.transform = `rotate(${totalAngle}deg)`;
   });
 }
 
