@@ -198,13 +198,16 @@ function kartlariCiz(items, onSecim) {
     `;
 
     btn.addEventListener('click', (e) => {
-      if (isDragging) return;
-      e.stopPropagation();
-      orbitBtns.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      kartıEnUsteGetir(i);
-      setTimeout(() => onSecim(item), 400);
-    });
+  if (isDragging) return;
+  e.stopPropagation();
+  orbitBtns.forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  
+  // Önce seçimi yap, sonra animasyon
+  onSecim(item);
+  kartıEnUsteGetir(i);
+});
+
 
     wheel.insertBefore(btn, centerBtn);
     orbitBtns.push(btn);

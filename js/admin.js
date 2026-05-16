@@ -545,3 +545,56 @@ function formuSifirla() {
   form.donem = null;
   form.cevap = null;
 }
+
+
+// ============================================
+// FLASHCARD EKLE
+// ============================================
+
+const flashForm = { donem: null };
+
+document.getElementById('flashDonem').querySelectorAll('.chip').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('flashDonem').querySelectorAll('.chip')
+      .forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    flashForm.donem = parseInt(btn.dataset.value);
+  });
+});
+
+document.getElementById('flashKaydetBtn').addEventListener('click', async () => {
+  const msg = document.getElementById('flashMsg');
+  const kurul = document.getElementById('flashKurul').value.trim().toUpperCase();
+  const ders = document.getElementById('flashDers').value.trim();
+  const onYuz = document.getElementById('flashOnYuz').value.trim();
+  const arkaYuz = document.getElementById('flashArkaYuz').value.trim();
+
+  if (!flashForm.donem) { mesajGoster(msg, 'Dönem seç!', 'error'); return; }
+  if (!kurul) { mesajGoster(msg, 'Kurul gir!', 'error'); return; }
+  if (!ders) { mesajGoster(msg, 'Ders gir!', 'error'); return; }
+  if (!onYuz) { mesajGoster(msg, 'Ön yüz boş!', 'error'); return; }
+  if (!arkaYuz) { mesajGoster(msg, 'Arka yüz boş!', 'error'); return; }
+
+  try {
+    document.getElementById('flashKaydetBtn').disabled = true;
+    await addDoc(collection(db, 'flashcardlar'), {
+      donem: flashForm.donem,
+      kurulId: kurul,
+      ders,
+      onYuz,
+      arkaYuz,
+      olusturulmaTarihi: new Date().toISOString()
+    });
+    mesajGoster(msg, '✓ Flashcard kaydedildi!', 'success');
+    document.getElementById('flashKurul').value = '';
+    document.getElementById('flashDers').value = '';
+    document.getElementById('flashOnYuz').value = '';
+    document.getElementById('flashArkaYuz').value = '';
+    document.getElementById('flashDonem').querySelectorAll('.chip').forEach(b => b.classList.remove('active'));
+    flashForm.donem = null;
+  } catch (err) {
+    mesajGoster(msg, 'Hata: ' + err.message, 'error');
+  } finally {
+    document.getElementById('flashKaydetBtn').disabled = false;
+  }
+});

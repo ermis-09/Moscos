@@ -1623,3 +1623,277 @@ body {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ============================================
+   FLASHCARD SAYFASI
+   ============================================ */
+
+.flash-frame {
+  background: var(--bg);
+}
+
+.flash-counter {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dim);
+}
+
+.flash-progress {
+  height: 3px;
+  background: rgba(200,119,26,0.12);
+  flex-shrink: 0;
+}
+
+.flash-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.flash-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 20px 24px;
+  overflow: hidden;
+}
+
+/* Deste arka kartları */
+.card-stack {
+  position: absolute;
+  width: 320px;
+}
+
+.card-back {
+  position: absolute;
+  width: 320px;
+  height: 420px;
+  border-radius: 20px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+}
+
+.card-back-1 {
+  transform: rotate(2deg) translateY(6px);
+  opacity: 0.6;
+}
+
+.card-back-2 {
+  transform: rotate(-3deg) translateY(10px);
+  opacity: 0.35;
+}
+
+/* Ana kart */
+.flash-card {
+  width: 320px;
+  height: 420px;
+  perspective: 1200px;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+  touch-action: none;
+  user-select: none;
+}
+
+.flash-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 20px;
+}
+
+.flash-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.flash-card-front,
+.flash-card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 28px;
+  gap: 20px;
+  background: var(--bg2);
+  border: 1.5px solid var(--border);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.4),
+    0 4px 16px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(200,119,26,0.1);
+}
+
+.flash-card-back {
+  transform: rotateY(180deg);
+  background: var(--bg3);
+  border-color: var(--accent);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.4),
+    0 0 30px rgba(200,119,26,0.15),
+    inset 0 1px 0 rgba(200,119,26,0.15);
+}
+
+.card-side-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--metal-light);
+  position: absolute;
+  top: 20px;
+  left: 28px;
+}
+
+.card-side-label.back {
+  color: var(--accent);
+}
+
+.card-main-text {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--paper);
+  text-align: center;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.card-tap-hint {
+  position: absolute;
+  bottom: 20px;
+  font-size: 10px;
+  color: var(--metal);
+  letter-spacing: 0.1em;
+  font-style: italic;
+}
+
+/* Kaydırma renk overlay */
+.flash-card.swiping-right .flash-card-front,
+.flash-card.swiping-right .flash-card-back {
+  border-color: #6BBF6B;
+  box-shadow: 0 20px 60px rgba(74,122,74,0.3), 0 0 40px rgba(74,122,74,0.2);
+}
+
+.flash-card.swiping-left .flash-card-front,
+.flash-card.swiping-left .flash-card-back {
+  border-color: #C46060;
+  box-shadow: 0 20px 60px rgba(139,56,56,0.3), 0 0 40px rgba(139,56,56,0.2);
+}
+
+.flash-card.swiping-up .flash-card-front,
+.flash-card.swiping-up .flash-card-back {
+  border-color: #6080C4;
+  box-shadow: 0 20px 60px rgba(60,80,160,0.3), 0 0 40px rgba(60,80,160,0.2);
+}
+
+/* Swipe hint */
+.swipe-hint {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.swipe-hint.visible {
+  opacity: 1;
+}
+
+.hint-left, .hint-right, .hint-up {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+}
+
+.hint-left { color: #C46060; }
+.hint-right { color: #6BBF6B; }
+.hint-up { color: #6080C4; }
+
+/* Alt istatistikler */
+.flash-footer {
+  padding: 12px 24px 28px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+}
+
+.flash-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.fstat {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.fstat.kolay { color: #6BBF6B; }
+.fstat.atla { color: #6080C4; }
+.fstat.zor { color: #C46060; }
+
+/* Sonuç ekranı */
+.flash-sonuc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  gap: 24px;
+  text-align: center;
+}
+
+.flash-sonuc-baslik {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--paper);
+  letter-spacing: -0.02em;
+}
+
+.flash-sonuc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.flash-sonuc-kart {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.flash-sonuc-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.flash-sonuc-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--metal-light);
+}
