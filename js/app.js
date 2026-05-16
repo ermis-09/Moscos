@@ -480,7 +480,8 @@ function donemleriGoster() {
       sayi: state.sorular.filter(s => s.donem === d.id).length
     }));
 
-  kartlariCiz(donemler, (item) => {
+  kartlariCiz([...donemler, GERI_BTN], (item) => {
+    if (item.geri) { geriGit(); return; }
     state.secim.donem = item.id;
     kurullariGoster(item.id);
     breadcrumbGuncelle();
