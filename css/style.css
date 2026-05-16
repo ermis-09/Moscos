@@ -381,6 +381,21 @@ html, body {
     inset 0 2px 0 rgba(255,255,255,0.2);
 }
 
+.center-btn.basla {
+  background: radial-gradient(circle at 35% 35%, var(--accent2), var(--accent));
+  border-color: var(--paper);
+  box-shadow:
+    0 8px 40px rgba(200,119,26,0.6),
+    0 0 0 6px rgba(200,119,26,0.15);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 8px 40px rgba(200,119,26,0.6), 0 0 0 6px rgba(200,119,26,0.15); }
+  50% { box-shadow: 0 8px 40px rgba(200,119,26,0.8), 0 0 0 12px rgba(200,119,26,0.1); }
+}
+
+
 .r-center-m {
   font-family: var(--font-display);
   font-size: 30px;
@@ -521,9 +536,12 @@ html, body {
 .exam-frame {
   background: var(--bg);
   background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(200,119,26,0.025) 40px, rgba(200,119,26,0.025) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(200,119,26,0.025) 40px, rgba(200,119,26,0.025) 41px);
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(200,119,26,0.02) 40px, rgba(200,119,26,0.02) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(200,119,26,0.02) 40px, rgba(200,119,26,0.02) 41px);
+  max-width: 440px;
+  margin: 0 auto;
 }
+
 
 .exam-header {
   display: flex;

@@ -1,6 +1,6 @@
 /* ============================================
    MOSCOS — Ana Sayfa
-   Retro Çark UI + Firebase
+   Retro Çark UI v2.0
    ============================================ */
 
 import { db, auth } from '../firebase.js';
@@ -29,17 +29,6 @@ const state = {
   }
 };
 
-// Çark state
-let currentAngle = 0;
-let targetAngle = 0;
-let animFrame = null;
-let isDragging = false;
-let dragStartAngle = 0;
-let dragStartRot = 0;
-let orbitBtns = [];
-
-const RADIUS = 105;
-
 // ============================================
 // DOM
 // ============================================
@@ -47,14 +36,15 @@ const RADIUS = 105;
 const wheel = document.getElementById('wheel');
 const centerBtn = document.getElementById('centerBtn');
 const centerHint = document.getElementById('centerHint');
-const breadcrumb = document.getElementById('breadcrumb');
-const breadcrumbInner = document.getElementById('breadcrumbInner');
 const infoText = document.getElementById('infoText');
 const footerBtns = document.getElementById('footerBtns');
 const startBtn = document.getElementById('startBtn');
+const breadcrumb = document.getElementById('breadcrumb');
+const breadcrumbInner = document.getElementById('breadcrumbInner');
 const girisBtn = document.getElementById('girisBtn');
 const profilBtn = document.getElementById('profilBtn');
 const profilFoto = document.getElementById('profilFoto');
+const profilAd = document.getElementById('profilAd');
 
 // ============================================
 // AUTH
@@ -66,6 +56,7 @@ onAuthStateChanged(auth, (user) => {
     girisBtn.hidden = true;
     profilBtn.hidden = false;
     profilFoto.src = user.photoURL || '';
+    profilAd.textContent = user.displayName?.split(' ')[0] || 'Profil';
   } else {
     girisBtn.hidden = false;
     profilBtn.hidden = true;
@@ -74,7 +65,7 @@ onAuthStateChanged(auth, (user) => {
 
 girisBtn.addEventListener('click', async () => {
   try { await signInWithPopup(auth, new GoogleAuthProvider()); }
-  catch (e) { console.error(e); }
+  catch (err) { console.error(err); }
 });
 
 profilBtn.addEventListener('click', () => { window.location.href = 'profil.html'; });
@@ -84,31 +75,61 @@ profilBtn.addEventListener('click', () => { window.location.href = 'profil.html'
 // ============================================
 
 async function veriYukle() {
+  let yukleniyorAnim = true;
+  let yuklenmeAcisi = 0;
+
+  function yuklenmeAnimasyonu() {
+    if (!yukleniyorAnim) return;
+    yuklenmeAcisi += 0.8;
+    currentAngle = yuklenmeAcisi;
+    targetAngle = yuklenmeAcisi;
+    const centerM = document.querySelector('.center-m');
+    if (centerM) centerM.style.transform = `rotate(${yuklenmeAcisi}deg)`;
+    requestAnimationFrame(yuklenmeAnimasyonu);
+  }
+  yuklenmeAnimasyonu();
+
   try {
-    const kurullarRes = await fetch('data/kurullar.json');
+    const [kurullarRes, soruSnap, cikmisSnap] = await Promise.all([
+      fetch('data/kurullar.json'),
+      getDocs(collection(db, 'sorular')),
+      getDocs(collection(db, 'cikmis_sorular'))
+    ]);
     state.kurullarData = await kurullarRes.json();
-    const snap1 = await getDocs(collection(db, 'sorular'));
-    state.sorular = snap1.docs.map(d => d.data());
-    const snap2 = await getDocs(collection(db, 'cikmis_sorular'));
-    state.cikmislar = snap2.docs.map(d => d.data());
+    state.sorular = soruSnap.docs.map(d => d.data());
+    state.cikmislar = cikmisSnap.docs.map(d => d.data());
   } catch (err) {
     console.error(err);
+  } finally {
+    yukleniyorAnim = false;
+    const centerM = document.querySelector('.center-m');
+    if (centerM) centerM.style.transform = '';
   }
 }
 
 // ============================================
-// ÇARK ANİMASYON
+// ÇARK MEKANİZMASI
 // ============================================
+
+const RADIUS = 105;
+let currentAngle = 0;
+let targetAngle = 0;
+let animFrame = null;
+let isDragging = false;
+let orbitBtns = [];
+let isOpen = false;
+let mevcutItems = [];
+let mevcutOnSecim = null;
 
 function animate() {
   const diff = targetAngle - currentAngle;
-  currentAngle += diff * 0.12;
-  updatePositions();
+  currentAngle += diff * 0.14;
   if (Math.abs(diff) > 0.05) {
+    guncellePozisyonlar();
     animFrame = requestAnimationFrame(animate);
   } else {
     currentAngle = targetAngle;
-    updatePositions();
+    guncellePozisyonlar();
     animFrame = null;
   }
 }
@@ -118,54 +139,278 @@ function startAnimate() {
   animFrame = requestAnimationFrame(animate);
 }
 
-function updatePositions() {
+function guncellePozisyonlar() {
+  const n = orbitBtns.length;
+  if (n === 0) return;
   orbitBtns.forEach((btn, i) => {
-    const n = orbitBtns.length;
     const baseAngle = (360 / n) * i;
     const totalAngle = baseAngle + currentAngle;
     const rad = (totalAngle * Math.PI) / 180;
-    const cx = 145, cy = 145;
+    const cx = 145;
+    const cy = 145;
     const x = cx + RADIUS * Math.sin(rad) - 38;
     const y = cy - RADIUS * Math.cos(rad) - 38;
     btn.style.left = x + 'px';
     btn.style.top = y + 'px';
-    // Yazıyı oku olacak şekilde döndür
-    const inner = btn.querySelector('.r-orbit-inner');
+    btn.style.transform = 'none';
+    const inner = btn.querySelector('.orbit-btn-inner');
     inner.style.transform = `rotate(${totalAngle}deg)`;
   });
 }
+
+function kartıEnUsteGetir(index) {
+  const n = orbitBtns.length;
+  const baseAngle = (360 / n) * index;
+  const fark = (((-baseAngle - currentAngle) % 360) + 360) % 360;
+  targetAngle = currentAngle + (fark > 180 ? fark - 360 : fark);
+  startAnimate();
+}
+
+function kartlariCiz(items, onSecim) {
+  orbitBtns.forEach(b => b.remove());
+  orbitBtns = [];
+  mevcutItems = items;
+  mevcutOnSecim = onSecim;
+
+  items.forEach((item, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'orbit-btn';
+    btn.dataset.id = String(item.id);
+    btn.innerHTML = `
+      <div class="orbit-btn-inner">
+        <span class="orbit-btn-text">${item.label}</span>
+        ${item.sayi !== undefined ? `<span class="orbit-btn-badge">${item.sayi}</span>` : ''}
+      </div>
+    `;
+
+    btn.addEventListener('click', (e) => {
+      if (isDragging) return;
+      e.stopPropagation();
+      orbitBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      kartıEnUsteGetir(i);
+      setTimeout(() => onSecim(item), 400);
+    });
+
+    wheel.insertBefore(btn, centerBtn);
+    orbitBtns.push(btn);
+
+    btn.style.opacity = '0';
+    btn.style.pointerEvents = 'none';
+    setTimeout(() => {
+      btn.style.transition = 'opacity 0.3s, background 0.25s, border-color 0.25s, box-shadow 0.25s';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    }, i * 70 + 50);
+  });
+
+  guncellePozisyonlar();
+}
+
+function kartlariGizle() {
+  orbitBtns.forEach((btn, i) => {
+    setTimeout(() => {
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+    }, i * 40);
+  });
+  setTimeout(() => {
+    orbitBtns.forEach(b => b.remove());
+    orbitBtns = [];
+  }, orbitBtns.length * 40 + 300);
+}
+
+// ============================================
+// ÇARK SÜRÜKLEME
+// ============================================
+
+function getAngleFromCenter(x, y) {
+  const rect = wheel.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  return Math.atan2(x - cx, -(y - cy)) * (180 / Math.PI);
+}
+
+let dragStartAngle = 0;
+let dragStartRot = 0;
+
+wheel.addEventListener('mousedown', (e) => {
+  if (e.target === centerBtn || centerBtn.contains(e.target)) return;
+  if (!isOpen) return;
+  isDragging = false;
+  dragStartAngle = getAngleFromCenter(e.clientX, e.clientY);
+  dragStartRot = currentAngle;
+  if (animFrame) cancelAnimationFrame(animFrame);
+
+  const onMove = (e) => {
+    isDragging = true;
+    const angle = getAngleFromCenter(e.clientX, e.clientY);
+    currentAngle = dragStartRot + (angle - dragStartAngle);
+    targetAngle = currentAngle;
+    guncellePozisyonlar();
+    wheel.style.cursor = 'grabbing';
+  };
+
+  const onUp = () => {
+    setTimeout(() => { isDragging = false; }, 50);
+    wheel.style.cursor = 'grab';
+    window.removeEventListener('mousemove', onMove);
+    window.removeEventListener('mouseup', onUp);
+  };
+
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+});
+
+let touchStartAngle = 0;
+let touchStartRot = 0;
+
+wheel.addEventListener('touchstart', (e) => {
+  if (!isOpen) return;
+  if (centerBtn.contains(e.target)) return;
+  const touch = e.touches[0];
+  touchStartAngle = getAngleFromCenter(touch.clientX, touch.clientY);
+  touchStartRot = currentAngle;
+  if (animFrame) cancelAnimationFrame(animFrame);
+}, { passive: true });
+
+wheel.addEventListener('touchmove', (e) => {
+  if (!isOpen) return;
+  isDragging = true;
+  const touch = e.touches[0];
+  const angle = getAngleFromCenter(touch.clientX, touch.clientY);
+  currentAngle = touchStartRot + (angle - touchStartAngle);
+  targetAngle = currentAngle;
+  guncellePozisyonlar();
+}, { passive: true });
+
+wheel.addEventListener('touchend', () => {
+  setTimeout(() => { isDragging = false; }, 80);
+});
+
+// Çift tıkla geri
+let sonTik = 0;
+wheel.addEventListener('click', (e) => {
+  if (e.target === centerBtn || centerBtn.contains(e.target)) return;
+  const simdi = Date.now();
+  if (simdi - sonTik < 350) {
+    geriGit();
+  }
+  sonTik = simdi;
+});
 
 // ============================================
 // MERKEZ BUTON
 // ============================================
 
-centerBtn.addEventListener('click', () => {
-  if (isDragging) return;
-  if (state.adim === 'kapali') {
-    menuyuAc();
+centerBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  if (centerBtn.classList.contains('basla')) {
+    startBtn.click();
+    return;
+  }
+
+  if (!isOpen) {
+    menuAc();
   } else {
-    geriGit();
+    if (state.adim === 'mod') {
+      menuKapat();
+    } else {
+      geriGit();
+    }
   }
 });
 
-function menuyuAc() {
-  state.adim = 'mod';
+function menuAc() {
+  isOpen = true;
   centerBtn.classList.add('open');
   centerHint.textContent = 'kapat';
-  infoText.textContent = 'Bir mod seç';
-  infoText.classList.remove('active');
+  state.adim = 'mod';
+  modlariGoster();
+  breadcrumb.hidden = true;
+}
 
-  const modlar = [
+function menuKapat() {
+  isOpen = false;
+  centerBtn.classList.remove('open');
+  centerBtn.classList.remove('basla');
+  centerBtn.querySelector('.center-m').textContent = 'M';
+  centerHint.textContent = 'aç';
+  state.adim = 'kapali';
+  state.secim = { mod: null, donem: null, kurulId: null, ders: null, yil: null, sinav: null };
+  kartlariGizle();
+  infoText.textContent = 'Çarkı döndür veya ortaya bas';
+  infoText.classList.remove('ready');
+  footerBtns.hidden = true;
+  breadcrumb.hidden = true;
+}
+
+function geriGit() {
+  centerNormaleGeri();
+  switch (state.adim) {
+    case 'donem':
+      state.secim.donem = null;
+      state.adim = 'mod';
+      modlariGoster();
+      break;
+    case 'kurul':
+      state.secim.kurulId = null;
+      state.adim = 'donem';
+      if (state.secim.mod === 'simulasyon') {
+        yillariGoster();
+      } else {
+        donemleriGoster();
+      }
+      break;
+    case 'ders':
+      state.secim.ders = null;
+      state.adim = 'kurul';
+      kurullariGoster(state.secim.donem);
+      break;
+    case 'sinav_sec':
+      state.secim.sinav = null;
+      state.adim = 'kurul';
+      sinavlariGoster(state.secim.yil);
+      break;
+  }
+  footerBtns.hidden = true;
+  breadcrumbGuncelle();
+}
+
+function centerBaslaYap() {
+  centerBtn.classList.add('basla');
+  centerBtn.querySelector('.center-m').textContent = '▶';
+  centerHint.textContent = 'başla';
+  footerBtns.hidden = true;
+}
+
+function centerNormaleGeri() {
+  centerBtn.classList.remove('basla');
+  centerBtn.querySelector('.center-m').textContent = 'M';
+  centerHint.textContent = 'kapat';
+}
+
+// ============================================
+// ADIMLAR
+// ============================================
+
+function modlariGoster() {
+  state.adim = 'mod';
+  infoText.textContent = 'Mod seç';
+  infoText.classList.remove('ready');
+  footerBtns.hidden = true;
+  centerNormaleGeri();
+
+  kartlariCiz([
     { id: 'sinav', label: 'Sınav' },
     { id: 'flashcard', label: 'Flash\ncard' },
     { id: 'simulasyon', label: 'Simü\nlasyon' }
-  ];
-
-  kartlariCiz(modlar, (item) => {
+  ], (item) => {
     state.secim.mod = item.id;
     if (item.id === 'simulasyon') {
-      state.adim = 'sim-yil';
-      simYillariGoster();
+      state.adim = 'kurul';
+      yillariGoster();
     } else {
       state.adim = 'donem';
       donemleriGoster();
@@ -174,73 +419,32 @@ function menuyuAc() {
   });
 }
 
-function geriGit() {
-  switch (state.adim) {
-    case 'mod':
-      state.adim = 'kapali';
-      state.secim = { mod: null, donem: null, kurulId: null, ders: null, yil: null, sinav: null };
-      centerBtn.classList.remove('open');
-      centerHint.textContent = 'aç';
-      infoText.textContent = 'Çarkı döndür veya ortaya bas';
-      infoText.classList.remove('active');
-      orbitlariTemizle();
-      footerBtns.hidden = true;
-      breadcrumb.hidden = true;
-      break;
-    case 'donem':
-      state.secim.donem = null;
-      state.adim = 'mod';
-      menuyuAc();
-      break;
-    case 'kurul':
-      state.secim.kurulId = null;
-      state.adim = 'donem';
-      donemleriGoster();
-      break;
-    case 'ders':
-      state.secim.ders = null;
-      state.adim = 'kurul';
-      kurullariGoster(state.secim.donem);
-      footerBtns.hidden = true;
-      break;
-    case 'sim-yil':
-      state.secim.yil = null;
-      state.adim = 'mod';
-      menuyuAc();
-      break;
-    case 'sim-sinav':
-      state.secim.sinav = null;
-      state.adim = 'sim-yil';
-      simYillariGoster();
-      footerBtns.hidden = true;
-      break;
-  }
-  breadcrumbGuncelle();
-}
-
-// ============================================
-// FİLTRE ADIMLARI
-// ============================================
-
 function donemleriGoster() {
+  state.adim = 'donem';
+  infoText.textContent = 'Dönem seç';
+  infoText.classList.remove('ready');
+
   const donemIdleri = new Set(state.sorular.map(s => s.donem));
   const donemler = state.kurullarData.donemler
     .filter(d => donemIdleri.has(d.id))
     .map(d => ({
       id: d.id,
       label: `D${d.id}`,
-      badge: state.sorular.filter(s => s.donem === d.id).length
+      sayi: state.sorular.filter(s => s.donem === d.id).length
     }));
 
   kartlariCiz(donemler, (item) => {
     state.secim.donem = item.id;
-    state.adim = 'kurul';
     kurullariGoster(item.id);
     breadcrumbGuncelle();
   });
 }
 
 function kurullariGoster(donemId) {
+  state.adim = 'kurul';
+  infoText.textContent = 'Kurul seç';
+  infoText.classList.remove('ready');
+
   const donem = state.kurullarData.donemler.find(d => d.id === donemId);
   const kurulIdleri = new Set(
     state.sorular.filter(s => s.donem === donemId).map(s => s.kurulId)
@@ -250,18 +454,21 @@ function kurullariGoster(donemId) {
     .map(k => ({
       id: k.id,
       label: k.ad,
-      badge: state.sorular.filter(s => s.donem === donemId && s.kurulId === k.id).length
+      sayi: state.sorular.filter(s => s.donem === donemId && s.kurulId === k.id).length
     }));
 
   kartlariCiz(kurullar, (item) => {
     state.secim.kurulId = item.id;
-    state.adim = 'ders';
     dersleriGoster(donemId, item.id);
     breadcrumbGuncelle();
   });
 }
 
 function dersleriGoster(donemId, kurulId) {
+  state.adim = 'ders';
+  infoText.textContent = 'Ders seç';
+  infoText.classList.remove('ready');
+
   const dersler = [...new Set(
     state.sorular
       .filter(s => s.donem === donemId && s.kurulId === kurulId)
@@ -269,115 +476,68 @@ function dersleriGoster(donemId, kurulId) {
   )].map(ders => ({
     id: ders,
     label: ders,
-    badge: state.sorular.filter(s => s.donem === donemId && s.kurulId === kurulId && s.ders === ders).length
+    sayi: state.sorular.filter(s => s.donem === donemId && s.kurulId === kurulId && s.ders === ders).length
   }));
 
   const tumDersler = {
     id: '',
     label: 'Tümü',
-    badge: state.sorular.filter(s => s.donem === donemId && s.kurulId === kurulId).length,
-    tumDersler: true
+    sayi: state.sorular.filter(s => s.donem === donemId && s.kurulId === kurulId).length
   };
 
   kartlariCiz([tumDersler, ...dersler], (item) => {
     state.secim.ders = item.id;
-    orbitBtns.forEach(b => b.classList.toggle('selected', b.dataset.id === item.id));
-    dersSec();
-  });
-}
-
-function dersSec() {
-  const uygun = uygunSorulariSay();
-  if (uygun > 0) {
-    infoText.textContent = `${uygun} soru hazır`;
-    infoText.classList.add('active');
-    footerBtns.hidden = false;
-    startBtn.textContent = state.secim.mod === 'sinav' ? 'Sınava Başla →' : 'Flashcard Başla →';
-  } else {
-    infoText.textContent = 'Bu seçimde soru yok';
-    infoText.classList.remove('active');
-    footerBtns.hidden = true;
-  }
-}
-
-// Simülasyon akışı
-function simYillariGoster() {
-  const yillar = [...new Set(state.cikmislar.map(s => s.yil))].sort((a, b) => b - a);
-  const items = yillar.map(y => ({ id: y, label: String(y) }));
-
-  kartlariCiz(items, (item) => {
-    state.secim.yil = item.id;
-    state.adim = 'sim-sinav';
-    simSinavlariGoster(item.id);
+    const uygun = uygunSorulariSay();
+    infoText.textContent = `${uygun} soru`;
+    infoText.classList.add('ready');
+    centerBaslaYap();
     breadcrumbGuncelle();
   });
 }
 
-function simSinavlariGoster(yil) {
+function yillariGoster() {
+  state.adim = 'kurul';
+  infoText.textContent = 'Yıl seç';
+  infoText.classList.remove('ready');
+
+  const yillar = [...new Set(state.cikmislar.map(s => s.yil))]
+    .sort((a, b) => b - a)
+    .map(yil => ({
+      id: yil,
+      label: String(yil),
+      sayi: state.cikmislar.filter(s => s.yil === yil).length
+    }));
+
+  kartlariCiz(yillar, (item) => {
+    state.secim.yil = item.id;
+    sinavlariGoster(item.id);
+    breadcrumbGuncelle();
+  });
+}
+
+function sinavlariGoster(yil) {
+  state.adim = 'sinav_sec';
+  infoText.textContent = 'Sınav seç';
+  infoText.classList.remove('ready');
+
   const sinavlar = [...new Set(
     state.cikmislar.filter(s => s.yil === yil).map(s => s.sinav)
-  )];
-  const items = sinavlar.map(s => ({
-    id: s,
-    label: s,
-    badge: state.cikmislar.filter(c => c.yil === yil && c.sinav === s).length
+  )].map(sinav => ({
+    id: sinav,
+    label: sinav,
+    sayi: state.cikmislar.filter(s => s.yil === yil && s.sinav === sinav).length
   }));
 
-  kartlariCiz(items, (item) => {
+  kartlariCiz(sinavlar, (item) => {
     state.secim.sinav = item.id;
-    orbitBtns.forEach(b => b.classList.toggle('selected', b.dataset.id === item.id));
-
-    const uygun = state.cikmislar.filter(
+    const sayi = state.cikmislar.filter(
       s => s.yil === state.secim.yil && s.sinav === item.id
     ).length;
-
-    infoText.textContent = `${uygun} soru hazır`;
-    infoText.classList.add('active');
-    footerBtns.hidden = false;
-    startBtn.textContent = 'Simülasyona Başla →';
+    infoText.textContent = `${sayi} soru`;
+    infoText.classList.add('ready');
+    centerBaslaYap();
     breadcrumbGuncelle();
   });
-}
-
-// ============================================
-// KARTLARI ÇİZ
-// ============================================
-
-function kartlariCiz(items, onSecim) {
-  orbitlariTemizle();
-  footerBtns.hidden = true;
-  infoText.classList.remove('active');
-
-  items.forEach((item, i) => {
-    const btn = document.createElement('div');
-    btn.className = 'r-orbit-btn';
-    btn.dataset.id = String(item.id);
-    btn.innerHTML = `
-      <div class="r-orbit-inner">
-        <span class="r-orbit-text">${item.label}</span>
-        ${item.badge !== undefined ? `<span class="r-orbit-badge">${item.badge}</span>` : ''}
-      </div>
-    `;
-    btn.style.opacity = '0';
-    btn.style.transition = 'opacity 0.3s';
-
-    btn.addEventListener('click', () => {
-      if (isDragging) return;
-      onSecim(item);
-    });
-
-    wheel.insertBefore(btn, centerBtn);
-    orbitBtns.push(btn);
-
-    setTimeout(() => { btn.style.opacity = '1'; }, i * 60 + 50);
-  });
-
-  updatePositions();
-}
-
-function orbitlariTemizle() {
-  orbitBtns.forEach(b => b.remove());
-  orbitBtns = [];
 }
 
 // ============================================
@@ -386,31 +546,34 @@ function orbitlariTemizle() {
 
 function breadcrumbGuncelle() {
   breadcrumbInner.innerHTML = '';
-  const adimlar = [];
+  const parcalar = [];
 
   if (state.secim.mod) {
     const modLabel = { sinav: 'Sınav', flashcard: 'Flashcard', simulasyon: 'Simülasyon' };
-    adimlar.push(modLabel[state.secim.mod]);
+    parcalar.push(modLabel[state.secim.mod] || state.secim.mod);
   }
-  if (state.secim.donem) adimlar.push(`D${state.secim.donem}`);
-  if (state.secim.kurulId) adimlar.push(state.secim.kurulId);
-  if (state.secim.ders !== null && state.adim === 'ders') {
-    adimlar.push(state.secim.ders || 'Tümü');
+  if (state.secim.donem) parcalar.push(`D${state.secim.donem}`);
+  if (state.secim.yil) parcalar.push(String(state.secim.yil));
+  if (state.secim.kurulId) parcalar.push(state.secim.kurulId);
+  if (state.secim.sinav) parcalar.push(state.secim.sinav);
+  if (state.secim.ders !== null && state.secim.ders !== undefined && state.adim === 'ders') {
+    parcalar.push(state.secim.ders || 'Tümü');
   }
-  if (state.secim.yil) adimlar.push(String(state.secim.yil));
-  if (state.secim.sinav) adimlar.push(state.secim.sinav);
 
-  if (adimlar.length === 0) { breadcrumb.hidden = true; return; }
+  if (parcalar.length === 0) {
+    breadcrumb.hidden = true;
+    return;
+  }
 
   breadcrumb.hidden = false;
-  adimlar.forEach((a, i) => {
+  parcalar.forEach((p, i) => {
     const span = document.createElement('span');
-    span.className = 'r-bc-item';
-    span.textContent = a;
+    span.className = 'bc-item';
+    span.textContent = p;
     breadcrumbInner.appendChild(span);
-    if (i < adimlar.length - 1) {
+    if (i < parcalar.length - 1) {
       const sep = document.createElement('span');
-      sep.className = 'r-bc-sep';
+      sep.className = 'bc-sep';
       sep.textContent = '›';
       breadcrumbInner.appendChild(sep);
     }
@@ -418,112 +581,10 @@ function breadcrumbGuncelle() {
 }
 
 // ============================================
-// SÜRÜKLEME
-// ============================================
-
-function getAngle(x, y) {
-  const rect = wheel.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-  return Math.atan2(x - cx, -(y - cy)) * (180 / Math.PI);
-}
-
-wheel.addEventListener('mousedown', (e) => {
-  if (e.target === centerBtn || centerBtn.contains(e.target)) return;
-  if (state.adim === 'kapali') return;
-  isDragging = false;
-  dragStartAngle = getAngle(e.clientX, e.clientY);
-  dragStartRot = currentAngle;
-  wheel.classList.add('spinning');
-  if (animFrame) cancelAnimationFrame(animFrame);
-
-  const onMove = (e) => {
-    isDragging = true;
-    const a = getAngle(e.clientX, e.clientY);
-    currentAngle = dragStartRot + (a - dragStartAngle);
-    targetAngle = currentAngle;
-    updatePositions();
-  };
-
-  const onUp = () => {
-    wheel.classList.remove('spinning');
-    window.removeEventListener('mousemove', onMove);
-    window.removeEventListener('mouseup', onUp);
-    setTimeout(() => { isDragging = false; }, 50);
-  };
-
-  window.addEventListener('mousemove', onMove);
-  window.addEventListener('mouseup', onUp);
-});
-
-wheel.addEventListener('touchstart', (e) => {
-  if (centerBtn.contains(e.target)) return;
-  if (state.adim === 'kapali') return;
-  const touch = e.touches[0];
-  isDragging = false;
-  dragStartAngle = getAngle(touch.clientX, touch.clientY);
-  dragStartRot = currentAngle;
-  if (animFrame) cancelAnimationFrame(animFrame);
-}, { passive: true });
-
-wheel.addEventListener('touchmove', (e) => {
-  isDragging = true;
-  const touch = e.touches[0];
-  const a = getAngle(touch.clientX, touch.clientY);
-  currentAngle = dragStartRot + (a - dragStartAngle);
-  targetAngle = currentAngle;
-  updatePositions();
-}, { passive: true });
-
-wheel.addEventListener('touchend', () => {
-  setTimeout(() => { isDragging = false; }, 50);
-});
-
-// ============================================
-// BAŞLAT BUTONLARI
-// ============================================
-
-startBtn.addEventListener('click', () => {
-  if (state.secim.mod === 'simulasyon') {
-    const sorular = state.cikmislar
-      .filter(s => s.yil === state.secim.yil && s.sinav === state.secim.sinav)
-      .sort((a, b) => (a.sira || 0) - (b.sira || 0));
-
-    const veri = {
-      mod: 'simulasyon',
-      sorular,
-      yil: state.secim.yil,
-      sinav: state.secim.sinav,
-      kullaniciId: state.kullanici?.uid || null
-    };
-    sessionStorage.setItem('sinavSonuc', null);
-    sessionStorage.setItem('sinavSecim', JSON.stringify(veri));
-    window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify(veri))}`;
-  } else {
-    const veri = {
-      mod: state.secim.mod,
-      donem: state.secim.donem,
-      kurulId: state.secim.kurulId,
-      ders: state.secim.ders,
-      sayi: uygunSorulariSay(),
-      sorular: state.sorular,
-      kullaniciId: state.kullanici?.uid || null
-    };
-    sessionStorage.setItem('sinavSecim', JSON.stringify(veri));
-    if (state.secim.mod === 'flashcard') {
-      window.location.href = 'flashcard.html';
-    } else {
-      window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify(veri))}`;
-    }
-  }
-});
-
-// ============================================
 // YARDIMCILAR
 // ============================================
 
 function uygunSorulariSay() {
-  if (!state.secim.donem || !state.secim.kurulId) return 0;
   return state.sorular.filter(s => {
     if (s.donem !== state.secim.donem) return false;
     if (s.kurulId !== state.secim.kurulId) return false;
@@ -533,7 +594,56 @@ function uygunSorulariSay() {
 }
 
 // ============================================
+// BAŞLAT
+// ============================================
+
+startBtn.addEventListener('click', () => {
+  if (state.secim.mod === 'simulasyon') {
+    const sorular = state.cikmislar
+      .filter(s => s.yil === state.secim.yil && s.sinav === state.secim.sinav)
+      .sort((a, b) => (a.sira || 0) - (b.sira || 0));
+    sessionStorage.setItem('simulasyonSecim', JSON.stringify({
+      sorular,
+      yil: state.secim.yil,
+      sinav: state.secim.sinav
+    }));
+    window.location.href = 'sinav.html?mod=simulasyon';
+  } else if (state.secim.mod === 'flashcard') {
+    const veri = {
+      ...state.secim,
+      sorular: state.sorular.filter(s => {
+        if (s.donem !== state.secim.donem) return false;
+        if (s.kurulId !== state.secim.kurulId) return false;
+        if (state.secim.ders && s.ders !== state.secim.ders) return false;
+        return true;
+      })
+    };
+    sessionStorage.setItem('flashSecim', JSON.stringify(veri));
+    window.location.href = 'flashcard.html';
+  } else {
+    const sorular = state.sorular.filter(s => {
+      if (s.donem !== state.secim.donem) return false;
+      if (s.kurulId !== state.secim.kurulId) return false;
+      if (state.secim.ders && s.ders !== state.secim.ders) return false;
+      return true;
+    });
+    const veri = {
+      ...state.secim,
+      sorular,
+      kullaniciId: state.kullanici?.uid || null
+    };
+    sessionStorage.setItem('sinavSecim', JSON.stringify(veri));
+    window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify(veri))}`;
+  }
+});
+
+// ============================================
 // INIT
 // ============================================
 
-veriYukle();
+async function init() {
+  await veriYukle();
+  menuAc();
+}
+
+init();
