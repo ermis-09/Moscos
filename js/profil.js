@@ -57,10 +57,18 @@ cikisBtn.addEventListener('click', async () => {
 
 async function veriYukle(userId) {
   try {
+    console.log('veriYukle başladı, userId:', userId);
+    
     const q = query(
-      collection(db, 'kullanici_sonuclari', userId, 'sonuclar'),
+      collection(db, 'kullanici_sonuclari', userId, 'sonuclar')
     );
+    
+    console.log('Query oluşturuldu');
+    
     const snapshot = await getDocs(q);
+    
+    console.log('Snapshot alındı, boyut:', snapshot.size);
+    
     const sonuclar = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
     genelIstatCiz(sonuclar);
@@ -68,9 +76,9 @@ async function veriYukle(userId) {
     gecmisSinavCiz(sonuclar);
 
   } catch (err) {
-    console.error(err);
+    console.error('Hata detayı:', err.message, err.code);
     document.getElementById('gegmisSinavList').innerHTML =
-      '<p class="liste-bos">Veri yüklenemedi.</p>';
+      '<p class="liste-bos">Veri yüklenemedi: ' + err.message + '</p>';
   }
 }
 
