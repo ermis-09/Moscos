@@ -94,7 +94,7 @@ async function veriYukle() {
 // ÇARK MEKANİZMASI
 // ============================================
 
-const RADIUS = 105;
+const RADIUS = 125;
 let currentAngle = 0;
 let targetAngle = 0;
 let animFrame = null;
@@ -129,15 +129,20 @@ function guncellePozisyonlar() {
     const baseAngle = (360 / n) * i;
     const totalAngle = baseAngle + currentAngle;
     const rad = (totalAngle * Math.PI) / 180;
-    const cx = 145;
-    const cy = 145;
-    const x = cx + RADIUS * Math.sin(rad) - 38;
-    const y = cy - RADIUS * Math.cos(rad) - 38;
+    const cx = 170;
+    const cy = 170;
+    const x = cx + RADIUS * Math.sin(rad) - 42;
+    const y = cy - RADIUS * Math.cos(rad) - 42;
     btn.style.left = x + 'px';
     btn.style.top = y + 'px';
     btn.style.transform = 'none';
     const inner = btn.querySelector('.orbit-btn-inner');
     inner.style.transform = `rotate(${totalAngle}deg)`;
+
+    // En üstteki butonu bul ve hologram label göster
+    const normalizedTotal = ((totalAngle % 360) + 360) % 360;
+    const isTop = normalizedTotal < 30 || normalizedTotal > 330;
+    btn.classList.toggle('top-position', isTop);
   });
 }
 

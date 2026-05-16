@@ -225,17 +225,40 @@ body {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  perspective: 600px;
+  perspective: 400px;
 }
 
 
+.wheel-area::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 120px;
+  background: radial-gradient(ellipse at bottom, rgba(200,119,26,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hologram tarama çizgileri */
 .wheel-area::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(200,119,26,0.06) 0%, transparent 70%);
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(200,119,26,0.02) 3px,
+      rgba(200,119,26,0.02) 4px
+    );
   pointer-events: none;
+  z-index: 1;
 }
+
 
 /* Dişli halka */
 .gear-ring {
@@ -243,18 +266,20 @@ body {
   width: 340px;
   height: 340px;
   border-radius: 50%;
-  border: 2px solid rgba(200,119,26,0.12);
+  border: 2px solid rgba(200,119,26,0.2);
   pointer-events: none;
-  transform: rotateX(35deg);
+  transform: rotateX(55deg);
+  box-shadow:
+    0 0 30px rgba(200,119,26,0.15),
+    inset 0 0 30px rgba(200,119,26,0.05);
 }
-
 
 .gear-ring::before {
   content: '';
   position: absolute;
   inset: 10px;
   border-radius: 50%;
-  border: 1px dashed rgba(200,119,26,0.18);
+  border: 1px dashed rgba(200,119,26,0.25);
 }
 
 .gear-ring::after {
@@ -262,8 +287,9 @@ body {
   position: absolute;
   inset: -14px;
   border-radius: 50%;
-  border: 1px solid rgba(200,119,26,0.06);
+  border: 1px solid rgba(200,119,26,0.08);
 }
+
 
 /* Çark */
 .wheel {
@@ -274,11 +300,13 @@ body {
   touch-action: none;
   user-select: none;
   z-index: 2;
-  transform: rotateX(35deg);
+  transform: rotateX(55deg);
   transform-style: preserve-3d;
+  transition: transform 0.3s ease;
 }
 
 .wheel.spinning { cursor: grabbing; }
+
 
 
 /* Yörünge butonları */
@@ -288,19 +316,29 @@ body {
   height: 84px;
   border-radius: 50%;
   border: 1.5px solid var(--accent);
-  background: var(--bg2);
+  background: rgba(28, 26, 21, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow:
-    0 4px 20px rgba(0,0,0,0.4),
-    inset 0 1px 0 rgba(200,119,26,0.15);
+    0 0 15px rgba(200,119,26,0.3),
+    inset 0 0 10px rgba(200,119,26,0.1);
   transition: background 0.25s, box-shadow 0.25s, border-color 0.25s, opacity 0.3s;
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
+  backdrop-filter: blur(4px);
 }
+
+.orbit-btn.selected {
+  background: rgba(200,119,26,0.3);
+  border-color: var(--accent2);
+  box-shadow:
+    0 0 30px rgba(200,119,26,0.6),
+    inset 0 0 15px rgba(200,119,26,0.2);
+}
+
 
 .orbit-btn::before {
   content: '';
@@ -314,12 +352,6 @@ body {
 .orbit-btn:hover {
   background: var(--bg3);
   box-shadow: 0 4px 24px rgba(200,119,26,0.25), inset 0 1px 0 rgba(200,119,26,0.2);
-}
-
-.orbit-btn.selected {
-  background: var(--accent);
-  border-color: var(--accent2);
-  box-shadow: 0 0 28px rgba(200,119,26,0.5);
 }
 
 .orbit-btn-inner {
@@ -355,6 +387,20 @@ body {
 
 .orbit-btn.selected .orbit-btn-badge { color: rgba(28,26,21,0.6); }
 
+/* En üstteki buton hologram yansıması */
+.orbit-btn.top-position {
+  box-shadow:
+    0 0 20px rgba(200,119,26,0.5),
+    0 -20px 40px rgba(200,119,26,0.2),
+    inset 0 0 15px rgba(200,119,26,0.15);
+  border-color: var(--accent2);
+}
+
+.orbit-btn.top-position .orbit-btn-text {
+  color: var(--accent2);
+  text-shadow: 0 0 10px rgba(200,119,26,0.8);
+}
+
 /* Merkez buton */
 .center-btn {
   position: absolute;
@@ -374,13 +420,14 @@ body {
   gap: 3px;
   z-index: 10;
   box-shadow:
-    0 8px 32px rgba(0,0,0,0.5),
     0 0 0 3px rgba(200,119,26,0.15),
-    inset 0 2px 0 rgba(255,255,255,0.12),
-    inset 0 -2px 0 rgba(0,0,0,0.25);
+    0 0 30px rgba(200,119,26,0.4),
+    0 0 60px rgba(200,119,26,0.2),
+    inset 0 2px 0 rgba(255,255,255,0.12);
   transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
   user-select: none;
 }
+
 
 .center-btn:hover {
   box-shadow:
