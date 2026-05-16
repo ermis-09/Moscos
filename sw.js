@@ -1,4 +1,4 @@
-const CACHE_NAME = 'moscos-v1';
+const CACHE_NAME = 'moscos-v1.1';
 
 const CACHE_FILES = [
   '/',
@@ -36,16 +36,24 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', e => {
+sself.addEventListener('fetch', e => {
+  // Firebase ve dış istekleri atla
   if (e.request.url.includes('firestore.googleapis.com') ||
       e.request.url.includes('firebase') ||
-      e.request.url.includes('googleapis.com')) {
+      e.request.url.includes('googleapis.com') ||
+      e.request.url.includes('gstatic.com') ||
+      e.request.url.includes('fonts.')) {
     return;
   }
 
+  // Sadece GET isteklerini cache'le
+  if (e.request.method !== 'GET') return;
+
   e.respondWith(
     caches.match(e.request).then(cached => {
-      return cached || fetch(e.request);
+      if (cached) return cached;
+      return fetch(e.request).catch(() => cached);
     })
   );
 });
+
