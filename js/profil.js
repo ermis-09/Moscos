@@ -91,26 +91,29 @@ function genelIstatCiz(sonuclar) {
     document.getElementById('toplamSinav').textContent = '0';
     document.getElementById('toplamSoru').textContent = '0';
     document.getElementById('ortalamaYuzde').textContent = '—';
-    document.getElementById('enYuksek').textContent = '—';
+    document.getElementById('enYuksek').textContent = '0';
     return;
   }
 
   const toplamSoru = sonuclar.reduce((acc, s) => acc + (s.toplam || 0), 0);
+  
+  const ortalamaYuzde = Math.round(
+    sonuclar.reduce((acc, s) => acc + (s.yuzde || 0), 0) / sonuclar.length
+  );
+
   const buAy = sonuclar.filter(s => {
-  const tarih = new Date(s.tarih);
-  const simdi = new Date();
-  return tarih.getMonth() === simdi.getMonth() &&
-         tarih.getFullYear() === simdi.getFullYear();
-}).length;
-
-document.getElementById('enYuksek').textContent = buAy;
-
+    const tarih = new Date(s.tarih);
+    const simdi = new Date();
+    return tarih.getMonth() === simdi.getMonth() &&
+           tarih.getFullYear() === simdi.getFullYear();
+  }).length;
 
   document.getElementById('toplamSinav').textContent = sonuclar.length;
   document.getElementById('toplamSoru').textContent = toplamSoru;
-  document.getElementById('ortalamaYuzde').textContent = `%${ortalama}`;
-  document.getElementById('enYuksek').textContent = `%${enYuksek}`;
+  document.getElementById('ortalamaYuzde').textContent = `%${ortalamaYuzde}`;
+  document.getElementById('enYuksek').textContent = buAy;
 }
+
 
 // ============================================
 // DERS BAZINDA İSTATİSTİK
