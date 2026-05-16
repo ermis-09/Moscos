@@ -173,18 +173,20 @@ function gecmisSinavCiz(sonuclar) {
     return;
   }
 
+  // Sadece son 3
+  const son3 = sonuclar.slice(0, 3);
+
   liste.innerHTML = '';
-  sonuclar.forEach(s => {
+  son3.forEach(s => {
     const tarih = new Date(s.tarih).toLocaleDateString('tr-TR', {
       day: 'numeric', month: 'long', year: 'numeric'
     });
 
     const baslik = s.mod === 'simulasyon'
-  ? `${s.yil} · ${s.kurulId || ''}`
-  : `D${s.donem} · ${s.kurulId || ''}`;
+      ? `${s.yil} · ${s.kurulId || ''}`
+      : `D${s.donem} · ${s.kurulId || ''}`;
 
-
-    const renk = s.yuzde >= 75 ? '#4A7A4A' : s.yuzde >= 50 ? '#8B2635' : '#8B3838';
+    const renk = s.yuzde >= 75 ? '#6BBF6B' : s.yuzde >= 50 ? '#C8771A' : '#C46060';
 
     const kart = document.createElement('div');
     kart.className = 'gecmis-kart';
@@ -197,12 +199,13 @@ function gecmisSinavCiz(sonuclar) {
         <div class="gecmis-skor" style="color:${renk}">%${s.yuzde}</div>
       </div>
       <div class="gecmis-detay">
-        <span class="gecmis-stat" style="color:#4A7A4A">✓ ${s.dogru}</span>
-        <span class="gecmis-stat" style="color:#8B3838">✗ ${s.yanlis}</span>
-        <span class="gecmis-stat" style="color:#8B5F62">— ${s.bos}</span>
-        <span class="gecmis-stat">${s.toplam} soru</span>
+        <span class="gecmis-stat" style="color:#6BBF6B">✓ ${s.dogru}</span>
+        <span class="gecmis-stat" style="color:#C46060">✗ ${s.yanlis}</span>
+        <span class="gecmis-stat" style="color:${renk === '#6BBF6B' ? 'var(--metal-light)' : renk}">— ${s.bos}</span>
+        <span class="gecmis-stat" style="color:var(--metal-light)">${s.toplam} soru</span>
       </div>
     `;
     liste.appendChild(kart);
   });
 }
+
