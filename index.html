@@ -3,81 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#FFF0EB" />
+  <meta name="theme-color" content="#1C1A15" />
   <title>Moscos · Soru Bankası</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="manifest" href="manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-title" content="Moscos" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <div class="app-frame">
+<body class="retro-body">
+<div class="retro-frame">
 
-    <!-- Üst bar -->
-    <header class="top-bar">
-      <button class="giris-btn" id="girisBtn">Giriş Yap</button>
-      <div class="profil-btn" id="profilBtn" hidden>
-        <img class="profil-foto" id="profilFoto" src="" alt="" />
-        <span class="profil-ad" id="profilAd"></span>
+  <!-- Köşe süsler -->
+  <div class="r-corner tl"></div>
+  <div class="r-corner tr"></div>
+  <div class="r-corner bl"></div>
+  <div class="r-corner br"></div>
+
+  <!-- Üst bar -->
+  <header class="r-header">
+    <button class="r-giris-btn" id="girisBtn">Giriş</button>
+    <div class="r-brand">
+      <span class="r-brand-name">M<span class="r-brand-os">os</span>cos</span>
+      <span class="r-brand-sub">Soru Bankası</span>
+    </div>
+    <div class="r-header-right">
+      <div class="r-profil-btn" id="profilBtn" hidden>
+        <img class="r-profil-foto" id="profilFoto" src="" alt="" />
       </div>
-      <a href="admin.html" class="admin-link">⚙</a>
-    </header>
+      <a href="admin.html" class="r-admin-btn">⚙</a>
+    </div>
+  </header>
 
-    <!-- Ana alan -->
-    <main class="orbit-main">
+  <!-- Çark alanı -->
+  <main class="r-main">
 
-      <!-- Merkez -->
-      <div class="orbit-center" id="orbitCenter">
-        <div class="center-logo" id="centerLogo">
-          <div class="logo-placeholder">
-            <span class="logo-m">M</span>
-          </div>
-          <p class="center-label" id="centerLabel">Moscos</p>
-        </div>
+    <!-- Dekoratif grid -->
+    <div class="r-grid-bg"></div>
+
+    <!-- Dişli halka -->
+    <div class="r-gear-ring"></div>
+
+    <!-- Çark -->
+    <div class="r-wheel" id="wheel">
+
+      <!-- Yörünge butonları JS ile eklenecek -->
+
+      <!-- Merkez buton -->
+      <div class="r-center-btn" id="centerBtn">
+        <span class="r-center-m">M</span>
+        <span class="r-center-hint" id="centerHint">aç</span>
       </div>
 
-      <!-- Yörünge halkası -->
-      <div class="orbit-ring" id="orbitRing" hidden>
-        <div class="orbit-track" id="orbitTrack">
-          <!-- Kartlar JS ile eklenecek -->
-        </div>
-      </div>
+    </div>
 
-      <!-- Breadcrumb — neredesin -->
-      <div class="orbit-breadcrumb" id="orbitBreadcrumb" hidden>
-        <div class="breadcrumb-items" id="breadcrumbItems"></div>
-      </div>
+    <!-- Breadcrumb -->
+    <div class="r-breadcrumb" id="breadcrumb" hidden>
+      <div class="r-breadcrumb-inner" id="breadcrumbInner"></div>
+    </div>
 
-    </main>
+  </main>
 
-    <!-- Alt bilgi & başla -->
-    <footer class="orbit-footer" id="orbitFooter" hidden>
-      <p class="available-info" id="availableInfo"></p>
-      <div class="footer-btns" id="footerBtns" hidden>
-        <button class="start-btn" id="startSinavBtn">
-          Sınava Başla <span class="start-btn-icon">→</span>
-        </button>
-        <button class="start-btn start-btn-flash" id="startFlashBtn">
-          Flashcard <span class="start-btn-icon">🃏</span>
-        </button>
-      </div>
-    </footer>
+  <!-- Alt bilgi -->
+  <footer class="r-footer">
+    <div class="r-info" id="infoArea">
+      <p class="r-info-text" id="infoText">Çarkı döndür veya ortaya bas</p>
+    </div>
+    <div class="r-footer-btns" id="footerBtns" hidden>
+      <button class="r-start-btn" id="startBtn">
+        Başla <span>→</span>
+      </button>
+    </div>
+  </footer>
 
-    <!-- Sim butonu -->
-    <a href="simulasyon.html" class="sim-fab">⟳</a>
+</div>
 
-  </div>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js');
-    }
-  </script>
-  <script type="module" src="js/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+</script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
