@@ -519,6 +519,87 @@ body {
 }
 
 /* ============================================
+   HOLOGRAM HUZME
+   ============================================ */
+
+.hologram-beam {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  pointer-events: none;
+  margin-bottom: 50px;
+}
+
+.hologram-symbol {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hologramFlicker 3s infinite;
+  filter: drop-shadow(0 0 8px rgba(200,119,26,0.8));
+}
+
+.hologram-symbol svg {
+  width: 56px;
+  height: 56px;
+}
+
+.hologram-rays {
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(to top, rgba(200,119,26,0.6), transparent);
+  margin-top: -4px;
+  animation: hologramFlicker 3s infinite;
+}
+
+.hologram-rays::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  width: 42px;
+  height: 100%;
+  background: linear-gradient(to top,
+    rgba(200,119,26,0.15) 0%,
+    rgba(200,119,26,0.05) 50%,
+    transparent 100%);
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  transform: scaleY(-1);
+}
+
+@keyframes hologramFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.4; }
+  94% { opacity: 1; }
+  96% { opacity: 0.6; }
+  97% { opacity: 1; }
+}
+
+/* Tarama çizgileri hologram üzerinde */
+.hologram-symbol::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(200,119,26,0.08) 2px,
+    rgba(200,119,26,0.08) 3px
+  );
+  pointer-events: none;
+}
+
+
+/* ============================================
    BOTTOM BAR
    ============================================ */
 

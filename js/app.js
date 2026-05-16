@@ -137,14 +137,36 @@ function guncellePozisyonlar() {
     btn.style.top = y + 'px';
     btn.style.transform = 'none';
     const inner = btn.querySelector('.orbit-btn-inner');
-    inner.style.transform = `rotate(${totalAngle}deg)`;
+    inner.style.transform = `rotate(${totalAngle + 180}deg)`;
 
-    // En üstteki butonu bul ve hologram label göster
+    // En üstteki butonu bul
     const normalizedTotal = ((totalAngle % 360) + 360) % 360;
     const isTop = normalizedTotal < 30 || normalizedTotal > 330;
     btn.classList.toggle('top-position', isTop);
+
+    // Hologram göster
+    if (isTop && isOpen && state.adim === 'mod') {
+      const item = mevcutItems[i];
+      if (item?.svg && aktifHologramSvg !== item.id) {
+        aktifHologramSvg = item.id;
+        hologramGoster(item.svg, 'rgba(200,119,26,0.9)');
+      }
+    }
   });
+
+  // Hiçbiri üstte değilse hologramı gizle
+  const birUstte = orbitBtns.some((btn, i) => {
+    const ba = (360 / orbitBtns.length) * i + currentAngle;
+    const nt = ((ba % 360) + 360) % 360;
+    return nt < 30 || nt > 330;
+  });
+
+  if (!birUstte) {
+    aktifHologramSvg = null;
+    hologramGizle();
+  }
 }
+
 
 function kartıEnUsteGetir(index) {
   const n = orbitBtns.length;
@@ -390,21 +412,43 @@ function modlariGoster() {
   footerBtns.hidden = true;
   centerNormaleGeri();
 
-  kartlariCiz([
-    { id: 'sinav', label: 'Sınav' },
-    { id: 'flashcard', label: 'Flash\ncard' },
-    { id: 'simulasyon', label: 'Simü\nlasyon' }
-  ], (item) => {
-    state.secim.mod = item.id;
-    if (item.id === 'simulasyon') {
-      state.adim = 'kurul';
-      yillariGoster();
-    } else {
-      state.adim = 'donem';
-      donemleriGoster();
-    }
-    breadcrumbGuncelle();
-  });
+ kartlariCiz([
+  { id: 'sinav', label: 'Sınav', svg: `
+    <rect x="12" y="8" width="36" height="44" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+    <line x1="20" y1="20" x2="40" y2="20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="20" y1="28" x2="40" y2="28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="20" y1="36" x2="32" y2="36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="17" cy="20" r="2" fill="currentColor"/>
+    <circle cx="17" cy="28" r="2" fill="currentColor"/>
+    <circle cx="17" cy="36" r="2" fill="currentColor"/>
+  `},
+  { id: 'flashcard', label: 'Flash\ncard', svg: `
+    <rect x="6" y="16" width="38" height="26" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+    <rect x="16" y="10" width="38" height="26" rx="3" stroke="currentColor" stroke-width="2" fill="none" opacity="0.5"/>
+    <line x1="18" y1="25" x2="32" y2="25" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="18" y1="31" x2="28" y2="31" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  `},
+  { id: 'simulasyon', label: 'Simü\nlasyon', svg: `
+    <circle cx="30" cy="30" r="20" stroke="currentColor" stroke-width="2.5" fill="none"/>
+    <circle cx="30" cy="30" r="2.5" fill="currentColor"/>
+    <line x1="30" y1="30" x2="30" y2="14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="30" y1="30" x2="42" y2="36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="22" y1="10" x2="24" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <line x1="38" y1="10" x2="36" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  `}
+], (item) => {
+  state.secim.mod = item.id;
+  hologramGizle();
+  if (item.id === 'simulasyon') {
+    state.adim = 'kurul';
+    yillariGoster();
+  } else {
+    state.adim = 'donem';
+    donemleriGoster();
+  }
+  breadcrumbGuncelle();
+});
+
 }
 
 function donemleriGoster() {
@@ -624,6 +668,25 @@ startBtn.addEventListener('click', () => {
     window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify(veri))}`;
   }
 });
+
+// ============================================
+// HOLOGRAM
+// ============================================
+
+const hologramBeam = document.getElementById('hologramBeam');
+const hologramSvg = document.getElementById('hologramSvg');
+let aktifHologramSvg = null;
+
+function hologramGoster(svgContent, renk) {
+  hologramSvg.innerHTML = svgContent;
+  hologramSvg.style.color = renk || 'rgba(200,119,26,0.9)';
+  hologramBeam.hidden = false;
+}
+
+function hologramGizle() {
+  hologramBeam.hidden = true;
+}
+
 
 // ============================================
 // INIT
