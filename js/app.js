@@ -141,25 +141,26 @@ function guncellePozisyonlar() {
 
     // En üstteki butonu bul
     const normalizedTotal = ((totalAngle % 360) + 360) % 360;
-    const isTop = normalizedTotal < 30 || normalizedTotal > 330;
-    btn.classList.toggle('top-position', isTop);
+    const isBottom = normalizedTotal > 150 && normalizedTotal < 210;
+btn.classList.toggle('top-position', isBottom);
 
-    // Hologram göster
-    if (isTop && isOpen && state.adim === 'mod') {
-      const item = mevcutItems[i];
-      if (item?.svg && aktifHologramSvg !== item.id) {
-        aktifHologramSvg = item.id;
-        hologramGoster(item.svg, 'rgba(200,119,26,0.9)');
-      }
-    }
+if (isBottom && isOpen && state.adim === 'mod') {
+  const item = mevcutItems[i];
+  if (item?.svg && aktifHologramSvg !== item.id) {
+    aktifHologramSvg = item.id;
+    hologramGoster(item.svg, 'rgba(200,119,26,0.9)');
+  }
+}
+
   });
 
   // Hiçbiri üstte değilse hologramı gizle
   const birUstte = orbitBtns.some((btn, i) => {
-    const ba = (360 / orbitBtns.length) * i + currentAngle;
-    const nt = ((ba % 360) + 360) % 360;
-    return nt < 30 || nt > 330;
-  });
+  const ba = (360 / orbitBtns.length) * i + currentAngle;
+  const nt = ((ba % 360) + 360) % 360;
+  return nt > 150 && nt < 210;
+});
+
 
   if (!birUstte) {
     aktifHologramSvg = null;
