@@ -34,6 +34,7 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById('kullaniciAd').textContent = user.displayName || '—';
   document.getElementById('kullaniciEmail').textContent = user.email || '—';
 
+  console.log('Kullanıcı UID:', user.uid);
   await veriYukle(user.uid);
 });
 
