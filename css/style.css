@@ -225,7 +225,9 @@ body {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  perspective: 600px;
 }
+
 
 .wheel-area::before {
   content: '';
@@ -243,7 +245,9 @@ body {
   border-radius: 50%;
   border: 2px solid rgba(200,119,26,0.12);
   pointer-events: none;
+  transform: rotateX(35deg);
 }
+
 
 .gear-ring::before {
   content: '';
@@ -270,9 +274,12 @@ body {
   touch-action: none;
   user-select: none;
   z-index: 2;
+  transform: rotateX(35deg);
+  transform-style: preserve-3d;
 }
 
 .wheel.spinning { cursor: grabbing; }
+
 
 /* Yörünge butonları */
 .orbit-btn {
