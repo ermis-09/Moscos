@@ -13,6 +13,7 @@ import {
 // STATE
 // ============================================
 
+const GERI_BTN = { id: '__geri__', label: '←\nGeri', geri: true };
 const state = {
   kurullarData: null,
   sorular: [],
