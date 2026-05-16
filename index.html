@@ -8,86 +8,68 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="manifest" href="manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Moscos" />
-
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <div class="app-frame">
 
-    <header class="app-header">
+    <!-- Üst bar -->
+    <header class="top-bar">
       <button class="giris-btn" id="girisBtn">Giriş Yap</button>
       <div class="profil-btn" id="profilBtn" hidden>
         <img class="profil-foto" id="profilFoto" src="" alt="" />
         <span class="profil-ad" id="profilAd"></span>
       </div>
-      <div class="brand">
-        <span class="brand-mark">✦</span>
-        <h1 class="brand-name">Moscos</h1>
-      </div>
-      <p class="brand-sub">Soru Bankası</p>
       <a href="admin.html" class="admin-link">⚙</a>
     </header>
 
-    <main class="app-main">
+    <!-- Ana alan -->
+    <main class="orbit-main">
 
-      <!-- Yükleme iskeleti -->
-      <div id="skeleton" class="skeleton-wrap">
-        <div class="skeleton-label"></div>
-        <div class="skeleton-row">
-          <div class="skeleton-kart"></div>
-          <div class="skeleton-kart"></div>
-          <div class="skeleton-kart"></div>
+      <!-- Merkez -->
+      <div class="orbit-center" id="orbitCenter">
+        <div class="center-logo" id="centerLogo">
+          <div class="logo-placeholder">
+            <span class="logo-m">M</span>
+          </div>
+          <p class="center-label" id="centerLabel">Moscos</p>
         </div>
       </div>
 
-      <!-- Filtre içeriği -->
-      <div id="filterContent" hidden>
-
-        <!-- Dönem seçimi -->
-        <div class="filter-step" id="stepDonem">
-          <p class="step-label">Dönem</p>
-          <div class="donem-grid" id="donemGrid"></div>
+      <!-- Yörünge halkası -->
+      <div class="orbit-ring" id="orbitRing" hidden>
+        <div class="orbit-track" id="orbitTrack">
+          <!-- Kartlar JS ile eklenecek -->
         </div>
+      </div>
 
-        <!-- Kurul seçimi -->
-        <div class="filter-step" id="stepKurul" hidden>
-          <p class="step-label">
-            <button class="geri-btn" id="geriDonem">←</button>
-            Kurul
-          </p>
-          <div class="kurul-grid" id="kurulGrid"></div>
-        </div>
-
-        <!-- Ders seçimi -->
-        <div class="filter-step" id="stepDers" hidden>
-          <p class="step-label">
-            <button class="geri-btn" id="geriKurul">←</button>
-            Ders
-          </p>
-          <div class="chip-row" id="dersChips"></div>
-        </div>
-
+      <!-- Breadcrumb — neredesin -->
+      <div class="orbit-breadcrumb" id="orbitBreadcrumb" hidden>
+        <div class="breadcrumb-items" id="breadcrumbItems"></div>
       </div>
 
     </main>
 
-    <footer class="app-footer" id="appFooter">
-      <a href="simulasyon.html" class="sim-btn">
-        Simülasyon Modu <span>⟳</span>
-      </a>
-      <div id="footerInfo" hidden>
-        <p class="available-info" id="availableInfo"></p>
-        <button class="start-btn" id="startBtn" disabled>
-          Sınava Başla
-          <span class="start-btn-icon">→</span>
+    <!-- Alt bilgi & başla -->
+    <footer class="orbit-footer" id="orbitFooter" hidden>
+      <p class="available-info" id="availableInfo"></p>
+      <div class="footer-btns" id="footerBtns" hidden>
+        <button class="start-btn" id="startSinavBtn">
+          Sınava Başla <span class="start-btn-icon">→</span>
+        </button>
+        <button class="start-btn start-btn-flash" id="startFlashBtn">
+          Flashcard <span class="start-btn-icon">🃏</span>
         </button>
       </div>
     </footer>
+
+    <!-- Sim butonu -->
+    <a href="simulasyon.html" class="sim-fab">⟳</a>
 
   </div>
 

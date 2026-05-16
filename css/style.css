@@ -97,52 +97,22 @@ body {
 }
 
 /* ============================================
-   HEADER
+   TOP BAR
    ============================================ */
 
-.app-header {
-  padding: 28px 24px 20px;
-  text-align: center;
-  position: relative;
-  flex-shrink: 0;
-  padding-top: 72px;
-}
-
-
-.brand {
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 24px 0;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.brand-mark {
-  font-size: 20px;
-  color: var(--accent);
-}
-
-.brand-name {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 32px;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
-  line-height: 1;
-}
-
-.brand-sub {
-  font-size: 10px;
-  color: var(--accent);
-  margin-top: 6px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 700;
+  justify-content: space-between;
+  z-index: 10;
 }
 
 .admin-link {
-  position: absolute;
-  top: 28px;
-  right: 24px;
   width: 36px;
   height: 36px;
   background: var(--surface);
@@ -162,14 +132,7 @@ body {
   transform: rotate(30deg);
 }
 
-/* ============================================
-   KULLANICI GİRİŞİ
-   ============================================ */
-
 .giris-btn {
-  position: absolute;
-  top: 28px;
-  left: 24px;
   background: var(--surface);
   border: 1.5px solid var(--accent-soft);
   border-radius: var(--radius-pill);
@@ -189,9 +152,6 @@ body {
 }
 
 .profil-btn {
-  position: absolute;
-  top: 24px;
-  left: 24px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -207,7 +167,6 @@ body {
 
 .profil-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(193,83,58,0.15);
 }
 
 .profil-foto {
@@ -228,375 +187,316 @@ body {
 }
 
 /* ============================================
-   MAIN
+   ORBIT MAIN — Ana yörünge alanı
    ============================================ */
 
-.app-main {
+.orbit-main {
   flex: 1;
-  padding: 8px 22px 16px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  overflow-y: auto;
-}
-
-/* ============================================
-   SKELETON LOADER
-   ============================================ */
-
-.skeleton-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding-top: 8px;
-}
-
-.skeleton-label {
-  height: 14px;
-  width: 60px;
-  background: linear-gradient(90deg, var(--border-soft) 25%, var(--bg-gradient-end) 50%, var(--border-soft) 75%);
-  background-size: 200% 100%;
-  border-radius: var(--radius-pill);
-  animation: shimmer 1.5s infinite;
-}
-
-.skeleton-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.skeleton-kart {
-  height: 80px;
-  background: linear-gradient(90deg, var(--border-soft) 25%, var(--bg-gradient-end) 50%, var(--border-soft) 75%);
-  background-size: 200% 100%;
-  border-radius: var(--radius-md);
-  animation: shimmer 1.5s infinite;
-}
-
-.skeleton-kart:nth-child(2) { animation-delay: 0.15s; }
-.skeleton-kart:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* ============================================
-   FİLTRE ADIMLAR
-   ============================================ */
-
-.filter-step {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.step-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-secondary);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.geri-btn {
-  background: var(--surface);
-  border: 1.5px solid var(--border-soft);
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  font-size: 14px;
-  color: var(--accent);
-  cursor: pointer;
-  display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 20px;
 }
 
-.geri-btn:hover {
-  background: var(--accent-light);
-  border-color: var(--accent);
-}
-
-/* Dönem kartları */
-.donem-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.donem-kart {
-  background: var(--surface);
-  border: 1.5px solid transparent;
-  border-radius: var(--radius-md);
-  padding: 18px 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow:
-    0 4px 14px rgba(193,83,58,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.8);
+/* Merkez logo */
+.orbit-center {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 12px;
+  z-index: 5;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.donem-kart:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(193,83,58,0.15);
-  border-color: var(--accent-soft);
+.orbit-center:hover {
+  transform: scale(1.05);
 }
 
-.donem-kart.active {
+.orbit-center.active .logo-placeholder {
   background: var(--accent);
-  border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(193,83,58,0.35);
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 8px rgba(193,83,58,0.15), 0 0 0 16px rgba(193,83,58,0.08);
 }
 
-.donem-kart-num {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--accent);
-  line-height: 1;
-  transition: color 0.2s;
-}
-
-.donem-kart.active .donem-kart-num {
+.orbit-center.active .logo-m {
   color: white;
 }
 
-.donem-kart-label {
-  font-size: 11px;
+.logo-placeholder {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 8px 30px rgba(193,83,58,0.2),
+    0 2px 8px rgba(193,83,58,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.logo-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-soft);
+  opacity: 0.5;
+}
+
+.logo-m {
+  font-family: var(--font-display);
+  font-size: 44px;
   font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  transition: color 0.3s;
+}
+
+.center-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: color 0.2s;
+  transition: opacity 0.3s;
 }
 
-.donem-kart.active .donem-kart-label {
-  color: rgba(255,255,255,0.8);
+/* Yörünge halkası */
+.orbit-ring {
+  width: 100%;
+  padding: 24px 0;
+  overflow: hidden;
 }
 
-.donem-kart-sayi {
-  font-size: 11px;
-  color: var(--text-muted);
-  transition: color 0.2s;
+.orbit-track {
+  display: flex;
+  gap: 12px;
+  padding: 8px 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.donem-kart.active .donem-kart-sayi {
-  color: rgba(255,255,255,0.7);
-}
+.orbit-track::-webkit-scrollbar { display: none; }
+.orbit-track.grabbing { cursor: grabbing; }
 
-/* Kurul kartları */
-.kurul-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.kurul-kart {
+/* Yörünge kartı */
+.orbit-card {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  width: 140px;
+  height: 80px;
   background: var(--surface);
   border: 1.5px solid transparent;
   border-radius: var(--radius-md);
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow:
-    0 4px 14px rgba(193,83,58,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.8);
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow:
+    0 4px 16px rgba(193,83,58,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
 }
 
-.kurul-kart:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(193,83,58,0.15);
+.orbit-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.orbit-card:hover::before { opacity: 1; }
+
+.orbit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(193,83,58,0.18);
   border-color: var(--accent-soft);
 }
 
-.kurul-kart.active {
+.orbit-card.active {
   background: var(--accent);
   border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(193,83,58,0.35);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(193,83,58,0.4);
+  transform: translateY(-3px) scale(1.05);
 }
 
-.kurul-kart-ad {
+.orbit-card-text {
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 600;
   color: var(--text-primary);
+  text-align: center;
+  padding: 0 12px;
+  line-height: 1.2;
   transition: color 0.2s;
 }
 
-.kurul-kart.active .kurul-kart-ad {
+.orbit-card.active .orbit-card-text {
   color: white;
 }
 
-.kurul-kart-sayi {
-  font-size: 12px;
+/* Soru sayısı badge */
+.orbit-card-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 700;
   color: var(--text-muted);
   transition: color 0.2s;
 }
 
-.kurul-kart.active .kurul-kart-sayi {
+.orbit-card.active .orbit-card-badge {
   color: rgba(255,255,255,0.7);
 }
 
-/* Ders chip'leri */
-.chip-row {
+/* Tüm seçenekler kartı */
+.orbit-card.all-card {
+  border-style: dashed;
+  border-color: var(--accent-soft);
+  background: transparent;
+}
+
+.orbit-card.all-card .orbit-card-text {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* Breadcrumb */
+.orbit-breadcrumb {
   display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  margin-top: 8px;
+}
+
+.breadcrumb-items {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  width: 100%;
 }
 
-.chip {
-  background: var(--surface);
-  border: 1.5px solid transparent;
-  border-radius: var(--radius-pill);
-  padding: 10px 18px;
-  font-family: var(--font-body);
-  font-size: 14px;
+.breadcrumb-item {
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  box-shadow: 0 3px 10px rgba(193,83,58,0.08);
+  transition: all 0.2s;
 }
 
-.chip:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: var(--accent-soft);
-  color: var(--text-primary);
-}
-
-.chip.active {
+.breadcrumb-item:hover {
   background: var(--accent);
   color: white;
-  border-color: var(--accent);
-  box-shadow: 0 6px 16px rgba(193,83,58,0.35);
 }
 
-.chip:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  box-shadow: none;
+.breadcrumb-sep {
+  font-size: 10px;
+  color: var(--text-muted);
 }
 
 /* ============================================
-   FOOTER
+   ORBIT FOOTER
    ============================================ */
 
-.app-footer {
-  padding: 16px 22px 28px;
+.orbit-footer {
+  padding: 12px 22px 28px;
   background: linear-gradient(to top, var(--bg-gradient-end) 60%, transparent);
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: sticky;
-  bottom: 0;
 }
 
-.available-info {
-  font-size: 12px;
-  color: var(--text-secondary);
-  text-align: center;
-  font-style: italic;
-  min-height: 18px;
+.footer-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.available-info.ready {
+.start-btn-flash {
+  background: var(--surface) !important;
+  color: var(--accent) !important;
+  border: 1.5px solid var(--accent-soft) !important;
+  box-shadow: 0 4px 12px rgba(193,83,58,0.10) !important;
+}
+
+.start-btn-flash:hover {
+  background: var(--accent-light) !important;
+}
+
+/* Sim FAB butonu */
+.sim-fab {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border: 1.5px solid var(--accent-soft);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
   color: var(--accent);
-  font-weight: 600;
-  font-style: normal;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(193,83,58,0.15);
+  transition: all 0.2s;
+  z-index: 20;
 }
 
-.start-btn {
-  width: 100%;
+.sim-fab:hover {
+  transform: scale(1.1);
   background: var(--accent);
   color: white;
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 18px 24px;
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  box-shadow:
-    0 10px 28px rgba(193,83,58,0.35),
-    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
-.start-btn:hover:not(:disabled) {
-  background: var(--accent-warm);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(193,83,58,0.4);
+/* Giriş animasyonları */
+@keyframes orbitIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
-.start-btn:disabled {
-  background: var(--border-soft);
-  cursor: not-allowed;
-  box-shadow: none;
-  opacity: 0.7;
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.start-btn-icon {
-  font-size: 20px;
-  transition: transform 0.2s;
+.orbit-ring {
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-.start-btn:hover:not(:disabled) .start-btn-icon {
-  transform: translateX(4px);
-}
-
-.sim-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  background: var(--surface);
-  color: var(--accent);
-  border: 1.5px solid var(--accent-soft);
-  border-radius: var(--radius-md);
-  padding: 14px 24px;
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(193,83,58,0.08);
-}
-
-.sim-btn:hover {
-  background: var(--accent-light);
-  transform: translateY(-1px);
+.orbit-card {
+  animation: orbitIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
 /* ============================================

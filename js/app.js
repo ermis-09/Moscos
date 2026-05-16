@@ -1,6 +1,6 @@
 /* ============================================
    MOSCOS — Ana Sayfa
-   Kart tabanlı filtre, skeleton loader
+   Orbit UI — döner yörünge filtre sistemi
    ============================================ */
 
 import { db, auth } from '../firebase.js';
@@ -9,25 +9,39 @@ import {
   GoogleAuthProvider, signInWithPopup, onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
+// ============================================
+// STATE
+// ============================================
+
 const state = {
   kurullarData: null,
   sorular: [],
-  secim: { donem: null, kurulId: null, ders: '', sayi: 30 },
-  kullanici: null
+  kullanici: null,
+  adim: 'baslangic', // baslangic | mod | donem | kurul | ders
+  secim: {
+    mod: null,      // 'sinav' | 'flashcard'
+    donem: null,
+    kurulId: null,
+    ders: null
+  }
 };
 
+// ============================================
 // DOM
-const skeleton = document.getElementById('skeleton');
-const filterContent = document.getElementById('filterContent');
-const stepDonem = document.getElementById('stepDonem');
-const stepKurul = document.getElementById('stepKurul');
-const stepDers = document.getElementById('stepDers');
-const donemGrid = document.getElementById('donemGrid');
-const kurulGrid = document.getElementById('kurulGrid');
-const dersChips = document.getElementById('dersChips');
+// ============================================
+
+const orbitCenter = document.getElementById('orbitCenter');
+const centerLogo = document.getElementById('centerLogo');
+const centerLabel = document.getElementById('centerLabel');
+const orbitRing = document.getElementById('orbitRing');
+const orbitTrack = document.getElementById('orbitTrack');
+const orbitBreadcrumb = document.getElementById('orbitBreadcrumb');
+const breadcrumbItems = document.getElementById('breadcrumbItems');
+const orbitFooter = document.getElementById('orbitFooter');
 const availableInfo = document.getElementById('availableInfo');
-const startBtn = document.getElementById('startBtn');
-const footerInfo = document.getElementById('footerInfo');
+const footerBtns = document.getElementById('footerBtns');
+const startSinavBtn = document.getElementById('startSinavBtn');
+const startFlashBtn = document.getElementById('startFlashBtn');
 const girisBtn = document.getElementById('girisBtn');
 const profilBtn = document.getElementById('profilBtn');
 const profilFoto = document.getElementById('profilFoto');
@@ -51,16 +65,11 @@ onAuthStateChanged(auth, (user) => {
 });
 
 girisBtn.addEventListener('click', async () => {
-  try {
-    await signInWithPopup(auth, new GoogleAuthProvider());
-  } catch (err) {
-    console.error(err);
-  }
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch (err) { console.error(err); }
 });
 
-profilBtn.addEventListener('click', () => {
-  window.location.href = 'profil.html';
-});
+profilBtn.addEventListener('click', () => { window.location.href = 'profil.html'; });
 
 // ============================================
 // VERİ YÜKLEME
@@ -72,188 +81,289 @@ async function veriYukle() {
     state.kurullarData = await kurullarRes.json();
     const snapshot = await getDocs(collection(db, 'sorular'));
     state.sorular = snapshot.docs.map(d => d.data());
-
-    skeleton.hidden = true;
-    filterContent.hidden = false;
-    donemleriCiz();
   } catch (err) {
-    skeleton.hidden = true;
-    filterContent.hidden = false;
     console.error(err);
   }
 }
 
 // ============================================
-// DÖNEM KARTLARI
+// MERKEZ BUTON
 // ============================================
 
-function donemleriCiz() {
-  donemGrid.innerHTML = '';
-  const donemIdleri = new Set(state.sorular.map(s => s.donem));
-  const donemler = state.kurullarData.donemler.filter(d => donemIdleri.has(d.id));
-
-  if (donemler.length === 0) {
-    donemGrid.innerHTML = '<p style="color:var(--text-muted);font-size:14px;">Henüz soru yok.</p>';
-    return;
+orbitCenter.addEventListener('click', () => {
+  if (state.adim === 'baslangic') {
+    modlariGoster();
   }
+});
 
-  donemler.forEach(donem => {
-    const soruSayisi = state.sorular.filter(s => s.donem === donem.id).length;
+// Çift tıkla geri
+let sonTiklama = 0;
+orbitCenter.addEventListener('dblclick', () => {
+  geriGit();
+});
 
-    const kart = document.createElement('button');
-    kart.className = 'donem-kart';
-    kart.innerHTML = `
-      <span class="donem-kart-num">${donem.id}</span>
-      <span class="donem-kart-label">Dönem</span>
-      <span class="donem-kart-sayi">${soruSayisi} soru</span>
-    `;
-    kart.addEventListener('click', () => donemSec(donem.id));
-    donemGrid.appendChild(kart);
-  });
+orbitTrack.addEventListener('dblclick', () => {
+  geriGit();
+});
+
+function geriGit() {
+  switch (state.adim) {
+    case 'mod':
+      state.secim.mod = null;
+      state.adim = 'baslangic';
+      orbitRing.hidden = true;
+      orbitBreadcrumb.hidden = true;
+      orbitFooter.hidden = true;
+      orbitCenter.classList.remove('active');
+      centerLabel.textContent = 'Moscos';
+      break;
+    case 'donem':
+      state.secim.donem = null;
+      state.adim = 'mod';
+      modlariGoster();
+      break;
+    case 'kurul':
+      state.secim.kurulId = null;
+      state.adim = 'donem';
+      donemleriGoster();
+      break;
+    case 'ders':
+      state.secim.ders = null;
+      state.adim = 'kurul';
+      kurullariGoster(state.secim.donem);
+      break;
+  }
+  breadcrumbGuncelle();
 }
 
 // ============================================
-// KURUL KARTLARI
+// ADIMLAR
 // ============================================
 
-function kurullariCiz(donemId) {
-  kurulGrid.innerHTML = '';
-  const donem = state.kurullarData.donemler.find(d => d.id === donemId);
-  if (!donem) return;
+function modlariGoster() {
+  state.adim = 'mod';
+  orbitCenter.classList.add('active');
+  centerLabel.textContent = 'Ne yapalım?';
 
+  const modlar = [
+    { id: 'sinav', label: 'Sınav' },
+    { id: 'flashcard', label: 'Flashcard' }
+  ];
+
+  kartlariCiz(modlar, (mod) => {
+    state.secim.mod = mod.id;
+    state.adim = 'donem';
+    centerLabel.textContent = mod.label;
+    donemleriGoster();
+    breadcrumbGuncelle();
+  });
+
+  orbitRing.hidden = false;
+  orbitFooter.hidden = true;
+  footerBtns.hidden = true;
+  breadcrumbGuncelle();
+}
+
+function donemleriGoster() {
+  state.adim = 'donem';
+
+  const donemIdleri = new Set(state.sorular.map(s => s.donem));
+  const donemler = state.kurullarData.donemler
+    .filter(d => donemIdleri.has(d.id))
+    .map(d => ({
+      id: d.id,
+      label: `Dönem ${d.id}`,
+      sayi: state.sorular.filter(s => s.donem === d.id).length
+    }));
+
+  kartlariCiz(donemler, (donem) => {
+    state.secim.donem = donem.id;
+    state.adim = 'kurul';
+    kurullariGoster(donem.id);
+    breadcrumbGuncelle();
+  });
+}
+
+function kurullariGoster(donemId) {
+  state.adim = 'kurul';
+
+  const donem = state.kurullarData.donemler.find(d => d.id === donemId);
   const kurulIdleri = new Set(
     state.sorular.filter(s => s.donem === donemId).map(s => s.kurulId)
   );
-  const kurullar = donem.kurullar.filter(k => kurulIdleri.has(k.id));
+  const kurullar = donem.kurullar
+    .filter(k => kurulIdleri.has(k.id))
+    .map(k => ({
+      id: k.id,
+      label: k.ad,
+      sayi: state.sorular.filter(s => s.donem === donemId && s.kurulId === k.id).length
+    }));
 
-  kurullar.forEach(kurul => {
-    const soruSayisi = state.sorular.filter(
-      s => s.donem === donemId && s.kurulId === kurul.id
-    ).length;
-
-    const kart = document.createElement('button');
-    kart.className = 'kurul-kart';
-    kart.innerHTML = `
-      <span class="kurul-kart-ad">${kurul.ad}</span>
-      <span class="kurul-kart-sayi">${soruSayisi} soru</span>
-    `;
-    kart.addEventListener('click', () => kurulSec(kurul.id));
-    kurulGrid.appendChild(kart);
+  kartlariCiz(kurullar, (kurul) => {
+    state.secim.kurulId = kurul.id;
+    state.adim = 'ders';
+    dersleriGoster(donemId, kurul.id);
+    breadcrumbGuncelle();
   });
 }
 
-// ============================================
-// DERS CHİP'LERİ
-// ============================================
+function dersleriGoster(donemId, kurulId) {
+  state.adim = 'ders';
 
-function dersleriCiz(donemId, kurulId) {
-  dersChips.innerHTML = '';
-
-  const hepsi = chipOlustur('Tüm dersler', () => dersSec(''));
-  hepsi.classList.add('active');
-  hepsi.dataset.value = '';
-  dersChips.appendChild(hepsi);
-
-  const dersler = new Set(
+  const dersler = [...new Set(
     state.sorular
       .filter(s => s.donem === donemId && s.kurulId === kurulId)
       .map(s => s.ders)
-  );
+  )].map(ders => ({
+    id: ders,
+    label: ders,
+    sayi: state.sorular.filter(
+      s => s.donem === donemId && s.kurulId === kurulId && s.ders === ders
+    ).length
+  }));
 
-  dersler.forEach(ders => {
-    const btn = chipOlustur(ders, () => dersSec(ders));
-    btn.dataset.value = ders;
-    dersChips.appendChild(btn);
+  // "Tüm dersler" seçeneği ekle
+  const tumDersler = {
+    id: '',
+    label: 'Tüm Dersler',
+    sayi: state.sorular.filter(
+      s => s.donem === donemId && s.kurulId === kurulId
+    ).length,
+    tumDersler: true
+  };
+
+  kartlariCiz([tumDersler, ...dersler], (ders) => {
+    state.secim.ders = ders.id;
+    dersSec(ders);
   });
-}
-
-function chipOlustur(metin, onClick) {
-  const btn = document.createElement('button');
-  btn.className = 'chip';
-  btn.textContent = metin;
-  if (onClick) btn.addEventListener('click', onClick);
-  return btn;
-}
-
-// ============================================
-// SEÇİM MANTIĞI
-// ============================================
-
-function donemSec(donemId) {
-  state.secim.donem = donemId;
-  state.secim.kurulId = null;
-  state.secim.ders = '';
-
-  // Dönem kartını aktif yap
-  donemGrid.querySelectorAll('.donem-kart').forEach(k => {
-    k.classList.toggle('active', parseInt(k.querySelector('.donem-kart-num').textContent) === donemId);
-  });
-
-  kurullariCiz(donemId);
-
-  // Kurul adımına geç
-  stepDonem.hidden = true;
-  stepKurul.hidden = false;
-  stepDers.hidden = true;
-  footerInfo.hidden = true;
-
-  durumGuncelle();
-}
-
-function kurulSec(kurulId) {
-  state.secim.kurulId = kurulId;
-  state.secim.ders = '';
-
-  kurulGrid.querySelectorAll('.kurul-kart').forEach(k => {
-    const ad = k.querySelector('.kurul-kart-ad').textContent;
-    const kurul = state.kurullarData.donemler
-      .flatMap(d => d.kurullar)
-      .find(ku => ku.ad === ad);
-    k.classList.toggle('active', kurul?.id === kurulId);
-  });
-
-  dersleriCiz(state.secim.donem, kurulId);
-
-  stepDers.hidden = false;
-  footerInfo.hidden = false;
-
-  durumGuncelle();
 }
 
 function dersSec(ders) {
-  state.secim.ders = ders;
-  dersChips.querySelectorAll('.chip').forEach(b => {
-    b.classList.toggle('active', b.dataset.value === ders);
+  // Aktif kartı işaretle
+  orbitTrack.querySelectorAll('.orbit-card').forEach(k => {
+    k.classList.toggle('active', k.dataset.id === ders.id);
   });
-  durumGuncelle();
+
+  const uygun = uygunSorulariSay();
+  orbitFooter.hidden = false;
+  availableInfo.textContent = `${uygun} soru`;
+  availableInfo.classList.add('ready');
+
+  if (uygun > 0) {
+    footerBtns.hidden = false;
+  } else {
+    footerBtns.hidden = true;
+    availableInfo.textContent = 'Bu seçimde soru yok';
+    availableInfo.classList.remove('ready');
+  }
+
+  breadcrumbGuncelle();
 }
 
-// Geri butonları
-document.getElementById('geriDonem').addEventListener('click', () => {
-  state.secim.donem = null;
-  state.secim.kurulId = null;
-  state.secim.ders = '';
-  stepDonem.hidden = false;
-  stepKurul.hidden = true;
-  stepDers.hidden = true;
-  footerInfo.hidden = true;
-  durumGuncelle();
-});
+// ============================================
+// KARTLARI ÇİZ + SWIPE
+// ============================================
 
-document.getElementById('geriKurul').addEventListener('click', () => {
-  state.secim.kurulId = null;
-  state.secim.ders = '';
-  stepKurul.hidden = true;
-  stepDers.hidden = true;
-  footerInfo.hidden = true;
+function kartlariCiz(items, onSecim) {
+  orbitTrack.innerHTML = '';
 
-  // Dönem adımına dön ama seçili kalma
-  stepDonem.hidden = false;
-  durumGuncelle();
-});
+  items.forEach((item, i) => {
+    const kart = document.createElement('button');
+    kart.className = 'orbit-card' + (item.tumDersler ? ' all-card' : '');
+    kart.dataset.id = item.id;
+    kart.style.animationDelay = `${i * 0.05}s`;
+    kart.innerHTML = `
+      <span class="orbit-card-text">${item.label}</span>
+      ${item.sayi !== undefined ? `<span class="orbit-card-badge">${item.sayi}</span>` : ''}
+    `;
+    kart.addEventListener('click', () => {
+      orbitTrack.querySelectorAll('.orbit-card').forEach(k => k.classList.remove('active'));
+      kart.classList.add('active');
+      onSecim(item);
+    });
+    orbitTrack.appendChild(kart);
+  });
+
+  // Ortaya scroll
+  setTimeout(() => {
+    const firstCard = orbitTrack.querySelector('.orbit-card');
+    if (firstCard) firstCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }, 100);
+
+  swipeEkle();
+}
+
+// Swipe/drag desteği
+function swipeEkle() {
+  let startX = 0;
+  let scrollStart = 0;
+  let isDragging = false;
+
+  orbitTrack.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = e.pageX;
+    scrollStart = orbitTrack.scrollLeft;
+    orbitTrack.classList.add('grabbing');
+  });
+
+  orbitTrack.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    orbitTrack.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+
+  orbitTrack.addEventListener('mouseup', () => {
+    isDragging = false;
+    orbitTrack.classList.remove('grabbing');
+  });
+
+  orbitTrack.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX;
+    scrollStart = orbitTrack.scrollLeft;
+  }, { passive: true });
+
+  orbitTrack.addEventListener('touchmove', (e) => {
+    orbitTrack.scrollLeft = scrollStart - (e.touches[0].pageX - startX);
+  }, { passive: true });
+}
 
 // ============================================
-// DURUM
+// BREADCRUMB
+// ============================================
+
+function breadcrumbGuncelle() {
+  breadcrumbItems.innerHTML = '';
+
+  const adimlar = [];
+  if (state.secim.mod) adimlar.push({ label: state.secim.mod === 'sinav' ? 'Sınav' : 'Flashcard', adim: 'mod' });
+  if (state.secim.donem) adimlar.push({ label: `D${state.secim.donem}`, adim: 'donem' });
+  if (state.secim.kurulId) adimlar.push({ label: state.secim.kurulId, adim: 'kurul' });
+  if (state.secim.ders !== null && state.adim === 'ders') {
+    adimlar.push({ label: state.secim.ders || 'Tüm Dersler', adim: 'ders' });
+  }
+
+  if (adimlar.length === 0) {
+    orbitBreadcrumb.hidden = true;
+    return;
+  }
+
+  orbitBreadcrumb.hidden = false;
+  adimlar.forEach((a, i) => {
+    const span = document.createElement('span');
+    span.className = 'breadcrumb-item';
+    span.textContent = a.label;
+    breadcrumbItems.appendChild(span);
+
+    if (i < adimlar.length - 1) {
+      const sep = document.createElement('span');
+      sep.className = 'breadcrumb-sep';
+      sep.textContent = '›';
+      breadcrumbItems.appendChild(sep);
+    }
+  });
+}
+
+// ============================================
+// YARDIMCILAR
 // ============================================
 
 function uygunSorulariSay() {
@@ -266,25 +376,14 @@ function uygunSorulariSay() {
   }).length;
 }
 
-function durumGuncelle() {
-  const uygun = uygunSorulariSay();
-  if (uygun === 0) {
-    availableInfo.textContent = '';
-    availableInfo.classList.remove('ready');
-    startBtn.disabled = true;
-    return;
-  }
+// ============================================
+// BAŞLAT
+// ============================================
 
-  // Soru sayısını dinamik tut
-  state.secim.sayi = uygun;
-  availableInfo.textContent = `${uygun} soru`;
-  availableInfo.classList.add('ready');
-  startBtn.disabled = false;
-}
-
-startBtn.addEventListener('click', () => {
+startSinavBtn.addEventListener('click', () => {
   const veri = {
     ...state.secim,
+    sayi: uygunSorulariSay(),
     sorular: state.sorular,
     kullaniciId: state.kullanici?.uid || null
   };
@@ -292,4 +391,21 @@ startBtn.addEventListener('click', () => {
   window.location.href = `sinav.html?data=${encodeURIComponent(JSON.stringify(veri))}`;
 });
 
-veriYukle();
+startFlashBtn.addEventListener('click', () => {
+  const veri = {
+    ...state.secim,
+    sorular: state.sorular
+  };
+  sessionStorage.setItem('flashSecim', JSON.stringify(veri));
+  window.location.href = 'flashcard.html';
+});
+
+// ============================================
+// INIT
+// ============================================
+
+async function init() {
+  await veriYukle();
+}
+
+init();
