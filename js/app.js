@@ -686,22 +686,13 @@ let aktifHologramSvg = null;
 function hologramGoster(svgContent, renk) {
   hologramSvg.innerHTML = svgContent;
   hologramSvg.style.color = renk || 'rgba(200,119,26,0.9)';
-  hologramBeam.hidden = false;
-  // Küçük gecikme ile görünür yap
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      hologramBeam.classList.add('visible');
-    });
-  });
+  hologramBeam.classList.add('visible');
 }
 
 function hologramGizle() {
   hologramBeam.classList.remove('visible');
-  setTimeout(() => {
-    hologramBeam.hidden = true;
-    aktifHologramSvg = null;
-  }, 600);
 }
+
 
 // ============================================
 // INIT
