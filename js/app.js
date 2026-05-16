@@ -172,10 +172,13 @@ if (isBottom && isOpen && state.adim === 'mod') {
 function kartıEnUsteGetir(index) {
   const n = orbitBtns.length;
   const baseAngle = (360 / n) * index;
-  const fark = (((-baseAngle - currentAngle) % 360) + 360) % 360;
+  // En alta getir (180 derece — bize yakın)
+  const hedef = 180;
+  const fark = ((( hedef - baseAngle - currentAngle) % 360) + 360) % 360;
   targetAngle = currentAngle + (fark > 180 ? fark - 360 : fark);
   startAnimate();
 }
+
 
 function kartlariCiz(items, onSecim) {
   orbitBtns.forEach(b => b.remove());
@@ -343,6 +346,7 @@ function menuAc() {
 }
 
 function menuKapat() {
+  hologramGizle();
   isOpen = false;
   centerBtn.classList.remove('open');
   centerBtn.classList.remove('basla');
@@ -358,6 +362,7 @@ function menuKapat() {
 }
 
 function geriGit() {
+  hologramGizle();
   centerNormaleGeri();
   switch (state.adim) {
     case 'donem':
@@ -682,12 +687,21 @@ function hologramGoster(svgContent, renk) {
   hologramSvg.innerHTML = svgContent;
   hologramSvg.style.color = renk || 'rgba(200,119,26,0.9)';
   hologramBeam.hidden = false;
+  // Küçük gecikme ile görünür yap
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      hologramBeam.classList.add('visible');
+    });
+  });
 }
 
 function hologramGizle() {
-  hologramBeam.hidden = true;
+  hologramBeam.classList.remove('visible');
+  setTimeout(() => {
+    hologramBeam.hidden = true;
+    aktifHologramSvg = null;
+  }, 600);
 }
-
 
 // ============================================
 // INIT

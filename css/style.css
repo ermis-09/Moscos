@@ -533,6 +533,12 @@ body {
   align-items: center;
   z-index: 20;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.hologram-beam.visible {
+  opacity: 1;
 }
 
 .hologram-symbol {
