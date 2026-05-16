@@ -75,20 +75,6 @@ profilBtn.addEventListener('click', () => { window.location.href = 'profil.html'
 // ============================================
 
 async function veriYukle() {
-  let yukleniyorAnim = true;
-  let yuklenmeAcisi = 0;
-
-  function yuklenmeAnimasyonu() {
-    if (!yukleniyorAnim) return;
-    yuklenmeAcisi += 0.8;
-    currentAngle = yuklenmeAcisi;
-    targetAngle = yuklenmeAcisi;
-    const centerM = document.querySelector('.center-m');
-    if (centerM) centerM.style.transform = `rotate(${yuklenmeAcisi}deg)`;
-    requestAnimationFrame(yuklenmeAnimasyonu);
-  }
-  yuklenmeAnimasyonu();
-
   try {
     const [kurullarRes, soruSnap, cikmisSnap] = await Promise.all([
       fetch('data/kurullar.json'),
@@ -100,12 +86,9 @@ async function veriYukle() {
     state.cikmislar = cikmisSnap.docs.map(d => d.data());
   } catch (err) {
     console.error(err);
-  } finally {
-    yukleniyorAnim = false;
-    const centerM = document.querySelector('.center-m');
-    if (centerM) centerM.style.transform = '';
   }
 }
+
 
 // ============================================
 // ÇARK MEKANİZMASI
