@@ -161,7 +161,7 @@ function optikEkraniGoster(sonuc) {
   });
 
   document.getElementById('optikYeniBtn').addEventListener('click', () => {
-    window.location.href = 'simulasyon.html';
+    window.location.href = 'index.html';
   });
 }
 

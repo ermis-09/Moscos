@@ -308,10 +308,16 @@ wheel.addEventListener('click', (e) => {
   if (e.target === centerBtn || centerBtn.contains(e.target)) return;
   const simdi = Date.now();
   if (simdi - sonTik < 350) {
+    // Başla modunda bile geri dönebilsin
+    if (centerBtn.classList.contains('basla')) {
+      centerNormaleGeri();
+      footerBtns.hidden = true;
+    }
     geriGit();
   }
   sonTik = simdi;
 });
+
 
 // ============================================
 // MERKEZ BUTON
