@@ -4,7 +4,7 @@
    ============================================ */
 
 const exam = {
-  mod: 'sinav', // 'sinav' | 'simulasyon'
+  mod: 'sinav',
   sorular: [],
   aktifIndex: 0,
   cevaplar: {}
@@ -22,10 +22,6 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const finishBtn = document.getElementById('finishBtn');
 const exitBtn = document.getElementById('exitBtn');
-
-// ============================================
-// BAŞLA
-// ============================================
 
 function basla() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -78,9 +74,14 @@ function simulasyonBasla() {
   soruyuGoster(0);
 }
 
-// ============================================
-// SORU GÖSTER
-// ============================================
+function karistir(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 function soruyuGoster(index) {
   exam.aktifIndex = index;
@@ -117,7 +118,6 @@ function soruyuGoster(index) {
     btn.dataset.harf = harf;
 
     if (exam.mod === 'simulasyon') {
-      // Simülasyon: cevap gösterme, sadece işaretle
       if (kullaniciCevap === harf) {
         btn.classList.add('selected');
       }
@@ -126,7 +126,6 @@ function soruyuGoster(index) {
         soruyuGoster(index);
       });
     } else {
-      // Normal mod: anında geri bildirim
       if (kullaniciCevap) {
         btn.disabled = true;
         if (harf === soru.dogruCevap) {
@@ -144,7 +143,6 @@ function soruyuGoster(index) {
     optionsBox.appendChild(btn);
   });
 
-  // Açıklama — sadece normal modda ve cevap verildikten sonra
   if (exam.mod === 'sinav' && kullaniciCevap && soru.aciklama) {
     rationaleText.textContent = soru.aciklama;
     rationale.hidden = false;
@@ -157,18 +155,10 @@ function soruyuGoster(index) {
   finishBtn.hidden = !sonSoru;
 }
 
-// ============================================
-// CEVAP
-// ============================================
-
 function cevapVer(harf) {
   exam.cevaplar[exam.aktifIndex] = harf;
   soruyuGoster(exam.aktifIndex);
 }
-
-// ============================================
-// NAVİGASYON
-// ============================================
 
 prevBtn.addEventListener('click', () => {
   if (exam.aktifIndex > 0) soruyuGoster(exam.aktifIndex - 1);
