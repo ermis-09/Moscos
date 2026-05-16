@@ -51,7 +51,7 @@ body {
   background: #0F0E0A;
   display: flex;
   justify-content: center;
-  align-items: stretch;
+  align-items: flex-start;
   min-height: 100vh;
   min-height: 100dvh;
   color: var(--text);
@@ -66,6 +66,7 @@ body {
 .app-frame {
   width: 100%;
   max-width: 440px;
+  margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
