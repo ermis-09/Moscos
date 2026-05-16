@@ -4,7 +4,7 @@
 
 import { db, auth } from '../firebase.js';
 import {
-  collection, getDocs, orderBy, query
+  collection, getDocs, query
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import {
   GoogleAuthProvider, signInWithPopup,
@@ -58,7 +58,6 @@ async function veriYukle(userId) {
   try {
     const q = query(
       collection(db, 'kullanici_sonuclari', userId, 'sonuclar'),
-      orderBy('tarih', 'desc')
     );
     const snapshot = await getDocs(q);
     const sonuclar = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));

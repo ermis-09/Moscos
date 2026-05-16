@@ -105,7 +105,9 @@ body {
   text-align: center;
   position: relative;
   flex-shrink: 0;
+  padding-top: 72px;
 }
+
 
 .brand {
   display: flex;
