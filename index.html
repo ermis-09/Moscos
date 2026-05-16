@@ -5,79 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="theme-color" content="#1C1A15" />
   <title>Moscos · Soru Bankası</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="manifest" href="manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Moscos" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="retro-body">
-<div class="retro-frame">
+<body>
+<div class="app-frame">
 
   <!-- Köşe süsler -->
-  <div class="r-corner tl"></div>
-  <div class="r-corner tr"></div>
-  <div class="r-corner bl"></div>
-  <div class="r-corner br"></div>
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
 
   <!-- Üst bar -->
-  <header class="r-header">
-    <button class="r-giris-btn" id="girisBtn">Giriş</button>
-    <div class="r-brand">
-      <span class="r-brand-name">M<span class="r-brand-os">os</span>cos</span>
-      <span class="r-brand-sub">Soru Bankası</span>
+  <header class="top-bar">
+    <button class="giris-btn" id="girisBtn">Giriş Yap</button>
+    <div class="profil-btn" id="profilBtn" hidden>
+      <img class="profil-foto" id="profilFoto" src="" alt="" />
+      <span class="profil-ad" id="profilAd"></span>
     </div>
-    <div class="r-header-right">
-      <div class="r-profil-btn" id="profilBtn" hidden>
-        <img class="r-profil-foto" id="profilFoto" src="" alt="" />
-      </div>
-      <a href="admin.html" class="r-admin-btn">⚙</a>
+    <div class="brand">
+      <span class="brand-name">M<span class="brand-os">os</span>cos</span>
+      <span class="brand-sub">Soru Bankası</span>
     </div>
+    <a href="admin.html" class="admin-link">⚙</a>
   </header>
 
-  <!-- Çark alanı -->
-  <main class="r-main">
-
-    <!-- Dekoratif grid -->
-    <div class="r-grid-bg"></div>
+  <!-- Ana çark alanı -->
+  <main class="wheel-area">
 
     <!-- Dişli halka -->
-    <div class="r-gear-ring"></div>
+    <div class="gear-ring"></div>
 
     <!-- Çark -->
-    <div class="r-wheel" id="wheel">
-
-      <!-- Yörünge butonları JS ile eklenecek -->
-
+    <div class="wheel" id="wheel">
       <!-- Merkez buton -->
-      <div class="r-center-btn" id="centerBtn">
-        <span class="r-center-m">M</span>
-        <span class="r-center-hint" id="centerHint">aç</span>
+      <div class="center-btn" id="centerBtn">
+        <span class="center-m">M</span>
+        <span class="center-hint" id="centerHint">aç</span>
       </div>
-
     </div>
 
     <!-- Breadcrumb -->
-    <div class="r-breadcrumb" id="breadcrumb" hidden>
-      <div class="r-breadcrumb-inner" id="breadcrumbInner"></div>
+    <div class="breadcrumb" id="breadcrumb" hidden>
+      <div class="breadcrumb-inner" id="breadcrumbInner"></div>
     </div>
 
   </main>
 
   <!-- Alt bilgi -->
-  <footer class="r-footer">
-    <div class="r-info" id="infoArea">
-      <p class="r-info-text" id="infoText">Çarkı döndür veya ortaya bas</p>
-    </div>
-    <div class="r-footer-btns" id="footerBtns" hidden>
-      <button class="r-start-btn" id="startBtn">
+  <footer class="bottom-bar">
+    <div class="info-text" id="infoText">Yükleniyor...</div>
+    <div class="footer-btns" id="footerBtns" hidden>
+      <button class="start-btn" id="startBtn">
         Başla <span>→</span>
       </button>
     </div>
+    <div class="drag-hint">◀ sürükle ▶</div>
   </footer>
 
 </div>
