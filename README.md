@@ -1,55 +1,16 @@
-# Moscos — Soru Bankası
+# React + Vite
 
-> *Çoktan atılmış bir mızrak.*
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Tıp fakültesi kurul sınavlarına yönelik kişisel soru bankası ve sınav hazırlık platformu.
+Currently, two official plugins are available:
 
----
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Özellikler
+## React Compiler
 
-### 📝 Soru Bankası & Sınav Modu
-- Dönem, kurul ve derse göre filtrelenmiş soru havuzu
-- Rastgele karıştırılmış sorularla mini sınav
-- Anında doğru/yanlış geri bildirimi ve açıklamalar
-- Sınav sonunda ders bazında performans analizi
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### 🏛️ Simülasyon Modu
-- Gerçek çıkmış sınav soruları, orijinal sırasıyla
-- Yıl ve sınava göre filtreleme
-- Sınav bitmeden geri bildirim yok — gerçek sınav hissi
-- Optik okuyucu tarzı sonuç ekranı ile net hesaplama
+## Expanding the ESLint configuration
 
-### 👤 Kişisel Profil & İstatistikler
-- Google hesabıyla giriş
-- Her sınavın otomatik kaydedilmesi
-- Geçmiş sınav sonuçları ve gelişim takibi
-- Ders bazında performans grafikleri
-
-### ⚙️ Admin Paneli
-- Google Auth korumalı
-- Soru ekleme, düzenleme ve silme
-- Çıkmış sınav soruları yönetimi
-- Firebase Firestore entegrasyonu
-
----
-
-## Teknoloji
-
-| Katman | Teknoloji |
-|--------|-----------|
-| Frontend | HTML, CSS, Vanilla JS |
-| Veritabanı | Firebase Firestore |
-| Auth | Firebase Authentication (Google) |
-| Hosting | Netlify |
-| PWA | Service Worker + Web Manifest |
-
----
-
-## Kurulum
-
-Proje tamamen statik — klonla ve tarayıcıda aç.
-
-```bash
-git clone https://github.com/kullaniciadi/moscov.git
-cd moscov
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
