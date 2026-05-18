@@ -11,6 +11,7 @@ export default function SimFiltre() {
   const cikmislar = useMoscosStore(s => s.cikmislar)
   const setSecim = useMoscosStore(s => s.setSecim)
   const sinavBaslat = useMoscosStore(s => s.sinavBaslat)
+  const anaSayfaIndex = useMoscosStore(s => s.anaSayfaIndex)
 
   const [donem, setDonem] = useState(null)
 const [yil, setYil] = useState(null)
@@ -79,14 +80,19 @@ const sayi = (yil && sinav)
 
       {/* Header */}
       <header className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0 relative z-10">
-        <button
-          onClick={() => navigate(-1)}
-          className="w-9 h-9 rounded-full flex items-center justify-center"
-          style={{ background: `${t.accent}18`, border: `1px solid ${t.border}`, color: t.accent2 }}
-        >←</button>
-        <span className="font-display text-base font-semibold" style={{ color: t.text }}>Simülasyon</span>
-        <div className="w-9" />
-      </header>
+  <button
+    onClick={() => {
+  sessionStorage.setItem('anaIndex', anaSayfaIndex)
+  navigate('/')
+}}
+
+    className="w-9 h-9 rounded-full flex items-center justify-center"
+    style={{ background: `${t.accent}18`, border: `1px solid ${t.border}`, color: t.accent2 }}
+  >←</button>
+  <span className="font-display text-base font-semibold" style={{ color: t.text }}>Simülasyon</span>
+  <div className="w-9" />
+</header>
+
 
       {/* İçerik */}
       <main className="flex-1 px-5 pb-6 flex flex-col gap-5 relative z-10 overflow-y-auto">

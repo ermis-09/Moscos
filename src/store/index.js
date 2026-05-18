@@ -30,8 +30,11 @@ export const useMoscosStore = create((set, get) => ({
   tamamlandi: false,
 },
 
+anaSayfaIndex: 0,
 
   // Actions
+setAnaSayfaIndex: (index) => set({ anaSayfaIndex: index }),
+
   setVeri: (key, val) => set({ [key]: val }),
 
   setSecim: (key, val) => set(state => ({
@@ -65,6 +68,7 @@ export const useMoscosStore = create((set, get) => ({
 sinavTamamla: () => set(state => ({
   aktivSinav: { ...state.aktivSinav, tamamlandi: true }
 })),
+
 
 
   // Filtrelenmiş sorular

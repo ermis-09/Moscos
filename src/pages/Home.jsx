@@ -116,7 +116,7 @@ function Drawer({ open, onClose, navigate, theme: t }) {
         </div>
       ))}
       <div className="mt-auto text-center text-xs font-display tracking-widest" style={{ color: `${t.accent}50` }}>
-        Moscos · v2.0
+        Moscos · v2.1
       </div>
     </motion.div>
   )
@@ -154,7 +154,6 @@ function Page({ theme, decoNum, children, triangleColor }) {
   )
 }
 
-// Günlük flashcard — tarih bazlı sabit
 function GunlukKart({ flashcardlar, t }) {
   const [cevrildimi, setCevrildimi] = useState(false)
   if (!flashcardlar.length) return null
@@ -162,17 +161,15 @@ function GunlukKart({ flashcardlar, t }) {
   const kart = flashcardlar[gun % flashcardlar.length]
 
   return (
-    <div
-      onClick={() => setCevrildimi(f => !f)}
-      className="rounded-2xl cursor-pointer relative overflow-hidden"
+    <div onClick={() => setCevrildimi(f => !f)}
+      className="rounded-2xl cursor-pointer relative flex-shrink-0"
       style={{
         height: 140,
         background: cevrildimi ? t.bg3 : t.bg2,
         border: `1.5px solid ${cevrildimi ? t.accent : t.border}`,
         transition: 'all 0.3s',
         boxShadow: cevrildimi ? `0 0 20px ${t.accent}30` : 'none',
-      }}
-    >
+      }}>
       <div className="absolute inset-0 flex flex-col items-center justify-center p-5 gap-2">
         <span className="text-[9px] font-bold tracking-widest uppercase absolute top-3 left-4"
           style={{ color: cevrildimi ? t.accent2 : t.accent }}>
@@ -190,7 +187,6 @@ function GunlukKart({ flashcardlar, t }) {
   )
 }
 
-// Sınav sayfası için rastgele soru önizlemesi
 function RastgeleSoru({ sorular, t }) {
   const [goster, setGoster] = useState(false)
   if (!sorular.length) return null
@@ -198,9 +194,9 @@ function RastgeleSoru({ sorular, t }) {
   const soru = sorular[gun % sorular.length]
 
   return (
-    <div className="rounded-2xl p-4 flex flex-col gap-3 flex-1"
+    <div className="rounded-2xl p-4 flex flex-col gap-3 flex-1 overflow-y-auto"
       style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-shrink-0">
         <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
           Günün Sorusu
         </span>
@@ -208,11 +204,9 @@ function RastgeleSoru({ sorular, t }) {
           {soru.ders}
         </span>
       </div>
-
-      <p className="font-display text-sm font-medium leading-relaxed" style={{ color: t.text }}>
+      <p className="font-display text-sm font-medium leading-relaxed flex-shrink-0" style={{ color: t.text }}>
         {soru.soru}
       </p>
-
       <div className="flex flex-col gap-1.5">
         {['A','B','C','D','E'].map(harf => {
           const metin = soru.secenekler?.[harf]
@@ -220,7 +214,7 @@ function RastgeleSoru({ sorular, t }) {
           const dogru = goster && harf === soru.dogruCevap
           return (
             <div key={harf}
-              className="flex items-start gap-2 px-3 py-2 rounded-lg"
+              className="flex items-start gap-2 px-3 py-2 rounded-lg flex-shrink-0"
               style={{
                 background: dogru ? 'rgba(46,139,87,0.2)' : t.bg3,
                 border: `1px solid ${dogru ? '#2E8B57' : t.border}`,
@@ -236,55 +230,21 @@ function RastgeleSoru({ sorular, t }) {
           )
         })}
       </div>
-
       {!goster ? (
         <button onClick={() => setGoster(true)}
-          className="text-xs font-semibold font-display py-2 rounded-xl"
+          className="text-xs font-semibold font-display py-2 rounded-xl flex-shrink-0"
           style={{ background: `${t.accent}20`, color: t.accent }}>
           Cevabı Göster →
         </button>
-      ) : (
-        <div className="rounded-xl px-3 py-2" style={{ background: `${t.accent}15`, border: `1px solid ${t.border}` }}>
-          {soru.aciklama && (
-            <p className="text-xs leading-relaxed" style={{ color: t.dim }}>{soru.aciklama}</p>
-          )}
+      ) : soru.aciklama ? (
+        <div className="rounded-xl px-3 py-2 flex-shrink-0" style={{ background: `${t.accent}15`, border: `1px solid ${t.border}` }}>
+          <p className="text-xs leading-relaxed" style={{ color: t.dim }}>{soru.aciklama}</p>
         </div>
-      )}
+      ) : null}
     </div>
   )
 }
 
-
-// Ders pill listesi
-function DersPilleri({ sorular, t }) {
-  const dersler = Object.entries(
-    sorular.reduce((acc, s) => {
-      acc[s.ders] = (acc[s.ders] || 0) + 1
-      return acc
-    }, {})
-  ).sort((a, b) => b[1] - a[1])
-
-  if (!dersler.length) return null
-
-  return (
-    <div className="flex flex-col gap-2">
-      <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
-        Konu Dağılımı
-      </span>
-      <div className="flex flex-wrap gap-1.5">
-        {dersler.map(([ders, sayi]) => (
-          <span key={ders}
-            className="px-3 py-1 rounded-full font-display text-xs font-semibold"
-            style={{ background: `${t.accent}15`, border: `1px solid ${t.border}`, color: t.text }}>
-            {ders} <span style={{ color: t.accent2 }}>{sayi}</span>
-          </span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-// Simülasyon arşiv listesi
 function SimulasyonArsiv({ cikmislar, t, navigate }) {
   const sinavlar = Object.entries(
     cikmislar.reduce((acc, s) => {
@@ -332,6 +292,7 @@ export default function Home() {
   const kullanici = useMoscosStore(s => s.kullanici)
   const aktivSinav = useMoscosStore(s => s.aktivSinav)
   const yukleniyor = useMoscosStore(s => s.yukleniyor)
+  const setAnaSayfaIndex = useMoscosStore(s => s.setAnaSayfaIndex)
 
   const [sonSinav, setSonSinav] = useState(null)
 
@@ -363,17 +324,28 @@ export default function Home() {
   ]
 
   useEffect(() => {
+  const idx = parseInt(sessionStorage.getItem('anaIndex') || '0')
+  if (idx > 0 && scrollRef.current) {
+    scrollRef.current.scrollTo({ top: idx * window.innerHeight, behavior: 'instant' })
+  }
+}, [])
+
+  useEffect(() => {
     const el = scrollRef.current
     if (!el) return
     const handler = () => {
-      const idx = Math.round(el.scrollTop / window.innerHeight)
-      setCurrentPage(idx)
-    }
+  const idx = Math.round(el.scrollTop / window.innerHeight)
+  setCurrentPage(idx)
+  setAnaSayfaIndex(idx)
+  sessionStorage.setItem('anaIndex', idx)
+}
+
     el.addEventListener('scroll', handler, { passive: true })
     return () => el.removeEventListener('scroll', handler)
   }, [])
 
   const currentTheme = themes[pages[currentPage].theme]
+  const motivasyon = gunlukMotivasyonAl()
 
   const sonSinavLabel = sonSinav
     ? sonSinav.mod === 'simulasyon'
@@ -381,13 +353,19 @@ export default function Home() {
       : `D${sonSinav.donem} · ${sonSinav.kurulId}${sonSinav.ders ? ' · ' + sonSinav.ders : ''}`
     : null
 
-  const motivasyon = gunlukMotivasyonAl()
+  function geriDon(sayfaIndex) {
+    navigate('/')
+    setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTo({ top: sayfaIndex * window.innerHeight, behavior: 'instant' })
+      }
+    }, 50)
+  }
 
   return (
     <div className="w-full max-w-[390px] mx-auto relative overflow-hidden" style={{ height: '100dvh' }}>
       <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navigate={navigate} theme={currentTheme} />
 
-      {/* Sabit header */}
       <header className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 pb-3 z-20">
         <Hamburger onClick={() => setDrawerOpen(true)} dim={currentTheme.dim} accent={currentTheme.accent} />
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
@@ -401,7 +379,6 @@ export default function Home() {
         </span>
       </header>
 
-      {/* Sayfa göstergesi */}
       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-20">
         {pages.map((_, i) => (
           <div key={i}
@@ -412,15 +389,13 @@ export default function Home() {
         ))}
       </div>
 
-      <div ref={scrollRef} className="w-full h-full overflow-y-scroll"
-        style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}>
+      <div ref={scrollRef} id="anaScroll" className="w-full h-full overflow-y-scroll"
+  style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}>
 
         {/* ANA SAYFA */}
         <Page theme="home" decoNum="01" triangleColor="rgba(200,119,26,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
-
-            {/* Motivasyon */}
-            <div className="rounded-2xl px-4 py-3 flex items-start gap-3"
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
+            <div className="rounded-2xl px-4 py-3 flex items-start gap-3 flex-shrink-0"
               style={{ background: t0.bg2, border: `1px solid ${t0.border}` }}>
               <span style={{ color: t0.accent, fontSize: 18, flexShrink: 0 }}>✦</span>
               <p className="font-display text-sm italic leading-relaxed" style={{ color: t0.text }}>
@@ -428,8 +403,7 @@ export default function Home() {
               </p>
             </div>
 
-            {/* İstatistik kartı */}
-            <div className="rounded-2xl p-4 flex flex-col gap-3"
+            <div className="rounded-2xl p-4 flex flex-col gap-3 flex-shrink-0"
               style={{ background: t0.bg2, border: `1px solid ${t0.border}` }}>
               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: '#A87840' }}>
                 Genel Durum
@@ -484,35 +458,30 @@ export default function Home() {
 
         {/* SINAV SAYFASI */}
         <Page theme="sinav" decoNum="02" triangleColor="rgba(58,124,200,0.1)">
-  <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto min-h-0">
-    <div>
-      <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t1.text, letterSpacing: '-0.025em' }}>Sınav Modu</h1>
-      <p className="text-xs leading-relaxed" style={{ color: t1.dim }}>Anında geri bildirim ve açıklamalarla çalış.</p>
-    </div>
-
-    <RastgeleSoru sorular={sorularData} t={t1} />
-
-    <motion.button whileTap={{ scale: 0.98 }}
-      onClick={() => navigate('/sinav/filtre')}
-      className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
-      style={{ background: `linear-gradient(135deg, ${t1.accent}, #204878)`, color: '#E8F4FF', boxShadow: '0 6px 20px rgba(58,124,200,0.3)' }}>
-      Sınava Başla <span>→</span>
-    </motion.button>
-  </main>
-</Page>
-
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
+            <div className="flex-shrink-0">
+              <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t1.text, letterSpacing: '-0.025em' }}>Sınav Modu</h1>
+              <p className="text-xs leading-relaxed" style={{ color: t1.dim }}>Anında geri bildirim ve açıklamalarla çalış.</p>
+            </div>
+            <RastgeleSoru sorular={sorularData} t={t1} />
+            <motion.button whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/sinav/filtre')}
+              className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
+              style={{ background: `linear-gradient(135deg, ${t1.accent}, #204878)`, color: '#E8F4FF', boxShadow: '0 6px 20px rgba(58,124,200,0.3)' }}>
+              Sınava Başla <span>→</span>
+            </motion.button>
+          </main>
+        </Page>
 
         {/* FLASHCARD SAYFASI */}
         <Page theme="flash" decoNum="03" triangleColor="rgba(46,139,87,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
-            <div>
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
+            <div className="flex-shrink-0">
               <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t2.text, letterSpacing: '-0.025em' }}>Flashcard</h1>
               <p className="text-xs leading-relaxed" style={{ color: t2.dim }}>Kavramları kart çevirerek çalış.</p>
             </div>
-
             <GunlukKart flashcardlar={flashcardlar} t={t2} />
-
-            <div className="rounded-2xl p-4 flex flex-col gap-2"
+            <div className="rounded-2xl p-4 flex flex-col gap-2 flex-shrink-0"
               style={{ background: t2.bg2, border: `1px solid ${t2.border}` }}>
               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t2.accent }}>Kart Havuzu</span>
               <div className="grid grid-cols-2 gap-2">
@@ -527,39 +496,32 @@ export default function Home() {
                 ))}
               </div>
             </div>
-
-            <div className="mt-auto">
-              <motion.button whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/flashcard/filtre')}
-                className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                style={{ background: `linear-gradient(135deg, ${t2.accent}, #1A5030)`, color: '#E8FFF0', boxShadow: '0 6px 20px rgba(46,139,87,0.3)' }}>
-                Çalışmaya Başla <span>→</span>
-              </motion.button>
-            </div>
+            <motion.button whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/flashcard/filtre')}
+              className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0 mt-auto"
+              style={{ background: `linear-gradient(135deg, ${t2.accent}, #1A5030)`, color: '#E8FFF0', boxShadow: '0 6px 20px rgba(46,139,87,0.3)' }}>
+              Çalışmaya Başla <span>→</span>
+            </motion.button>
           </main>
         </Page>
 
         {/* SİMÜLASYON SAYFASI */}
         <Page theme="sim" decoNum="04" triangleColor="rgba(139,58,200,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
-            <div>
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
+            <div className="flex-shrink-0">
               <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t3.text, letterSpacing: '-0.025em' }}>Simülasyon</h1>
               <p className="text-xs leading-relaxed" style={{ color: t3.dim }}>Gerçek sınav hissiyle çıkmış soruları çöz.</p>
             </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t3.accent }}>Arşiv</span>
+            <div className="flex flex-col gap-2 flex-1 overflow-y-auto">
+              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase flex-shrink-0" style={{ color: t3.accent }}>Arşiv</span>
               <SimulasyonArsiv cikmislar={cikmislar} t={t3} navigate={navigate} />
             </div>
-
-            <div className="mt-auto">
-              <motion.button whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/simulasyon/filtre')}
-                className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                style={{ background: `linear-gradient(135deg, ${t3.accent}, #501878)`, color: '#F8E8FF', boxShadow: '0 6px 20px rgba(139,58,200,0.3)' }}>
-                Simülasyona Başla <span>→</span>
-              </motion.button>
-            </div>
+            <motion.button whileTap={{ scale: 0.98 }}
+              onClick={() => navigate('/simulasyon/filtre')}
+              className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
+              style={{ background: `linear-gradient(135deg, ${t3.accent}, #501878)`, color: '#F8E8FF', boxShadow: '0 6px 20px rgba(139,58,200,0.3)' }}>
+              Simülasyona Başla <span>→</span>
+            </motion.button>
           </main>
         </Page>
 
