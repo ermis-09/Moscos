@@ -23,10 +23,13 @@ export const useMoscosStore = create((set, get) => ({
 
   // Aktif sınav
   aktivSinav: {
-    sorular: [],
-    cevaplar: {},
-    mod: null,
-  },
+  sorular: [],
+  cevaplar: {},
+  mod: null,
+  aktifIndex: 0,
+  tamamlandi: false,
+},
+
 
   // Actions
   setVeri: (key, val) => set({ [key]: val }),
@@ -54,6 +57,15 @@ export const useMoscosStore = create((set, get) => ({
       cevaplar: { ...state.aktivSinav.cevaplar, [index]: harf }
     }
   })),
+
+  aktifIndexGuncelle: (index) => set(state => ({
+  aktivSinav: { ...state.aktivSinav, aktifIndex: index }
+})),
+
+sinavTamamla: () => set(state => ({
+  aktivSinav: { ...state.aktivSinav, tamamlandi: true }
+})),
+
 
   // Filtrelenmiş sorular
   uygunSorular: () => {

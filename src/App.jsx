@@ -16,6 +16,9 @@ import Simulasyon from './pages/Simulasyon'
 import SimFiltre from './pages/SimFiltre'
 import Profil from './pages/Profil'
 import Admin from './pages/Admin'
+import SimulasyonSonuc from './pages/SimulasyonSonuc'
+
+
 
 function DataLoader() {
   const setVeri = useMoscosStore(s => s.setVeri)
@@ -71,6 +74,7 @@ function AnimatedRoutes() {
         <Route path="/simulasyon/filtre" element={<SimFiltre />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/simulasyon/sonuc" element={<SimulasyonSonuc />} />
       </Routes>
     </AnimatePresence>
   )

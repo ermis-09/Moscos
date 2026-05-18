@@ -1,0 +1,18 @@
+{
+  "name": "Moscos",
+  "short_name": "Moscos",
+  "description": "Tıp Fakültesi Soru Bankası",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0D09",
+  "theme_color": "#1A1710",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

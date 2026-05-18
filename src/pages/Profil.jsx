@@ -192,9 +192,12 @@ export default function Profil() {
                       <div key={s.id} className="flex items-center justify-between p-4 rounded-xl"
                         style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
                         <div>
-                          <p className="text-sm font-semibold" style={{ color: t.text }}>
-                            {s.mod === 'simulasyon' ? `${s.yil} · ${s.sinav}` : `D${s.donem} · ${s.kurulId}`}
-                          </p>
+                         <p className="text-sm font-semibold" style={{ color: t.text }}>
+  {s.mod === 'simulasyon'
+    ? `${s.yil} · ${s.sinav}`
+    : `D${s.donem} · ${s.kurulId}${s.ders ? ' · ' + s.ders : ''}`}
+</p>
+
                           <p className="text-xs mt-0.5" style={{ color: t.dim }}>{tarih}</p>
                         </div>
                         <div className="text-right">

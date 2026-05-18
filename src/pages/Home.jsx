@@ -1,26 +1,44 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
-import AppShell, { themes } from '../components/AppShell'
 import { useMoscosStore } from '../store'
+import { themes } from '../components/AppShell'
+import { db } from '../lib/firebase'
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore'
 
 const t0 = themes.home
 const t1 = themes.sinav
 const t2 = themes.flash
 const t3 = themes.sim
 
+const MOTIVASYON = [
+  "Bilgi, taşıdığın en hafif yüktür.",
+  "Her soru, yarının cevabıdır.",
+  "Zorlu sorular seni büyütür.",
+  "Bugün öğrendiğin, yarın hayat kurtarır.",
+  "Tekrar, uzmanlaşmanın temelidir.",
+  "Merak et, sorgula, öğren.",
+  "Her yanlış cevap seni doğruya yaklaştırır.",
+  "Tıp bir maraton, sabırla koş.",
+  "Bugünün çalışması yarının güvencesidir.",
+  "Küçük adımlar büyük hedeflere ulaştırır.",
+  "Anlamak, ezberden üstündür.",
+  "Zorluk olmadan gelişme olmaz.",
+  "Her gün biraz daha iyi ol.",
+  "Bilim sabır ister, sen de sabırlısın.",
+]
+
+function gunlukMotivasyonAl() {
+  const gun = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  return MOTIVASYON[gun % MOTIVASYON.length]
+}
+
 function Hamburger({ onClick, dim, accent }) {
   return (
     <button onClick={onClick} className="w-10 h-10 relative flex-shrink-0 cursor-pointer">
       <svg className="absolute inset-0" viewBox="0 0 40 40" fill="none">
-        <polygon points="2,2 38,2 2,38" 
-          fill={`${accent}10`} 
-          stroke={`${accent}50`} 
-          strokeWidth="1"/>
-        <polygon points="38,2 38,38 2,38" 
-          fill={`${accent}05`} 
-          stroke={`${accent}25`} 
-          strokeWidth="1"/>
+        <polygon points="2,2 38,2 2,38" fill={`${accent}08`} stroke={`${accent}50`} strokeWidth="1"/>
+        <polygon points="38,2 38,38 2,38" fill={`${accent}04`} stroke={`${accent}25`} strokeWidth="1"/>
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-[5px]">
         {[0,1,2].map(i => (
@@ -70,11 +88,9 @@ function Drawer({ open, onClose, navigate, theme: t }) {
         className="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center text-sm"
         style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)' }}
       >✕</button>
-
       <div className="font-display text-2xl font-bold mb-6" style={{ color: t.text, letterSpacing: '-0.025em' }}>
         M<span style={{ color: t.accent2 }}>os</span>cos
       </div>
-
       {items.map((item, i) => (
         <div key={i}>
           {i === 2 && <div className="my-2 h-px" style={{ background: `${t.accent}25` }} />}
@@ -85,14 +101,8 @@ function Drawer({ open, onClose, navigate, theme: t }) {
             }}
             className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all text-left"
             style={{ border: '1px solid transparent' }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = `${t.accent}15`
-              e.currentTarget.style.borderColor = `${t.accent}35`
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'transparent'
-              e.currentTarget.style.borderColor = 'transparent'
-            }}
+            onMouseEnter={e => { e.currentTarget.style.background = `${t.accent}15`; e.currentTarget.style.borderColor = `${t.accent}35` }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'transparent' }}
           >
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
               style={{ background: `${t.accent}18`, border: `1px solid ${t.accent}35` }}>
@@ -105,7 +115,6 @@ function Drawer({ open, onClose, navigate, theme: t }) {
           </button>
         </div>
       ))}
-
       <div className="mt-auto text-center text-xs font-display tracking-widest" style={{ color: `${t.accent}50` }}>
         Moscos · v2.0
       </div>
@@ -113,56 +122,238 @@ function Drawer({ open, onClose, navigate, theme: t }) {
   )
 }
 
-// Tek sayfa bileşeni
-function Page({ theme, tag, decoNum, children, triangleColor }) {
+function Page({ theme, decoNum, children, triangleColor }) {
   const t = themes[theme]
   return (
-    <div
-      className="flex-shrink-0 flex flex-col relative overflow-hidden"
-      style={{ height: '100dvh', background: t.bg, scrollSnapAlign: 'start', scrollSnapStop: 'always' }}
-    >
-      {/* Izgara */}
+    <div className="flex-shrink-0 flex flex-col relative overflow-hidden"
+      style={{ height: '100dvh', background: t.bg, scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
       <div className="absolute inset-0 pointer-events-none" style={{
         backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
       }} />
-
-      {/* Üçgenler */}
       <svg className="absolute inset-0 pointer-events-none w-full h-full" viewBox="0 0 390 844" preserveAspectRatio="none">
         <polygon points="0,0 0,260 180,0" fill="none" stroke={triangleColor} strokeWidth="1"/>
         <polygon points="0,0 0,200 140,0" fill="none" stroke={triangleColor.replace('0.1','0.05')} strokeWidth="1"/>
         <polygon points="390,844 390,584 210,844" fill="none" stroke={triangleColor} strokeWidth="1"/>
         <polygon points="390,844 390,644 250,844" fill="none" stroke={triangleColor.replace('0.1','0.05')} strokeWidth="1"/>
       </svg>
-
-      {/* Köşe süsler */}
       {[
-        { pos: 'tl', style: { top: 12, left: 12, borderWidth: '2px 0 0 2px' } },
-        { pos: 'tr', style: { top: 12, right: 12, borderWidth: '2px 2px 0 0' } },
-        { pos: 'bl', style: { bottom: 12, left: 12, borderWidth: '0 0 2px 2px' } },
-        { pos: 'br', style: { bottom: 12, right: 12, borderWidth: '0 2px 2px 0' } },
-      ].map(({ pos, style }) => (
-        <div key={pos} className="absolute w-5 h-5 pointer-events-none" style={{ ...style, borderColor: t.borderS, borderStyle: 'solid', zIndex: 5 }} />
+        { style: { top: 12, left: 12, borderWidth: '2px 0 0 2px' } },
+        { style: { top: 12, right: 12, borderWidth: '2px 2px 0 0' } },
+        { style: { bottom: 12, left: 12, borderWidth: '0 0 2px 2px' } },
+        { style: { bottom: 12, right: 12, borderWidth: '0 2px 2px 0' } },
+      ].map(({ style }, i) => (
+        <div key={i} className="absolute w-5 h-5 pointer-events-none"
+          style={{ ...style, borderColor: themes[theme].borderS, borderStyle: 'solid', zIndex: 5 }} />
       ))}
-
-      {/* Dekoratif sayı */}
       <div className="absolute bottom-4 right-4 font-display font-bold pointer-events-none select-none"
         style={{ fontSize: 100, lineHeight: 1, color: triangleColor.replace('0.1','0.04'), letterSpacing: '-0.05em', zIndex: 0 }}>
         {decoNum}
       </div>
-
       {children}
+    </div>
+  )
+}
+
+// Günlük flashcard — tarih bazlı sabit
+function GunlukKart({ flashcardlar, t }) {
+  const [cevrildimi, setCevrildimi] = useState(false)
+  if (!flashcardlar.length) return null
+  const gun = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  const kart = flashcardlar[gun % flashcardlar.length]
+
+  return (
+    <div
+      onClick={() => setCevrildimi(f => !f)}
+      className="rounded-2xl cursor-pointer relative overflow-hidden"
+      style={{
+        height: 140,
+        background: cevrildimi ? t.bg3 : t.bg2,
+        border: `1.5px solid ${cevrildimi ? t.accent : t.border}`,
+        transition: 'all 0.3s',
+        boxShadow: cevrildimi ? `0 0 20px ${t.accent}30` : 'none',
+      }}
+    >
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-5 gap-2">
+        <span className="text-[9px] font-bold tracking-widest uppercase absolute top-3 left-4"
+          style={{ color: cevrildimi ? t.accent2 : t.accent }}>
+          {cevrildimi ? 'AÇIKLAMA' : 'GÜNÜN KARTI'}
+        </span>
+        <p className="font-display text-sm font-medium text-center leading-snug"
+          style={{ color: t.text }}>
+          {cevrildimi ? kart.arkaYuz : kart.onYuz}
+        </p>
+        <span className="text-[9px] italic absolute bottom-3" style={{ color: `${t.dim}80` }}>
+          {cevrildimi ? 'tekrar çevir' : 'dokunarak çevir'}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+// Sınav sayfası için rastgele soru önizlemesi
+function RastgeleSoru({ sorular, t }) {
+  const [goster, setGoster] = useState(false)
+  if (!sorular.length) return null
+  const gun = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
+  const soru = sorular[gun % sorular.length]
+
+  return (
+    <div className="rounded-2xl p-4 flex flex-col gap-3 flex-1"
+      style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+      <div className="flex items-center justify-between">
+        <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+          Günün Sorusu
+        </span>
+        <span className="text-[9px] px-2 py-0.5 rounded-full" style={{ background: `${t.accent}20`, color: t.accent }}>
+          {soru.ders}
+        </span>
+      </div>
+
+      <p className="font-display text-sm font-medium leading-relaxed" style={{ color: t.text }}>
+        {soru.soru}
+      </p>
+
+      <div className="flex flex-col gap-1.5">
+        {['A','B','C','D','E'].map(harf => {
+          const metin = soru.secenekler?.[harf]
+          if (!metin) return null
+          const dogru = goster && harf === soru.dogruCevap
+          return (
+            <div key={harf}
+              className="flex items-start gap-2 px-3 py-2 rounded-lg"
+              style={{
+                background: dogru ? 'rgba(46,139,87,0.2)' : t.bg3,
+                border: `1px solid ${dogru ? '#2E8B57' : t.border}`,
+              }}>
+              <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-display text-[10px] font-semibold"
+                style={{ background: dogru ? '#2E8B57' : t.bg2, color: dogru ? 'white' : t.accent }}>
+                {harf}
+              </span>
+              <span className="text-xs leading-relaxed" style={{ color: dogru ? '#B8E0C8' : t.dim }}>
+                {metin}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+
+      {!goster ? (
+        <button onClick={() => setGoster(true)}
+          className="text-xs font-semibold font-display py-2 rounded-xl"
+          style={{ background: `${t.accent}20`, color: t.accent }}>
+          Cevabı Göster →
+        </button>
+      ) : (
+        <div className="rounded-xl px-3 py-2" style={{ background: `${t.accent}15`, border: `1px solid ${t.border}` }}>
+          {soru.aciklama && (
+            <p className="text-xs leading-relaxed" style={{ color: t.dim }}>{soru.aciklama}</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+
+// Ders pill listesi
+function DersPilleri({ sorular, t }) {
+  const dersler = Object.entries(
+    sorular.reduce((acc, s) => {
+      acc[s.ders] = (acc[s.ders] || 0) + 1
+      return acc
+    }, {})
+  ).sort((a, b) => b[1] - a[1])
+
+  if (!dersler.length) return null
+
+  return (
+    <div className="flex flex-col gap-2">
+      <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+        Konu Dağılımı
+      </span>
+      <div className="flex flex-wrap gap-1.5">
+        {dersler.map(([ders, sayi]) => (
+          <span key={ders}
+            className="px-3 py-1 rounded-full font-display text-xs font-semibold"
+            style={{ background: `${t.accent}15`, border: `1px solid ${t.border}`, color: t.text }}>
+            {ders} <span style={{ color: t.accent2 }}>{sayi}</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Simülasyon arşiv listesi
+function SimulasyonArsiv({ cikmislar, t, navigate }) {
+  const sinavlar = Object.entries(
+    cikmislar.reduce((acc, s) => {
+      const key = `${s.yil} · ${s.sinav}`
+      if (!acc[key]) acc[key] = { yil: s.yil, sinav: s.sinav, sayi: 0 }
+      acc[key].sayi++
+      return acc
+    }, {})
+  ).sort((a, b) => b[1].yil - a[1].yil)
+
+  if (!sinavlar.length) return (
+    <p className="text-xs italic" style={{ color: t.dim }}>Henüz çıkmış soru yok.</p>
+  )
+
+  return (
+    <div className="flex flex-col gap-2">
+      {sinavlar.slice(0, 3).map(([key, val]) => (
+        <button key={key}
+          onClick={() => navigate('/simulasyon/filtre')}
+          className="flex items-center justify-between px-4 py-3 rounded-xl transition-all"
+          style={{ background: t.bg2, border: `1px solid ${t.border}` }}
+          onMouseEnter={e => e.currentTarget.style.borderColor = t.accent}
+          onMouseLeave={e => e.currentTarget.style.borderColor = t.border}
+        >
+          <div>
+            <p className="font-display text-sm font-semibold text-left" style={{ color: t.text }}>{key}</p>
+            <p className="text-xs mt-0.5" style={{ color: t.dim }}>{val.sayi} soru</p>
+          </div>
+          <span style={{ color: t.accent }}>→</span>
+        </button>
+      ))}
     </div>
   )
 }
 
 export default function Home() {
   const navigate = useNavigate()
-  const sorular = useMoscosStore(s => s.sorular)
-const cikmislar = useMoscosStore(s => s.cikmislar)
-const yukleniyor = useMoscosStore(s => s.yukleniyor)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
   const scrollRef = useRef(null)
+
+  const sorularData = useMoscosStore(s => s.sorular)
+  const cikmislar = useMoscosStore(s => s.cikmislar)
+  const flashcardlar = useMoscosStore(s => s.flashcardlar)
+  const kullanici = useMoscosStore(s => s.kullanici)
+  const aktivSinav = useMoscosStore(s => s.aktivSinav)
+  const yukleniyor = useMoscosStore(s => s.yukleniyor)
+
+  const [sonSinav, setSonSinav] = useState(null)
+
+  useEffect(() => {
+    if (!kullanici) return
+    async function yukle() {
+      try {
+        const q = query(
+          collection(db, 'kullanici_sonuclari', kullanici.uid, 'sonuclar'),
+          orderBy('tarih', 'desc'),
+          limit(1)
+        )
+        const snap = await getDocs(q)
+        if (!snap.empty) setSonSinav({ id: snap.docs[0].id, ...snap.docs[0].data() })
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    yukle()
+  }, [kullanici])
+
+  const yariKalan = aktivSinav.sorular.length > 0 && !aktivSinav.tamamlandi
 
   const pages = [
     { theme: 'home', color: 'rgba(200,119,26,0.1)' },
@@ -184,13 +375,21 @@ const yukleniyor = useMoscosStore(s => s.yukleniyor)
 
   const currentTheme = themes[pages[currentPage].theme]
 
+  const sonSinavLabel = sonSinav
+    ? sonSinav.mod === 'simulasyon'
+      ? `${sonSinav.yil} · ${sonSinav.sinav}`
+      : `D${sonSinav.donem} · ${sonSinav.kurulId}${sonSinav.ders ? ' · ' + sonSinav.ders : ''}`
+    : null
+
+  const motivasyon = gunlukMotivasyonAl()
+
   return (
     <div className="w-full max-w-[390px] mx-auto relative overflow-hidden" style={{ height: '100dvh' }}>
       <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navigate={navigate} theme={currentTheme} />
 
       {/* Sabit header */}
       <header className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 pb-3 z-20">
-        <Hamburger onClick={() => setDrawerOpen(true)} dim={currentTheme.dim} />
+        <Hamburger onClick={() => setDrawerOpen(true)} dim={currentTheme.dim} accent={currentTheme.accent} />
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
           <span className="font-display text-xl font-bold leading-none tracking-tight transition-colors duration-500" style={{ color: currentTheme.text }}>
             M<span style={{ color: currentTheme.accent2 }}>os</span>cos
@@ -205,65 +404,79 @@ const yukleniyor = useMoscosStore(s => s.yukleniyor)
       {/* Sayfa göstergesi */}
       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-20">
         {pages.map((_, i) => (
-          <div
-            key={i}
+          <div key={i}
             onClick={() => scrollRef.current?.scrollTo({ top: i * window.innerHeight, behavior: 'smooth' })}
             className="cursor-pointer rounded-full transition-all duration-300"
-            style={{
-              width: 4,
-              height: i === currentPage ? 16 : 4,
-              background: i === currentPage ? currentTheme.accent : 'rgba(255,255,255,0.2)',
-            }}
+            style={{ width: 4, height: i === currentPage ? 16 : 4, background: i === currentPage ? currentTheme.accent : 'rgba(255,255,255,0.2)' }}
           />
         ))}
       </div>
 
-      {/* Scroll container */}
-      <div
-        ref={scrollRef}
-        className="w-full h-full overflow-y-scroll"
-        style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}
-      >
+      <div ref={scrollRef} className="w-full h-full overflow-y-scroll"
+        style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}>
 
         {/* ANA SAYFA */}
         <Page theme="home" decoNum="01" triangleColor="rgba(200,119,26,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 min-h-0">
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
+
+            {/* Motivasyon */}
+            <div className="rounded-2xl px-4 py-3 flex items-start gap-3"
+              style={{ background: t0.bg2, border: `1px solid ${t0.border}` }}>
+              <span style={{ color: t0.accent, fontSize: 18, flexShrink: 0 }}>✦</span>
+              <p className="font-display text-sm italic leading-relaxed" style={{ color: t0.text }}>
+                "{motivasyon}"
+              </p>
+            </div>
+
+            {/* İstatistik kartı */}
             <div className="rounded-2xl p-4 flex flex-col gap-3"
               style={{ background: t0.bg2, border: `1px solid ${t0.border}` }}>
               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: '#A87840' }}>
-                Bu Haftaki Durum
+                Genel Durum
               </span>
               <div className="grid grid-cols-3 gap-2">
                 {[
-  [yukleniyor ? '...' : sorular.length, 'Soru'],
-  [yukleniyor ? '...' : cikmislar.length, 'Çıkmış'],
-  ['%74', 'Ort.']
-].map(([num, label]) => (
+                  [yukleniyor ? '...' : sorularData.length, 'Soru'],
+                  [yukleniyor ? '...' : cikmislar.length, 'Çıkmış'],
+                  [yukleniyor ? '...' : flashcardlar.length, 'Kart'],
+                ].map(([num, label]) => (
                   <div key={label} className="text-center">
                     <div className="font-display text-3xl font-semibold leading-none" style={{ color: t0.text }}>{num}</div>
                     <div className="text-[9px] font-bold tracking-[0.14em] uppercase mt-1" style={{ color: t0.dim }}>{label}</div>
                   </div>
                 ))}
               </div>
-              <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${t0.border}, transparent)` }} />
-              <div className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: t0.dim }}>Son sınav · D2K5</span>
-                <span className="font-display text-lg font-semibold" style={{ color: t0.accent2 }}>%81</span>
-              </div>
+              {sonSinavLabel && (
+                <>
+                  <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${t0.border}, transparent)` }} />
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs" style={{ color: t0.dim }}>{sonSinavLabel}</span>
+                    <span className="font-display text-lg font-semibold" style={{ color: t0.accent2 }}>%{sonSinav.yuzde}</span>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="flex flex-col gap-2.5 mt-auto">
+              {yariKalan && (
+                <motion.button whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/sinav/coz')}
+                  className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
+                  style={{
+                    background: aktivSinav.mod === 'simulasyon'
+                      ? `linear-gradient(135deg, ${t3.accent}, #501878)`
+                      : `linear-gradient(135deg, ${t1.accent}, #204878)`,
+                    color: '#E8F4FF',
+                    boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
+                  }}>
+                  Devam Et — {aktivSinav.aktifIndex + 1}/{aktivSinav.sorular.length} <span>→</span>
+                </motion.button>
+              )}
               <motion.button whileTap={{ scale: 0.98 }}
                 onClick={() => scrollRef.current?.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                 className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
                 style={{ background: `linear-gradient(135deg, ${t0.accent}, #8B5020)`, color: '#FAF0D0', boxShadow: '0 6px 20px rgba(200,119,26,0.3)' }}>
-                Sınava Git <span>↓</span>
-              </motion.button>
-              <motion.button whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/profil')}
-                className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                style={{ background: t0.bg2, border: `1px solid ${t0.border}`, color: t0.text }}>
-                Profil & İstatistikler <span>→</span>
+                Sınav Modları <span>↓</span>
               </motion.button>
             </div>
           </main>
@@ -271,52 +484,50 @@ const yukleniyor = useMoscosStore(s => s.yukleniyor)
 
         {/* SINAV SAYFASI */}
         <Page theme="sinav" decoNum="02" triangleColor="rgba(58,124,200,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 min-h-0">
-            <div>
-              <h1 className="font-display text-3xl font-bold leading-tight mb-1.5" style={{ color: t1.text, letterSpacing: '-0.025em' }}>Sınav Modu</h1>
-              <p className="text-xs leading-relaxed" style={{ color: t1.dim }}>Dönem, kurul ve ders bazında sorularla kendini test et.</p>
-            </div>
-            <div className="rounded-2xl p-4 flex flex-col gap-2.5"
-              style={{ background: t1.bg2, border: `1px solid ${t1.border}` }}>
-              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t1.accent }}>Son Sınavlar</span>
-              <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${t1.border}, transparent)` }} />
-              {[['D2K5 · Anatomi','%81'],['D2K5 · Fizyoloji','%68']].map(([l,s]) => (
-                <div key={l} className="flex justify-between items-center">
-                  <span className="text-xs" style={{ color: t1.dim }}>{l}</span>
-                  <span className="font-display text-base font-semibold" style={{ color: t1.accent2 }}>{s}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-auto">
-              <motion.button whileTap={{ scale: 0.98 }}
-                onClick={() => navigate('/sinav/filtre')}
-                className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                style={{ background: `linear-gradient(135deg, ${t1.accent}, #204878)`, color: '#E8F4FF', boxShadow: '0 6px 20px rgba(58,124,200,0.3)' }}>
-                Sınava Başla <span>→</span>
-              </motion.button>
-            </div>
-          </main>
-        </Page>
+  <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto min-h-0">
+    <div>
+      <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t1.text, letterSpacing: '-0.025em' }}>Sınav Modu</h1>
+      <p className="text-xs leading-relaxed" style={{ color: t1.dim }}>Anında geri bildirim ve açıklamalarla çalış.</p>
+    </div>
+
+    <RastgeleSoru sorular={sorularData} t={t1} />
+
+    <motion.button whileTap={{ scale: 0.98 }}
+      onClick={() => navigate('/sinav/filtre')}
+      className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
+      style={{ background: `linear-gradient(135deg, ${t1.accent}, #204878)`, color: '#E8F4FF', boxShadow: '0 6px 20px rgba(58,124,200,0.3)' }}>
+      Sınava Başla <span>→</span>
+    </motion.button>
+  </main>
+</Page>
+
 
         {/* FLASHCARD SAYFASI */}
         <Page theme="flash" decoNum="03" triangleColor="rgba(46,139,87,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 min-h-0">
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
             <div>
-              <h1 className="font-display text-3xl font-bold leading-tight mb-1.5" style={{ color: t2.text, letterSpacing: '-0.025em' }}>Flashcard</h1>
-              <p className="text-xs leading-relaxed" style={{ color: t2.dim }}>Kavramları kart çevirerek çalış. Kolay, orta, zor değerlendirmeleriyle öğrenimini takip et.</p>
+              <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t2.text, letterSpacing: '-0.025em' }}>Flashcard</h1>
+              <p className="text-xs leading-relaxed" style={{ color: t2.dim }}>Kavramları kart çevirerek çalış.</p>
             </div>
-            <div className="rounded-2xl p-4 flex flex-col gap-2.5"
+
+            <GunlukKart flashcardlar={flashcardlar} t={t2} />
+
+            <div className="rounded-2xl p-4 flex flex-col gap-2"
               style={{ background: t2.bg2, border: `1px solid ${t2.border}` }}>
-              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t2.accent }}>Çalışılacak Kartlar</span>
-              <div className="grid grid-cols-3 gap-2">
-                {[['48','Kart'],['12','Zor'],['%75','Bilinen']].map(([num,label]) => (
-                  <div key={label} className="text-center">
+              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t2.accent }}>Kart Havuzu</span>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  [yukleniyor ? '...' : flashcardlar.length, 'Toplam Kart'],
+                  [yukleniyor ? '...' : new Set(flashcardlar.map(f => f.ders)).size, 'Ders'],
+                ].map(([num, label]) => (
+                  <div key={label} className="text-center py-2 rounded-xl" style={{ background: t2.bg3 }}>
                     <div className="font-display text-2xl font-semibold leading-none" style={{ color: t2.text }}>{num}</div>
                     <div className="text-[9px] font-bold tracking-[0.14em] uppercase mt-1" style={{ color: t2.dim }}>{label}</div>
                   </div>
                 ))}
               </div>
             </div>
+
             <div className="mt-auto">
               <motion.button whileTap={{ scale: 0.98 }}
                 onClick={() => navigate('/flashcard/filtre')}
@@ -330,20 +541,17 @@ const yukleniyor = useMoscosStore(s => s.yukleniyor)
 
         {/* SİMÜLASYON SAYFASI */}
         <Page theme="sim" decoNum="04" triangleColor="rgba(139,58,200,0.1)">
-          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 min-h-0">
+          <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-y-auto">
             <div>
-              <h1 className="font-display text-3xl font-bold leading-tight mb-1.5" style={{ color: t3.text, letterSpacing: '-0.025em' }}>Simülasyon</h1>
-              <p className="text-xs leading-relaxed" style={{ color: t3.dim }}>Gerçek sınav hissiyle çıkmış soruları çöz. Cevaplar sınav sonunda açıklanır.</p>
+              <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t3.text, letterSpacing: '-0.025em' }}>Simülasyon</h1>
+              <p className="text-xs leading-relaxed" style={{ color: t3.dim }}>Gerçek sınav hissiyle çıkmış soruları çöz.</p>
             </div>
-            <div className="rounded-2xl p-4 flex flex-col gap-2.5"
-              style={{ background: t3.bg2, border: `1px solid ${t3.border}` }}>
-              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t3.accent }}>Son Simülasyon</span>
-              <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${t3.border}, transparent)` }} />
-              <div className="flex justify-between items-center">
-                <span className="text-xs" style={{ color: t3.dim }}>2025 · Kurul 5</span>
-                <span className="font-display text-base font-semibold" style={{ color: t3.accent2 }}>%72</span>
-              </div>
+
+            <div className="flex flex-col gap-2">
+              <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t3.accent }}>Arşiv</span>
+              <SimulasyonArsiv cikmislar={cikmislar} t={t3} navigate={navigate} />
             </div>
+
             <div className="mt-auto">
               <motion.button whileTap={{ scale: 0.98 }}
                 onClick={() => navigate('/simulasyon/filtre')}
