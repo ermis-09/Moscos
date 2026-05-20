@@ -1,23 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg: #1C1A15;
-  --color-bg2: #252218;
-  --color-bg3: #2E2A1F;
-  --color-paper: #F0DDB0;
-  --color-paper-dark: #D4C090;
-  --color-accent: #C8771A;
-  --color-accent2: #E09030;
-  --color-metal: #8B7355;
-  --color-metal-light: #A89070;
-  --color-metal-dark: #6B5535;
-  --color-text: #E8D5A3;
-  --color-text-dim: #A89070;
-
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 * {

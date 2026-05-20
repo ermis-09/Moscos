@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.sim
 
 export default function SimFiltre() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('sim', ayarlar)
   const navigate = useNavigate()
   const cikmislar = useMoscosStore(s => s.cikmislar)
   const setSecim = useMoscosStore(s => s.setSecim)

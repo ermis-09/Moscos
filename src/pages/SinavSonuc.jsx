@@ -4,11 +4,12 @@ import { useEffect } from 'react'
 import { db } from '../lib/firebase'
 import { collection, addDoc } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.sinav
 
 export default function SinavSonuc() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('sinav', ayarlar)
   const navigate = useNavigate()
   const aktivSinav = useMoscosStore(s => s.aktivSinav)
   const secimSifirla = useMoscosStore(s => s.secimSifirla)

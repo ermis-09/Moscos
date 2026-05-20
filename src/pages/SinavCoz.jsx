@@ -2,14 +2,15 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
+
 
 export default function SinavCoz() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+  const t = temaAl(aktivSinav.mod === 'simulasyon' ? 'sim' : 'sinav', ayarlar)
   const navigate = useNavigate()
   const aktivSinav = useMoscosStore(s => s.aktivSinav)
   const cevapVer = useMoscosStore(s => s.cevapVer)
-
-  const t = aktivSinav.mod === 'simulasyon' ? themes.sim : themes.sinav
 
   const aktifIndexGuncelle = useMoscosStore(s => s.aktifIndexGuncelle)
 const [aktifIndex, setAktifIndex] = useState(aktivSinav.aktifIndex || 0)

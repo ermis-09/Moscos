@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.flash
 
 export default function FlashFiltre() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+  const t = temaAl('flash', ayarlar)
   const navigate = useNavigate()
   const flashcardlar = useMoscosStore(s => s.flashcardlar)
   const kurullarData = useMoscosStore(s => s.kurullarData)

@@ -2,14 +2,9 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl, bazTemalar } from '../lib/renkler'
 import { db } from '../lib/firebase'
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore'
-
-const t0 = themes.home
-const t1 = themes.sinav
-const t2 = themes.flash
-const t3 = themes.sim
 
 const MOTIVASYON = [
   "Bilgi, taşıdığın en hafif yüktür.",
@@ -56,6 +51,12 @@ function Drawer({ open, onClose, navigate, theme: t }) {
         <circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 4-9 9-9s9 4 9 9"/>
       </svg>
     )},
+    { label: 'Ayarlar', sub: 'Tema & görünüm', path: '/ayarlar', icon: (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="1.8" strokeLinecap="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    )},
     { label: 'Admin Paneli', sub: 'Soru yönetimi', path: '/admin', icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="1.8" strokeLinecap="round">
         <circle cx="12" cy="12" r="3"/>
@@ -93,7 +94,7 @@ function Drawer({ open, onClose, navigate, theme: t }) {
       </div>
       {items.map((item, i) => (
         <div key={i}>
-          {i === 2 && <div className="my-2 h-px" style={{ background: `${t.accent}25` }} />}
+          {i === 3 && <div className="my-2 h-px" style={{ background: `${t.accent}25` }} />}
           <button
             onClick={() => {
               if (item.external) window.open(item.path, '_blank')
@@ -122,8 +123,8 @@ function Drawer({ open, onClose, navigate, theme: t }) {
   )
 }
 
-function Page({ theme, decoNum, children, triangleColor }) {
-  const t = themes[theme]
+function Page({ theme, ayarlar, decoNum, children, triangleColor }) {
+  const t = temaAl(theme, ayarlar)
   return (
     <div className="flex-shrink-0 flex flex-col relative overflow-hidden"
       style={{ height: '100dvh', background: t.bg, scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
@@ -143,7 +144,7 @@ function Page({ theme, decoNum, children, triangleColor }) {
         { style: { bottom: 12, right: 12, borderWidth: '0 2px 2px 0' } },
       ].map(({ style }, i) => (
         <div key={i} className="absolute w-5 h-5 pointer-events-none"
-          style={{ ...style, borderColor: themes[theme].borderS, borderStyle: 'solid', zIndex: 5 }} />
+          style={{ ...style, borderColor: t.borderS, borderStyle: 'solid', zIndex: 5 }} />
       ))}
       <div className="absolute bottom-4 right-4 font-display font-bold pointer-events-none select-none"
         style={{ fontSize: 100, lineHeight: 1, color: triangleColor.replace('0.1','0.04'), letterSpacing: '-0.05em', zIndex: 0 }}>
@@ -159,13 +160,11 @@ function GunlukKart({ flashcardlar, t }) {
   if (!flashcardlar.length) return null
   const gun = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
   const kart = flashcardlar[gun % flashcardlar.length]
-
   return (
     <div onClick={() => setCevrildimi(f => !f)}
       className="rounded-2xl cursor-pointer relative flex-shrink-0"
       style={{
-        height: 140,
-        background: cevrildimi ? t.bg3 : t.bg2,
+        height: 140, background: cevrildimi ? t.bg3 : t.bg2,
         border: `1.5px solid ${cevrildimi ? t.accent : t.border}`,
         transition: 'all 0.3s',
         boxShadow: cevrildimi ? `0 0 20px ${t.accent}30` : 'none',
@@ -175,8 +174,7 @@ function GunlukKart({ flashcardlar, t }) {
           style={{ color: cevrildimi ? t.accent2 : t.accent }}>
           {cevrildimi ? 'AÇIKLAMA' : 'GÜNÜN KARTI'}
         </span>
-        <p className="font-display text-sm font-medium text-center leading-snug"
-          style={{ color: t.text }}>
+        <p className="font-display text-sm font-medium text-center leading-snug" style={{ color: t.text }}>
           {cevrildimi ? kart.arkaYuz : kart.onYuz}
         </p>
         <span className="text-[9px] italic absolute bottom-3" style={{ color: `${t.dim}80` }}>
@@ -192,7 +190,6 @@ function RastgeleSoru({ sorular, t }) {
   if (!sorular.length) return null
   const gun = Math.floor(Date.now() / (1000 * 60 * 60 * 24))
   const soru = sorular[gun % sorular.length]
-
   return (
     <div className="rounded-2xl p-4 flex flex-col gap-3 flex-1 overflow-y-auto"
       style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
@@ -213,19 +210,11 @@ function RastgeleSoru({ sorular, t }) {
           if (!metin) return null
           const dogru = goster && harf === soru.dogruCevap
           return (
-            <div key={harf}
-              className="flex items-start gap-2 px-3 py-2 rounded-lg flex-shrink-0"
-              style={{
-                background: dogru ? 'rgba(46,139,87,0.2)' : t.bg3,
-                border: `1px solid ${dogru ? '#2E8B57' : t.border}`,
-              }}>
+            <div key={harf} className="flex items-start gap-2 px-3 py-2 rounded-lg flex-shrink-0"
+              style={{ background: dogru ? 'rgba(46,139,87,0.2)' : t.bg3, border: `1px solid ${dogru ? '#2E8B57' : t.border}` }}>
               <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center font-display text-[10px] font-semibold"
-                style={{ background: dogru ? '#2E8B57' : t.bg2, color: dogru ? 'white' : t.accent }}>
-                {harf}
-              </span>
-              <span className="text-xs leading-relaxed" style={{ color: dogru ? '#B8E0C8' : t.dim }}>
-                {metin}
-              </span>
+                style={{ background: dogru ? '#2E8B57' : t.bg2, color: dogru ? 'white' : t.accent }}>{harf}</span>
+              <span className="text-xs leading-relaxed" style={{ color: dogru ? '#B8E0C8' : t.dim }}>{metin}</span>
             </div>
           )
         })}
@@ -255,20 +244,16 @@ function SimulasyonArsiv({ cikmislar, t, navigate }) {
     }, {})
   ).sort((a, b) => b[1].yil - a[1].yil)
 
-  if (!sinavlar.length) return (
-    <p className="text-xs italic" style={{ color: t.dim }}>Henüz çıkmış soru yok.</p>
-  )
+  if (!sinavlar.length) return <p className="text-xs italic" style={{ color: t.dim }}>Henüz çıkmış soru yok.</p>
 
   return (
     <div className="flex flex-col gap-2">
       {sinavlar.slice(0, 3).map(([key, val]) => (
-        <button key={key}
-          onClick={() => navigate('/simulasyon/filtre')}
+        <button key={key} onClick={() => navigate('/simulasyon/filtre')}
           className="flex items-center justify-between px-4 py-3 rounded-xl transition-all"
           style={{ background: t.bg2, border: `1px solid ${t.border}` }}
           onMouseEnter={e => e.currentTarget.style.borderColor = t.accent}
-          onMouseLeave={e => e.currentTarget.style.borderColor = t.border}
-        >
+          onMouseLeave={e => e.currentTarget.style.borderColor = t.border}>
           <div>
             <p className="font-display text-sm font-semibold text-left" style={{ color: t.text }}>{key}</p>
             <p className="text-xs mt-0.5" style={{ color: t.dim }}>{val.sayi} soru</p>
@@ -293,6 +278,12 @@ export default function Home() {
   const aktivSinav = useMoscosStore(s => s.aktivSinav)
   const yukleniyor = useMoscosStore(s => s.yukleniyor)
   const setAnaSayfaIndex = useMoscosStore(s => s.setAnaSayfaIndex)
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+
+  const t0 = temaAl('home', ayarlar)
+  const t1 = temaAl('sinav', ayarlar)
+  const t2 = temaAl('flash', ayarlar)
+  const t3 = temaAl('sim', ayarlar)
 
   const [sonSinav, setSonSinav] = useState(null)
 
@@ -302,14 +293,11 @@ export default function Home() {
       try {
         const q = query(
           collection(db, 'kullanici_sonuclari', kullanici.uid, 'sonuclar'),
-          orderBy('tarih', 'desc'),
-          limit(1)
+          orderBy('tarih', 'desc'), limit(1)
         )
         const snap = await getDocs(q)
         if (!snap.empty) setSonSinav({ id: snap.docs[0].id, ...snap.docs[0].data() })
-      } catch (err) {
-        console.error(err)
-      }
+      } catch (err) { console.error(err) }
     }
     yukle()
   }, [kullanici])
@@ -317,34 +305,33 @@ export default function Home() {
   const yariKalan = aktivSinav.sorular.length > 0 && !aktivSinav.tamamlandi
 
   const pages = [
-    { theme: 'home', color: 'rgba(200,119,26,0.1)' },
-    { theme: 'sinav', color: 'rgba(58,124,200,0.1)' },
-    { theme: 'flash', color: 'rgba(46,139,87,0.1)' },
-    { theme: 'sim', color: 'rgba(139,58,200,0.1)' },
+    { theme: 'home', color: t0.triangle },
+    { theme: 'sinav', color: t1.triangle },
+    { theme: 'flash', color: t2.triangle },
+    { theme: 'sim', color: t3.triangle },
   ]
 
   useEffect(() => {
-  const idx = parseInt(sessionStorage.getItem('anaIndex') || '0')
-  if (idx > 0 && scrollRef.current) {
-    scrollRef.current.scrollTo({ top: idx * window.innerHeight, behavior: 'instant' })
-  }
-}, [])
+    const idx = parseInt(sessionStorage.getItem('anaIndex') || '0')
+    if (idx > 0 && scrollRef.current) {
+      scrollRef.current.scrollTo({ top: idx * window.innerHeight, behavior: 'instant' })
+    }
+  }, [])
 
   useEffect(() => {
     const el = scrollRef.current
     if (!el) return
     const handler = () => {
-  const idx = Math.round(el.scrollTop / window.innerHeight)
-  setCurrentPage(idx)
-  setAnaSayfaIndex(idx)
-  sessionStorage.setItem('anaIndex', idx)
-}
-
+      const idx = Math.round(el.scrollTop / window.innerHeight)
+      setCurrentPage(idx)
+      setAnaSayfaIndex(idx)
+      sessionStorage.setItem('anaIndex', idx)
+    }
     el.addEventListener('scroll', handler, { passive: true })
     return () => el.removeEventListener('scroll', handler)
   }, [])
 
-  const currentTheme = themes[pages[currentPage].theme]
+  const currentThemeObj = [t0, t1, t2, t3][currentPage]
   const motivasyon = gunlukMotivasyonAl()
 
   const sonSinavLabel = sonSinav
@@ -353,28 +340,19 @@ export default function Home() {
       : `D${sonSinav.donem} · ${sonSinav.kurulId}${sonSinav.ders ? ' · ' + sonSinav.ders : ''}`
     : null
 
-  function geriDon(sayfaIndex) {
-    navigate('/')
-    setTimeout(() => {
-      if (scrollRef.current) {
-        scrollRef.current.scrollTo({ top: sayfaIndex * window.innerHeight, behavior: 'instant' })
-      }
-    }, 50)
-  }
-
   return (
     <div className="w-full max-w-[390px] mx-auto relative overflow-hidden" style={{ height: '100dvh' }}>
-      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navigate={navigate} theme={currentTheme} />
+      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navigate={navigate} theme={currentThemeObj} />
 
       <header className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 pb-3 z-20">
-        <Hamburger onClick={() => setDrawerOpen(true)} dim={currentTheme.dim} accent={currentTheme.accent} />
+        <Hamburger onClick={() => setDrawerOpen(true)} dim={currentThemeObj.dim} accent={currentThemeObj.accent} />
         <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
-          <span className="font-display text-xl font-bold leading-none tracking-tight transition-colors duration-500" style={{ color: currentTheme.text }}>
-            M<span style={{ color: currentTheme.accent2 }}>os</span>cos
+          <span className="font-display text-xl font-bold leading-none tracking-tight transition-colors duration-500" style={{ color: currentThemeObj.text }}>
+            M<span style={{ color: currentThemeObj.accent2 }}>os</span>cos
           </span>
-          <span className="text-[8px] font-bold tracking-[0.24em] uppercase transition-colors duration-500" style={{ color: currentTheme.dim }}>Soru Bankası</span>
+          <span className="text-[8px] font-bold tracking-[0.24em] uppercase transition-colors duration-500" style={{ color: currentThemeObj.dim }}>Soru Bankası</span>
         </div>
-        <span className="text-[10px] font-display font-semibold tracking-widest uppercase transition-colors duration-500" style={{ color: currentTheme.accent }}>
+        <span className="text-[10px] font-display font-semibold tracking-widest uppercase transition-colors duration-500" style={{ color: currentThemeObj.accent }}>
           {['Ana','Sınav','Flash','Sim.'][currentPage]}
         </span>
       </header>
@@ -384,23 +362,21 @@ export default function Home() {
           <div key={i}
             onClick={() => scrollRef.current?.scrollTo({ top: i * window.innerHeight, behavior: 'smooth' })}
             className="cursor-pointer rounded-full transition-all duration-300"
-            style={{ width: 4, height: i === currentPage ? 16 : 4, background: i === currentPage ? currentTheme.accent : 'rgba(255,255,255,0.2)' }}
+            style={{ width: 4, height: i === currentPage ? 16 : 4, background: i === currentPage ? currentThemeObj.accent : 'rgba(255,255,255,0.2)' }}
           />
         ))}
       </div>
 
       <div ref={scrollRef} id="anaScroll" className="w-full h-full overflow-y-scroll"
-  style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}>
+        style={{ scrollSnapType: 'y mandatory', scrollbarWidth: 'none' }}>
 
         {/* ANA SAYFA */}
-        <Page theme="home" decoNum="01" triangleColor="rgba(200,119,26,0.1)">
+        <Page theme="home" ayarlar={ayarlar} decoNum="01" triangleColor={t0.triangle}>
           <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
             <div className="rounded-2xl px-4 py-3 flex items-start gap-3 flex-shrink-0"
               style={{ background: t0.bg2, border: `1px solid ${t0.border}` }}>
               <span style={{ color: t0.accent, fontSize: 18, flexShrink: 0 }}>✦</span>
-              <p className="font-display text-sm italic leading-relaxed" style={{ color: t0.text }}>
-                "{motivasyon}"
-              </p>
+              <p className="font-display text-sm italic leading-relaxed" style={{ color: t0.text }}>"{motivasyon}"</p>
             </div>
 
             <div className="rounded-2xl p-4 flex flex-col gap-3 flex-shrink-0"
@@ -433,15 +409,13 @@ export default function Home() {
 
             <div className="flex flex-col gap-2.5 mt-auto">
               {yariKalan && (
-                <motion.button whileTap={{ scale: 0.98 }}
-                  onClick={() => navigate('/sinav/coz')}
+                <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/sinav/coz')}
                   className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
                   style={{
                     background: aktivSinav.mod === 'simulasyon'
                       ? `linear-gradient(135deg, ${t3.accent}, #501878)`
                       : `linear-gradient(135deg, ${t1.accent}, #204878)`,
-                    color: '#E8F4FF',
-                    boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
+                    color: '#E8F4FF', boxShadow: '0 6px 20px rgba(0,0,0,0.3)'
                   }}>
                   Devam Et — {aktivSinav.aktifIndex + 1}/{aktivSinav.sorular.length} <span>→</span>
                 </motion.button>
@@ -457,15 +431,14 @@ export default function Home() {
         </Page>
 
         {/* SINAV SAYFASI */}
-        <Page theme="sinav" decoNum="02" triangleColor="rgba(58,124,200,0.1)">
+        <Page theme="sinav" ayarlar={ayarlar} decoNum="02" triangleColor={t1.triangle}>
           <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
             <div className="flex-shrink-0">
               <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t1.text, letterSpacing: '-0.025em' }}>Sınav Modu</h1>
               <p className="text-xs leading-relaxed" style={{ color: t1.dim }}>Anında geri bildirim ve açıklamalarla çalış.</p>
             </div>
             <RastgeleSoru sorular={sorularData} t={t1} />
-            <motion.button whileTap={{ scale: 0.98 }}
-              onClick={() => navigate('/sinav/filtre')}
+            <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/sinav/filtre')}
               className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
               style={{ background: `linear-gradient(135deg, ${t1.accent}, #204878)`, color: '#E8F4FF', boxShadow: '0 6px 20px rgba(58,124,200,0.3)' }}>
               Sınava Başla <span>→</span>
@@ -474,7 +447,7 @@ export default function Home() {
         </Page>
 
         {/* FLASHCARD SAYFASI */}
-        <Page theme="flash" decoNum="03" triangleColor="rgba(46,139,87,0.1)">
+        <Page theme="flash" ayarlar={ayarlar} decoNum="03" triangleColor={t2.triangle}>
           <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
             <div className="flex-shrink-0">
               <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t2.text, letterSpacing: '-0.025em' }}>Flashcard</h1>
@@ -496,8 +469,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <motion.button whileTap={{ scale: 0.98 }}
-              onClick={() => navigate('/flashcard/filtre')}
+            <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/flashcard/filtre')}
               className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0 mt-auto"
               style={{ background: `linear-gradient(135deg, ${t2.accent}, #1A5030)`, color: '#E8FFF0', boxShadow: '0 6px 20px rgba(46,139,87,0.3)' }}>
               Çalışmaya Başla <span>→</span>
@@ -506,7 +478,7 @@ export default function Home() {
         </Page>
 
         {/* SİMÜLASYON SAYFASI */}
-        <Page theme="sim" decoNum="04" triangleColor="rgba(139,58,200,0.1)">
+        <Page theme="sim" ayarlar={ayarlar} decoNum="04" triangleColor={t3.triangle}>
           <main className="flex-1 px-5 pb-6 flex flex-col gap-3 relative z-10 mt-20 overflow-hidden">
             <div className="flex-shrink-0">
               <h1 className="font-display text-3xl font-bold leading-tight mb-1" style={{ color: t3.text, letterSpacing: '-0.025em' }}>Simülasyon</h1>
@@ -516,8 +488,7 @@ export default function Home() {
               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase flex-shrink-0" style={{ color: t3.accent }}>Arşiv</span>
               <SimulasyonArsiv cikmislar={cikmislar} t={t3} navigate={navigate} />
             </div>
-            <motion.button whileTap={{ scale: 0.98 }}
-              onClick={() => navigate('/simulasyon/filtre')}
+            <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/simulasyon/filtre')}
               className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between flex-shrink-0"
               style={{ background: `linear-gradient(135deg, ${t3.accent}, #501878)`, color: '#F8E8FF', boxShadow: '0 6px 20px rgba(139,58,200,0.3)' }}>
               Simülasyona Başla <span>→</span>

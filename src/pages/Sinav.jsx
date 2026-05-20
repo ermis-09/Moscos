@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import AppShell, { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.sinav
 
 export default function Sinav() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+  const t = temaAl('sinav', ayarlar)
   const navigate = useNavigate()
 
   return (

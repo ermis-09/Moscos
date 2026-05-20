@@ -12,23 +12,32 @@ import SinavCoz from './pages/SinavCoz'
 import SinavSonuc from './pages/SinavSonuc'
 import Flashcard from './pages/Flashcard'
 import FlashFiltre from './pages/FlashFiltre'
-import Simulasyon from './pages/Simulasyon'
 import SimFiltre from './pages/SimFiltre'
 import Profil from './pages/Profil'
 import Admin from './pages/Admin'
 import SimulasyonSonuc from './pages/SimulasyonSonuc'
-
+import { doc, getDoc } from 'firebase/firestore'
+import Ayarlar from './pages/Ayarlar'
 
 
 function DataLoader() {
   const setVeri = useMoscosStore(s => s.setVeri)
   const setKullanici = useMoscosStore(s => s.setKullanici)
+  const setAyarlar = useMoscosStore(s => s.setAyarlar)
 
   useEffect(() => {
     // Auth
-    const unsub = onAuthStateChanged(auth, user => {
-      setKullanici(user)
-    })
+    const unsub = onAuthStateChanged(auth, async user => {
+  setKullanici(user)
+  if (user) {
+    try {
+      const snap = await getDoc(doc(db, 'kullanici_ayarlari', user.uid))
+      if (snap.exists()) setAyarlar(snap.data())
+    } catch (err) {
+      console.error(err)
+    }
+  }
+})
 
     // Veriler
     async function yukle() {
@@ -70,11 +79,11 @@ function AnimatedRoutes() {
         <Route path="/sinav/sonuc" element={<SinavSonuc />} />
         <Route path="/flashcard" element={<Flashcard />} />
         <Route path="/flashcard/filtre" element={<FlashFiltre />} />
-        <Route path="/simulasyon" element={<Simulasyon />} />
         <Route path="/simulasyon/filtre" element={<SimFiltre />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/simulasyon/sonuc" element={<SimulasyonSonuc />} />
+        <Route path="/ayarlar" element={<Ayarlar />} />
       </Routes>
     </AnimatePresence>
   )

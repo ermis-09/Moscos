@@ -2,9 +2,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.flash
 
 function karistir(arr) {
   const a = [...arr]
@@ -16,6 +15,8 @@ function karistir(arr) {
 }
 
 export default function Flashcard() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('flash', ayarlar)
   const navigate = useNavigate()
   const location = useLocation()
   const { donem, kurulId, ders } = location.state || {}

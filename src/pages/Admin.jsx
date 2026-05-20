@@ -5,9 +5,7 @@ import { db, auth } from '../lib/firebase'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { collection, getDocs, doc, updateDoc, deleteDoc, query, where } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
-
-const t = themes.home
+import { temaAl } from '../lib/renkler'
 
 // Form alanları
 const SORU_ALANLARI = ['donem', 'kurulId', 'ders', 'ogrenimHedefi', 'soru', 'dogruCevap', 'aciklama']
@@ -167,6 +165,8 @@ function SoruKart({ item, onDuzenle, onSil, tip }) {
 }
 
 export default function Admin() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('home', ayarlar)
   const navigate = useNavigate()
   const kullanici = useMoscosStore(s => s.kullanici)
   const setKullanici = useMoscosStore(s => s.setKullanici)

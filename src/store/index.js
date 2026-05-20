@@ -32,8 +32,21 @@ export const useMoscosStore = create((set, get) => ({
 
 anaSayfaIndex: 0,
 
+ayarlar: {
+  sinavRenk: 'mavi',
+  flashRenk: 'yesil',
+  simRenk: 'mor',
+  butonBoyutu: 'orta',
+  yaziBoyutu: 'normal',
+},
+
+
   // Actions
 setAnaSayfaIndex: (index) => set({ anaSayfaIndex: index }),
+
+setAyarlar: (yeniAyarlar) => set(state => ({
+  ayarlar: { ...state.ayarlar, ...yeniAyarlar }
+})),
 
   setVeri: (key, val) => set({ [key]: val }),
 

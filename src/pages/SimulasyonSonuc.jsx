@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react'
 import { db } from '../lib/firebase'
 import { collection, addDoc } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.sim
 const harfler = ['A', 'B', 'C', 'D', 'E']
 
 function secenekStil(harf, soruObj, cevap) {
@@ -25,6 +24,8 @@ function secenekStil(harf, soruObj, cevap) {
 }
 
 export default function SimulasyonSonuc() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('sim', ayarlar)
   const navigate = useNavigate()
   const aktivSinav = useMoscosStore(s => s.aktivSinav)
   const secimSifirla = useMoscosStore(s => s.secimSifirla)

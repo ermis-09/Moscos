@@ -5,11 +5,12 @@ import { auth, db } from '../lib/firebase'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { collection, query, where, orderBy, limit, getDocs } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.home
 
 export default function Profil() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+const t = temaAl('home', ayarlar)
   const navigate = useNavigate()
   const kullanici = useMoscosStore(s => s.kullanici)
   const setKullanici = useMoscosStore(s => s.setKullanici)

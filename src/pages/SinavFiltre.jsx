@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useMoscosStore } from '../store'
-import { themes } from '../components/AppShell'
+import { temaAl } from '../lib/renkler'
 
-const t = themes.sinav
 
 export default function SinavFiltre() {
+  const ayarlar = useMoscosStore(s => s.ayarlar)
+  const t = temaAl('sinav', ayarlar)
   const navigate = useNavigate()
   const sorular = useMoscosStore(s => s.sorular)
   const kurullarData = useMoscosStore(s => s.kurullarData)
