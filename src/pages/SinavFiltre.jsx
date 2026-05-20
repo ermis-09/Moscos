@@ -18,9 +18,7 @@ export default function SinavFiltre() {
   const [donem, setDonem] = useState(null)
   const [kurulId, setKurulId] = useState(null)
   const [ders, setDers] = useState(null)
-
-  console.log('kurullarData:', kurullarData)
-console.log('sorular:', sorular.length)
+  const [soruSayisi, setSoruSayisi] = useState('')
 
 
   const donemler = kurullarData?.donemler.filter(d =>
@@ -44,19 +42,23 @@ console.log('sorular:', sorular.length)
   }).length
 
   function basla() {
-    const uygun = sorular.filter(s => {
-      if (s.donem !== donem) return false
-      if (s.kurulId !== kurulId) return false
-      if (ders && s.ders !== ders) return false
-      return true
-    })
-    const karisik = [...uygun].sort(() => Math.random() - 0.5)
-    setSecim('donem', donem)
-    setSecim('kurulId', kurulId)
-    setSecim('ders', ders)
-    sinavBaslat(karisik, 'sinav')
-    navigate('/sinav/coz')
+  let uygun = sorular.filter(s => {
+    if (s.donem !== donem) return false
+    if (s.kurulId !== kurulId) return false
+    if (ders && s.ders !== ders) return false
+    return true
+  })
+  uygun = [...uygun].sort(() => Math.random() - 0.5)
+  if (soruSayisi && soruSayisi > 0) {
+    uygun = uygun.slice(0, soruSayisi)
   }
+  setSecim('donem', donem)
+  setSecim('kurulId', kurulId)
+  setSecim('ders', ders)
+  sinavBaslat(uygun, 'sinav')
+  navigate('/sinav/coz')
+}
+
 
   return (
     <motion.div
@@ -192,26 +194,67 @@ console.log('sorular:', sorular.length)
         )}
 
         {/* Başla */}
-        {kurulId && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-auto">
-            <p className="text-center text-sm mb-4 font-display" style={{ color: t.dim }}>
-              {uygunSayisi} soru
-            </p>
-            <motion.button
-              whileTap={{ scale: 0.98 }}
-              onClick={basla}
-              disabled={uygunSayisi === 0}
-              className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between disabled:opacity-40"
-              style={{
-                background: `linear-gradient(135deg, ${t.accent}, #204878)`,
-                color: '#E8F4FF',
-                boxShadow: `0 6px 20px ${t.accent}40`
-              }}
-            >
-              Sınava Başla <span>→</span>
-            </motion.button>
-          </motion.div>
-        )}
+       {kurulId && (
+  <motion.div
+    initial={{ opacity: 0, y: 8 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="mt-auto flex flex-col gap-3"
+  >
+    <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase"
+      style={{ color: t.accent }}>Soru Sayısı</span>
+
+    {/* Hızlı seçim */}
+    <div className="flex gap-2">
+      {[5, 10, 25, 50].map(n => (
+        <button key={n}
+          onClick={() => setSoruSayisi(soruSayisi === n ? '' : n)}
+          className="flex-1 py-3 rounded-xl font-display text-sm font-semibold transition-all"
+          style={{
+            background: soruSayisi === n ? t.accent : t.bg2,
+            color: soruSayisi === n ? '#E8F4FF' : t.dim,
+            border: `1.5px solid ${soruSayisi === n ? t.accent2 : t.border}`,
+            boxShadow: soruSayisi === n ? `0 4px 12px ${t.accent}40` : 'none',
+          }}>{n}</button>
+      ))}
+    </div>
+
+    {/* Özel input — başla butonuna benzer */}
+    <div className="relative rounded-2xl overflow-hidden"
+      style={{
+        background: `${t.accent}15`,
+        border: `1.5px solid ${t.accent}50`,
+      }}>
+      <input
+        type="number"
+        value={soruSayisi || ''}
+        onChange={e => setSoruSayisi(e.target.value ? parseInt(e.target.value) : '')}
+        placeholder={`Tümü  (${uygunSayisi} soru)`}
+        className="w-full px-5 py-4 font-display text-[15px] font-semibold bg-transparent outline-none text-center"
+        style={{ color: soruSayisi ? t.accent2 : t.dim }}
+      />
+      <span className="absolute right-5 top-1/2 -translate-y-1/2 font-display text-sm"
+        style={{ color: `${t.accent}80` }}>
+        /{uygunSayisi}
+      </span>
+    </div>
+
+    {/* Başla */}
+    <motion.button
+      whileTap={{ scale: 0.98 }}
+      onClick={basla}
+      disabled={uygunSayisi === 0}
+      className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between disabled:opacity-40"
+      style={{
+        background: `linear-gradient(135deg, ${t.accent}, #204878)`,
+        color: '#E8F4FF',
+        boxShadow: `0 6px 20px ${t.accent}40`
+      }}
+    >
+      Sınava Başla <span>→</span>
+    </motion.button>
+  </motion.div>
+)}
+
 
       </main>
     </motion.div>
