@@ -186,6 +186,45 @@ function GunlukKart({ flashcardlar, t }) {
   )
 }
 
+function SonDesteler({ t, navigate, kurullarData }) {
+  const desteler = JSON.parse(localStorage.getItem('sonDesteler') || '[]')
+  if (!desteler.length) return null
+
+  function desteAdi(d) {
+    const kurul = kurullarData?.donemler
+      .find(don => don.id === d.donem)?.kurullar
+      .find(k => k.id === d.kurulId)
+    return `${kurul?.ad || d.kurulId}${d.ders ? ' · ' + d.ders : ''}`
+  }
+
+  return (
+    <div className="flex flex-col gap-2 flex-shrink-0">
+      <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase"
+        style={{ color: t.accent }}>Son Desteler</span>
+      {desteler.slice(0, 3).map((d, i) => (
+        <button key={i}
+          onClick={() => navigate('/flashcard', { state: d })}
+          className="flex items-center justify-between px-4 py-3 rounded-xl transition-all"
+          style={{ background: t.bg2, border: `1px solid ${t.border}` }}
+          onMouseEnter={e => e.currentTarget.style.borderColor = t.accent}
+          onMouseLeave={e => e.currentTarget.style.borderColor = t.border}
+        >
+          <div>
+            <p className="font-display text-sm font-semibold text-left" style={{ color: t.text }}>
+              {desteAdi(d)}
+            </p>
+            <p className="text-xs mt-0.5" style={{ color: t.dim }}>
+              {d.kartSayisi} kart · {d.siralama === 'karisik' ? 'Karışık' : 'Sıralı'}
+            </p>
+          </div>
+          <span style={{ color: t.accent }}>→</span>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+
 function RastgeleSoru({ sorular, t }) {
   const [secilen, setSecilen] = useState(null)
   const [onay, setOnay] = useState(null)
@@ -405,6 +444,7 @@ export default function Home() {
   const yukleniyor = useMoscosStore(s => s.yukleniyor)
   const setAnaSayfaIndex = useMoscosStore(s => s.setAnaSayfaIndex)
   const ayarlar = useMoscosStore(s => s.ayarlar)
+  const kurullarData = useMoscosStore(s => s.kurullarData)
 
   const t0 = temaAl('home', ayarlar)
   const t1 = temaAl('sinav', ayarlar)
@@ -601,6 +641,7 @@ useEffect(() => {
               <p className="text-xs leading-relaxed" style={{ color: t2.dim }}>Kavramları kart çevirerek çalış.</p>
             </div>
             <GunlukKart flashcardlar={flashcardlar} t={t2} />
+            <SonDesteler t={t2} navigate={navigate} kurullarData={kurullarData} />
             <div className="rounded-2xl p-4 flex flex-col gap-2 flex-shrink-0"
               style={{ background: t2.bg2, border: `1px solid ${t2.border}` }}>
               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t2.accent }}>Kart Havuzu</span>

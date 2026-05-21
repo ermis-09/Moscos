@@ -19,15 +19,23 @@ export default function Flashcard() {
 const t = temaAl('flash', ayarlar)
   const navigate = useNavigate()
   const location = useLocation()
-  const { donem, kurulId, ders } = location.state || {}
+ const { donem, kurulId, ders, kartSayisi, siralama } = location.state || {}
   const flashcardlar = useMoscosStore(s => s.flashcardlar)
 
-  const kartlar = karistir(flashcardlar.filter(f => {
-    if (f.donem !== donem) return false
-    if (f.kurulId !== kurulId) return false
-    if (ders && f.ders !== ders) return false
-    return true
-  }))
+  let kartlar = flashcardlar.filter(f => {
+  if (f.donem !== donem) return false
+  if (f.kurulId !== kurulId) return false
+  if (ders && f.ders !== ders) return false
+  return true
+})
+
+if (siralama === 'karisik') {
+  kartlar = karistir(kartlar)
+}
+
+if (kartSayisi && kartSayisi > 0) {
+  kartlar = kartlar.slice(0, kartSayisi)
+}
 
   const [index, setIndex] = useState(0)
   const [cevrildimi, setCevrildimi] = useState(false)
@@ -63,7 +71,23 @@ const t = temaAl('flash', ayarlar)
     setTimeout(() => {
       setSwipeDir(null)
       setCevrildimi(false)
-      if (index + 1 >= kartlar.length) setBitti(true)
+      if (index + 1 >= kartlar.length) {
+  // Son desteyi kaydet
+  const sonDesteler = JSON.parse(localStorage.getItem('sonDesteler') || '[]')
+  const yeniDeste = {
+    donem, kurulId, ders: ders || null,
+    kartSayisi: kartlar.length,
+    siralama: siralama || 'karisik',
+    tarih: new Date().toISOString(),
+  }
+  // Aynı desteyi tekrar ekleme
+  const filtrelenmis = sonDesteler.filter(d =>
+    !(d.donem === yeniDeste.donem && d.kurulId === yeniDeste.kurulId && d.ders === yeniDeste.ders)
+  )
+  const guncellenmis = [yeniDeste, ...filtrelenmis].slice(0, 5)
+  localStorage.setItem('sonDesteler', JSON.stringify(guncellenmis))
+  setBitti(true)
+}
       else setIndex(i => i + 1)
     }, 350)
   }
