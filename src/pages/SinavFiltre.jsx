@@ -119,7 +119,11 @@ export default function SinavFiltre() {
             {donemler.map(d => (
               <button key={d.id}
                 onClick={() => { setDonem(d.id); setKurulId(null); setDers(null) }}
-                className="px-4 py-2.5 rounded-xl font-display text-sm font-semibold transition-all"
+                className={`rounded-xl font-display font-semibold transition-all ${
+  ayarlar.butonBoyutu === 'kucuk' ? 'px-3 py-2 text-xs' :
+  ayarlar.butonBoyutu === 'buyuk' ? 'px-5 py-3 text-base' :
+  'px-4 py-2.5 text-sm'
+}`}
                 style={{
                   background: donem === d.id ? t.accent : t.bg2,
                   color: donem === d.id ? '#E8F4FF' : t.dim,
@@ -143,7 +147,11 @@ export default function SinavFiltre() {
               {kurullar.map(k => (
                 <button key={k.id}
                   onClick={() => { setKurulId(k.id); setDers(null) }}
-                  className="px-4 py-2.5 rounded-xl font-display text-sm font-semibold transition-all"
+                  className={`rounded-xl font-display font-semibold transition-all ${
+  ayarlar.butonBoyutu === 'kucuk' ? 'px-3 py-2 text-xs' :
+  ayarlar.butonBoyutu === 'buyuk' ? 'px-5 py-3 text-base' :
+  'px-4 py-2.5 text-sm'
+}`}
                   style={{
                     background: kurulId === k.id ? t.accent : t.bg2,
                     color: kurulId === k.id ? '#E8F4FF' : t.dim,
@@ -167,7 +175,11 @@ export default function SinavFiltre() {
             <div className="flex gap-2 flex-wrap">
               <button
                 onClick={() => setDers(null)}
-                className="px-4 py-2.5 rounded-xl font-display text-sm font-semibold transition-all"
+                className={`rounded-xl font-display font-semibold transition-all ${
+  ayarlar.butonBoyutu === 'kucuk' ? 'px-3 py-2 text-xs' :
+  ayarlar.butonBoyutu === 'buyuk' ? 'px-5 py-3 text-base' :
+  'px-4 py-2.5 text-sm'
+}`}
                 style={{
                   background: ders === null ? t.accent : t.bg2,
                   color: ders === null ? '#E8F4FF' : t.dim,
@@ -179,7 +191,11 @@ export default function SinavFiltre() {
               {dersler.map(d => (
                 <button key={d}
                   onClick={() => setDers(d)}
-                  className="px-4 py-2.5 rounded-xl font-display text-sm font-semibold transition-all"
+                  className={`rounded-xl font-display font-semibold transition-all ${
+  ayarlar.butonBoyutu === 'kucuk' ? 'px-3 py-2 text-xs' :
+  ayarlar.butonBoyutu === 'buyuk' ? 'px-5 py-3 text-base' :
+  'px-4 py-2.5 text-sm'
+}`}
                   style={{
                     background: ders === d ? t.accent : t.bg2,
                     color: ders === d ? '#E8F4FF' : t.dim,

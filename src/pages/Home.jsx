@@ -445,6 +445,12 @@ export default function Home() {
   const setAnaSayfaIndex = useMoscosStore(s => s.setAnaSayfaIndex)
   const ayarlar = useMoscosStore(s => s.ayarlar)
   const kurullarData = useMoscosStore(s => s.kurullarData)
+  const anaButonPadding = ayarlar.butonBoyutu === 'kucuk' ? 'py-3' :
+  ayarlar.butonBoyutu === 'buyuk' ? 'py-5' : 'py-4'
+
+const anaButonFontSize = ayarlar.butonBoyutu === 'kucuk' ? 13 :
+  ayarlar.butonBoyutu === 'buyuk' ? 17 : 15
+
 
   const t0 = temaAl('home', ayarlar)
   const t1 = temaAl('sinav', ayarlar)
@@ -597,8 +603,7 @@ useEffect(() => {
             <div className="flex flex-col gap-2.5 mt-auto">
               {yariKalan && (
                 <motion.button whileTap={{ scale: 0.98 }} onClick={() => navigate('/sinav/coz')}
-                  className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                  style={{
+                  className={`w-full rounded-2xl px-5 font-display font-semibold flex items-center justify-between ${anaButonPadding}`}                  style={{
                     background: aktivSinav.mod === 'simulasyon'
                       ? `linear-gradient(135deg, ${t3.accent}, #501878)`
                       : `linear-gradient(135deg, ${t1.accent}, #204878)`,
@@ -609,8 +614,7 @@ useEffect(() => {
               )}
               <motion.button whileTap={{ scale: 0.98 }}
                 onClick={() => scrollRef.current?.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-                className="w-full rounded-2xl px-5 py-4 font-display text-[15px] font-semibold flex items-center justify-between"
-                style={{ background: `linear-gradient(135deg, ${t0.accent}, #8B5020)`, color: '#FAF0D0', boxShadow: '0 6px 20px rgba(200,119,26,0.3)' }}>
+                className={`w-full rounded-2xl px-5 font-display font-semibold flex items-center justify-between ${anaButonPadding}`}                style={{ background: `linear-gradient(135deg, ${t0.accent}, #8B5020)`, color: '#FAF0D0', boxShadow: '0 6px 20px rgba(200,119,26,0.3)' }}>
                 Sınav Modları <span>↓</span>
               </motion.button>
             </div>
