@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useRef, useEffect } from 'react'
 import { useMoscosStore } from '../store'
 import { temaAl, bazTemalar } from '../lib/renkler'
+import { doc, getDoc } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore'
 
@@ -411,23 +412,44 @@ export default function Home() {
   const t3 = temaAl('sim', ayarlar)
 
   const [sonSinav, setSonSinav] = useState(null)
+const aktivSinavYukle = useMoscosStore(s => s.aktivSinavYukle)
+const setSecim = useMoscosStore(s => s.setSecim)
+const [firebaseDevamVar, setFirebaseDevamVar] = useState(false)
 
-  useEffect(() => {
-    if (!kullanici) return
-    async function yukle() {
-      try {
-        const q = query(
-          collection(db, 'kullanici_sonuclari', kullanici.uid, 'sonuclar'),
-          orderBy('tarih', 'desc'), limit(1)
-        )
-        const snap = await getDocs(q)
-        if (!snap.empty) setSonSinav({ id: snap.docs[0].id, ...snap.docs[0].data() })
-      } catch (err) { console.error(err) }
+useEffect(() => {
+  if (!kullanici) return
+  if (sorularData.length === 0 && cikmislar.length === 0) return
+
+  async function aktifSinavYukle_() {
+    try {
+      const snap = await getDoc(doc(db, 'kullanici_aktif_sinav', kullanici.uid))
+      console.log('snap:', snap.exists())
+      if (snap.exists()) {
+        const veri = snap.data()
+        const tumS = veri.mod === 'simulasyon' ? cikmislar : sorularData
+        const eslesmis = veri.soruIdleri
+          .map(id => tumS.find(s => s.id === id))
+          .filter(Boolean)
+        console.log('eslesmis:', eslesmis.length)
+        if (eslesmis.length > 0) {
+          aktivSinavYukle({ ...veri, sorular: eslesmis })
+          setFirebaseDevamVar(true)
+          if (veri.secim) {
+            Object.entries(veri.secim).forEach(([key, val]) => {
+              if (val) setSecim(key, val)
+            })
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Firebase hata:', err)
     }
-    yukle()
-  }, [kullanici])
+  }
+  aktifSinavYukle_()
+}, [kullanici, sorularData.length, cikmislar.length])
 
-  const yariKalan = aktivSinav.sorular.length > 0 && !aktivSinav.tamamlandi
+
+  const yariKalan = (aktivSinav.sorular.length > 0 && !aktivSinav.tamamlandi) || firebaseDevamVar
 
   const pages = [
     { theme: 'home', color: t0.triangle },

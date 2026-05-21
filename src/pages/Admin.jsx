@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { db, auth } from '../lib/firebase'
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { collection, getDocs, doc, updateDoc, deleteDoc, addDoc } from 'firebase/firestore'
@@ -96,11 +96,26 @@ function DuzenleModal({ item, alanlar, onKaydet, onKapat, t }) {
  )
 }
 
-function SoruKart({ item, onDuzenle, onSil, tip, t }) {
+function SoruKart({ item, onDuzenle, onSil, tip, t, secimModu, secili, onSec }) {
  return (
-   <div className="rounded-xl p-4 flex flex-col gap-2"
-     style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+   <div
+     onClick={() => secimModu && onSec(item.id)}
+     className="rounded-xl p-4 flex flex-col gap-2 transition-all"
+     style={{
+       background: secili ? `${t.accent}15` : t.bg2,
+       border: `1.5px solid ${secili ? t.accent : t.border}`,
+       cursor: secimModu ? 'pointer' : 'default',
+     }}>
      <div className="flex items-center gap-2 flex-wrap">
+       {secimModu && (
+         <div className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0"
+           style={{
+             background: secili ? t.accent : t.bg3,
+             border: `1.5px solid ${secili ? t.accent2 : t.border}`,
+           }}>
+           {secili && <span className="text-[10px] font-bold" style={{ color: '#FAF0D0' }}>✓</span>}
+         </div>
+       )}
        <span className="text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
          style={{ background: t.accent, color: '#FAF0D0' }}>{item.kurulId}</span>
        <span className="text-[9px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full"
@@ -117,19 +132,178 @@ function SoruKart({ item, onDuzenle, onSil, tip, t }) {
      <p className="text-sm leading-relaxed" style={{ color: t.text }}>
        {tip === 'flash' ? item.onYuz : item.soru?.slice(0, 80) + (item.soru?.length > 80 ? '...' : '')}
      </p>
-     <div className="flex gap-2 justify-end mt-1">
-       <button onClick={() => onDuzenle(item)}
-         className="px-3 py-1.5 rounded-lg text-xs font-semibold"
-         style={{ background: `${t.accent}15`, border: `1px solid ${t.border}`, color: t.accent }}>
-         Düzenle
-       </button>
-       <button onClick={() => onSil(item)}
-         className="px-3 py-1.5 rounded-lg text-xs font-semibold"
-         style={{ background: 'rgba(139,58,58,0.15)', border: '1px solid rgba(139,58,58,0.3)', color: '#E08080' }}>
-         Sil
-       </button>
-     </div>
+     {!secimModu && (
+       <div className="flex gap-2 justify-end mt-1">
+         <button onClick={() => onDuzenle(item)}
+           className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+           style={{ background: `${t.accent}15`, border: `1px solid ${t.border}`, color: t.accent }}>
+           Düzenle
+         </button>
+         <button onClick={() => onSil(item)}
+           className="px-3 py-1.5 rounded-lg text-xs font-semibold"
+           style={{ background: 'rgba(139,58,58,0.15)', border: '1px solid rgba(139,58,58,0.3)', color: '#E08080' }}>
+           Sil
+         </button>
+       </div>
+     )}
    </div>
+ )
+}
+
+function FiltrePanel({ acik, onKapat, sekme, items, filtreler, setFiltreler, t }) {
+ const donemler = [...new Set(items.map(i => i.donem).filter(Boolean))].sort()
+ const kurullar = [...new Set(items.filter(i =>
+   !filtreler.donem.length || filtreler.donem.includes(i.donem)
+ ).map(i => i.kurulId).filter(Boolean))].sort()
+ const dersler = [...new Set(items.filter(i => {
+   if (filtreler.donem.length && !filtreler.donem.includes(i.donem)) return false
+   if (filtreler.kurulId.length && !filtreler.kurulId.includes(i.kurulId)) return false
+   return true
+ }).map(i => i.ders).filter(Boolean))].sort()
+ const yillar = [...new Set(items.map(i => i.yil).filter(Boolean))].sort((a, b) => b - a)
+ const sinavlar = [...new Set(items.filter(i =>
+   !filtreler.yil.length || filtreler.yil.includes(i.yil)
+ ).map(i => i.sinav).filter(Boolean))].sort()
+
+ function toggle(key, val) {
+   setFiltreler(f => ({
+     ...f,
+     [key]: f[key].includes(val) ? f[key].filter(v => v !== val) : [...f[key], val]
+   }))
+ }
+
+ function temizle() {
+   setFiltreler({ donem: [], kurulId: [], ders: [], yil: [], sinav: [] })
+ }
+
+ const aktifSayisi = Object.values(filtreler).filter(arr => arr.length > 0).length
+
+ return (
+   <AnimatePresence>
+     {acik && (
+       <>
+         <motion.div
+           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+           onClick={onKapat}
+           className="fixed inset-0 z-30"
+           style={{ background: 'rgba(0,0,0,0.4)' }}
+         />
+         <motion.div
+           initial={{ opacity: 0, y: -8 }}
+           animate={{ opacity: 1, y: 0 }}
+           exit={{ opacity: 0, y: -8 }}
+           transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+           className="absolute left-0 right-0 z-40 rounded-2xl overflow-hidden"
+           style={{ top: 4, background: t.bg2, border: `1px solid ${t.border}`, boxShadow: `0 8px 32px rgba(0,0,0,0.4)` }}
+         >
+           <div className="flex items-center justify-between px-4 py-3 border-b" style={{ borderColor: t.border }}>
+             <span className="font-display text-xs font-bold tracking-widest uppercase" style={{ color: t.accent }}>
+               Filtrele {aktifSayisi > 0 && `(${aktifSayisi})`}
+             </span>
+             <div className="flex items-center gap-2">
+               {aktifSayisi > 0 && (
+                 <button onClick={temizle}
+                   className="text-[10px] font-semibold font-display px-2.5 py-1 rounded-lg"
+                   style={{ background: 'rgba(139,58,58,0.15)', color: '#E08080' }}>
+                   Temizle
+                 </button>
+               )}
+               <button onClick={onKapat}
+                 className="w-7 h-7 rounded-full flex items-center justify-center text-xs"
+                 style={{ background: t.bg3, color: t.dim }}>✕</button>
+             </div>
+           </div>
+
+           <div className="p-4 flex flex-col gap-4 max-h-80 overflow-y-auto">
+             {donemler.length > 0 && (
+               <div className="flex flex-col gap-2">
+                 <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Dönem</span>
+                 <div className="flex gap-1.5 flex-wrap">
+                   {donemler.map(d => (
+                     <button key={d} onClick={() => toggle('donem', d)}
+                       className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{
+                         background: filtreler.donem.includes(d) ? t.accent : t.bg3,
+                         border: `1px solid ${filtreler.donem.includes(d) ? t.accent2 : t.border}`,
+                         color: filtreler.donem.includes(d) ? '#FAF0D0' : t.dim,
+                       }}>D{d}</button>
+                   ))}
+                 </div>
+               </div>
+             )}
+
+             {sekme === 'cikmislar' && yillar.length > 0 && (
+               <div className="flex flex-col gap-2">
+                 <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Yıl</span>
+                 <div className="flex gap-1.5 flex-wrap">
+                   {yillar.map(y => (
+                     <button key={y} onClick={() => toggle('yil', y)}
+                       className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{
+                         background: filtreler.yil.includes(y) ? t.accent : t.bg3,
+                         border: `1px solid ${filtreler.yil.includes(y) ? t.accent2 : t.border}`,
+                         color: filtreler.yil.includes(y) ? '#FAF0D0' : t.dim,
+                       }}>{y}</button>
+                   ))}
+                 </div>
+               </div>
+             )}
+
+             {sekme === 'cikmislar' && sinavlar.length > 0 && (
+               <div className="flex flex-col gap-2">
+                 <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Sınav</span>
+                 <div className="flex gap-1.5 flex-wrap">
+                   {sinavlar.map(s => (
+                     <button key={s} onClick={() => toggle('sinav', s)}
+                       className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{
+                         background: filtreler.sinav.includes(s) ? t.accent : t.bg3,
+                         border: `1px solid ${filtreler.sinav.includes(s) ? t.accent2 : t.border}`,
+                         color: filtreler.sinav.includes(s) ? '#FAF0D0' : t.dim,
+                       }}>{s}</button>
+                   ))}
+                 </div>
+               </div>
+             )}
+
+             {kurullar.length > 0 && (
+               <div className="flex flex-col gap-2">
+                 <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Kurul</span>
+                 <div className="flex gap-1.5 flex-wrap">
+                   {kurullar.map(k => (
+                     <button key={k} onClick={() => toggle('kurulId', k)}
+                       className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{
+                         background: filtreler.kurulId.includes(k) ? t.accent : t.bg3,
+                         border: `1px solid ${filtreler.kurulId.includes(k) ? t.accent2 : t.border}`,
+                         color: filtreler.kurulId.includes(k) ? '#FAF0D0' : t.dim,
+                       }}>{k}</button>
+                   ))}
+                 </div>
+               </div>
+             )}
+
+             {dersler.length > 0 && (
+               <div className="flex flex-col gap-2">
+                 <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Ders</span>
+                 <div className="flex gap-1.5 flex-wrap">
+                   {dersler.map(d => (
+                     <button key={d} onClick={() => toggle('ders', d)}
+                       className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{
+                         background: filtreler.ders.includes(d) ? t.accent : t.bg3,
+                         border: `1px solid ${filtreler.ders.includes(d) ? t.accent2 : t.border}`,
+                         color: filtreler.ders.includes(d) ? '#FAF0D0' : t.dim,
+                       }}>{d}</button>
+                   ))}
+                 </div>
+               </div>
+             )}
+           </div>
+         </motion.div>
+       </>
+     )}
+   </AnimatePresence>
  )
 }
 
@@ -143,13 +317,20 @@ export default function Admin() {
  const [sekme, setSekme] = useState('sorular')
  const [items, setItems] = useState([])
  const [yukleniyor, setYukleniyor] = useState(false)
- const [filtre, setFiltre] = useState('')
- const [yilFiltre, setYilFiltre] = useState('')
+ const [aramaFiltre, setAramaFiltre] = useState('')
+ const [filtreler, setFiltreler] = useState({ donem: [], kurulId: [], ders: [], yil: [], sinav: [] })
+ const [filtreAcik, setFiltreAcik] = useState(false)
  const [duzenleItem, setDuzenleItem] = useState(null)
  const [adminMi, setAdminMi] = useState(false)
  const [jsonInput, setJsonInput] = useState('')
  const [jsonMesaj, setJsonMesaj] = useState('')
  const [jsonYukleniyor, setJsonYukleniyor] = useState(false)
+ const [secimModu, setSecimModu] = useState(false)
+ const [seciliIds, setSeciliIds] = useState(new Set())
+ const [topluSilOnay, setTopluSilOnay] = useState(false)
+ const filtreRef = useRef(null)
+
+ const aktifFiltreSayisi = Object.values(filtreler).filter(arr => arr.length > 0).length
 
  useEffect(() => {
    if (!kullanici) return
@@ -166,6 +347,11 @@ export default function Admin() {
  useEffect(() => {
    if (!adminMi || sekme === 'iceriak') return
    yukle()
+   setFiltreler({ donem: [], kurulId: [], ders: [], yil: [], sinav: [] })
+   setAramaFiltre('')
+   setFiltreAcik(false)
+   setSecimModu(false)
+   setSeciliIds(new Set())
  }, [sekme, adminMi])
 
  async function yukle() {
@@ -197,6 +383,21 @@ export default function Admin() {
    yukle()
  }
 
+ async function topluSil() {
+   const koleksiyon = sekme === 'sorular' ? 'sorular' : sekme === 'cikmislar' ? 'cikmis_sorular' : 'flashcardlar'
+   try {
+     for (const id of seciliIds) {
+       await deleteDoc(doc(db, koleksiyon, id))
+     }
+     setSeciliIds(new Set())
+     setSecimModu(false)
+     setTopluSilOnay(false)
+     yukle()
+   } catch (err) {
+     console.error(err)
+   }
+ }
+
  async function girisYap() {
    const provider = new GoogleAuthProvider()
    const result = await signInWithPopup(auth, provider)
@@ -204,49 +405,69 @@ export default function Admin() {
  }
 
  async function topluIcerAktar() {
-  setJsonMesaj('')
-  setJsonYukleniyor(true)
-  let parsed
-  try {
-    parsed = JSON.parse(jsonInput)
-  } catch {
-    setJsonMesaj('Geçersiz JSON formatı.')
-    setJsonYukleniyor(false)
-    return
-  }
+   setJsonMesaj('')
+   setJsonYukleniyor(true)
+   let parsed
+   try {
+     parsed = JSON.parse(jsonInput)
+   } catch {
+     setJsonMesaj('Geçersiz JSON formatı.')
+     setJsonYukleniyor(false)
+     return
+   }
 
-  const soruArr = parsed.sorular || parsed.cikmislar || parsed.flashcardlar || parsed
-  if (!Array.isArray(soruArr)) {
-    setJsonMesaj('Veri bir dizi olmalı.')
-    setJsonYukleniyor(false)
-    return
-  }
+   const soruArr = parsed.sorular || parsed.cikmislar || parsed.flashcardlar || parsed
+   if (!Array.isArray(soruArr)) {
+     setJsonMesaj('Veri bir dizi olmalı.')
+     setJsonYukleniyor(false)
+     return
+   }
 
-  // Koleksiyonu otomatik tespit et
-  const ilk = soruArr[0] || {}
-  let koleksiyon = 'sorular'
-  if (ilk.yil && ilk.sinav) koleksiyon = 'cikmis_sorular'
-  else if (ilk.onYuz || ilk.arkaYuz) koleksiyon = 'flashcardlar'
+   const ilk = soruArr[0] || {}
+   let koleksiyon = 'sorular'
+   if (ilk.yil && ilk.sinav) koleksiyon = 'cikmis_sorular'
+   else if (ilk.onYuz || ilk.arkaYuz) koleksiyon = 'flashcardlar'
 
-  try {
-    let basarili = 0
-    for (const item of soruArr) {
-      await addDoc(collection(db, koleksiyon), item)
-      basarili++
-    }
-    setJsonInput('')
-    setJsonMesaj(`✓ ${basarili} kayıt "${koleksiyon}" koleksiyonuna eklendi.`)
-  } catch (err) {
-    setJsonMesaj('Firebase hatası: ' + err.message)
-  } finally {
-    setJsonYukleniyor(false)
-  }
-}
+   try {
+     let basarili = 0
+     for (const item of soruArr) {
+       await addDoc(collection(db, koleksiyon), item)
+       basarili++
+     }
+     setJsonInput('')
+     setJsonMesaj(`✓ ${basarili} kayıt "${koleksiyon}" koleksiyonuna eklendi.`)
+   } catch (err) {
+     setJsonMesaj('Firebase hatası: ' + err.message)
+   } finally {
+     setJsonYukleniyor(false)
+   }
+ }
+
+ function secToggle(id) {
+   setSeciliIds(prev => {
+     const yeni = new Set(prev)
+     if (yeni.has(id)) yeni.delete(id)
+     else yeni.add(id)
+     return yeni
+   })
+ }
+
+ function tumunuSec() {
+   if (seciliIds.size === filtrelenmis.length) {
+     setSeciliIds(new Set())
+   } else {
+     setSeciliIds(new Set(filtrelenmis.map(i => i.id)))
+   }
+ }
 
  const filtrelenmis = items.filter(item => {
-   if (yilFiltre && item.yil !== yilFiltre) return false
-   if (!filtre) return true
-   const aramaMetni = filtre.toLowerCase()
+   if (filtreler.donem.length && !filtreler.donem.includes(item.donem)) return false
+   if (filtreler.kurulId.length && !filtreler.kurulId.includes(item.kurulId)) return false
+   if (filtreler.ders.length && !filtreler.ders.includes(item.ders)) return false
+   if (filtreler.yil.length && !filtreler.yil.includes(item.yil)) return false
+   if (filtreler.sinav.length && !filtreler.sinav.includes(item.sinav)) return false
+   if (!aramaFiltre) return true
+   const aramaMetni = aramaFiltre.toLowerCase()
    return (
      item.kurulId?.toLowerCase().includes(aramaMetni) ||
      item.ders?.toLowerCase().includes(aramaMetni) ||
@@ -258,7 +479,7 @@ export default function Admin() {
  })
 
  const alanlar = sekme === 'sorular' ? SORU_ALANLARI : sekme === 'cikmislar' ? CIKMIS_ALANLARI : FLASH_ALANLARI
- const yillar = [...new Set(items.map(i => i.yil).filter(Boolean))].sort((a, b) => b - a)
+ const tumSecili = filtrelenmis.length > 0 && seciliIds.size === filtrelenmis.length
 
  return (
    <motion.div
@@ -304,7 +525,6 @@ export default function Admin() {
        </div>
      ) : (
        <>
-         {/* Sekmeler */}
          <div className="flex gap-2 px-5 pb-3 flex-shrink-0 overflow-x-auto">
            {[
              { id: 'sorular', label: 'Sorular' },
@@ -312,7 +532,7 @@ export default function Admin() {
              { id: 'flashcardlar', label: 'Flashcard' },
              { id: 'iceriak', label: 'İçe Aktar' },
            ].map(s => (
-             <button key={s.id} onClick={() => { setSekme(s.id); setYilFiltre('') }}
+             <button key={s.id} onClick={() => setSekme(s.id)}
                className="flex-1 py-2.5 rounded-xl font-display text-xs font-semibold transition-all flex-shrink-0"
                style={{
                  background: sekme === s.id ? t.accent : t.bg2,
@@ -332,26 +552,20 @@ export default function Admin() {
                  <span style={{ color: t.accent }}>{'{ "sorular": [...] }'}</span> veya direkt dizi.
                </p>
              </div>
-
-             <textarea
-               value={jsonInput}
+             <textarea value={jsonInput}
                onChange={e => { setJsonInput(e.target.value); setJsonMesaj('') }}
-               placeholder={'{\n  "sorular": [\n    {\n      "soru": "...",\n      "secenekler": { "A": "...", ... },\n      "dogruCevap": "A",\n      "ders": "...",\n      "kurulId": "KK-1",\n      "donem": 1\n    }\n  ]\n}'}
+               placeholder={'{\n  "sorular": [\n    {\n      "soru": "...",\n      ...\n    }\n  ]\n}'}
                rows={12}
                className="w-full px-4 py-3 rounded-xl text-xs font-mono resize-none"
                style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text, lineHeight: 1.6 }}
              />
-
              {jsonMesaj && (
                <p className="text-xs font-semibold font-display"
                  style={{ color: jsonMesaj.startsWith('✓') ? '#70D090' : '#E08080' }}>
                  {jsonMesaj}
                </p>
              )}
-
-             <motion.button
-               whileTap={{ scale: 0.98 }}
-               onClick={topluIcerAktar}
+             <motion.button whileTap={{ scale: 0.98 }} onClick={topluIcerAktar}
                disabled={!jsonInput.trim() || jsonYukleniyor}
                className="w-full py-4 rounded-2xl font-display text-sm font-semibold disabled:opacity-40"
                style={{ background: `linear-gradient(135deg, ${t.accent}, #8B5020)`, color: '#FAF0D0' }}>
@@ -360,35 +574,88 @@ export default function Admin() {
            </div>
          ) : (
            <>
-             <div className="px-5 pb-3 flex-shrink-0">
-               <input value={filtre} onChange={e => setFiltre(e.target.value)}
-                 placeholder={sekme === 'cikmislar' ? "Kurul, ders, yıl veya sınav ara..." : "Kurul, ders veya soru ara..."}
-                 className="w-full px-4 py-2.5 rounded-xl text-sm"
+             {/* Arama + Filtre + Seç */}
+             <div className="px-5 pb-3 flex-shrink-0 flex gap-2 relative" ref={filtreRef}>
+               <input value={aramaFiltre} onChange={e => setAramaFiltre(e.target.value)}
+                 placeholder="Ara..."
+                 className="flex-1 px-4 py-2.5 rounded-xl text-sm"
                  style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text }} />
+
+               <button onClick={() => setFiltreAcik(f => !f)}
+                 className="relative px-3 py-2.5 rounded-xl font-display text-xs font-semibold flex items-center gap-1.5 flex-shrink-0"
+                 style={{
+                   background: aktifFiltreSayisi > 0 ? `${t.accent}20` : t.bg2,
+                   border: `1.5px solid ${aktifFiltreSayisi > 0 ? t.accent : t.border}`,
+                   color: aktifFiltreSayisi > 0 ? t.accent2 : t.dim,
+                 }}>
+                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                   <line x1="4" y1="6" x2="20" y2="6"/>
+                   <line x1="8" y1="12" x2="16" y2="12"/>
+                   <line x1="11" y1="18" x2="13" y2="18"/>
+                 </svg>
+                 {aktifFiltreSayisi > 0 && (
+                   <span className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold"
+                     style={{ background: t.accent, color: '#FAF0D0' }}>{aktifFiltreSayisi}</span>
+                 )}
+               </button>
+
+               <button
+                 onClick={() => {
+                   setSecimModu(f => !f)
+                   setSeciliIds(new Set())
+                 }}
+                 className="px-3 py-2.5 rounded-xl font-display text-xs font-semibold flex-shrink-0"
+                 style={{
+                   background: secimModu ? `${t.accent}20` : t.bg2,
+                   border: `1.5px solid ${secimModu ? t.accent : t.border}`,
+                   color: secimModu ? t.accent2 : t.dim,
+                 }}>
+                 Seç
+               </button>
+
+               <div className="absolute left-5 right-5 z-40" style={{ top: '100%' }}>
+                 <FiltrePanel
+                   acik={filtreAcik}
+                   onKapat={() => setFiltreAcik(false)}
+                   sekme={sekme}
+                   items={items}
+                   filtreler={filtreler}
+                   setFiltreler={setFiltreler}
+                   t={t}
+                 />
+               </div>
              </div>
 
-             {sekme === 'cikmislar' && yillar.length > 0 && (
-               <div className="px-5 pb-3 flex-shrink-0 flex gap-2 overflow-x-auto">
-                 <button onClick={() => setYilFiltre('')}
-                   className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold flex-shrink-0"
+             {/* Seçim modu toolbar */}
+             {secimModu && (
+               <div className="px-5 pb-3 flex-shrink-0 flex items-center justify-between">
+                 <button onClick={tumunuSec}
+                   className="flex items-center gap-2 px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
                    style={{
-                     background: yilFiltre === '' ? t.accent : t.bg2,
-                     border: `1px solid ${yilFiltre === '' ? t.accent2 : t.border}`,
-                     color: yilFiltre === '' ? '#FAF0D0' : t.dim,
-                   }}>Tümü</button>
-                 {yillar.map(yil => (
-                   <button key={yil} onClick={() => setYilFiltre(yil)}
-                     className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold flex-shrink-0"
-                     style={{
-                       background: yilFiltre === yil ? t.accent : t.bg2,
-                       border: `1px solid ${yilFiltre === yil ? t.accent2 : t.border}`,
-                       color: yilFiltre === yil ? '#FAF0D0' : t.dim,
-                     }}>{yil}</button>
-                 ))}
+                     background: tumSecili ? `${t.accent}20` : t.bg2,
+                     border: `1px solid ${tumSecili ? t.accent : t.border}`,
+                     color: tumSecili ? t.accent2 : t.dim,
+                   }}>
+                   <div className="w-4 h-4 rounded-md flex items-center justify-center"
+                     style={{ background: tumSecili ? t.accent : t.bg3, border: `1.5px solid ${tumSecili ? t.accent2 : t.border}` }}>
+                     {tumSecili && <span className="text-[9px] font-bold" style={{ color: '#FAF0D0' }}>✓</span>}
+                   </div>
+                   Tümünü Seç ({filtrelenmis.length})
+                 </button>
+                 <span className="text-xs font-display" style={{ color: t.dim }}>
+                   {seciliIds.size} seçili
+                 </span>
                </div>
              )}
 
-             <main className="flex-1 px-5 pb-6 overflow-y-auto flex flex-col gap-2 relative z-10">
+             {/* Sonuç sayısı */}
+             {(aktifFiltreSayisi > 0 || aramaFiltre) && !secimModu && (
+               <div className="px-5 pb-2 flex-shrink-0">
+                 <span className="text-xs" style={{ color: t.dim }}>{filtrelenmis.length} kayıt</span>
+               </div>
+             )}
+
+             <main className="flex-1 px-5 pb-24 overflow-y-auto flex flex-col gap-2 relative z-10">
                {yukleniyor ? (
                  <p className="text-sm italic text-center py-8" style={{ color: t.dim }}>Yükleniyor...</p>
                ) : filtrelenmis.length === 0 ? (
@@ -397,14 +664,78 @@ export default function Admin() {
                  filtrelenmis.map(item => (
                    <SoruKart key={item.id} item={item}
                      tip={sekme === 'flashcardlar' ? 'flash' : sekme === 'cikmislar' ? 'cikmis' : 'soru'}
-                     onDuzenle={setDuzenleItem} onSil={sil} t={t} />
+                     onDuzenle={setDuzenleItem} onSil={sil} t={t}
+                     secimModu={secimModu}
+                     secili={seciliIds.has(item.id)}
+                     onSec={secToggle}
+                   />
                  ))
                )}
              </main>
+
+             {/* Toplu silme action bar */}
+             <AnimatePresence>
+               {secimModu && seciliIds.size > 0 && (
+                 <motion.div
+                   initial={{ y: 80, opacity: 0 }}
+                   animate={{ y: 0, opacity: 1 }}
+                   exit={{ y: 80, opacity: 0 }}
+                   className="absolute bottom-0 left-0 right-0 px-5 pb-6 pt-3 z-20"
+                   style={{ background: `linear-gradient(to top, ${t.bg} 60%, transparent)` }}
+                 >
+                   <button
+                     onClick={() => setTopluSilOnay(true)}
+                     className="w-full py-4 rounded-2xl font-display text-sm font-semibold"
+                     style={{ background: 'linear-gradient(135deg, #8B3A3A, #6B2A2A)', color: '#FFD0D0' }}>
+                     {seciliIds.size} kaydı sil
+                   </button>
+                 </motion.div>
+               )}
+             </AnimatePresence>
            </>
          )}
        </>
      )}
+
+     {/* Toplu silme onay modal */}
+     <AnimatePresence>
+       {topluSilOnay && (
+         <motion.div
+           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+           className="fixed inset-0 z-50 flex items-center justify-center px-6"
+           style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
+         >
+           <motion.div
+             initial={{ scale: 0.9, opacity: 0 }}
+             animate={{ scale: 1, opacity: 1 }}
+             exit={{ scale: 0.9, opacity: 0 }}
+             className="w-full max-w-[320px] rounded-2xl p-6 flex flex-col gap-4"
+             style={{ background: t.bg2, border: `1px solid ${t.border}` }}
+           >
+             <div className="text-center">
+               <p className="font-display text-lg font-bold mb-2" style={{ color: t.text }}>
+                 Emin misin?
+               </p>
+               <p className="text-sm" style={{ color: t.dim }}>
+                 {seciliIds.size} kayıt kalıcı olarak silinecek.
+               </p>
+             </div>
+             <div className="flex gap-2">
+               <button onClick={() => setTopluSilOnay(false)}
+                 className="flex-1 py-3 rounded-xl font-display text-sm font-semibold"
+                 style={{ background: t.bg3, border: `1px solid ${t.border}`, color: t.dim }}>
+                 İptal
+               </button>
+               <button onClick={topluSil}
+                 className="flex-1 py-3 rounded-xl font-display text-sm font-semibold"
+                 style={{ background: 'linear-gradient(135deg, #8B3A3A, #6B2A2A)', color: '#FFD0D0' }}>
+                 Sil
+               </button>
+             </div>
+           </motion.div>
+         </motion.div>
+       )}
+     </AnimatePresence>
 
      <AnimatePresence>
        {duzenleItem && (

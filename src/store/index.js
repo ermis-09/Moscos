@@ -40,6 +40,16 @@ ayarlar: {
   yaziBoyutu: 'normal',
 },
 
+aktivSinavYukle: (veri) => set({
+  aktivSinav: {
+    sorular: veri.sorular,
+    cevaplar: veri.cevaplar || {},
+    mod: veri.mod,
+    aktifIndex: veri.aktifIndex || 0,
+    tamamlandi: false,
+  }
+}),
+
 
   // Actions
 setAnaSayfaIndex: (index) => set({ anaSayfaIndex: index }),

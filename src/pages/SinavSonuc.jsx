@@ -24,18 +24,20 @@ const t = temaAl('sinav', ayarlar)
 
   sorular.forEach((s, i) => {
     const cevap = cevaplar[i]
-    if (!dersDetay[s.ders]) dersDetay[s.ders] = { dogru: 0, yanlis: 0, toplam: 0 }
+    if (!dersDetay[s.ders]) dersDetay[s.ders] = { dogru: 0, yanlis: 0, toplam: 0, yanliHedefler: new Set() }
     dersDetay[s.ders].toplam++
     if (!cevap) {
-      bos++
-      dersDetay[s.ders].yanlis++
-    } else if (cevap === s.dogruCevap) {
-      dogru++
-      dersDetay[s.ders].dogru++
-    } else {
-      yanlis++
-      dersDetay[s.ders].yanlis++
-    }
+  bos++
+  dersDetay[s.ders].yanlis++
+  if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
+} else if (cevap === s.dogruCevap) {
+  dogru++
+  dersDetay[s.ders].dogru++
+} else {
+  yanlis++
+  dersDetay[s.ders].yanlis++
+  if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
+}
   })
 
   const yuzde = sorular.length > 0 ? Math.round((dogru / sorular.length) * 100) : 0
@@ -140,22 +142,34 @@ const t = temaAl('sinav', ayarlar)
             const y = stat.toplam > 0 ? Math.round((stat.dogru / stat.toplam) * 100) : 0
             return (
               <div key={ders} className="rounded-xl p-3" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
-                <div className="flex justify-between items-baseline mb-2">
-                  <span className="text-sm font-semibold" style={{ color: t.text }}>{ders}</span>
-                  <span className="font-display text-sm font-semibold" style={{ color: t.accent2 }}>
-                    {stat.dogru}/{stat.toplam} · %{y}
-                  </span>
-                </div>
-                <div className="h-1 rounded-full overflow-hidden" style={{ background: `${t.accent}20` }}>
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ background: `linear-gradient(to right, ${t.accent}, ${t.accent2})` }}
-                    initial={{ width: 0 }}
-                    animate={{ width: `${y}%` }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                  />
-                </div>
-              </div>
+ <div className="flex justify-between items-baseline mb-2">
+   <span className="text-sm font-semibold" style={{ color: t.text }}>{ders}</span>
+   <span className="font-display text-sm font-semibold" style={{ color: t.accent2 }}>
+     {stat.dogru}/{stat.toplam} · %{y}
+   </span>
+ </div>
+ <div className="h-1 rounded-full overflow-hidden" style={{ background: `${t.accent}20` }}>
+   <motion.div
+     className="h-full rounded-full"
+     style={{ background: `linear-gradient(to right, ${t.accent}, ${t.accent2})` }}
+     initial={{ width: 0 }}
+     animate={{ width: `${y}%` }}
+     transition={{ duration: 0.8, delay: 0.2 }}
+   />
+ </div>
+ {[...stat.yanliHedefler].length > 0 && (
+   <div className="flex flex-col gap-1 mt-2 pt-2 border-t" style={{ borderColor: t.border }}>
+     <span className="text-[8px] font-bold tracking-widest uppercase mb-0.5" style={{ color: '#E08080' }}>
+       Eksik Konular
+     </span>
+     {[...stat.yanliHedefler].map((h, i) => (
+       <p key={i} className="text-[10px] leading-relaxed" style={{ color: t.dim }}>
+         · {h}
+       </p>
+     ))}
+   </div>
+ )}
+</div>
             )
           })}
         </div>
