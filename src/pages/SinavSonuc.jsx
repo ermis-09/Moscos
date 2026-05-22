@@ -6,194 +6,255 @@ import { collection, addDoc } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
 import { temaAl } from '../lib/renkler'
 
-
 export default function SinavSonuc() {
-  const ayarlar = useMoscosStore(s => s.ayarlar)
-const t = temaAl('sinav', ayarlar)
-  const navigate = useNavigate()
-  const aktivSinav = useMoscosStore(s => s.aktivSinav)
-  const secimSifirla = useMoscosStore(s => s.secimSifirla)
-  const kullanici = useMoscosStore(s => s.kullanici)
-  const secim = useMoscosStore(s => s.secim)
+ const ayarlar = useMoscosStore(s => s.ayarlar)
+ const t = temaAl('sinav', ayarlar)
+ const navigate = useNavigate()
+ const aktivSinav = useMoscosStore(s => s.aktivSinav)
+ const secimSifirla = useMoscosStore(s => s.secimSifirla)
+ const kullanici = useMoscosStore(s => s.kullanici)
+ const secim = useMoscosStore(s => s.secim)
 
-  const { sorular, cevaplar } = aktivSinav
+ const { sorular, cevaplar } = aktivSinav
 
-  // İstatistikler
-  let dogru = 0, yanlis = 0, bos = 0
-  const dersDetay = {}
+ let dogru = 0, yanlis = 0, bos = 0
+ const dersDetay = {}
 
-  sorular.forEach((s, i) => {
-    const cevap = cevaplar[i]
-    if (!dersDetay[s.ders]) dersDetay[s.ders] = { dogru: 0, yanlis: 0, toplam: 0, yanliHedefler: new Set() }
-    dersDetay[s.ders].toplam++
-    if (!cevap) {
-  bos++
-  dersDetay[s.ders].yanlis++
-  if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
-} else if (cevap === s.dogruCevap) {
-  dogru++
-  dersDetay[s.ders].dogru++
-} else {
-  yanlis++
-  dersDetay[s.ders].yanlis++
-  if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
-}
-  })
+ sorular.forEach((s, i) => {
+   const cevap = cevaplar[i]
+   if (!dersDetay[s.ders]) dersDetay[s.ders] = { dogru: 0, yanlis: 0, toplam: 0, yanliHedefler: new Set() }
+   dersDetay[s.ders].toplam++
+   if (!cevap) {
+     bos++
+     dersDetay[s.ders].yanlis++
+     if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
+   } else if (cevap === s.dogruCevap) {
+     dogru++
+     dersDetay[s.ders].dogru++
+   } else {
+     yanlis++
+     dersDetay[s.ders].yanlis++
+     if (s.ogrenimHedefi) dersDetay[s.ders].yanliHedefler.add(s.ogrenimHedefi)
+   }
+ })
 
-  const yuzde = sorular.length > 0 ? Math.round((dogru / sorular.length) * 100) : 0
-  const tier = yuzde >= 75 ? 'high' : yuzde >= 50 ? 'mid' : 'low'
-  const tierColor = tier === 'high' ? '#70D090' : tier === 'mid' ? t.accent2 : '#E08080'
-  const mesaj = tier === 'high' ? 'Harika gidiyor!' : tier === 'mid' ? 'İyi iş çıkardın.' : 'Tekrar çalışmaya devam!'
+ const yuzde = sorular.length > 0 ? Math.round((dogru / sorular.length) * 100) : 0
+ const tier = yuzde >= 75 ? 'high' : yuzde >= 50 ? 'mid' : 'low'
+ const tierColor = tier === 'high' ? '#70D090' : tier === 'mid' ? t.accent2 : '#E08080'
+ const mesaj = tier === 'high' ? 'Harika gidiyor!' : tier === 'mid' ? 'İyi iş çıkardın.' : 'Tekrar çalışmaya devam!'
 
-  useEffect(() => {
-    if (!kullanici || !sorular.length) return
-    async function kaydet() {
-      try {
-        await addDoc(
-          collection(db, 'kullanici_sonuclari', kullanici.uid, 'sonuclar'),
-          {
-            mod: aktivSinav.mod,
-            donem: secim.donem,
-            kurulId: secim.kurulId,
-            ders: secim.ders,
-            yil: secim.yil,
-            sinav: secim.sinav,
-            dogru,
-            yanlis,
-            bos,
-            toplam: sorular.length,
-            yuzde,
-            tarih: new Date().toISOString(),
-          }
-        )
-      } catch (err) {
-        console.error('Sonuç kaydedilemedi:', err)
-      }
-    }
-    kaydet()
-  }, [])
+ useEffect(() => {
+   if (!kullanici || !sorular.length) return
+   async function kaydet() {
+     try {
+       await addDoc(
+         collection(db, 'kullanici_sonuclari', kullanici.uid, 'sonuclar'),
+         {
+           mod: aktivSinav.mod,
+           donem: secim.donem,
+           kurulId: secim.kurulId,
+           ders: secim.ders,
+           yil: secim.yil,
+           sinav: secim.sinav,
+           dogru, yanlis, bos,
+           toplam: sorular.length,
+           yuzde,
+           tarih: new Date().toISOString(),
+         }
+       )
+     } catch (err) { console.error('Sonuç kaydedilemedi:', err) }
+   }
+   kaydet()
+ }, [])
 
-  if (!sorular.length) {
-    return (
-      <div className="w-full max-w-[390px] mx-auto flex items-center justify-center"
-        style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.dim }}>
-        <p>Veri bulunamadı.</p>
-      </div>
-    )
-  }
+ if (!sorular.length) {
+   return (
+     <div className="w-full mx-auto flex items-center justify-center"
+       style={{ height: '100dvh', background: t.bg, color: t.dim }}>
+       <p>Veri bulunamadı.</p>
+     </div>
+   )
+ }
 
-  return (
-    <motion.div
-      initial={{ x: '100%', opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: '100%', opacity: 0 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="w-full max-w-[390px] mx-auto flex flex-col relative overflow-hidden"
-      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
-    >
-      {/* Izgara */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
-      }} />
-
-      {/* Üçgenler */}
-      <svg className="absolute inset-0 pointer-events-none w-full h-full" viewBox="0 0 390 844" preserveAspectRatio="none">
-        <polygon points="0,0 0,260 180,0" fill="none" stroke="rgba(58,124,200,0.08)" strokeWidth="1"/>
-        <polygon points="390,844 390,584 210,844" fill="none" stroke="rgba(58,124,200,0.08)" strokeWidth="1"/>
-      </svg>
-
-      {/* Skor header */}
-      <div className="flex flex-col items-center pt-10 pb-5 px-5 flex-shrink-0 relative z-10 border-b"
-        style={{ borderColor: t.border }}>
-        <span className="text-[10px] font-bold tracking-[0.28em] uppercase mb-3" style={{ color: t.accent }}>
-          Sınav Sonucu
-        </span>
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="font-display font-semibold" style={{ fontSize: 72, lineHeight: 1, letterSpacing: '-0.04em', color: tierColor }}>
-            {dogru}
-          </span>
-          <span className="font-display font-light" style={{ fontSize: 28, color: t.dim }}>/ {sorular.length}</span>
-        </div>
-        <span className="font-display italic text-lg mb-2" style={{ color: tierColor }}>%{yuzde}</span>
-        <span className="text-sm" style={{ color: t.dim }}>{mesaj}</span>
-
-        <div className="flex gap-2.5 mt-4">
-          {[
-            { num: dogru, label: 'Doğru', color: '#70D090' },
-            { num: yanlis, label: 'Yanlış', color: '#E08080' },
-            { num: bos, label: 'Boş', color: t.dim },
-          ].map(({ num, label, color }) => (
-            <div key={label} className="flex flex-col items-center gap-1 px-4 py-2.5 rounded-xl"
-              style={{ background: t.bg2, border: `1px solid ${t.border}`, minWidth: 72 }}>
-              <span className="font-display text-2xl font-semibold leading-none" style={{ color }}>{num}</span>
-              <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Ders detayı */}
-      <main className="flex-1 px-5 py-4 overflow-y-auto relative z-10 pb-24">
-        <p className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase mb-3" style={{ color: t.accent }}>
-          Ders Bazında
-        </p>
-        <div className="flex flex-col gap-2">
-          {Object.entries(dersDetay).map(([ders, stat]) => {
-            const y = stat.toplam > 0 ? Math.round((stat.dogru / stat.toplam) * 100) : 0
-            return (
-              <div key={ders} className="rounded-xl p-3" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
- <div className="flex justify-between items-baseline mb-2">
-   <span className="text-sm font-semibold" style={{ color: t.text }}>{ders}</span>
-   <span className="font-display text-sm font-semibold" style={{ color: t.accent2 }}>
-     {stat.dogru}/{stat.toplam} · %{y}
-   </span>
- </div>
- <div className="h-1 rounded-full overflow-hidden" style={{ background: `${t.accent}20` }}>
+ return (
    <motion.div
-     className="h-full rounded-full"
-     style={{ background: `linear-gradient(to right, ${t.accent}, ${t.accent2})` }}
-     initial={{ width: 0 }}
-     animate={{ width: `${y}%` }}
-     transition={{ duration: 0.8, delay: 0.2 }}
-   />
- </div>
- {[...stat.yanliHedefler].length > 0 && (
-   <div className="flex flex-col gap-1 mt-2 pt-2 border-t" style={{ borderColor: t.border }}>
-     <span className="text-[8px] font-bold tracking-widest uppercase mb-0.5" style={{ color: '#E08080' }}>
-       Eksik Konular
-     </span>
-     {[...stat.yanliHedefler].map((h, i) => (
-       <p key={i} className="text-[10px] leading-relaxed" style={{ color: t.dim }}>
-         · {h}
-       </p>
-     ))}
-   </div>
- )}
-</div>
-            )
-          })}
-        </div>
-      </main>
+     initial={{ x: '100%', opacity: 0 }}
+     animate={{ x: 0, opacity: 1 }}
+     exit={{ x: '100%', opacity: 0 }}
+     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+     className="w-full mx-auto flex relative overflow-hidden"
+     style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
+   >
+     <div className="absolute inset-0 pointer-events-none" style={{
+       backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
+     }} />
+     <svg className="absolute inset-0 pointer-events-none w-full h-full" viewBox="0 0 390 844" preserveAspectRatio="none">
+       <polygon points="0,0 0,260 180,0" fill="none" stroke="rgba(58,124,200,0.08)" strokeWidth="1"/>
+       <polygon points="390,844 390,584 210,844" fill="none" stroke="rgba(58,124,200,0.08)" strokeWidth="1"/>
+     </svg>
 
-      {/* Footer */}
-      <footer className="absolute bottom-0 left-0 right-0 flex gap-2 px-5 pb-6 pt-3 z-10"
-        style={{ background: `linear-gradient(to top, ${t.bg} 70%, transparent)` }}>
-        <button
-          onClick={() => { secimSifirla(); navigate('/sinav/filtre') }}
-          className="flex-1 h-12 rounded-xl font-display text-sm font-semibold"
-          style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text }}
-        >
-          Tekrar
-        </button>
-        <motion.button
-          whileTap={{ scale: 0.98 }}
-          onClick={() => { secimSifirla(); navigate('/') }}
-          className="flex-1 h-12 rounded-xl font-display text-sm font-semibold"
-          style={{ background: `linear-gradient(135deg, ${t.accent}, #204878)`, color: '#E8F4FF' }}
-        >
-          Ana Sayfa →
-        </motion.button>
-      </footer>
-    </motion.div>
-  )
+     {/* Sol panel */}
+     <div className="flex-1 flex flex-col relative z-10 min-w-0 md:max-w-md md:border-r" style={{ borderColor: t.border }}>
+
+       {/* Skor header */}
+       <div className="flex flex-col items-center pt-10 pb-5 px-5 flex-shrink-0 border-b" style={{ borderColor: t.border }}>
+         <span className="text-[10px] font-bold tracking-[0.28em] uppercase mb-3" style={{ color: t.accent }}>
+           Sınav Sonucu
+         </span>
+         <div className="flex items-baseline gap-2 mb-1">
+           <span className="font-display font-semibold" style={{ fontSize: 72, lineHeight: 1, letterSpacing: '-0.04em', color: tierColor }}>
+             {dogru}
+           </span>
+           <span className="font-display font-light" style={{ fontSize: 28, color: t.dim }}>/ {sorular.length}</span>
+         </div>
+         <span className="font-display italic text-lg mb-2" style={{ color: tierColor }}>%{yuzde}</span>
+         <span className="text-sm" style={{ color: t.dim }}>{mesaj}</span>
+
+         <div className="flex gap-2.5 mt-4">
+           {[
+             { num: dogru, label: 'Doğru', color: '#70D090' },
+             { num: yanlis, label: 'Yanlış', color: '#E08080' },
+             { num: bos, label: 'Boş', color: t.dim },
+           ].map(({ num, label, color }) => (
+             <div key={label} className="flex flex-col items-center gap-1 px-4 py-2.5 rounded-xl"
+               style={{ background: t.bg2, border: `1px solid ${t.border}`, minWidth: 72 }}>
+               <span className="font-display text-2xl font-semibold leading-none" style={{ color }}>{num}</span>
+               <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>{label}</span>
+             </div>
+           ))}
+         </div>
+       </div>
+
+       {/* Ders detayı */}
+       <main className="flex-1 px-5 py-4 overflow-y-auto pb-24">
+         <p className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase mb-3" style={{ color: t.accent }}>
+           Ders Bazında
+         </p>
+         <div className="flex flex-col gap-2">
+           {Object.entries(dersDetay).map(([ders, stat]) => {
+             const y = stat.toplam > 0 ? Math.round((stat.dogru / stat.toplam) * 100) : 0
+             const renk = y >= 75 ? '#70D090' : y >= 50 ? t.accent2 : '#E08080'
+             return (
+               <div key={ders} className="rounded-xl p-3" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+                 <div className="flex justify-between items-baseline mb-2">
+                   <span className="text-sm font-semibold" style={{ color: t.text }}>{ders}</span>
+                   <span className="font-display text-sm font-semibold" style={{ color: renk }}>
+                     {stat.dogru}/{stat.toplam} · %{y}
+                   </span>
+                 </div>
+                 <div className="h-1 rounded-full overflow-hidden" style={{ background: `${t.accent}20` }}>
+                   <motion.div className="h-full rounded-full"
+                     style={{ background: `linear-gradient(to right, ${t.accent}, ${t.accent2})` }}
+                     initial={{ width: 0 }} animate={{ width: `${y}%` }}
+                     transition={{ duration: 0.8, delay: 0.2 }} />
+                 </div>
+                 {[...stat.yanliHedefler].length > 0 && (
+                   <div className="flex flex-col gap-1 mt-2 pt-2 border-t" style={{ borderColor: t.border }}>
+                     <span className="text-[8px] font-bold tracking-widest uppercase mb-0.5" style={{ color: '#E08080' }}>
+                       Eksik Konular
+                     </span>
+                     {[...stat.yanliHedefler].map((h, i) => (
+                       <p key={i} className="text-[10px] leading-relaxed" style={{ color: t.dim }}>· {h}</p>
+                     ))}
+                   </div>
+                 )}
+               </div>
+             )
+           })}
+         </div>
+       </main>
+
+       {/* Footer */}
+       <footer className="absolute bottom-0 left-0 right-0 md:relative flex gap-2 px-5 pb-6 pt-3 z-10 flex-shrink-0"
+         style={{ background: `linear-gradient(to top, ${t.bg} 70%, transparent)` }}>
+         <button onClick={() => { secimSifirla(); navigate('/sinav/filtre') }}
+           className="flex-1 h-12 rounded-xl font-display text-sm font-semibold"
+           style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text }}>
+           Tekrar
+         </button>
+         <motion.button whileTap={{ scale: 0.98 }} onClick={() => { secimSifirla(); navigate('/') }}
+           className="flex-1 h-12 rounded-xl font-display text-sm font-semibold"
+           style={{ background: `linear-gradient(135deg, ${t.accent}, #204878)`, color: '#E8F4FF' }}>
+           Ana Sayfa →
+         </motion.button>
+       </footer>
+     </div>
+
+     {/* Sağ panel — md+ */}
+     <div className="hidden md:flex flex-1 flex-col px-8 py-6 gap-5 overflow-y-auto relative z-10">
+
+       {/* Genel özet */}
+       <div className="flex flex-col gap-3">
+         <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+           Genel Özet
+         </span>
+         <div className="grid grid-cols-2 gap-3">
+           {[
+             { num: `%${yuzde}`, label: 'Başarı Oranı', color: tierColor },
+             { num: sorular.length, label: 'Toplam Soru', color: t.accent2 },
+             { num: dogru, label: 'Doğru', color: '#70D090' },
+             { num: yanlis + bos, label: 'Yanlış + Boş', color: '#E08080' },
+           ].map(({ num, label, color }) => (
+             <div key={label} className="flex flex-col gap-1 px-4 py-3 rounded-xl"
+               style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+               <span className="font-display text-2xl font-bold leading-none" style={{ color }}>{num}</span>
+               <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>{label}</span>
+             </div>
+           ))}
+         </div>
+       </div>
+
+       {/* Performans grafiği — ders bazlı barlar */}
+       <div className="flex flex-col gap-3">
+         <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+           Ders Performansı
+         </span>
+         <div className="flex flex-col gap-3">
+           {Object.entries(dersDetay).map(([ders, stat]) => {
+             const y = stat.toplam > 0 ? Math.round((stat.dogru / stat.toplam) * 100) : 0
+             const renk = y >= 75 ? '#70D090' : y >= 50 ? t.accent2 : '#E08080'
+             return (
+               <div key={ders} className="flex flex-col gap-1.5">
+                 <div className="flex justify-between items-baseline">
+                   <span className="text-sm font-display font-semibold" style={{ color: t.text }}>{ders}</span>
+                   <span className="text-sm font-display font-bold" style={{ color: renk }}>%{y}</span>
+                 </div>
+                 <div className="h-2 rounded-full overflow-hidden" style={{ background: `${renk}20` }}>
+                   <motion.div className="h-full rounded-full"
+                     style={{ background: renk }}
+                     initial={{ width: 0 }} animate={{ width: `${y}%` }}
+                     transition={{ duration: 0.8, delay: 0.1 }} />
+                 </div>
+                 <div className="flex justify-between">
+                   <span className="text-[10px]" style={{ color: t.dim }}>{stat.dogru} doğru · {stat.yanlis} hata · {stat.toplam} soru</span>
+                 </div>
+               </div>
+             )
+           })}
+         </div>
+       </div>
+
+       {/* Eksik konular özeti */}
+       {Object.entries(dersDetay).some(([, s]) => s.yanliHedefler.size > 0) && (
+         <div className="flex flex-col gap-3">
+           <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: '#E08080' }}>
+             Çalışılması Gereken Konular
+           </span>
+           <div className="flex flex-col gap-2">
+             {Object.entries(dersDetay).map(([ders, stat]) => (
+               [...stat.yanliHedefler].map((h, i) => (
+                 <div key={`${ders}-${i}`} className="flex items-start gap-3 px-4 py-3 rounded-xl"
+                   style={{ background: 'rgba(139,58,58,0.1)', border: '1px solid rgba(139,58,58,0.2)' }}>
+                   <span className="text-[9px] font-bold px-2 py-0.5 rounded-full flex-shrink-0"
+                     style={{ background: 'rgba(139,58,58,0.2)', color: '#E08080' }}>{ders}</span>
+                   <p className="text-xs leading-relaxed" style={{ color: t.dim }}>{h}</p>
+                 </div>
+               ))
+             ))}
+           </div>
+         </div>
+       )}
+     </div>
+   </motion.div>
+ )
 }
