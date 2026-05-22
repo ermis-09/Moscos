@@ -16,7 +16,7 @@ export default function Sinav() {
   exit={{ x: '-100%', opacity: 0 }}
   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
   className="flex flex-col"
-  style={{ height: '100dvh' }}
+  style={{ height: '100dvh', maxHeight: '-webkit-fill-available' }}
 >
 
         {/* Header */}

@@ -51,7 +51,7 @@ if (kartSayisi && kartSayisi > 0) {
   if (!kartlar.length) {
     return (
       <div className="w-full max-w-[390px] mx-auto flex flex-col items-center justify-center gap-4"
-        style={{ height: '100dvh', background: t.bg, color: t.dim }}>
+        style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.dim }}>
         <p className="font-display text-lg">Bu seçimde kart yok.</p>
         <button onClick={() => navigate(-1)}
           className="px-6 py-3 rounded-xl font-display text-sm font-semibold"
@@ -144,7 +144,7 @@ if (kartSayisi && kartSayisi > 0) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="w-full max-w-[390px] mx-auto flex flex-col items-center justify-center gap-6 px-6"
-        style={{ height: '100dvh', background: t.bg, color: t.text }}
+        style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
       >
         <div className="font-display text-5xl font-bold" style={{ color: t.accent2 }}>✦</div>
         <h2 className="font-display text-3xl font-bold" style={{ color: t.text, letterSpacing: '-0.02em' }}>Tamamlandı!</h2>
@@ -188,7 +188,7 @@ if (kartSayisi && kartSayisi > 0) {
       exit={{ x: '100%', opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="w-full max-w-[390px] mx-auto flex flex-col relative overflow-hidden"
-      style={{ height: '100dvh', background: t.bg, color: t.text }}
+      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
     >
       {/* Izgara */}
       <div className="absolute inset-0 pointer-events-none" style={{

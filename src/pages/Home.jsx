@@ -84,7 +84,7 @@ function Drawer({ open, onClose, navigate, theme: t }) {
       animate={{ x: open ? 0 : '-100%' }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="fixed top-0 left-0 w-full max-w-[390px] z-50 flex flex-col px-8 py-14 gap-2"
-      style={{ height: '100dvh', background: 'rgba(13,11,8,0.97)', backdropFilter: 'blur(8px)' }}
+      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: 'rgba(13,11,8,0.97)', backdropFilter: 'blur(8px)' }}
     >
       <button onClick={onClose}
         className="absolute top-5 right-5 w-9 h-9 rounded-full flex items-center justify-center text-sm"
@@ -99,7 +99,7 @@ function Drawer({ open, onClose, navigate, theme: t }) {
           <button
             onClick={() => {
               if (item.external) window.open(item.path, '_blank')
-              else if (item.path) { onClose(); navigate(item.path) }
+              else if (item.path) { onClose(); setTimeout(() => navigate(item.path), 150) }
             }}
             className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all text-left"
             style={{ border: '1px solid transparent' }}
@@ -128,7 +128,7 @@ function Page({ theme, ayarlar, decoNum, children, triangleColor }) {
   const t = temaAl(theme, ayarlar)
   return (
     <div className="flex-shrink-0 flex flex-col relative overflow-hidden"
-      style={{ height: '100dvh', background: t.bg, scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
+      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, scrollSnapAlign: 'start', scrollSnapStop: 'always' }}>
       <div className="absolute inset-0 pointer-events-none" style={{
         backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
       }} />
@@ -534,7 +534,7 @@ useEffect(() => {
     : null
 
   return (
-    <div className="w-full max-w-[390px] mx-auto relative overflow-hidden" style={{ height: '100dvh' }}>
+    <div className="w-full max-w-[390px] mx-auto relative overflow-hidden" style={{ height: '100dvh', maxHeight: '-webkit-fill-available' }}>
       <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} navigate={navigate} theme={currentThemeObj} />
 
       <header className="absolute top-0 left-0 right-0 flex items-center justify-between px-5 pt-5 pb-3 z-20">

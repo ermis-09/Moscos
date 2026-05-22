@@ -6,6 +6,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 body {
   background: #0F0E0A;
   font-family: var(--font-body);

@@ -55,7 +55,7 @@ const sayi = (yil && sinav)
       exit={{ x: '100%', opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       className="w-full max-w-[390px] mx-auto flex flex-col relative overflow-hidden"
-      style={{ height: '100dvh', background: t.bg, color: t.text }}
+      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
     >
       {/* Izgara */}
       <div className="absolute inset-0 pointer-events-none" style={{

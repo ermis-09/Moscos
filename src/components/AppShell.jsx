@@ -58,7 +58,7 @@ export default function AppShell({ theme = 'home', children }) {
   return (
     <div
       className="w-full max-w-[390px] flex flex-col relative overflow-hidden mx-auto"
-style={{ height: '100dvh' }}
+style={{ height: '100dvh', maxHeight: '-webkit-fill-available' }}
       style={{ background: t.bg, color: t.text, fontFamily: "'DM Sans', sans-serif" }}
     >
       {/* Izgara */}
