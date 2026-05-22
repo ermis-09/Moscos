@@ -7,56 +7,31 @@ import { db } from '../lib/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
 const AYARLAR_TANIMI = [
- {
-   key: 'sinavRenk',
-   baslik: 'Sınav Rengi',
-   tip: 'renk',
-   secenekler: [
-     { id: 'mavi', label: 'Mavi', renk: '#3A7CC8' },
-     { id: 'kirmizi', label: 'Kırmızı', renk: '#C83A3A' },
-     { id: 'turkuaz', label: 'Turkuaz', renk: '#2A9B9B' },
-   ]
- },
- {
-   key: 'flashRenk',
-   baslik: 'Flashcard Rengi',
-   tip: 'renk',
-   secenekler: [
-     { id: 'yesil', label: 'Yeşil', renk: '#2E8B57' },
-     { id: 'pembe', label: 'Pembe', renk: '#C83A8B' },
-     { id: 'sari', label: 'Sarı', renk: '#B89020' },
-   ]
- },
- {
-   key: 'simRenk',
-   baslik: 'Simülasyon Rengi',
-   tip: 'renk',
-   secenekler: [
-     { id: 'mor', label: 'Mor', renk: '#8B3AC8' },
-     { id: 'turuncu', label: 'Turuncu', renk: '#C86020' },
-     { id: 'gri', label: 'Gri', renk: '#7A8A9A' },
-   ]
- },
- {
-   key: 'butonBoyutu',
-   baslik: 'Filtre Buton Boyutu',
-   tip: 'buton',
-   secenekler: [
-     { id: 'kucuk', label: 'Küçük', py: 6, fontSize: 11 },
-     { id: 'orta', label: 'Orta', py: 10, fontSize: 13 },
-     { id: 'buyuk', label: 'Büyük', py: 14, fontSize: 15 },
-   ]
- },
- {
-   key: 'yaziBoyutu',
-   baslik: 'Soru Yazı Boyutu',
-   tip: 'yazi',
-   secenekler: [
-     { id: 'kucuk', label: 'Küçük', fontSize: 12 },
-     { id: 'normal', label: 'Normal', fontSize: 14 },
-     { id: 'buyuk', label: 'Büyük', fontSize: 17 },
-   ]
- },
+ { key: 'sinavRenk', baslik: 'Sınav Rengi', tip: 'renk', secenekler: [
+   { id: 'mavi', label: 'Mavi', renk: '#3A7CC8' },
+   { id: 'kirmizi', label: 'Kırmızı', renk: '#C83A3A' },
+   { id: 'turkuaz', label: 'Turkuaz', renk: '#2A9B9B' },
+ ]},
+ { key: 'flashRenk', baslik: 'Flashcard Rengi', tip: 'renk', secenekler: [
+   { id: 'yesil', label: 'Yeşil', renk: '#2E8B57' },
+   { id: 'pembe', label: 'Pembe', renk: '#C83A8B' },
+   { id: 'sari', label: 'Sarı', renk: '#B89020' },
+ ]},
+ { key: 'simRenk', baslik: 'Simülasyon Rengi', tip: 'renk', secenekler: [
+   { id: 'mor', label: 'Mor', renk: '#8B3AC8' },
+   { id: 'turuncu', label: 'Turuncu', renk: '#C86020' },
+   { id: 'gri', label: 'Gri', renk: '#7A8A9A' },
+ ]},
+ { key: 'butonBoyutu', baslik: 'Filtre Buton Boyutu', tip: 'buton', secenekler: [
+   { id: 'kucuk', label: 'Küçük', py: 6, fontSize: 11 },
+   { id: 'orta', label: 'Orta', py: 10, fontSize: 13 },
+   { id: 'buyuk', label: 'Büyük', py: 14, fontSize: 15 },
+ ]},
+ { key: 'yaziBoyutu', baslik: 'Soru Yazı Boyutu', tip: 'yazi', secenekler: [
+   { id: 'kucuk', label: 'Küçük', fontSize: 12 },
+   { id: 'normal', label: 'Normal', fontSize: 14 },
+   { id: 'buyuk', label: 'Büyük', fontSize: 17 },
+ ]},
 ]
 
 function AyarSatiri({ tanim, ayarlar, onGuncelle, t }) {
@@ -66,41 +41,24 @@ function AyarSatiri({ tanim, ayarlar, onGuncelle, t }) {
 
  return (
    <div className="rounded-2xl overflow-hidden" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
-     {/* Satır başlığı */}
-     <button
-       onClick={() => setAcik(a => !a)}
-       className="w-full flex items-center justify-between px-4 py-4"
-     >
-       <span className="font-display text-sm font-semibold" style={{ color: t.text }}>
-         {tanim.baslik}
-       </span>
+     <button onClick={() => setAcik(a => !a)} className="w-full flex items-center justify-between px-4 py-4">
+       <span className="font-display text-sm font-semibold" style={{ color: t.text }}>{tanim.baslik}</span>
        <div className="flex items-center gap-2.5">
-         {mevcutRenk && (
-           <div className="w-4 h-4 rounded-full" style={{ background: mevcutRenk }} />
-         )}
-         <span className="text-xs font-display" style={{ color: t.dim }}>
-           {mevcutSecim?.label}
-         </span>
-         <motion.span
-           animate={{ rotate: acik ? 90 : 0 }}
-           transition={{ duration: 0.2 }}
+         {mevcutRenk && <div className="w-4 h-4 rounded-full" style={{ background: mevcutRenk }} />}
+         <span className="text-xs font-display" style={{ color: t.dim }}>{mevcutSecim?.label}</span>
+         <motion.span animate={{ rotate: acik ? 90 : 0 }} transition={{ duration: 0.2 }}
            style={{ color: t.dim, fontSize: 12 }}>›</motion.span>
        </div>
      </button>
 
-     {/* Açılır içerik */}
      <AnimatePresence>
        {acik && (
          <motion.div
-           initial={{ height: 0, opacity: 0 }}
-           animate={{ height: 'auto', opacity: 1 }}
-           exit={{ height: 0, opacity: 0 }}
+           initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
            transition={{ duration: 0.2 }}
-           style={{ overflow: 'hidden', borderTop: `1px solid ${t.border}` }}
-         >
+           style={{ overflow: 'hidden', borderTop: `1px solid ${t.border}` }}>
            <div className="px-4 py-4 flex flex-col gap-3">
 
-             {/* Renk seçimi */}
              {tanim.tip === 'renk' && (
                <div className="flex gap-2">
                  {tanim.secenekler.map(s => {
@@ -125,7 +83,6 @@ function AyarSatiri({ tanim, ayarlar, onGuncelle, t }) {
                </div>
              )}
 
-             {/* Buton boyutu */}
              {tanim.tip === 'buton' && (
                <>
                  <div className="flex gap-2">
@@ -143,46 +100,39 @@ function AyarSatiri({ tanim, ayarlar, onGuncelle, t }) {
                            fontSize: s.fontSize,
                            boxShadow: secili ? `0 0 12px ${t.accent}25` : 'none',
                            transition: 'all 0.2s',
-                         }}>
-                         {s.label}
-                       </motion.button>
+                         }}>{s.label}</motion.button>
                      )
                    })}
                  </div>
-                 {/* Önizleme */}
-<div className="flex flex-col gap-2 pt-1">
-  <p className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Filtre</p>
-  <div className="flex flex-wrap gap-2">
-    {['Dönem 1', 'KK-1', 'Anatomi'].map(label => {
-      const s = tanim.secenekler.find(x => x.id === ayarlar[tanim.key])
-      return (
-        <div key={label} className="rounded-xl font-display font-semibold"
-          style={{
-            background: `${t.accent}15`, border: `1px solid ${t.accent}40`, color: t.accent2,
-            padding: `${s?.py || 10}px 16px`, fontSize: s?.fontSize || 13,
-          }}>
-          {label}
-        </div>
-      )
-    })}
-  </div>
-  <p className="text-[9px] font-bold tracking-widest uppercase mt-1" style={{ color: t.dim }}>Ana Buton</p>
-  <div className="rounded-2xl font-display font-semibold flex items-center justify-between px-5"
-    style={{
-      background: `linear-gradient(135deg, ${t.accent}, #8B5020)`,
-      color: '#FAF0D0',
-      paddingTop: (tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.py || 10) + 2,
-      paddingBottom: (tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.py || 10) + 2,
-      fontSize: tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.fontSize || 13,
-    }}>
-    Sınava Başla <span>→</span>
-  </div>
-</div>
-
+                 <div className="flex flex-col gap-2 pt-1">
+                   <p className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>Filtre</p>
+                   <div className="flex flex-wrap gap-2">
+                     {['Dönem 1', 'KK-1', 'Anatomi'].map(label => {
+                       const s = tanim.secenekler.find(x => x.id === ayarlar[tanim.key])
+                       return (
+                         <div key={label} className="rounded-xl font-display font-semibold"
+                           style={{
+                             background: `${t.accent}15`, border: `1px solid ${t.accent}40`, color: t.accent2,
+                             padding: `${s?.py || 10}px 16px`, fontSize: s?.fontSize || 13,
+                           }}>{label}</div>
+                       )
+                     })}
+                   </div>
+                   <p className="text-[9px] font-bold tracking-widest uppercase mt-1" style={{ color: t.dim }}>Ana Buton</p>
+                   <div className="rounded-2xl font-display font-semibold flex items-center justify-between px-5"
+                     style={{
+                       background: `linear-gradient(135deg, ${t.accent}, #8B5020)`,
+                       color: '#FAF0D0',
+                       paddingTop: (tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.py || 10) + 2,
+                       paddingBottom: (tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.py || 10) + 2,
+                       fontSize: tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.fontSize || 13,
+                     }}>
+                     Sınava Başla <span>→</span>
+                   </div>
+                 </div>
                </>
              )}
 
-             {/* Yazı boyutu */}
              {tanim.tip === 'yazi' && (
                <>
                  <div className="flex gap-2">
@@ -199,23 +149,16 @@ function AyarSatiri({ tanim, ayarlar, onGuncelle, t }) {
                            fontSize: s.fontSize,
                            boxShadow: secili ? `0 0 12px ${t.accent}25` : 'none',
                            transition: 'all 0.2s',
-                         }}>
-                         {s.label}
-                       </motion.button>
+                         }}>{s.label}</motion.button>
                      )
                    })}
                  </div>
-                 {/* Önizleme */}
                  <p className="font-display font-medium leading-relaxed pt-1"
-                   style={{
-                     color: t.dim,
-                     fontSize: tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.fontSize || 14
-                   }}>
+                   style={{ color: t.dim, fontSize: tanim.secenekler.find(x => x.id === ayarlar[tanim.key])?.fontSize || 14 }}>
                    Aşağıdaki yapılardan hangisi ön kolda yer alır ve supinasyon hareketinde görev yapar?
                  </p>
                </>
              )}
-
            </div>
          </motion.div>
        )}
@@ -230,22 +173,16 @@ export default function Ayarlar() {
  const ayarlar = useMoscosStore(s => s.ayarlar)
  const setAyarlar = useMoscosStore(s => s.setAyarlar)
  const t = temaAl('home', ayarlar)
-
  const [kaydedildi, setKaydedildi] = useState(false)
 
  async function ayarGuncelle(yeniAyarlar) {
    setAyarlar(yeniAyarlar)
    if (!kullanici) return
    try {
-     await setDoc(doc(db, 'kullanici_ayarlari', kullanici.uid), {
-       ...ayarlar,
-       ...yeniAyarlar
-     })
+     await setDoc(doc(db, 'kullanici_ayarlari', kullanici.uid), { ...ayarlar, ...yeniAyarlar })
      setKaydedildi(true)
      setTimeout(() => setKaydedildi(false), 1500)
-   } catch (err) {
-     console.error(err)
-   }
+   } catch (err) { console.error(err) }
  }
 
  return (
@@ -254,18 +191,16 @@ export default function Ayarlar() {
      animate={{ x: 0, opacity: 1 }}
      exit={{ x: '100%', opacity: 0 }}
      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-     className="w-full max-w-[390px] mx-auto flex flex-col relative overflow-hidden"
+     className="w-full mx-auto flex flex-col relative overflow-hidden"
      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
    >
      <div className="absolute inset-0 pointer-events-none" style={{
        backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
      }} />
-
      <svg className="absolute inset-0 pointer-events-none w-full h-full" viewBox="0 0 390 844" preserveAspectRatio="none">
        <polygon points="0,0 0,260 180,0" fill="none" stroke={t.triangle} strokeWidth="1"/>
        <polygon points="390,844 390,584 210,844" fill="none" stroke={t.triangle} strokeWidth="1"/>
      </svg>
-
      {[
        { style: { top: 12, left: 12, borderWidth: '2px 0 0 2px' } },
        { style: { top: 12, right: 12, borderWidth: '2px 2px 0 0' } },
@@ -285,10 +220,8 @@ export default function Ayarlar() {
          <span className="font-display text-base font-semibold" style={{ color: t.text }}>Ayarlar</span>
          <AnimatePresence>
            {kaydedildi && (
-             <motion.span
-               initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-               className="text-[9px] font-bold tracking-widest"
-               style={{ color: '#70D090' }}>
+             <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+               className="text-[9px] font-bold tracking-widest" style={{ color: '#70D090' }}>
                Kaydedildi ✓
              </motion.span>
            )}
@@ -297,59 +230,91 @@ export default function Ayarlar() {
        <div className="w-9" />
      </header>
 
-      <main className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-3 relative z-10 pb-10">
+     {/* İki kolon layout */}
+     <div className="flex-1 flex overflow-hidden relative z-10">
 
-  {/* Özelleştirme bölümü */}
-  <div className="flex items-center gap-2 mb-1">
-    <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
-    <span className="font-display text-[9px] font-bold tracking-[0.28em] uppercase" style={{ color: t.accent }}>
-      Özelleştirme
-    </span>
-    <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
-  </div>
+       {/* Sol panel — Özelleştirme */}
+       <div className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-3 pb-10 md:max-w-md md:border-r"
+         style={{ borderColor: t.border }}>
+         <div className="flex items-center gap-2 mb-1">
+           <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
+           <span className="font-display text-[9px] font-bold tracking-[0.28em] uppercase" style={{ color: t.accent }}>Özelleştirme</span>
+           <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
+         </div>
 
-  {AYARLAR_TANIMI.map(tanim => (
-    <AyarSatiri key={tanim.key} tanim={tanim} ayarlar={ayarlar} onGuncelle={ayarGuncelle} t={t} />
-  ))}
+         {AYARLAR_TANIMI.map(tanim => (
+           <AyarSatiri key={tanim.key} tanim={tanim} ayarlar={ayarlar} onGuncelle={ayarGuncelle} t={t} />
+         ))}
 
-  {/* Hesap bölümü */}
-  <div className="flex items-center gap-2 mt-4 mb-1">
-    <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
-    <span className="font-display text-[9px] font-bold tracking-[0.28em] uppercase" style={{ color: t.accent }}>
-      Hesap
-    </span>
-    <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
-  </div>
+         <div className="flex items-center gap-2 mt-4 mb-1">
+           <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
+           <span className="font-display text-[9px] font-bold tracking-[0.28em] uppercase" style={{ color: t.accent }}>Hesap</span>
+           <div className="h-px flex-1" style={{ background: `${t.accent}25` }} />
+         </div>
 
-  <div className="rounded-2xl overflow-hidden" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
-  <button
-    onClick={() => {
-      if (!kullanici) return
-      // Sınav geçmişi sıfırlama ileride eklenecek
-    }}
-    className="w-full flex items-center justify-between px-4 py-4">
-    <div>
-      <span className="font-display text-sm font-semibold" style={{ color: '#E08080' }}>
-        Sınav Geçmişini Sıfırla
-      </span>
-      <p className="text-xs mt-0.5" style={{ color: t.dim }}>Tüm sonuçlar silinir</p>
-    </div>
-    <span style={{ color: '#E08080', fontSize: 12 }}>›</span>
-  </button>
-</div>
+         <div className="rounded-2xl overflow-hidden" style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+           <button onClick={() => {}} className="w-full flex items-center justify-between px-4 py-4">
+             <div>
+               <span className="font-display text-sm font-semibold" style={{ color: '#E08080' }}>Sınav Geçmişini Sıfırla</span>
+               <p className="text-xs mt-0.5" style={{ color: t.dim }}>Tüm sonuçlar silinir</p>
+             </div>
+             <span style={{ color: '#E08080', fontSize: 12 }}>›</span>
+           </button>
+         </div>
 
-  {!kullanici && (
-    <div className="rounded-xl px-4 py-3 flex items-center gap-3 mt-2"
-      style={{ background: `${t.accent}10`, border: `1px solid ${t.border}` }}>
-      <span style={{ color: t.accent }}>⚠</span>
-      <p className="text-xs" style={{ color: t.dim }}>
-        Ayarları kaydetmek için profil sayfasından giriş yap.
-      </p>
-    </div>
-  )}
+         {!kullanici && (
+           <div className="rounded-xl px-4 py-3 flex items-center gap-3"
+             style={{ background: `${t.accent}10`, border: `1px solid ${t.border}` }}>
+             <span style={{ color: t.accent }}>⚠</span>
+             <p className="text-xs" style={{ color: t.dim }}>Ayarları kaydetmek için profil sayfasından giriş yap.</p>
+           </div>
+         )}
+       </div>
 
-</main>
+       {/* Sağ panel — md+ önizleme */}
+       <div className="hidden md:flex flex-1 flex-col px-8 py-6 gap-6 overflow-y-auto">
+         <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+           Canlı Önizleme
+         </span>
 
+         {/* Tema önizleme kartları */}
+         <div className="flex flex-col gap-4">
+           {[
+             { theme: 'sinav', label: 'Sınav', ayarKey: 'sinavRenk' },
+             { theme: 'flash', label: 'Flashcard', ayarKey: 'flashRenk' },
+             { theme: 'sim', label: 'Simülasyon', ayarKey: 'simRenk' },
+           ].map(({ theme, label }) => {
+             const tt = temaAl(theme, ayarlar)
+             return (
+               <div key={theme} className="rounded-2xl overflow-hidden flex-shrink-0"
+                 style={{ background: tt.bg, border: `1.5px solid ${tt.border}` }}>
+                 <div className="px-4 py-3 border-b flex items-center justify-between"
+                   style={{ borderColor: tt.border }}>
+                   <span className="font-display text-[9px] font-bold tracking-widest uppercase" style={{ color: tt.accent }}>
+                     {label}
+                   </span>
+                   <div className="w-3 h-3 rounded-full" style={{ background: tt.accent }} />
+                 </div>
+                 <div className="p-4 flex flex-col gap-3">
+                   <div className="h-1.5 rounded-full" style={{ background: tt.accent, width: '60%' }} />
+                   <div className="h-1.5 rounded-full" style={{ background: `${tt.accent}40`, width: '40%' }} />
+                   <div className="flex gap-2 mt-1">
+                     <div className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{ background: tt.accent, color: theme === 'sim' ? '#F8E8FF' : theme === 'flash' ? '#E8FFF0' : '#E8F4FF' }}>
+                       Seçili
+                     </div>
+                     <div className="px-3 py-1.5 rounded-lg font-display text-xs font-semibold"
+                       style={{ background: tt.bg2, border: `1px solid ${tt.border}`, color: tt.dim }}>
+                       Pasif
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             )
+           })}
+         </div>
+       </div>
+     </div>
    </motion.div>
  )
 }

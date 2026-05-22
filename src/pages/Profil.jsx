@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { auth, db } from '../lib/firebase'
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth'
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore'
+import { collection, query, orderBy, getDocs } from 'firebase/firestore'
 import { useMoscosStore } from '../store'
 import { temaAl } from '../lib/renkler'
 
@@ -15,59 +15,55 @@ export default function Profil() {
  const setKullanici = useMoscosStore(s => s.setKullanici)
 
  const [sonuclar, setSonuclar] = useState([])
- const [yukleniyor, setYukleniyor] = useState(false)
  const [tumSonuclar, setTumSonuclar] = useState([])
+ const [yukleniyor, setYukleniyor] = useState(false)
 
-
- // Auth state'i direkt dinle — store geç gelirse diye
  useEffect(() => {
-  const unsub = onAuthStateChanged(auth, async user => {
-    if (user) {
-      setKullanici(user)
-      setYukleniyor(true)
-      try {
-        // Tüm sonuçlar — istatistik için
-        const tumQ = query(
-          collection(db, 'kullanici_sonuclari', user.uid, 'sonuclar'),
-          orderBy('tarih', 'desc')
-        )
-        const tumSnap = await getDocs(tumQ)
-        const tumSonuclar = tumSnap.docs.map(d => ({ id: d.id, ...d.data() }))
-        
-        // Son 5 — gösterim için
-        setSonuclar(tumSonuclar.slice(0, 5))
-        setTumSonuclar(tumSonuclar)
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setYukleniyor(false)
-      }
-    }
-  })
-  return () => unsub()
-}, [])
+   const unsub = onAuthStateChanged(auth, async user => {
+     if (user) {
+       setKullanici(user)
+       setYukleniyor(true)
+       try {
+         const tumQ = query(collection(db, 'kullanici_sonuclari', user.uid, 'sonuclar'), orderBy('tarih', 'desc'))
+         const tumSnap = await getDocs(tumQ)
+         const tum = tumSnap.docs.map(d => ({ id: d.id, ...d.data() }))
+         setSonuclar(tum.slice(0, 5))
+         setTumSonuclar(tum)
+       } catch (err) { console.error(err) }
+       finally { setYukleniyor(false) }
+     }
+   })
+   return () => unsub()
+ }, [])
 
  async function girisYap() {
    try {
      const provider = new GoogleAuthProvider()
      const result = await signInWithPopup(auth, provider)
      setKullanici(result.user)
-   } catch (err) {
-     console.error(err)
-   }
+   } catch (err) { console.error(err) }
  }
 
  async function cikisYap() {
    await signOut(auth)
    setKullanici(null)
    setSonuclar([])
+   setTumSonuclar([])
  }
 
  const toplamSinav = tumSonuclar.length
-const toplamSoru = tumSonuclar.reduce((acc, s) => acc + (s.toplam || 0), 0)
-const ortalama = toplamSinav > 0
-  ? Math.round(tumSonuclar.reduce((acc, s) => acc + (s.yuzde || 0), 0) / toplamSinav)
-  : 0
+ const toplamSoru = tumSonuclar.reduce((acc, s) => acc + (s.toplam || 0), 0)
+ const ortalama = toplamSinav > 0 ? Math.round(tumSonuclar.reduce((acc, s) => acc + (s.yuzde || 0), 0) / toplamSinav) : 0
+
+ // Ders bazlı analiz
+ const dersDetay = {}
+ tumSonuclar.filter(s => s.mod !== 'simulasyon').forEach(s => {
+   const key = s.kurulId || 'Genel'
+   if (!dersDetay[key]) dersDetay[key] = { dogru: 0, toplam: 0, sayi: 0 }
+   dersDetay[key].dogru += s.dogru || 0
+   dersDetay[key].toplam += s.toplam || 0
+   dersDetay[key].sayi++
+ })
 
  return (
    <motion.div
@@ -75,18 +71,16 @@ const ortalama = toplamSinav > 0
      animate={{ x: 0, opacity: 1 }}
      exit={{ x: '100%', opacity: 0 }}
      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-     className="w-full max-w-[390px] mx-auto flex flex-col relative overflow-hidden"
+     className="w-full mx-auto flex flex-col relative overflow-hidden"
      style={{ height: '100dvh', maxHeight: '-webkit-fill-available', background: t.bg, color: t.text }}
    >
      <div className="absolute inset-0 pointer-events-none" style={{
        backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px), repeating-linear-gradient(90deg, transparent, transparent 44px, rgba(255,255,255,0.015) 44px, rgba(255,255,255,0.015) 45px)`
      }} />
-
      <svg className="absolute inset-0 pointer-events-none w-full h-full" viewBox="0 0 390 844" preserveAspectRatio="none">
        <polygon points="0,0 0,260 180,0" fill="none" stroke="rgba(200,119,26,0.08)" strokeWidth="1"/>
        <polygon points="390,844 390,584 210,844" fill="none" stroke="rgba(200,119,26,0.08)" strokeWidth="1"/>
      </svg>
-
      {[
        { style: { top: 12, left: 12, borderWidth: '2px 0 0 2px' } },
        { style: { top: 12, right: 12, borderWidth: '2px 2px 0 0' } },
@@ -97,7 +91,8 @@ const ortalama = toplamSinav > 0
          style={{ ...style, borderColor: t.borderS, borderStyle: 'solid', zIndex: 5 }} />
      ))}
 
-     <header className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0 relative z-10">
+     <header className="flex items-center justify-between px-5 pt-5 pb-3 flex-shrink-0 relative z-10 border-b"
+       style={{ borderColor: t.border }}>
        <button onClick={() => navigate(-1)}
          className="w-9 h-9 rounded-full flex items-center justify-center"
          style={{ background: `${t.accent}18`, border: `1px solid ${t.border}`, color: t.accent2 }}>←</button>
@@ -105,40 +100,38 @@ const ortalama = toplamSinav > 0
        <div className="w-9" />
      </header>
 
-     <main className="flex-1 px-5 pb-6 flex flex-col gap-4 relative z-10 overflow-hidden">
-       {!kullanici ? (
-         <div className="flex-1 flex flex-col items-center justify-center gap-5 py-12">
-           <div className="w-16 h-16 rounded-full flex items-center justify-center"
-             style={{ background: `${t.accent}15`, border: `1px solid ${t.border}` }}>
-             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="1.8" strokeLinecap="round">
-               <circle cx="12" cy="8" r="5"/>
-               <path d="M3 21c0-5 4-9 9-9s9 4 9 9"/>
-             </svg>
-           </div>
-           <div className="text-center">
-             <h2 className="font-display text-2xl font-bold mb-2" style={{ color: t.text, letterSpacing: '-0.02em' }}>
-               Giriş Yap
-             </h2>
-             <p className="text-sm leading-relaxed" style={{ color: t.dim }}>
-               İstatistiklerini görmek ve sınav geçmişini takip etmek için giriş yap.
-             </p>
-           </div>
-           <motion.button whileTap={{ scale: 0.98 }} onClick={girisYap}
-             className="flex items-center gap-3 px-6 py-4 rounded-2xl font-display text-sm font-semibold"
-             style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text }}>
-             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-               <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-               <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
-               <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-               <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 6.293C4.672 4.166 6.656 3.58 9 3.58z" fill="#EA4335"/>
-             </svg>
-             Google ile Giriş Yap
-           </motion.button>
+     {!kullanici ? (
+       <div className="flex-1 flex flex-col items-center justify-center gap-5 px-6">
+         <div className="w-16 h-16 rounded-full flex items-center justify-center"
+           style={{ background: `${t.accent}15`, border: `1px solid ${t.border}` }}>
+           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={t.accent} strokeWidth="1.8" strokeLinecap="round">
+             <circle cx="12" cy="8" r="5"/><path d="M3 21c0-5 4-9 9-9s9 4 9 9"/>
+           </svg>
          </div>
-       ) : (
-         <>
+         <div className="text-center">
+           <h2 className="font-display text-2xl font-bold mb-2" style={{ color: t.text, letterSpacing: '-0.02em' }}>Giriş Yap</h2>
+           <p className="text-sm leading-relaxed" style={{ color: t.dim }}>İstatistiklerini görmek ve sınav geçmişini takip etmek için giriş yap.</p>
+         </div>
+         <motion.button whileTap={{ scale: 0.98 }} onClick={girisYap}
+           className="flex items-center gap-3 px-6 py-4 rounded-2xl font-display text-sm font-semibold"
+           style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.text }}>
+           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+             <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+             <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+             <path d="M3.964 10.707A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+             <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.961L3.964 6.293C4.672 4.166 6.656 3.58 9 3.58z" fill="#EA4335"/>
+           </svg>
+           Google ile Giriş Yap
+         </motion.button>
+       </div>
+     ) : (
+       <div className="flex-1 flex overflow-hidden relative z-10">
+
+         {/* Sol panel */}
+         <div className="flex-1 px-5 pb-6 flex flex-col gap-4 overflow-hidden md:max-w-sm md:border-r" style={{ borderColor: t.border }}>
+
            {/* Kullanıcı kartı */}
-           <div className="flex items-center gap-3 p-4 rounded-2xl flex-shrink-0"
+           <div className="flex items-center gap-3 p-4 rounded-2xl flex-shrink-0 mt-4"
              style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
              <img src={kullanici.photoURL} alt=""
                className="w-12 h-12 rounded-full flex-shrink-0"
@@ -149,9 +142,7 @@ const ortalama = toplamSinav > 0
              </div>
              <button onClick={cikisYap}
                className="px-3 py-1.5 rounded-lg text-xs font-semibold flex-shrink-0"
-               style={{ background: t.bg3, border: `1px solid ${t.border}`, color: t.dim }}>
-               Çıkış
-             </button>
+               style={{ background: t.bg3, border: `1px solid ${t.border}`, color: t.dim }}>Çıkış</button>
            </div>
 
            {/* İstatistikler */}
@@ -169,15 +160,12 @@ const ortalama = toplamSinav > 0
              ))}
            </div>
 
-           {/* Son sınavlar — flex-1 ile kalan alanı doldurur */}
+           {/* Son sınavlar */}
            <div className="flex-1 flex flex-col min-h-0 rounded-2xl overflow-hidden"
              style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
-             <div className="px-4 py-3 border-b flex-shrink-0"
-               style={{ borderColor: t.border }}>
-               <p className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase"
-                 style={{ color: t.accent }}>Son Sınavlar</p>
+             <div className="px-4 py-3 border-b flex-shrink-0" style={{ borderColor: t.border }}>
+               <p className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>Son Sınavlar</p>
              </div>
-
              {yukleniyor ? (
                <div className="flex-1 flex items-center justify-center">
                  <p className="text-sm italic" style={{ color: t.dim }}>Yükleniyor...</p>
@@ -189,18 +177,14 @@ const ortalama = toplamSinav > 0
              ) : (
                <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-2">
                  {sonuclar.map(s => {
-                   const tarih = new Date(s.tarih).toLocaleDateString('tr-TR', {
-                     day: 'numeric', month: 'long'
-                   })
+                   const tarih = new Date(s.tarih).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long' })
                    const renk = s.yuzde >= 75 ? '#70D090' : s.yuzde >= 50 ? t.accent2 : '#E08080'
                    return (
                      <div key={s.id} className="flex items-center justify-between p-4 rounded-xl"
                        style={{ background: t.bg3, border: `1px solid ${t.border}` }}>
                        <div>
                          <p className="text-sm font-semibold" style={{ color: t.text }}>
-                           {s.mod === 'simulasyon'
-                             ? `${s.yil} · ${s.sinav}`
-                             : `D${s.donem} · ${s.kurulId}${s.ders ? ' · ' + s.ders : ''}`}
+                           {s.mod === 'simulasyon' ? `${s.yil} · ${s.sinav}` : `D${s.donem} · ${s.kurulId}${s.ders ? ' · ' + s.ders : ''}`}
                          </p>
                          <p className="text-xs mt-0.5" style={{ color: t.dim }}>{tarih}</p>
                        </div>
@@ -214,9 +198,97 @@ const ortalama = toplamSinav > 0
                </div>
              )}
            </div>
-         </>
-       )}
-     </main>
+         </div>
+
+         {/* Sağ panel — md+ */}
+         <div className="hidden md:flex flex-1 flex-col px-8 py-6 gap-5 overflow-y-auto">
+
+           {/* Genel istatistik kartları */}
+           <div className="flex flex-col gap-3">
+             <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+               Genel İstatistik
+             </span>
+             <div className="grid grid-cols-2 gap-3">
+               {[
+                 { num: toplamSinav, label: 'Toplam Sınav', color: t.accent2 },
+                 { num: `%${ortalama}`, label: 'Genel Ortalama', color: ortalama >= 75 ? '#70D090' : ortalama >= 50 ? t.accent2 : '#E08080' },
+                 { num: toplamSoru, label: 'Toplam Soru', color: t.accent2 },
+                 { num: tumSonuclar.reduce((a, s) => a + (s.dogru || 0), 0), label: 'Toplam Doğru', color: '#70D090' },
+               ].map(({ num, label, color }) => (
+                 <div key={label} className="flex flex-col gap-1 px-4 py-3 rounded-xl"
+                   style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+                   <span className="font-display text-2xl font-bold leading-none" style={{ color }}>{num}</span>
+                   <span className="text-[9px] font-bold tracking-widest uppercase" style={{ color: t.dim }}>{label}</span>
+                 </div>
+               ))}
+             </div>
+           </div>
+
+           {/* Kurul bazlı performans */}
+           {Object.keys(dersDetay).length > 0 && (
+             <div className="flex flex-col gap-3">
+               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+                 Kurul Performansı
+               </span>
+               <div className="flex flex-col gap-3">
+                 {Object.entries(dersDetay).map(([kurul, stat]) => {
+                   const y = stat.toplam > 0 ? Math.round((stat.dogru / stat.toplam) * 100) : 0
+                   const renk = y >= 75 ? '#70D090' : y >= 50 ? t.accent2 : '#E08080'
+                   return (
+                     <div key={kurul} className="flex flex-col gap-1.5">
+                       <div className="flex justify-between items-baseline">
+                         <span className="text-sm font-display font-semibold" style={{ color: t.text }}>{kurul}</span>
+                         <span className="text-sm font-display font-bold" style={{ color: renk }}>%{y}</span>
+                       </div>
+                       <div className="h-2 rounded-full overflow-hidden" style={{ background: `${renk}20` }}>
+                         <motion.div className="h-full rounded-full" style={{ background: renk }}
+                           initial={{ width: 0 }} animate={{ width: `${y}%` }}
+                           transition={{ duration: 0.8 }} />
+                       </div>
+                       <span className="text-[10px]" style={{ color: t.dim }}>
+                         {stat.dogru} doğru / {stat.toplam} soru · {stat.sayi} sınav
+                       </span>
+                     </div>
+                   )
+                 })}
+               </div>
+             </div>
+           )}
+
+           {/* Tüm sınavlar listesi */}
+           {tumSonuclar.length > 5 && (
+             <div className="flex flex-col gap-3">
+               <span className="font-display text-[9px] font-semibold tracking-[0.22em] uppercase" style={{ color: t.accent }}>
+                 Tüm Sınavlar
+               </span>
+               <div className="flex flex-col gap-2">
+                 {tumSonuclar.map(s => {
+                   const tarih = new Date(s.tarih).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })
+                   const renk = s.yuzde >= 75 ? '#70D090' : s.yuzde >= 50 ? t.accent2 : '#E08080'
+                   return (
+                     <div key={s.id} className="flex items-center gap-3 px-4 py-3 rounded-xl"
+                       style={{ background: t.bg2, border: `1px solid ${t.border}` }}>
+                       <div className="flex-1 min-w-0">
+                         <p className="text-sm font-semibold font-display truncate" style={{ color: t.text }}>
+                           {s.mod === 'simulasyon' ? `${s.yil} · ${s.sinav}` : `D${s.donem} · ${s.kurulId}${s.ders ? ' · ' + s.ders : ''}`}
+                         </p>
+                         <p className="text-xs mt-0.5" style={{ color: t.dim }}>{tarih}</p>
+                       </div>
+                       <div className="flex items-center gap-3 flex-shrink-0">
+                         <div className="w-16 h-1.5 rounded-full overflow-hidden" style={{ background: `${renk}20` }}>
+                           <div className="h-full rounded-full" style={{ background: renk, width: `${s.yuzde}%` }} />
+                         </div>
+                         <span className="font-display text-sm font-bold w-10 text-right" style={{ color: renk }}>%{s.yuzde}</span>
+                       </div>
+                     </div>
+                   )
+                 })}
+               </div>
+             </div>
+           )}
+         </div>
+       </div>
+     )}
    </motion.div>
  )
 }
