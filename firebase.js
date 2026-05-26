@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore, initializeFirestore, CACHE_SIZE_UNLIMITED } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -8,11 +8,11 @@ const firebaseConfig = {
   projectId: "mobil-soru",
   storageBucket: "mobil-soru.firebasestorage.app",
   messagingSenderId: "844021041289",
-  appId: "1:844021041293:web:92955c8f24fa606f729e58"
+  appId: "1:844021041289:web:92955c8f24fa606f729e58"
 }
 
 const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+})
 export const auth = getAuth(app)
-
-
