@@ -41,25 +41,32 @@ function DataLoader() {
 
     // Veriler
     async function yukle() {
+  // Önce kurullar.json'ı yükle
   try {
-    const [soruSnap, cikmisSnap, flashSnap, kurullarRes] = await Promise.all([
+    const kurullarRes = await fetch('/data/kurullar.json')
+    setVeri('kurullarData', await kurullarRes.json())
+  } catch (err) {
+    console.error('kurullar.json hatası:', err)
+  }
+
+  // Sonra Firebase'i yükle
+  try {
+    const [soruSnap, cikmisSnap, flashSnap] = await Promise.all([
       getDocs(collection(db, 'sorular')),
       getDocs(collection(db, 'cikmis_sorular')),
       getDocs(collection(db, 'flashcardlar')),
-      fetch('/data/kurullar.json')
     ])
     setVeri('sorular', soruSnap.docs.map(d => ({ id: d.id, ...d.data() })))
     setVeri('cikmislar', cikmisSnap.docs.map(d => ({ id: d.id, ...d.data() })))
     setVeri('flashcardlar', flashSnap.docs.map(d => ({ id: d.id, ...d.data() })))
-    setVeri('kurullarData', await kurullarRes.json())
   } catch (err) {
-    console.error('Veri yükleme hatası:', err)
-    // 3 saniye sonra tekrar dene
+    console.error('Firebase hatası:', err)
     setTimeout(yukle, 3000)
   } finally {
     setVeri('yukleniyor', false)
   }
 }
+
 
 
     yukle()
