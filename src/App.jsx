@@ -43,7 +43,7 @@ function DataLoader() {
     async function yukle() {
   // Önce kurullar.json'ı yükle
   try {
-    const kurullarRes = await fetch('/data/kurullar.json')
+    const kurullarRes = await fetch('../data/kurullar.json')
     setVeri('kurullarData', await kurullarRes.json())
   } catch (err) {
     console.error('kurullar.json hatası:', err)
