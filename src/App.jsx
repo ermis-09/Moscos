@@ -6,7 +6,6 @@ import { collection, getDocs } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useMoscosStore } from './store'
 import Home from './pages/Home'
-import Sinav from './pages/Sinav'
 import SinavFiltre from './pages/SinavFiltre'
 import SinavCoz from './pages/SinavCoz'
 import SinavSonuc from './pages/SinavSonuc'
@@ -82,7 +81,6 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/sinav" element={<Sinav />} />
         <Route path="/sinav/filtre" element={<SinavFiltre />} />
         <Route path="/sinav/coz" element={<SinavCoz />} />
         <Route path="/sinav/sonuc" element={<SinavSonuc />} />

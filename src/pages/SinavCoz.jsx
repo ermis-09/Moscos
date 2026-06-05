@@ -40,6 +40,10 @@ export default function SinavCoz() {
   if (kullaniciCevap && mod !== 'simulasyon') return
   cevapVer(aktifIndex, harf)
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b24eb9d (Simülasyon hata giderme.)
  function ileri() {
    if (sonSoru) bitir()
    else {
@@ -188,23 +192,24 @@ export default function SinavCoz() {
            </motion.h2>
          </AnimatePresence>
 
-         <div className="flex flex-col gap-2">
-           {harfler.map(harf => {
-             const metin = soru.secenekler?.[harf]
-             if (!metin) return null
-             const s = secenekStil(harf)
-             return (
-               <motion.button key={harf} whileTap={{ scale: 0.98 }}
-                 onClick={() => cevapla(harf)} disabled={!!kullaniciCevap}
-                 className="flex items-start gap-3 w-full rounded-xl px-4 py-3 text-left transition-all"
-                 style={{ background: s.bg, border: `1.5px solid ${s.border}` }}>
-                 <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center font-display text-sm font-semibold"
-                   style={{ background: s.letterBg, color: s.letterColor }}>{harf}</span>
-                 <span className="flex-1 text-sm leading-relaxed pt-0.5 font-medium" style={{ color: s.text }}>{metin}</span>
-               </motion.button>
-             )
-           })}
-         </div>
+        <div className="flex flex-col gap-2">
+ {harfler.map(harf => {
+   const metin = soru.secenekler?.[harf]
+   if (!metin) return null
+   const s = secenekStil(harf)
+   return (
+     <motion.button key={harf} whileTap={{ scale: 0.98 }}
+       onClick={() => cevapla(harf)}
+       disabled={!!kullaniciCevap && mod !== 'simulasyon'}
+       className="flex items-start gap-3 w-full rounded-xl px-4 py-3 text-left transition-all"
+       style={{ background: s.bg, border: `1.5px solid ${s.border}` }}>
+       <span className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center font-display text-sm font-semibold"
+         style={{ background: s.letterBg, color: s.letterColor }}>{harf}</span>
+       <span className="flex-1 text-sm leading-relaxed pt-0.5 font-medium" style={{ color: s.text }}>{metin}</span>
+     </motion.button>
+   )
+ })}
+</div>
 
          {kullaniciCevap && soru.aciklama && mod !== 'simulasyon' && (
            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
