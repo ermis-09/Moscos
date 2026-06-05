@@ -17,7 +17,8 @@ export default function SimulasyonSonuc() {
  const kullanici = useMoscosStore(s => s.kullanici)
  const secim = useMoscosStore(s => s.secim)
 
- const [secilenSoru, setSecilenSoru] = useState(null)
+ const [secilenSoru, setSecilenSoru] = useState(0)
+const [mobilDetayAcik, setMobilDetayAcik] = useState(false)
  const [filtre, setFiltre] = useState('hepsi')
 
  const { sorular, cevaplar } = aktivSinav
