@@ -33,12 +33,14 @@ export const useMoscosStore = create((set, get) => ({
 anaSayfaIndex: 0,
 
 ayarlar: {
-  sinavRenk: 'mavi',
-  flashRenk: 'yesil',
-  simRenk: 'mor',
+  anaRenk: 'sicak',
+  sinavAksent: '#4A8CD8',
+  flashAksent: '#3A9B67',
+  simAksent: '#9B4AD8',
   butonBoyutu: 'orta',
   yaziBoyutu: 'normal',
 },
+
 
 aktivSinavYukle: (veri) => set({
   aktivSinav: {

@@ -1,69 +1,118 @@
-// Baz temalar
-export const bazTemalar = {
-  home: {
-    bg: '#1A1710', bg2: '#221F15', bg3: '#2C2818',
-    accent: '#C8771A', accent2: '#E09030', gold: '#F0B050',
-    text: '#E8D5A3', dim: '#A89060',
-    border: 'rgba(200,119,26,0.2)', borderS: 'rgba(200,119,26,0.45)',
-    triangle: 'rgba(200,119,26,0.1)',
+// ─── VARSAYILAN PALET ───────────────────────────────────────────────
+export const VARSAYILAN_AYARLAR = {
+  anaRenk: 'sicak',
+  sinavAksent: '#4A8CD8',
+  flashAksent: '#3A9B67',
+  simAksent: '#9B4AD8',
+  butonBoyutu: 'orta',
+  yaziBoyutu: 'normal',
+}
+
+// Önerilen renkler paleti
+export const RENK_PALETI = [
+  // Maviler
+  '#4A8CD8', '#5BA3E8', '#3A7CC8', '#2A6AB8',
+  // Yeşiller
+  '#3A9B67', '#2E8B57', '#4AB877', '#5ACC88',
+  // Morlar
+  '#9B4AD8', '#8B3AC8', '#B060F0', '#7030B0',
+  // Kırmızılar
+  '#D84A4A', '#C83A3A', '#E86060', '#B83030',
+  // Turuncular
+  '#D8804A', '#C87030', '#E89060', '#B86020',
+  // Turkuazlar
+  '#3AABB8', '#2A9BA8', '#4ABBC8', '#5ACCD8',
+  // Pembe
+  '#D84A9B', '#C83A8B', '#E860B0', '#B83080',
+  // Sarılar
+  '#C8A030', '#B89020', '#D8B040', '#A08020',
+  // Gri
+  '#7A8A9A', '#6A7A8A', '#8A9AAA', '#9AAAБА',
+]
+
+// Aksent renginden tam tema türet
+function temaTuret(aksent, koyuluk = 'koyu') {
+  const r = parseInt(aksent.slice(1, 3), 16)
+  const g = parseInt(aksent.slice(3, 5), 16)
+  const b = parseInt(aksent.slice(5, 7), 16)
+
+  return {
+    bg:      `rgb(${Math.round(r*0.05 + 8)}, ${Math.round(g*0.05 + 8)}, ${Math.round(b*0.05 + 8)})`,
+    bg2:     `rgb(${Math.round(r*0.08 + 10)}, ${Math.round(g*0.08 + 10)}, ${Math.round(b*0.08 + 10)})`,
+    bg3:     `rgb(${Math.round(r*0.11 + 12)}, ${Math.round(g*0.11 + 12)}, ${Math.round(b*0.11 + 12)})`,
+    accent:  aksent,
+    accent2: `rgb(${Math.min(255, Math.round(r*1.15 + 10))}, ${Math.min(255, Math.round(g*1.15 + 10))}, ${Math.min(255, Math.round(b*1.15 + 10))})`,
+    // text ve dim daha soluk — beyaza değil griye yakın
+    text:    `rgb(${Math.min(220, Math.round(r*0.25 + 140))}, ${Math.min(220, Math.round(g*0.25 + 140))}, ${Math.min(220, Math.round(b*0.25 + 140))})`,
+    dim:     `rgb(${Math.min(160, Math.round(r*0.2 + 60))}, ${Math.min(160, Math.round(g*0.2 + 60))}, ${Math.min(160, Math.round(b*0.2 + 60))})`,
+    border:  `rgba(${r}, ${g}, ${b}, 0.15)`,
+    borderS: `rgba(${r}, ${g}, ${b}, 0.35)`,
+    triangle:`rgba(${r}, ${g}, ${b}, 0.07)`,
+  }
+}
+
+
+// Ana sayfa tonu varyantları
+const ANA_TONLAR = {
+  sicak: {
+    bg: '#161410', bg2: '#1E1B14', bg3: '#262218',
+    accent: '#C8771A', accent2: '#D8901A',
+    text: '#E0CFA0', dim: '#907850',
+    border: 'rgba(200,119,26,0.18)', borderS: 'rgba(200,119,26,0.40)',
+    triangle: 'rgba(200,119,26,0.08)',
   },
-  sinav: {
-    bg: '#111820', bg2: '#182030', bg3: '#1E2838',
-    accent: '#3A7CC8', accent2: '#5090E0', gold: '#80B8F8',
-    text: '#C8DCF0', dim: '#6080A0',
-    border: 'rgba(58,124,200,0.2)', borderS: 'rgba(58,124,200,0.45)',
-    triangle: 'rgba(58,124,200,0.1)',
+  soguk: {
+    bg: '#111416', bg2: '#181C20', bg3: '#20242A',
+    accent: '#7A8A9A', accent2: '#90A0B0',
+    text: '#C0CAD4', dim: '#586470',
+    border: 'rgba(122,138,154,0.18)', borderS: 'rgba(122,138,154,0.40)',
+    triangle: 'rgba(122,138,154,0.08)',
   },
-  flash: {
-    bg: '#101A14', bg2: '#162018', bg3: '#1C2A1E',
-    accent: '#2E8B57', accent2: '#40A868', gold: '#70D090',
-    text: '#B8E0C8', dim: '#508060',
-    border: 'rgba(46,139,87,0.2)', borderS: 'rgba(46,139,87,0.45)',
-    triangle: 'rgba(46,139,87,0.1)',
-  },
-  sim: {
-    bg: '#181018', bg2: '#201520', bg3: '#281C28',
-    accent: '#8B3AC8', accent2: '#A050E0', gold: '#C880F8',
-    text: '#D8C0F0', dim: '#806090',
-    border: 'rgba(139,58,200,0.2)', borderS: 'rgba(139,58,200,0.45)',
-    triangle: 'rgba(139,58,200,0.1)',
+  aydinlik: {
+    bg: '#181714', bg2: '#222018', bg3: '#2C2A20',
+    accent: '#A09070', accent2: '#B8A880',
+    text: '#E8E0CC', dim: '#807060',
+    border: 'rgba(160,144,112,0.18)', borderS: 'rgba(160,144,112,0.40)',
+    triangle: 'rgba(160,144,112,0.08)',
   },
 }
 
-// Renk seçenekleri
-export const renkSecenekleri = {
-  sinav: {
-    mavi:    { accent: '#3A7CC8', accent2: '#5090E0', bg: '#111820', bg2: '#182030', bg3: '#1E2838', text: '#C8DCF0', dim: '#6080A0', border: 'rgba(58,124,200,0.2)', borderS: 'rgba(58,124,200,0.45)', triangle: 'rgba(58,124,200,0.1)' },
-    kirmizi: { accent: '#C83A3A', accent2: '#E05050', bg: '#201010', bg2: '#301818', bg3: '#381E1E', text: '#F0C8C8', dim: '#A06060', border: 'rgba(200,58,58,0.2)', borderS: 'rgba(200,58,58,0.45)', triangle: 'rgba(200,58,58,0.1)' },
-    turkuaz: { accent: '#2A9B9B', accent2: '#35B8B8', bg: '#0E1A1A', bg2: '#142424', bg3: '#1A2E2E', text: '#B8E0E0', dim: '#508080', border: 'rgba(42,155,155,0.2)', borderS: 'rgba(42,155,155,0.45)', triangle: 'rgba(42,155,155,0.1)' },
+// Uyumlama haritası
+export const UYUMLAMA = {
+  sicak: {
+    anaRenk: 'sicak',
+    sinavAksent: '#D85050',
+    flashAksent: '#C8A030',
+    simAksent: '#C87030',
   },
-  flash: {
-    yesil: { accent: '#2E8B57', accent2: '#40A868', bg: '#101A14', bg2: '#162018', bg3: '#1C2A1E', text: '#B8E0C8', dim: '#508060', border: 'rgba(46,139,87,0.2)', borderS: 'rgba(46,139,87,0.45)', triangle: 'rgba(46,139,87,0.1)' },
-    pembe: { accent: '#C83A8B', accent2: '#E050A8', bg: '#200E18', bg2: '#301424', bg3: '#3A1A2C', text: '#F0C8E0', dim: '#A06088', border: 'rgba(200,58,139,0.2)', borderS: 'rgba(200,58,139,0.45)', triangle: 'rgba(200,58,139,0.1)' },
-    sari:  { accent: '#B89020', accent2: '#D4AC30', bg: '#1A1808', bg2: '#242210', bg3: '#2E2C18', text: '#F0E0A0', dim: '#908040', border: 'rgba(184,144,32,0.2)', borderS: 'rgba(184,144,32,0.45)', triangle: 'rgba(184,144,32,0.1)' },
+  soguk: {
+    anaRenk: 'soguk',
+    sinavAksent: '#4A8CD8',
+    flashAksent: '#3A9B67',
+    simAksent: '#7A8A9A',
   },
-  sim: {
-    mor:     { accent: '#8B3AC8', accent2: '#A050E0', bg: '#181018', bg2: '#201520', bg3: '#281C28', text: '#D8C0F0', dim: '#806090', border: 'rgba(139,58,200,0.2)', borderS: 'rgba(139,58,200,0.45)', triangle: 'rgba(139,58,200,0.1)' },
-    turuncu: { accent: '#C86020', accent2: '#E07838', bg: '#1A1008', bg2: '#241810', bg3: '#2E2018', text: '#F0D0B0', dim: '#A07040', border: 'rgba(200,96,32,0.2)', borderS: 'rgba(200,96,32,0.45)', triangle: 'rgba(200,96,32,0.1)' },
-    gri:     { accent: '#7A8A9A', accent2: '#909FAF', bg: '#101418', bg2: '#181C22', bg3: '#20242C', text: '#C8D0D8', dim: '#607080', border: 'rgba(122,138,154,0.2)', borderS: 'rgba(122,138,154,0.45)', triangle: 'rgba(122,138,154,0.1)' },
+  aydinlik: {
+    anaRenk: 'aydinlik',
+    sinavAksent: '#5090D0',
+    flashAksent: '#3A9B67',
+    simAksent: '#9B4AD8',
   },
 }
 
-// Ana fonksiyon — ayarlara göre tema döndür
+
+// Ana fonksiyon
 export function temaAl(theme, ayarlar) {
-  const baz = { ...bazTemalar[theme] }
-  if (!ayarlar) return baz
+  if (!ayarlar) return temaTuret('#4A8CD8')
 
-  const renkMap = {
-    sinav: ayarlar.sinavRenk,
-    flash: ayarlar.flashRenk,
-    sim:   ayarlar.simRenk,
+  if (theme === 'home') {
+    return { ...ANA_TONLAR[ayarlar.anaRenk || 'sicak'] }
   }
 
-  const secim = renkMap[theme]
-  if (secim && renkSecenekleri[theme]?.[secim]) {
-    return { ...baz, ...renkSecenekleri[theme][secim] }
+  const aksentMap = {
+    sinav: ayarlar.sinavAksent || VARSAYILAN_AYARLAR.sinavAksent,
+    flash: ayarlar.flashAksent || VARSAYILAN_AYARLAR.flashAksent,
+    sim:   ayarlar.simAksent   || VARSAYILAN_AYARLAR.simAksent,
   }
 
-  return baz
+  return temaTuret(aksentMap[theme] || '#4A8CD8')
 }
