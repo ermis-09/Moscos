@@ -37,10 +37,9 @@ export default function SinavCoz() {
  const progress = ((aktifIndex + 1) / sorular.length) * 100
 
  function cevapla(harf) {
-   if (kullaniciCevap) return
-   cevapVer(aktifIndex, harf)
- }
-
+  if (kullaniciCevap && mod !== 'simulasyon') return
+  cevapVer(aktifIndex, harf)
+}
  function ileri() {
    if (sonSoru) bitir()
    else {
