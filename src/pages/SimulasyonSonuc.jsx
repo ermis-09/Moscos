@@ -17,7 +17,7 @@ export default function SimulasyonSonuc() {
  const kullanici = useMoscosStore(s => s.kullanici)
  const secim = useMoscosStore(s => s.secim)
 
- const [secilenSoru, setSecilenSoru] = useState(0)
+ const [secilenSoru, setSecilenSoru] = useState(null)
  const [filtre, setFiltre] = useState('hepsi')
 
  const { sorular, cevaplar } = aktivSinav
@@ -86,8 +86,9 @@ export default function SimulasyonSonuc() {
    return true
  })
 
- const soruObj = sorular[secilenSoru]
- const cevap = cevaplar[secilenSoru]
+const soruObj = secilenSoru !== null ? sorular[secilenSoru] : null
+const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
+
 
  return (
    <motion.div
