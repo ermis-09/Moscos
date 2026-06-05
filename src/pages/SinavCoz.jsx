@@ -40,10 +40,7 @@ export default function SinavCoz() {
   if (kullaniciCevap && mod !== 'simulasyon') return
   cevapVer(aktifIndex, harf)
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> b24eb9d (Simülasyon hata giderme.)
  function ileri() {
    if (sonSoru) bitir()
    else {
