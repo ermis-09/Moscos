@@ -18,7 +18,7 @@ export default function SimulasyonSonuc() {
  const secim = useMoscosStore(s => s.secim)
 
  const [secilenSoru, setSecilenSoru] = useState(0)
-const [mobilDetayAcik, setMobilDetayAcik] = useState(false)
+ const [mobilDetayAcik, setMobilDetayAcik] = useState(false)
  const [filtre, setFiltre] = useState('hepsi')
 
  const { sorular, cevaplar } = aktivSinav
@@ -48,7 +48,6 @@ const [mobilDetayAcik, setMobilDetayAcik] = useState(false)
    kaydet()
  }, [])
 
- // Klavye kısayolları — soru detay gezinme
  useEffect(() => {
    function handleKey(e) {
      if (e.key === 'ArrowRight') setSecilenSoru(i => Math.min(sorular.length - 1, i + 1))
@@ -87,9 +86,8 @@ const [mobilDetayAcik, setMobilDetayAcik] = useState(false)
    return true
  })
 
-const soruObj = secilenSoru !== null ? sorular[secilenSoru] : null
-const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
-
+ const soruObj = sorular[secilenSoru]
+ const cevap = cevaplar[secilenSoru]
 
  return (
    <motion.div
@@ -156,7 +154,8 @@ const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
              const renk = optikRenk(i)
              const aktif = i === secilenSoru
              return (
-               <button key={i} onClick={() => setSecilenSoru(i)}
+               <button key={i}
+                 onClick={() => { setSecilenSoru(i); setMobilDetayAcik(true) }}
                  className="w-full aspect-square rounded-lg flex items-center justify-center font-display text-[11px] font-semibold transition-all"
                  style={{
                    background: aktif ? t.accent : renk.bg,
@@ -199,7 +198,6 @@ const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
          </div>
          <span className="text-[9px] font-display" style={{ color: t.dim }}>← → ile gezin</span>
        </div>
-
        <div className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-4">
          <div className="flex items-center gap-2 flex-wrap">
            <span className="text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full"
@@ -234,16 +232,9 @@ const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
        </div>
      </div>
 
-     {/* Mobil soru detay — tam ekran slide */}
-     <AnimatePresence>
-       {false && ( // Mobilde optik grid'e tıklayınca bottom sheet açılsın isterssen buraya ekle
-         <></>
-       )}
-     </AnimatePresence>
-
      {/* Mobil soru detay bottom sheet */}
      <AnimatePresence>
-       {secilenSoru !== null && (
+       {mobilDetayAcik && soruObj && (
          <motion.div
            key="mobil-detay"
            initial={{ y: '100%' }}
@@ -265,7 +256,7 @@ const cevap = secilenSoru !== null ? cevaplar[secilenSoru] : null
                  className="w-8 h-8 rounded-full flex items-center justify-center disabled:opacity-30"
                  style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.dim }}>→</button>
              </div>
-             <button onClick={() => setSecilenSoru(null)}
+             <button onClick={() => setMobilDetayAcik(false)}
                className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
                style={{ background: t.bg2, border: `1px solid ${t.border}`, color: t.dim }}>✕</button>
            </div>
